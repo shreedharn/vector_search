@@ -1,4 +1,4 @@
-site_name: Vector and Hybrid Search
+site_name: OpenSearch for Vector and Hybrid Search
 theme:
   name: material
   features:
@@ -52,3 +52,12 @@ extra:
 extra_css:
   - styles/overrides.css
 docs_dir: docs
+nav:
+  - OpenSearch Intro: opensearch.md
+  - Deployment Options: opensearch_productionize.md
+  - OpenSearch vs Kendra: kendra_vs_opensearch.md
+  - OpenSearch vs PineCone: opensearch_vs_pinecone.md
+  - Examples: search_examples.md 
+  - Glossary: glossary.md
+  - LICENSE: LICENSE.md
+

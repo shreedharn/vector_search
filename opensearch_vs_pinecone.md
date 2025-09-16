@@ -25,7 +25,7 @@ Vector search works similarly - it converts text, images, or other data into mat
 
 ### The Competitors
 
-**AWS OpenSearch** is like a Swiss Army knife - it's a powerful search engine that can do traditional text search, analytics, AND vector search. It's part of Amazon's cloud services.
+**AWS OpenSearch** is like a Swiss Army knife - it's a powerful search engine that can do traditional text search, analytics, AND vector search. It's part of Amazon's cloud services. For comprehensive technical details about OpenSearch's vector search capabilities, algorithms, and implementation patterns, see the [OpenSearch Technical Guide](opensearch.md).
 
 **Pinecone** is like a specialized precision instrument - it's built specifically and only for vector search, making it incredibly good at that one thing.
 
@@ -50,10 +50,10 @@ Before we dive in, let's decode some key concepts:
 
 | Feature | AWS OpenSearch | Pinecone | 🤔 What This Means |
 |---------|----------------|----------|-------------------|
-| **Vector Search** | k-NN with [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world), [IVF](glossary.md#ivf-inverted-file-index) algorithms | Proprietary optimized algorithms | OpenSearch: Uses standard, proven methods. Pinecone: Uses custom-built, specialized methods |
+| **Vector Search** | k-NN with [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world), [IVF](glossary.md#ivf-inverted-file-index) algorithms | Proprietary optimized algorithms | OpenSearch: Uses standard, proven methods ([details](opensearch.md#hnsw-hierarchical-navigable-small-world)). Pinecone: Uses custom-built, specialized methods |
 | **Vector Dimensions** | Up to 16,000 dimensions | Up to 20,000 dimensions | Both handle very detailed data representations. Pinecone handles slightly more complex data |
 | **Similarity Metrics** | Cosine, Euclidean, Inner Product | Cosine, Euclidean, Dot Product | Both offer the main similarity measurement methods you'd need |
-| **Hybrid Search** | Vector + full-text search | Vector + metadata filtering | OpenSearch: Can combine meaning-based and keyword search. Pinecone: Combines meaning-based search with data filters |
+| **Hybrid Search** | Vector + full-text search | Vector + metadata filtering | OpenSearch: Can combine meaning-based and keyword search ([details](opensearch.md#the-progression-text-vector-hybrid_1)). Pinecone: Combines meaning-based search with data filters |
 | **Real-time Updates** | Supported with small delay | Real-time with immediate consistency | OpenSearch: Few seconds delay after updates. Pinecone: Instant availability after updates |
 | **Approximate Search** | [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world), [IVF](glossary.md#ivf-inverted-file-index) approximate algorithms | Proprietary approximate algorithms | Both use "good enough" fast search instead of perfect but slow search |
 | **Exact Search** | Brute force option available | Not optimized for exact search | OpenSearch: Can do perfect matching (slow). Pinecone: Focuses on fast approximate matching |
@@ -148,75 +148,7 @@ Let's say you're building a movie recommendation system:
 ## Vector Search Examples {#real-world-use-case-examples}
 
 ### OpenSearch Vector Search
-```json
-# Create index with vector mapping
-PUT /vector-search-index
-{
-  "mappings": {
-    "properties": {
-      "content_vector": {
-        "type": "knn_vector",
-        "dimension": 768,
-        "method": {
-          "name": "hnsw",
-          "space_type": "cosinesimil",
-          "engine": "lucene",
-          "parameters": {
-            "ef_construction": 256,
-            "m": 16
-          }
-        }
-      },
-      "metadata": {"type": "object"}
-    }
-  }
-}
-
-# Vector similarity search
-POST /vector-search-index/_search
-{
-  "size": 10,
-  "query": {
-    "knn": {
-      "content_vector": {
-        "vector": [0.1, 0.2, ...],
-        "k": 10,
-        "boost": 1.0
-      }
-    }
-  },
-  "_source": ["metadata", "content"]
-}
-
-# Hybrid search combining vector and text
-POST /vector-search-index/_search
-{
-  "query": {
-    "hybrid": {
-      "queries": [
-        {
-          "knn": {
-            "content_vector": {
-              "vector": [0.1, 0.2, ...],
-              "k": 50
-            }
-          }
-        },
-        {
-          "bool": {
-            "must": [
-              {"match": {"content": "machine learning"}}
-            ],
-            "filter": [
-              {"term": {"category": "tech"}}
-            ]
-          }
-        }
-      ]
-    }
-  }
-}
-```
+OpenSearch provides comprehensive vector search capabilities with support for multiple algorithms, hybrid search, and flexible configuration options. For detailed implementation examples, index configuration, and advanced search patterns, see the [OpenSearch Technical Guide](opensearch.md#index-configuration-and-setup).
 
 ### 🔴 Pinecone Vector Search: Step-by-Step Deep Dive
 
@@ -500,43 +432,7 @@ This is how you'd actually implement vector search in a real application!
 ## Index Design and Optimization
 
 ### OpenSearch Index Design
-```json
-{
-  "settings": {
-    "index": {
-      "knn": true,
-      "knn.algo_param.ef_search": 100,
-      "number_of_shards": 3,
-      "number_of_replicas": 1,
-      "refresh_interval": "1s"
-    }
-  },
-  "mappings": {
-    "properties": {
-      "vector_field": {
-        "type": "knn_vector",
-        "dimension": 768,
-        "method": {
-          "name": "hnsw",
-          "space_type": "cosinesimil",
-          "parameters": {
-            "ef_construction": 512,
-            "m": 16
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-**OpenSearch Optimization Tips:**
-
-- Set `ef_construction` higher for better recall (slower indexing)
-- Adjust `ef_search` based on latency vs accuracy requirements
-- Use appropriate shard count: `ceil(total_vectors / 1M)`
-- Configure memory settings for vector operations
-- Use warm nodes for infrequently accessed vectors
+For comprehensive OpenSearch index design patterns, configuration options, and optimization strategies, see the [OpenSearch Technical Guide](opensearch.md#index-configuration-and-setup).
 
 ### Pinecone Index Configuration
 ```python
@@ -571,52 +467,7 @@ pinecone.create_index(
 ## Embedding Management Strategies
 
 ### OpenSearch Embedding Management
-**Advantages:**
-
-- Full control over embedding generation pipeline
-- Can store multiple embedding versions in same index
-- Custom preprocessing and postprocessing
-- Integration with any embedding model
-- Batch processing optimization
-
-**Challenges:**
-
-- Need to manage embedding model lifecycle
-- Responsible for model versioning and updates
-- Must handle embedding dimension consistency
-- Storage and compute overhead for embedding generation
-
-```python
-# Example embedding pipeline for OpenSearch
-from sentence_transformers import SentenceTransformer
-import numpy as np
-
-class EmbeddingPipeline:
-    def __init__(self, model_name="all-MiniLM-L6-v2"):
-        self.model = SentenceTransformer(model_name)
-        self.dimension = self.model.get_sentence_embedding_dimension()
-    
-    def generate_embeddings(self, texts, batch_size=32):
-        embeddings = []
-        for i in range(0, len(texts), batch_size):
-            batch = texts[i:i + batch_size]
-            batch_embeddings = self.model.encode(batch)
-            embeddings.extend(batch_embeddings.tolist())
-        return embeddings
-    
-    def prepare_documents(self, texts, metadata_list):
-        embeddings = self.generate_embeddings(texts)
-        return [
-            {
-                "content": text,
-                "content_vector": embedding,
-                "metadata": metadata,
-                "embedding_model": "all-MiniLM-L6-v2",
-                "embedding_version": "1.0"
-            }
-            for text, embedding, metadata in zip(texts, embeddings, metadata_list)
-        ]
-```
+OpenSearch provides full control over embedding generation pipelines with support for multiple embedding versions and custom preprocessing. For detailed embedding management strategies and implementation examples, see the [OpenSearch Technical Guide](opensearch.md#opensearch-vector-architecture).
 
 ### Pinecone Embedding Management
 **Advantages:**
@@ -635,12 +486,7 @@ class EmbeddingPipeline:
 ## Advanced Vector Search Algorithms
 
 ### OpenSearch Algorithms
-
-| Algorithm | Parameters | Use Case | Performance Characteristics |
-|-----------|------------|----------|---------------------------|
-| **[HNSW](glossary.md#hnsw-hierarchical-navigable-small-world)** | `ef_construction`, `m` | General purpose | High recall, moderate indexing speed |
-| **[IVF](glossary.md#ivf-inverted-file-index)** | `nlist`, `nprobes` | Large datasets | Fast indexing, configurable recall/speed |
-| **Flat** | None | Small datasets | Perfect recall, linear search time |
+OpenSearch supports multiple vector search algorithms including HNSW, IVF, and flat search. For detailed algorithm comparisons, parameter tuning, and selection guidance, see the [OpenSearch Technical Guide](opensearch.md#algorithm-selection-guide).
 
 ### Pinecone Algorithms
 Pinecone uses proprietary algorithms optimized for different scenarios:

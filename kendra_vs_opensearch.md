@@ -5,32 +5,7 @@
 
 This guide provides a comprehensive comparison between AWS Kendra and AWS OpenSearch to help you choose the right search solution for your needs. Both services offer powerful search capabilities but serve different use cases and technical requirements.
 
-## Table of Contents
-
-**Part I: Service Foundation**
-
-
-- [Service Philosophy and Approach](#service-philosophy-and-approach)
-- [Core Differences Summary](#core-differences-summary)
-- [Detailed Feature Comparison](#detailed-feature-comparison)
-
-**Part II: Technical Capabilities**
-
-
-- [Search Capabilities](#search-capabilities)
-- [Data Handling and Integration](#data-handling-and-integration)
-- [Scalability and Performance](#scalability-and-performance)
-- [Security and Compliance](#security-and-compliance)
-
-**Part III: Implementation and Costs**
-
-
-- [Cost Comparison](#cost-comparison)
-- [Real-World Use Case Examples](#real-world-use-case-examples)
-- [Decision Framework](#decision-framework)
-- [Migration Considerations](#migration-considerations)
-
-> **📘 For technical implementation details:** See the dedicated [OpenSearch Guide](opensearch.md) for in-depth vector search implementation, algorithms, and production patterns.
+**📘 For technical implementation details:** See the dedicated [OpenSearch Guide](opensearch.md) for in-depth vector search implementation, algorithms, and production patterns.
 
 ## Service Philosophy and Approach
 
@@ -48,13 +23,14 @@ AWS Kendra is a fully managed enterprise search service that uses machine learni
 ### AWS OpenSearch - Flexible Search and Analytics Platform
 AWS OpenSearch is a distributed search and analytics suite based on Elasticsearch and Kibana. It provides full control over search implementation and supports both traditional text search and modern vector search capabilities.
 
-
 **Key characteristics:**
 
 - **Full control**: Configure every aspect of search behavior and relevance
 - **Multi-purpose**: Supports search, analytics, logging, and monitoring use cases
 - **Extensible architecture**: Build custom search experiences and applications
 - **Vector search capable**: Modern semantic search with [embedding](glossary.md#embedding) models
+
+For detailed technical information about OpenSearch's search approaches, algorithms, and implementation patterns, see the [OpenSearch Technical Guide](opensearch.md).
 
 ## Core Differences Summary
 
@@ -83,7 +59,7 @@ AWS OpenSearch is a distributed search and analytics suite based on Elasticsearc
 
 *For detailed AWS Kendra features, see: [AWS Kendra Features](https://aws.amazon.com/kendra/features/) (please verify current capabilities)*
 
-*For OpenSearch capabilities, see: [AWS OpenSearch Features](https://aws.amazon.com/opensearch-service/features/) (please verify current capabilities)*
+*For comprehensive OpenSearch vector search capabilities, algorithms, and implementation details, see: [OpenSearch Technical Guide](opensearch.md)*
 
 ### Data Handling and Integration
 
@@ -229,22 +205,22 @@ AWS OpenSearch is a distributed search and analytics suite based on Elasticsearc
 
 ### Choose AWS Kendra When:
 
-- **Primary use case is enterprise document search**
-- **Users need natural language query interface**
-- **Quick deployment with minimal technical resources**
-- **Built-in connectors match your data sources**
-- **Willing to pay premium for managed AI/ML capabilities**
-- **Limited search customization requirements**
+- Primary use case is enterprise document search
+- Users need natural language query interface
+- Quick deployment with minimal technical resources
+- Built-in connectors match your data sources
+- Willing to pay premium for managed AI/ML capabilities
+- Limited search customization requirements
 
 ### Choose AWS OpenSearch When:
 
-- **Need full control over search relevance and ranking**
-- **Building custom search applications**
-- **Require vector search and semantic capabilities**
-- **Have technical team capable of managing search infrastructure**
-- **Multiple use cases beyond search (analytics, logging)**
-- **Cost optimization is important for high query volumes** 
-- **Need real-time search and analytics capabilities**
+- Need full control over search relevance and ranking
+- Building custom search applications
+- Require vector search and semantic capabilities
+- Have technical team capable of managing search infrastructure
+- Multiple use cases beyond search (analytics, logging)
+- Cost optimization is important for high query volumes 
+- Need real-time search and analytics capabilities
 
 ### Hybrid Approach Considerations
 

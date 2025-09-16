@@ -2,17 +2,6 @@
 
 This document contains practical Python code examples for implementing vector search with OpenSearch.
 
-## Table of Contents
-
-- [Index Setup and Configuration](#index-setup-and-configuration)
-- [Document Indexing](#document-indexing)
-- [Basic Vector Search](#basic-vector-search)
-- [Advanced Search Techniques](#advanced-search-techniques)
-- [Hybrid Search Implementation](#hybrid-search-implementation)
-- [Multi-Modal Search](#multi-modal-search)
-- [Recommendation Systems](#recommendation-systems)
-- [Real-Time Applications](#real-time-applications)
-
 ---
 
 ## Index Setup and Configuration

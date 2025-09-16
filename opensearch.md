@@ -3,36 +3,6 @@
 
 A comprehensive guide to understanding and implementing modern search systems, from traditional text-based approaches to advanced vector search algorithms and their practical implementation in OpenSearch.
 
-## Table of Contents
-
-**Part I: Search Approaches**
-
-- [Traditional Text-Based Search](#traditional-text-based-search)
-- [Vector Search Evolution](#vector-search-evolution)
-- [Search Approach Comparison](#search-approach-comparison)
-- [The Progression: Text → Vector → Hybrid](#the-progression-text-vector-hybrid_1)
-- [Reranking: Refining Search Results](#reranking-refining-search-results)
-
-**Part II: Vector Search Algorithms**
-
-- [Mathematical Foundations](#mathematical-foundations)
-- [HNSW: Hierarchical Navigable Small World](#hnsw-hierarchical-navigable-small-world)
-- [IVF: Inverted File Index](#ivf-inverted-file-index)
-- [Product Quantization](#product-quantization)
-- [Algorithm Selection Guide](#algorithm-selection-guide)
-
-**Part III: OpenSearch Implementation**
-
-- [OpenSearch Vector Architecture](#opensearch-vector-architecture)
-- [Index Configuration and Setup](#index-configuration-and-setup)
-- [Reranking in OpenSearch](#reranking-in-opensearch)
-
-**Part IV: Advanced Applications**
-
-- [Multi-modal Search](#multi-modal-search)
-
-**[Glossary](glossary.md)** - Key concepts, metrics, and terminology
-
 
 ## Part I: Search Approaches
 

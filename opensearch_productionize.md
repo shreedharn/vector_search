@@ -4,34 +4,6 @@
 A comprehensive guide to deploying, scaling, and managing OpenSearch vector search in production environments. This guide covers everything from architecture decisions and cost optimization to performance tuning and disaster recovery for enterprise-scale vector search deployments.
 
 
-## Table of Contents
-
-**Part I: AWS Deployment Options**
-
-- [Managed vs Serverless Comparison](#managed-vs-serverless-comparison)
-- [AWS OpenSearch Service (Managed)](#aws-opensearch-service-managed)
-- [AWS OpenSearch Serverless](#aws-opensearch-serverless)
-- [Cost Analysis and Optimization](#cost-analysis-and-optimization)
-
-**Part II: Production Architecture**
-
-- [Cluster Design Patterns](#cluster-design-patterns)
-- [Capacity Planning and Scaling](#capacity-planning-and-scaling)
-- [Memory Management and Optimization](#memory-management-and-optimization)
-- [Security and Access Control](#security-and-access-control)
-
-**Part III: Performance Optimization**
-
-- [Parameter Tuning Guidelines](#parameter-tuning-guidelines)
-- [Performance Optimization](#part-iii-performance-optimization)
-- [Monitoring and Observability](#monitoring-and-observability)
-- [Troubleshooting Common Issues](#troubleshooting-common-issues)
-- [Best Practices](#best-practices)
-
-**Part IV: Integration Patterns**
-
-- [Disaster Recovery and Backup](#disaster-recovery-and-backup)
-
 ---
 
 ## Part I: AWS Deployment Options
