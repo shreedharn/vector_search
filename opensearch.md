@@ -306,25 +306,25 @@ Understanding when to use text search versus vector search—and how to combine 
 **Use Text Search When:**
 
 
-1. **Exact Matching is Critical**
+**Exact Matching is Critical**
 
    - Legal document retrieval: "habeas corpus," "force majeure"
    - Medical codes: "ICD-10 J44.0" (COPD diagnosis)
    - Product catalogs: "SKU-12345-RED-L"
 
-2. **Users Provide Specific Keywords**
+**Users Provide Specific Keywords**
 
    - Technical documentation: "numpy.array.reshape()"
    - Database queries: "SELECT statement syntax"
    - API references: "REST POST /users endpoint"
 
-3. **Computational Resources are Limited**
+**Computational Resources are Limited**
 
    - Mobile applications with limited processing power
    - Real-time systems requiring sub-millisecond responses
    - High-volume systems needing minimal infrastructure
 
-4. **Transparency and Explainability Required**
+**Transparency and Explainability Required**
 
    - Regulatory compliance scenarios where relevance must be explained
    - User interfaces showing why results matched
@@ -333,25 +333,26 @@ Understanding when to use text search versus vector search—and how to combine 
 **Use Vector Search When:**
 
 
-1. **Semantic Understanding is Essential**
+**Semantic Understanding is Essential**
 
    - Customer support: "my order hasn't arrived" → find shipping delay content
    - Research: "climate change impacts" → find global warming, environmental effects
    - Content discovery: "similar to The Matrix" → find sci-fi, cyberpunk themes
 
-2. **Cross-Language Search Needed**
+**Cross-Language Search Needed**
 
    - Global content platforms with multilingual documents
    - International e-commerce with product descriptions in multiple languages
    - Academic research across different language publications
 
-3. **Natural Language Queries Expected**
+**Natural Language Queries Expected**
 
    - Voice search: "What's a good Italian restaurant nearby?"
    - Conversational AI: "Show me articles about renewable energy policies"
    - Mobile search: "cheap flights to Europe next month"
 
-4. **Content Discovery and Exploration**
+**Content Discovery and Exploration**
+
    - Media recommendations: "movies like Inception"
    - News discovery: "stories related to artificial intelligence ethics"
    - Research paper suggestions: "papers citing similar methodologies"
@@ -767,107 +768,43 @@ HNSW performance scales favorably with dataset size:
 - **Search time:** O(log(N) × ef_search)
 - **Memory usage:** Linear with dataset size
 
-**Comprehensive Performance Analysis:**
-
-
-> **⚠️ Illustrative Example:** The following performance metrics are theoretical examples for planning purposes only. Actual performance will vary significantly based on your specific hardware, data characteristics, and configuration. Always benchmark with your own data and infrastructure.
-
-*Example Benchmark Scenario: 1M vectors, 384 dimensions*
-*Example Hardware: AWS c5.4xlarge (16 vCPU, 32GB RAM)*
-*Example Configuration: M=32, ef_construction=256*
-
-**Construction Metrics:**
-
-- **Build Time:** 45 minutes (single-threaded), 12 minutes (8 threads)
-- **Index Size:** 6.2GB total
-  - Vector storage: 1.54GB (raw data)
-  - Graph structure: 768MB (connections)
-  - Metadata: 128MB (layer assignments, entry points)
-  - System overhead: 3.7GB (OS buffers, fragmentation)
-
-**Search Performance Analysis:**
-
-
-| ef_search | Latency (ms) | Recall@10 | Recall@100 | QPS (single thread) | Memory Touches |
-|-----------|--------------|-----------|-------------|---------------------|----------------|
-| 25        | 0.08         | 89.1%     | 92.3%       | 12,500              | ~150 vectors   |
-| 50        | 0.12         | 94.2%     | 96.8%       | 8,300               | ~280 vectors   |
-| 100       | 0.23         | 97.1%     | 98.9%       | 4,300               | ~520 vectors   |
-| 200       | 0.48         | 99.0%     | 99.6%       | 2,100               | ~980 vectors   |
-| 500       | 1.15         | 99.7%     | 99.9%       | 870                 | ~2,200 vectors |
-
-**Scaling Characteristics:**
-
-
-*Dataset Size Impact:*
-
-- **100K vectors:** 0.08ms avg latency, 95% recall@10 (ef_search=50)
-- **1M vectors:** 0.12ms avg latency, 94% recall@10 (ef_search=50)
-- **10M vectors:** 0.18ms avg latency, 93% recall@10 (ef_search=50)
-- **100M vectors:** 0.28ms avg latency, 92% recall@10 (ef_search=50)
-
-*Dimensionality Impact:*
-
-- **128 dims:** 0.08ms, 96% recall (faster distance calculations)
-- **384 dims:** 0.12ms, 94% recall (baseline)
-- **768 dims:** 0.19ms, 93% recall (more expensive distances)
-- **1536 dims:** 0.31ms, 92% recall (significant computation overhead)
-
-**Production Deployment Insights:**
-
-
-*Memory Usage Patterns:*
-- **Working Set:** ~2-3GB actively accessed during search
-- **Peak Memory:** 8-10GB during index construction
-- **Steady State:** 6.5GB with OS caching
-
-*CPU Utilization:*
-
-- **Single Query:** 15-25% CPU utilization (memory-bound)
-- **Concurrent Queries:** Scales linearly up to ~8 threads
-- **Batch Processing:** 85-95% CPU utilization achievable
-
-*Real-World Performance Observations:*
-
-- **Cold Start:** First few queries 2-3x slower (cache warming)
-- **Steady State:** Performance stabilizes after ~1000 queries
-- **Load Variation:** Minimal performance degradation up to 80% memory utilization
-- **Network Latency:** Typically adds 0.5-2ms in distributed deployments
-
-**Advanced Optimization Strategies:**
-
 
 **Construction Optimizations:**
 
-1. **Parallel Construction:** Distribute index building across multiple threads
+**Parallel Construction:** Distribute index building across multiple threads
+
    - Partition vectors into chunks for concurrent processing
    - Use lock-free data structures for thread-safe updates
    - Typical speedup: 4-8x on modern multi-core systems
 
-2. **Progressive Construction:** Build index incrementally for dynamic datasets
+**Progressive Construction:** Build index incrementally for dynamic datasets
+
    - Add new vectors without full reconstruction
    - Periodically rebalance for optimal performance
    - Essential for real-time applications
 
-3. **Memory-Mapped Storage:** Handle datasets larger than RAM
+**Memory-Mapped Storage:** Handle datasets larger than RAM
+
    - Store vectors in memory-mapped files
    - Let OS manage virtual memory and caching
    - Enables searching billion-scale datasets on modest hardware
 
 **Query-Time Optimizations:**
 
+**[SIMD](glossary.md#simd-single-instruction-multiple-data) Vectorization:** Accelerate distance calculations
 
-4. **[SIMD](glossary.md#simd-single-instruction-multiple-data) Vectorization:** Accelerate distance calculations
    - Use AVX2/AVX-512 instructions for parallel arithmetic
    - Achieve 4-16x speedup in distance computations
    - Critical for high-dimensional vectors (768, 1536 dimensions)
 
-5. **Batch Query Processing:** Amortize overhead across multiple queries
+**Batch Query Processing:** Amortize overhead across multiple queries
+
    - Process 10-100 queries simultaneously
    - Better CPU cache utilization
    - Improved memory bandwidth efficiency
 
-6. **Warm-up Strategies:** Preload critical index regions
+**Warm-up Strategies:** Preload critical index regions
+
    - Touch frequently accessed memory pages
    - Pre-compute entry points for different query types
    - Reduce cold-start latency in production systems
@@ -875,12 +812,14 @@ HNSW performance scales favorably with dataset size:
 **Memory Layout Optimizations:**
 
 
-7. **Data Structure Packing:** Minimize memory overhead
+**Data Structure Packing:** Minimize memory overhead
+
    - Pack connection lists efficiently
    - Use compact representations for small M values
    - Typical overhead reduction: 20-40%
 
-8. **Cache-Friendly Traversal:** Optimize memory access patterns
+**Cache-Friendly Traversal:** Optimize memory access patterns
+
    - Layout connected nodes spatially close in memory
    - Prefetch neighbor data during graph traversal
    - Significant impact on large-scale deployments
@@ -897,10 +836,12 @@ HNSW performance scales favorably with dataset size:
 IVF embodies a classic divide-and-conquer strategy adapted for high-dimensional spaces:
 
 *Geographic Analogy:* Consider finding the nearest coffee shop in a large city:
+
 - **Naive approach:** Check every coffee shop in the entire city
 - **IVF approach:** Divide the city into neighborhoods, identify which neighborhoods you're likely to find coffee shops near your location, then search only those neighborhoods
 
 *Library Science Analogy:*
+
 - **Traditional library:** Books scattered randomly - must check every shelf
 - **Dewey Decimal System (IVF):** Books organized by topic - go directly to relevant sections
 
@@ -946,6 +887,7 @@ This principle holds particularly well in high-dimensional spaces due to the **c
 
 
 *Complexity Reduction:* Instead of O(N) comparisons for brute force search, IVF achieves:
+
 - O(√N) centroid comparisons (for optimal nlist ≈ √N)
 - O(N/nlist × nprobes) vector comparisons within selected clusters
 - Total: O(√N + (N×nprobes)/nlist)
@@ -954,253 +896,6 @@ This principle holds particularly well in high-dimensional spaces due to the **c
 
 *Parallelization:* Different clusters can be searched independently, enabling efficient distributed processing.
 
-#### Advanced Mathematical Foundation
-
-**K-means Clustering: Beyond Basic Implementation**
-
-
-*Objective Function and Optimization:*
-The k-means algorithm minimizes the within-cluster sum of squares (WCSS):
-
-```
-Objective: min Σᵢ₌₁ⁿ Σⱼ₌₁ᵏ wᵢⱼ ||xᵢ - μⱼ||²
-
-Where:
-- xᵢ = vector i
-- μⱼ = centroid of cluster j
-- wᵢⱼ = 1 if xᵢ belongs to cluster j, 0 otherwise
-```
-
-*Advanced Initialization Strategies:*
-
-**K-means++ Initialization:** Choose initial centroids to maximize distance between them
-
-- Select first centroid randomly
-- For each subsequent centroid, choose with probability proportional to squared distance from nearest existing centroid
-- Provides better initial configuration, leading to superior final clustering
-
-**Spherical K-means:** Optimize for cosine similarity instead of Euclidean distance
-
-- Normalize all vectors to unit length
-- Update rule: μⱼ = Σᵢ∈Cⱼ xᵢ / ||Σᵢ∈Cⱼ xᵢ||
-- Better suited for text embeddings and normalized vectors
-
-**Mini-batch K-means:** Handle datasets too large for memory
-
-- Process random subsets (mini-batches) of data
-- Update centroids incrementally
-- Enables clustering of billion-scale datasets
-
-**Advanced Cluster Quality Metrics:**
-
-
-*Within-Cluster Sum of Squares (WCSS):*
-```
-WCSS = Σⱼ₌₁ᵏ Σᵢ∈Cⱼ ||xᵢ - μⱼ||²
-```
-Lower WCSS indicates tighter clusters, but must be balanced against number of clusters.
-
-*Silhouette Coefficient:*
-```
-For vector i: s(i) = (b(i) - a(i)) / max(a(i), b(i))
-
-Where:
-- a(i) = average distance to vectors in same cluster
-- b(i) = average distance to vectors in nearest different cluster
-```
-Range: [-1, 1], where 1 indicates perfect clustering.
-
-*Davies-Bouldin Index:*
-```
-DB = (1/k) Σⱼ₌₁ᵏ maxₘ≠ⱼ ((σⱼ + σₘ) / d(cⱼ, cₘ))
-
-Where:
-- σⱼ = average distance of vectors in cluster j to centroid cⱼ
-- d(cⱼ, cₘ) = distance between centroids j and m
-```
-Lower values indicate better clustering (tighter clusters, more separated).
-
-*Cluster Balance Metrics:*
-
-**Size Variance:** Measures how evenly vectors are distributed across clusters
-```
-size_variance = var([|C₁|, |C₂|, ..., |Cₖ|])
-```
-Lower variance indicates more balanced clusters.
-
-**Load Balance Factor:** For cluster i with nᵢ vectors:
-```
-balance_factor = max(nᵢ) / (N/k)
-```
-Values close to 1.0 indicate good load balance.
-
-**Comprehensive Complexity Analysis:**
-
-
-*Time Complexity Breakdown:*
-
-**Training Phase (One-time cost):**
-
-- K-means clustering: O(I × N × k × D)
-  - I = number of iterations (typically 10-50)
-  - N = number of vectors
-  - k = number of clusters (nlist)
-  - D = vector dimensions
-
-**Query Phase (Per-query cost):**
-
-- Centroid distance calculation: O(k × D)
-- Cluster selection: O(k × log(nprobes))
-- Within-cluster search: O((N/k) × nprobes × D)
-- Total query complexity: O(k × D + (N × nprobes × D)/k)
-
-*Optimal Cluster Count Analysis:*
-To minimize query time, we differentiate the total cost with respect to k:
-
-```
-Total_cost = k × D + (N × nprobes × D)/k
-
-d(Total_cost)/dk = D - (N × nprobes × D)/k² = 0
-
-Solving: k² = N × nprobes
-Optimal k = √(N × nprobes)
-```
-
-For fixed nprobes, this gives the classic result: optimal nlist ≈ √N
-
-*Space Complexity:*
-
-- Centroids storage: O(k × D)
-- Inverted lists: O(N) (same as original data)
-- Cluster assignments: O(N × log(k)) bits
-- Total overhead: Minimal compared to original data
-
-*Practical Performance Scaling:*
-
-**Dataset Size Impact:**
-
-- 100K vectors: Query time ∝ √100K = 316 centroid operations
-- 1M vectors: Query time ∝ √1M = 1,000 centroid operations
-- 10M vectors: Query time ∝ √10M = 3,162 centroid operations
-
-**Dimensionality Impact:**
-
-- Linear scaling with D for both centroid comparisons and within-cluster search
-- Higher dimensions benefit more from clustering (curse of dimensionality helps)
-- Memory bandwidth often becomes bottleneck for D > 1000
-
-#### Advanced Parameter Optimization
-
-**nlist (Number of Clusters): Mathematical Foundation**
-
-
-*Theoretical Optimization:*
-The optimal number of clusters balances two competing factors:
-
-1. **Centroid search cost:** Increases linearly with nlist
-2. **Within-cluster search cost:** Decreases as 1/nlist
-
-Mathematical derivation:
-```
-Total_query_cost = α × nlist + β × N/nlist
-
-Minimizing: d(cost)/d(nlist) = α - β × N/nlist² = 0
-
-Optimal nlist = √(β × N / α) ≈ √N (when α ≈ β)
-```
-
-*Advanced Formula Incorporating Real-World Factors:*
-```
-nlist = √N × dimension_factor × distribution_factor × memory_factor
-
-Where:
-- dimension_factor = max(1.0, D/512) [higher dims need more clusters]
-- distribution_factor ∈ [0.8, 1.5] [depends on data uniformity]
-- memory_factor ∈ [0.7, 1.3] [based on available memory]
-```
-
-*Data Distribution Considerations:*
-
-**Uniform Distributions:** Standard √N formula works well
-**Clustered Data:** May need fewer clusters (factor = 0.8-0.9)
-**Sparse/Skewed Data:** May need more clusters (factor = 1.1-1.5)
-**Multi-modal Data:** Consider hierarchical clustering or larger nlist
-
-*Practical Guidelines by Scale:*
-
-| Dataset Size | Base nlist | Low Memory | High Accuracy | Comments |
-|--------------|------------|------------|---------------|-----------|
-| 50K vectors  | 224        | 128        | 384          | Small scale, memory-friendly |
-| 100K vectors | 316        | 200        | 500          | Sweet spot for many applications |
-| 500K vectors | 707        | 500        | 1,000        | Approaching large-scale |
-| 1M vectors   | 1,000      | 700        | 1,500        | Large-scale deployment |
-| 5M vectors   | 2,236      | 1,500      | 3,500        | Very large scale |
-| 10M vectors  | 3,162      | 2,000      | 5,000        | Massive scale |
-
-**nprobes (Search Width): Advanced Selection Strategy**
-
-
-*Accuracy-Speed Trade-off Analysis:*
-The relationship between nprobes and recall follows a logarithmic curve:
-
-```
-Recall(nprobes) ≈ 1 - exp(-nprobes × coverage_factor)
-
-Where coverage_factor depends on:
-- Data distribution uniformity
-- Cluster quality (silhouette score)
-- Query vector characteristics
-```
-
-*Adaptive nprobes Selection:*
-
-**Query-Type Based:**
-
-- **Autocomplete/Real-time:** nprobes = max(1, nlist × 0.01) [1% of clusters]
-- **Standard search:** nprobes = nlist × 0.05-0.10 [5-10% of clusters]
-- **High-precision:** nprobes = nlist × 0.15-0.25 [15-25% of clusters]
-- **Research/Batch:** nprobes = nlist × 0.30-0.50 [30-50% of clusters]
-
-**Load-Adaptive Strategy:**
-
-```
-if system_load < 0.5:
-    nprobes = base_nprobes × 1.5  # Higher accuracy when resources available
-elif system_load > 0.8:
-    nprobes = base_nprobes × 0.7  # Preserve response time under load
-else:
-    nprobes = base_nprobes
-```
-
-**Quality-Adaptive Selection:**
-
-Adjust based on cluster quality metrics:
-```
-if silhouette_score > 0.7:  # Well-separated clusters
-    nprobes = base_nprobes × 0.8  # Can search fewer clusters
-elif silhouette_score < 0.3:  # Poorly separated clusters
-    nprobes = base_nprobes × 1.3  # Need to search more clusters
-```
-
-**nprobes (Search Width)**
-
-
-Controls the accuracy-speed trade-off at query time:
-
-**Selection Strategy:**
-
-```
-Conservative: nprobes = nlist × 0.05 (5% of clusters)
-Balanced:     nprobes = nlist × 0.10 (10% of clusters)
-Aggressive:   nprobes = nlist × 0.20 (20% of clusters)
-```
-
-**Performance Scaling:**
-
-- **nprobes=1:** Fastest, ~60-70% recall
-- **nprobes=nlist×0.05:** Fast, ~85-90% recall
-- **nprobes=nlist×0.10:** Balanced, ~92-96% recall
-- **nprobes=nlist×0.20:** Accurate, ~96-98% recall
 
 #### Advanced IVF Techniques and Optimizations
 
@@ -1221,92 +916,6 @@ Periodically retrain cluster centroids using updated vector distributions, espec
 - **Symmetric Distance:** Faster approximation using centroid as intermediate point
 - **Trade-off:** Asymmetric provides better accuracy at higher computational cost
 
-**Comprehensive Performance Benchmarks**
-
-
-> **⚠️ Illustrative Example:** The following performance data represents theoretical examples for educational purposes. Real-world performance depends heavily on your specific data distribution, hardware configuration, and usage patterns. Conduct thorough benchmarking with your actual use case before making production decisions.
-
-*Example Reference Scenario: 10M vectors, 512 dimensions*
-*Example Hardware: AWS c5.9xlarge (36 vCPU, 72GB RAM)*
-*Example Configuration: nlist=4000, optimized implementation*
-
-**Training Phase Analysis:**
-
-- **K-means clustering:** 8 minutes (single-threaded), 2.5 minutes (16 threads)
-- **Index construction:** 3 minutes (building inverted lists)
-- **Total setup time:** 11 minutes (single-threaded), 4.5 minutes (parallel)
-- **Memory peak during training:** 45GB (includes working copies)
-
-**Storage Requirements:**
-
-- **Raw vectors:** 10M × 512 × 4 bytes = 20.48GB
-- **Centroids:** 4000 × 512 × 4 bytes = 8.2MB
-- **Inverted lists metadata:** ~150MB (cluster assignments, offsets)
-- **Total index size:** 20.6GB (minimal overhead)
-
-**Query Performance Deep Dive:**
-
-
-| nprobes | Latency | Recall@10 | Recall@100 | QPS | Clusters Hit | Vectors Examined |
-|---------|---------|-----------|-------------|-----|--------------|------------------|
-| 10      | 0.8ms   | 76.2%     | 82.1%       | 1,250 | 10/4000     | ~25,000         |
-| 25      | 1.3ms   | 84.7%     | 89.6%       | 770   | 25/4000     | ~62,500         |
-| 50      | 2.1ms   | 89.3%     | 93.2%       | 480   | 50/4000     | ~125,000        |
-| 100     | 4.8ms   | 93.7%     | 96.4%       | 210   | 100/4000    | ~250,000        |
-| 200     | 9.2ms   | 96.1%     | 98.1%       | 110   | 200/4000    | ~500,000        |
-| 400     | 18.7ms  | 97.8%     | 99.0%       | 53    | 400/4000    | ~1,000,000      |
-
-**Scaling Analysis Across Different Dataset Sizes:**
-
-
-*Fixed Configuration: nprobes = nlist × 0.10*
-
-| Dataset Size | nlist | nprobes | Avg Latency | Recall@10 | Memory Usage |
-|--------------|-------|---------|-------------|-----------|---------------|
-| 100K         | 316   | 32      | 0.15ms      | 94.8%     | 410MB        |
-| 500K         | 707   | 71      | 0.45ms      | 94.2%     | 2.1GB        |
-| 1M           | 1000  | 100     | 0.8ms       | 93.9%     | 4.1GB        |
-| 5M           | 2236  | 224     | 2.3ms       | 93.1%     | 20.5GB       |
-| 10M          | 3162  | 316     | 4.1ms       | 92.8%     | 41GB         |
-| 50M          | 7071  | 707     | 12.5ms      | 91.9%     | 205GB        |
-
-**Dimensionality Impact Analysis:**
-
-
-*Fixed: 1M vectors, nlist=1000, nprobes=100*
-
-| Dimensions | Latency | Recall@10 | Centroid Calc | Within-Cluster | Memory |
-|------------|---------|-----------|----------------|----------------|--------|
-| 128        | 0.3ms   | 95.1%     | 0.05ms        | 0.25ms         | 512MB  |
-| 256        | 0.5ms   | 94.6%     | 0.08ms        | 0.42ms         | 1.0GB  |
-| 384        | 0.7ms   | 94.3%     | 0.11ms        | 0.59ms         | 1.5GB  |
-| 512        | 0.8ms   | 94.0%     | 0.13ms        | 0.67ms         | 2.0GB  |
-| 768        | 1.1ms   | 93.6%     | 0.18ms        | 0.92ms         | 3.1GB  |
-| 1024       | 1.4ms   | 93.2%     | 0.22ms        | 1.18ms         | 4.1GB  |
-| 1536       | 2.0ms   | 92.7%     | 0.31ms        | 1.69ms         | 6.1GB  |
-
-**Production Deployment Insights:**
-
-
-*Multi-Threaded Performance:*
-
-- **Single thread:** Baseline performance as shown above
-- **4 threads:** 3.2x throughput improvement
-- **8 threads:** 5.8x throughput improvement
-- **16 threads:** 9.1x throughput improvement
-- **32+ threads:** Memory bandwidth becomes bottleneck
-
-*Memory Access Patterns:*
-- **Centroid access:** 100% cache hit rate (fits in L3)
-- **Inverted list access:** 60-80% cache hit rate (depends on nprobes)
-- **Vector data access:** 15-25% cache hit rate (too large for cache)
-
-*Network/Distributed Considerations:*
-
-- **Index replication:** Full index copy per search node
-- **Query distribution:** Load balance across nodes
-- **Typical deployment:** 2-4 replicas for high availability
-- **Network overhead:** +0.5-2ms latency in multi-node setups
 
 ### Product Quantization
 
@@ -1359,438 +968,7 @@ Where each subspace ℝᴰ/ᵐ is quantized independently
 2. **Embedding Structure:** Modern embedding models often encode different semantic aspects in distinct dimensional ranges
 3. **Local Similarity Preservation:** PQ preserves local neighborhood structure even with quantization errors
 
-**The Codebook Learning Process:**
 
-
-For each subvector position j:
-
-*Step 1: Subvector Extraction*
-```
-For all vectors v₁, v₂, ..., vₙ:
-Extract subvectors: s₁ⱼ, s₂ⱼ, ..., sₙⱼ where sᵢⱼ = vᵢ[j×(D/m) : (j+1)×(D/m)]
-```
-
-*Step 2: Subspace Clustering*
-```
-Apply k-means to {s₁ⱼ, s₂ⱼ, ..., sₙⱼ}:
-Minimize: Σᵢ₌₁ⁿ min_{c∈Cⱼ} ||sᵢⱼ - c||²
-
-Result: Codebook Cⱼ = {c₁ⱼ, c₂ⱼ, ..., cₖⱼ}
-```
-
-*Step 3: Quantization*
-```
-For each subvector sᵢⱼ:
-Find: qᵢⱼ = argmin_{c∈Cⱼ} ||sᵢⱼ - c||²
-```
-
-#### Advanced Mathematical Framework
-
-**Formal Problem Definition:**
-
-
-Given a dataset X = {x₁, x₂, ..., xₙ} where xᵢ ∈ ℝᴰ, find:
-
-1. A decomposition function: φ: ℝᴰ → (ℝᴰ/ᵐ)ᵐ
-2. Quantization functions: qⱼ: ℝᴰ/ᵐ → {0, 1, ..., k-1} for j = 1, ..., m
-3. Reconstruction functions: rⱼ: {0, 1, ..., k-1} → ℝᴰ/ᵐ for j = 1, ..., m
-
-Such that the quantization error is minimized:
-```
-min Σᵢ₌₁ⁿ ||xᵢ - reconstruct(quantize(decompose(xᵢ)))||²
-```
-
-**Vector Space Decomposition Theory:**
-
-
-*Cartesian Product Structure:*
-```
-ℝᴰ = ℝᴰ/ᵐ × ℝᴰ/ᵐ × ... × ℝᴰ/ᵐ
-
-Decomposition operator:
-φ(x) = (x[1:D/m], x[D/m+1:2D/m], ..., x[(m-1)D/m+1:D])
-
-Reconstruction operator:
-ψ(y₁, y₂, ..., yₘ) = [y₁ ⊕ y₂ ⊕ ... ⊕ yₘ] (concatenation)
-```
-
-*Optimality Conditions:*
-The optimal codebook for subspace j satisfies:
-```
-cₖⱼ* = (1/|Sₖⱼ|) Σ_{s∈Sₖⱼ} s
-
-Where Sₖⱼ = {sᵢⱼ : qⱼ(sᵢⱼ) = k} (Voronoi cell k in subspace j)
-```
-
-**Error Analysis and Bounds:**
-
-
-*Quantization Error Decomposition:*
-```
-E[||x - x̂||²] = Σⱼ₌₁ᵐ E[||xⱼ - x̂ⱼ||²]
-
-Where:
-
-- xⱼ = original subvector j
-- x̂ⱼ = quantized subvector j
-```
-
-*Lloyd's Theorem Application:*
-For each subspace, the optimal quantizer satisfies:
-```
-Distortion_j ≥ (1/12) * (2πe/k)^(2/d) * σⱼ²
-
-Where:
-
-- d = D/m (subvector dimensionality)
-- σⱼ² = variance of subvector j
-- k = number of centroids per codebook
-```
-
-*Total Distortion Bound:*
-```
-Total_Distortion ≤ Σⱼ₌₁ᵐ (1/12) * (2πe/k)^(2(D/m)) * σⱼ²
-```
-
-**Information-Theoretic Analysis:**
-
-
-*Rate-Distortion Trade-off:*
-```
-Rate = m × log₂(k) bits per vector
-Distortion = E[||x - x̂||²]
-
-Optimal trade-off (for Gaussian sources):
-D(R) ≥ σ² * 2^(-2R/D)
-
-Where R = rate, D = dimensions, σ² = source variance
-```
-
-*Compression Efficiency:*
-```
-Compression_ratio = (32 × D) / (m × log₂(k))
-
-Efficiency = 1 - (Distortion / Original_variance)
-
-Optimal m balances:
-- Larger m: Better error independence, more codebooks to store
-- Smaller m: Fewer codebooks, potential correlation within subvectors
-```
-
-**Optimized Quantization Process:**
-
-
-#### Compression Analysis
-
-**Memory Reduction Calculation:**
-
-
-```
-Original storage: D dimensions × 32 bits = 32D bits
-Quantized storage: m subquantizers × log₂(k) bits
-
-Compression ratio = 32D / (m × log₂(k))
-```
-
-**Practical Examples:**
-
-
-**Configuration 1: 768-dimensional, 96 subquantizers, 256 centroids**
-
-- Original: 768 × 32 = 24,576 bits (3,072 bytes)
-- Quantized: 96 × 8 = 768 bits (96 bytes)
-- **Compression: 32:1** (32× memory reduction)
-
-**Configuration 2: 1536-dimensional, 128 subquantizers, 256 centroids**
-
-- Original: 1536 × 32 = 49,152 bits (6,144 bytes)
-- Quantized: 128 × 8 = 1,024 bits (128 bytes)
-- **Compression: 48:1** (48× memory reduction)
-
-**Extreme Compression: 4-bit quantization (16 centroids)**
-
-- Quantized: 96 × 4 = 384 bits (48 bytes)
-- **Compression: 64:1** but with increased accuracy loss
-
-#### Advanced Distance Computation and Optimization
-
-**Asymmetric Distance Computation (ADC): Mathematical Foundation**
-
-
-The breakthrough insight of ADC is that distance computation can be decomposed into subspace contributions and precomputed efficiently.
-
-*Mathematical Derivation:*
-```
-For query q and quantized vector x̂:
-
-||q - x̂||² = ||Σⱼ₌₁ᵐ (qⱼ - x̂ⱼ)||²
-            = Σⱼ₌₁ᵐ ||qⱼ - x̂ⱼ||² + 2Σᵢ<ⱼ ⟨qᵢ - x̂ᵢ, qⱼ - x̂ⱼ⟩
-            ≈ Σⱼ₌₁ᵐ ||qⱼ - x̂ⱼ||² (cross-terms ≈ 0 for independent subspaces)
-```
-
-*ADC Algorithm:*
-
-**Phase 1: Precomputation (O(m × k × D/m))**
-
-```
-For each subspace j = 1, ..., m:
-    For each centroid cₖⱼ in codebook Cⱼ:
-        distance_table[j][k] = ||qⱼ - cₖⱼ||²
-```
-
-**Phase 2: Distance Computation (O(m) per vector)**
-
-```
-For quantized vector [q₁, q₂, ..., qₘ]:
-    distance = Σⱼ₌₁ᵐ distance_table[j][qⱼ]
-```
-
-**Complexity Analysis:**
-
-
-*Traditional Approach:*
-
-- Distance computation: O(D) per vector
-- For N vectors: O(N × D)
-- Memory requirement: N × D float values
-
-*ADC Approach:*
-
-- Precomputation: O(m × k × D/m) = O(k × D) once per query
-- Distance computation: O(m) per vector
-- For N vectors: O(k × D + N × m)
-- Memory requirement: N × m index values + m × k × D/m codebook storage
-
-*Speedup Factor:*
-```
-Speedup = (N × D) / (k × D + N × m)
-        ≈ D/m for large N (since k << N typically)
-
-For typical values (D=768, m=96): Speedup ≈ 8x
-```
-
-**Advanced Distance Computation Variants:**
-
-
-**1. Optimized Product Quantization (OPQ):**
-
-Apply orthogonal transformation before quantization to minimize correlation:
-
-```
-Objective: min ||X - Q(RX)||²_F
-
-Where:
-
-- R is an orthogonal matrix
-- Q() is the quantization function
-- X is the data matrix
-
-Solution alternates between:
-1. Fix R, optimize codebooks
-2. Fix codebooks, optimize R using SVD
-```
-
-**2. Additive Quantization (AQ):**
-
-Use multiple codebooks additively instead of product structure:
-
-```
-x̂ = Σⱼ₌₁ᵐ cⱼ[qⱼ]
-
-Advantages:
-
-- More flexible approximation
-- Better approximation quality for same bit rate
-
-Disadvantages:
-
-- More complex training
-- Higher computational cost
-```
-
-**3. Composite Quantization:**
-
-Combine dictionary learning with product quantization:
-
-```
-Objective: min ||X - DCQ||²_F
-
-Where:
-
-- D is a learned dictionary
-- C are combination weights
-- Q are quantized coefficients
-```
-
-**Memory Access Pattern Optimization:**
-
-
-*Cache-Friendly Storage Layout:*
-```
-Traditional layout: [vector1][vector2]...[vectorN]
-Quantized layout:   [indices1][indices2]...[indicesN]
-
-Optimized layout:
-
-- Interleave codebooks with indices for spatial locality
-- Pack multiple indices per cache line
-- Use SIMD-friendly alignment
-```
-
-*Vectorized Distance Computation:*
-```
-SIMD optimization:
-
-- Process 4-8 distance computations simultaneously
-- Use lookup table vectorization
-- Typical speedup: 2-4x on modern CPUs
-```
-
-#### Advanced Parameter Selection and Optimization
-
-**Mathematical Framework for Parameter Selection**
-
-
-*Optimal m Selection:*
-The choice of m involves a fundamental trade-off between quantization error and computational efficiency:
-
-```
-Quantization Error ∝ (k)^(-2/d) where d = D/m
-
-For fixed total bit budget B = m × log₂(k):
-
-- Larger m, smaller k: More subspaces, fewer centroids each
-- Smaller m, larger k: Fewer subspaces, more centroids each
-
-Optimal balance (Lloyd's theorem):
-m* ≈ D / (2 × ln(training_size/k))
-```
-
-*Data-Dependent Optimization:*
-
-**Correlation Analysis:** Examine dimensional correlations to inform m:
-```
-Correlation_matrix = corr(X)
-Block_structure = identify_low_correlation_blocks(Correlation_matrix)
-Optimal_m = number_of_blocks
-```
-
-**Principal Component Analysis:** Use PCA to inform subspace divisions:
-```
-PCA_transform = PCA(X)
-Explained_variance_ratio = PCA_transform.explained_variance_ratio_
-
-# Divide dimensions based on variance concentration
-m = balance_variance_across_subspaces(Explained_variance_ratio)
-```
-
-**Advanced Configuration Guidelines:**
-
-
-> **⚠️ Note:** The following configurations are illustrative examples for guidance. Optimal parameters depend on your specific data characteristics, hardware, and performance requirements. Test different configurations with your actual dataset.
-
-*High-Dimensional Embeddings (D ≥ 1024):*
-
-| Dimensions | Conservative m | Balanced m | Aggressive m | Reasoning |
-|------------|---------------|------------|--------------|------------|
-| 1024       | 64 (16:1)     | 128 (8:1)  | 256 (4:1)   | Large subspaces preserve local structure |
-| 1536       | 96 (16:1)     | 192 (8:1)  | 384 (4:1)   | Balance compression vs accuracy |
-| 2048       | 128 (16:1)    | 256 (8:1)  | 512 (4:1)   | Higher dimensions support more subspaces |
-
-*Medium-Dimensional Embeddings (D = 256-768):*
-
-| Dimensions | Conservative m | Balanced m | Aggressive m | Comments |
-|------------|---------------|------------|--------------|----------|
-| 256        | 16 (16:1)     | 32 (8:1)   | 64 (4:1)    | Careful balance needed |
-| 384        | 24 (16:1)     | 48 (8:1)   | 96 (4:1)    | Common text embedding size |
-| 512        | 32 (16:1)     | 64 (8:1)   | 128 (4:1)   | Good for image embeddings |
-| 768        | 48 (16:1)     | 96 (8:1)   | 192 (4:1)   | BERT-large size |
-
-**Adaptive k Selection:**
-
-
-*Training Data Size Dependency:*
-```
-Rule of thumb: k ≤ √(training_size_per_subspace)
-
-For subspace j with training vectors sⱼ:
-Optimal_k_j = min(256, max(16, √(|sⱼ|/10)))
-```
-
-*Subspace Complexity Estimation:*
-```
-Intrinsic_dimensionality = estimate_local_dimension(subspace_data)
-Complexity_factor = Intrinsic_dimensionality / (D/m)
-
-Adapted_k = base_k × Complexity_factor
-```
-
-**Quality-Compression Analysis Framework:**
-
-
-*Pareto Efficiency Calculation:*
-```
-For configuration (m, k):
-Compression_ratio = (32 × D) / (m × log₂(k))
-Recall@k = evaluate_recall(test_queries, configuration)
-Latency = measure_query_latency(configuration)
-
-Pareto_score = α × Recall + β × (1/Latency) + γ × Compression_ratio
-```
-
-*Application-Specific Optimization:*
-
-**Recommendation Systems:**
-
-- Prioritize recall over compression
-- Typical: m = D/16, k = 256
-- Accept 20-30:1 compression for 95%+ recall
-
-**Mobile/Edge Applications:**
-
-- Prioritize memory efficiency
-- Typical: m = D/4, k = 64
-- Accept 80% recall for 64:1 compression
-
-**Real-time Search:**
-
-- Balance latency and accuracy
-- Typical: m = D/8, k = 128
-- Target: 40:1 compression, <1ms query time
-
-**Performance Modeling:**
-
-
-*Theoretical Recall Estimation:*
-```
-Expected_recall ≈ 1 - (ε/σ)²
-
-Where:
-- ε = average quantization error per dimension
-- σ = standard deviation of query-database distances
-
-ε ≈ (σ_subspace) × (k)^(-1/d) × C
-C ≈ 0.5 (empirical constant)
-```
-
-*Memory Usage Prediction:*
-```
-Codebook_memory = m × k × (D/m) × 4 bytes
-Index_memory = N × m × log₂(k)/8 bytes
-Runtime_memory = m × k × 4 bytes (distance tables)
-
-Total = Codebook_memory + Index_memory + Runtime_memory
-```
-
-*Query Latency Model:*
-```
-Latency = T_precompute + N × T_lookup + T_sort
-
-Where:
-T_precompute = m × k × (D/m) × T_distance
-T_lookup = m × T_table_access
-T_sort = N × log(k) × T_compare
-```
 
 ### Algorithm Selection Guide
 
@@ -1815,6 +993,7 @@ Choosing the optimal vector search algorithm requires understanding your specifi
 
 
 *Base Parameter Selection by Latency Requirements:*
+
 - **Ultra-low latency (<1ms):** M=16, ef_construction=128
 - **Low latency (<5ms):** M=24, ef_construction=256
 - **Standard latency:** M=32, ef_construction=512
