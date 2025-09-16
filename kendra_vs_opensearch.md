@@ -1,11 +1,11 @@
 # AWS Kendra vs AWS OpenSearch: Service Comparison Guide
 
 
-## 🎯 Overview
+## Overview
 
 This guide provides a comprehensive comparison between AWS Kendra and AWS OpenSearch to help you choose the right search solution for your needs. Both services offer powerful search capabilities but serve different use cases and technical requirements.
 
-**📘 For technical implementation details:** See the dedicated [OpenSearch Guide](opensearch.md) for in-depth vector search implementation, algorithms, and production patterns.
+**📘 For details on OpenSearch:** See the dedicated [OpenSearch Introduction](opensearch.md)
 
 ## Service Philosophy and Approach
 
@@ -30,7 +30,7 @@ AWS OpenSearch is a distributed search and analytics suite based on Elasticsearc
 - **Extensible architecture**: Build custom search experiences and applications
 - **Vector search capable**: Modern semantic search with [embedding](glossary.md#embedding) models
 
-For detailed technical information about OpenSearch's search approaches, algorithms, and implementation patterns, see the [OpenSearch Technical Guide](opensearch.md).
+For detailed technical information about OpenSearch's search approaches, algorithms, and implementation patterns, see the [OpenSearch Introduction](opensearch.md).
 
 ## Core Differences Summary
 
@@ -56,10 +56,13 @@ For detailed technical information about OpenSearch's search approaches, algorit
 | **Synonyms** | Automatic detection | Manual configuration |
 | **Multi-language** | Limited built-in support | Full multilingual support |
 | **Vector Search** | Not supported | Full vector search capabilities |
+| **RAG Support** | Limited to Q&A format | Full RAG implementation capabilities |
 
 *For detailed AWS Kendra features, see: [AWS Kendra Features](https://aws.amazon.com/kendra/features/) (please verify current capabilities)*
 
 *For comprehensive OpenSearch vector search capabilities, algorithms, and implementation details, see: [OpenSearch Technical Guide](opensearch.md)*
+
+*For detailed RAG implementation patterns and architectures with OpenSearch, see: [OpenSearch RAG Guide](opensearch_rag.md)*
 
 ### Data Handling and Integration
 
@@ -177,6 +180,13 @@ For detailed technical information about OpenSearch's search approaches, algorit
 
 ### When AWS OpenSearch Excels
 
+**RAG-Powered AI Applications**
+
+- **Scenario**: Company building an AI assistant that needs to answer questions using company knowledge base
+- **Why OpenSearch**: Full RAG implementation with vector search, hybrid retrieval, and custom reranking
+- **Benefits**: Accurate AI responses with source attribution, scalable knowledge integration
+- **Implementation**: See [OpenSearch RAG Guide](opensearch_rag.md) for detailed patterns
+
 **E-commerce Product Search**
 
 - **Scenario**: Online retailer with millions of products needs advanced search with filters, facets, and recommendations
@@ -217,19 +227,36 @@ For detailed technical information about OpenSearch's search approaches, algorit
 - Need full control over search relevance and ranking
 - Building custom search applications
 - Require vector search and semantic capabilities
+- Implementing RAG (Retrieval-Augmented Generation) systems
 - Have technical team capable of managing search infrastructure
 - Multiple use cases beyond search (analytics, logging)
-- Cost optimization is important for high query volumes 
+- Cost optimization is important for high query volumes
 - Need real-time search and analytics capabilities
+- Building AI-powered applications requiring knowledge retrieval
 
 ### Hybrid Approach Considerations
 
 Some organizations use both services:
 
-- **Kendra** for internal enterprise search
-- **OpenSearch** for customer-facing applications and analytics
+- **Kendra** for internal enterprise search and simple Q&A systems
+- **OpenSearch** for customer-facing applications, analytics, and advanced RAG implementations
 
 This approach maximizes the strengths of each service while serving different organizational needs.
+
+### RAG Implementation Comparison
+
+| RAG Capability | AWS Kendra | AWS OpenSearch |
+|----------------|------------|----------------|
+| **Setup Complexity** | Low - built-in Q&A format | High - requires custom implementation |
+| **Customization** | Limited to predefined patterns | Full control over retrieval and generation |
+| **Vector Search** | Not available | Advanced HNSW and IVF algorithms |
+| **Hybrid Retrieval** | Basic metadata filtering | Sophisticated text + vector combination |
+| **Reranking** | Built-in ML models | Custom reranking pipelines |
+| **Multi-modal RAG** | Text documents only | Text, images, and multimedia content |
+| **Production Scale** | Managed scaling | Requires infrastructure management |
+| **Cost for RAG** | Higher per-query costs | More cost-effective at scale |
+
+*For comprehensive RAG implementation guidance with OpenSearch, see: [OpenSearch RAG Guide](opensearch_rag.md)*
 
 ## Migration Considerations
 
@@ -260,9 +287,6 @@ This approach maximizes the strengths of each service while serving different or
 - Plan for ongoing operational expenses
 
 ---
-
-> **📚 Additional Resources:**
-> - [OpenSearch Technical Implementation Guide](opensearch.md) - Detailed technical guide for OpenSearch vector search
 
 
 

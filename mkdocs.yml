@@ -53,7 +53,7 @@ extra_css:
   - styles/overrides.css
 docs_dir: docs
 nav:
-  - OpenSearch Intro: opensearch.md
+  - OpenSearch Introduction: opensearch.md
   - Deployment Options: opensearch_productionize.md
   - OpenSearch vs Kendra: kendra_vs_opensearch.md
   - OpenSearch vs PineCone: opensearch_vs_pinecone.md

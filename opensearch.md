@@ -1,5 +1,5 @@
 # OpenSearch: Theory to Implementation
-## 🎯 Overview
+## Overview
 
 A comprehensive guide to understanding and implementing modern search systems, from traditional text-based approaches to advanced vector search algorithms and their practical implementation in OpenSearch.
 
