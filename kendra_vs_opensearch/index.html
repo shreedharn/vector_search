@@ -223,7 +223,7 @@
   
   
   <span class="md-ellipsis">
-    OpenSearch Intro
+    OpenSearch Introduction
     
   </span>
   
@@ -312,9 +312,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#-overview" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      🎯 Overview
+      Overview
     </span>
   </a>
   
@@ -520,6 +520,15 @@
   <a href="#hybrid-approach-considerations" class="md-nav__link">
     <span class="md-ellipsis">
       Hybrid Approach Considerations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rag-implementation-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAG Implementation Comparison
     </span>
   </a>
   
@@ -699,9 +708,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#-overview" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      🎯 Overview
+      Overview
     </span>
   </a>
   
@@ -912,6 +921,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#rag-implementation-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAG Implementation Comparison
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -958,9 +976,9 @@
 
 
 <h1 id="aws-kendra-vs-aws-opensearch-service-comparison-guide">AWS Kendra vs AWS OpenSearch: Service Comparison Guide<a class="headerlink" href="#aws-kendra-vs-aws-opensearch-service-comparison-guide" title="Permanent link">&para;</a></h1>
-<h2 id="-overview">🎯 Overview<a class="headerlink" href="#-overview" title="Permanent link">&para;</a></h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This guide provides a comprehensive comparison between AWS Kendra and AWS OpenSearch to help you choose the right search solution for your needs. Both services offer powerful search capabilities but serve different use cases and technical requirements.</p>
-<p><strong>📘 For technical implementation details:</strong> See the dedicated <a href="../opensearch/">OpenSearch Guide</a> for in-depth vector search implementation, algorithms, and production patterns.</p>
+<p><strong>📘 For details on OpenSearch:</strong> See the dedicated <a href="../opensearch/">OpenSearch Introduction</a></p>
 <h2 id="service-philosophy-and-approach">Service Philosophy and Approach<a class="headerlink" href="#service-philosophy-and-approach" title="Permanent link">&para;</a></h2>
 <h3 id="aws-kendra---intelligent-enterprise-search">AWS Kendra - Intelligent Enterprise Search<a class="headerlink" href="#aws-kendra---intelligent-enterprise-search" title="Permanent link">&para;</a></h3>
 <p>AWS Kendra is a fully managed enterprise search service that uses machine learning to deliver intelligent search capabilities. It's designed for organizations that want to provide natural language search across their enterprise content without extensive technical configuration.</p>
@@ -980,7 +998,7 @@
 <li><strong>Extensible architecture</strong>: Build custom search experiences and applications</li>
 <li><strong>Vector search capable</strong>: Modern semantic search with <a href="../glossary/#embedding">embedding</a> models</li>
 </ul>
-<p>For detailed technical information about OpenSearch's search approaches, algorithms, and implementation patterns, see the <a href="../opensearch/">OpenSearch Technical Guide</a>.</p>
+<p>For detailed technical information about OpenSearch's search approaches, algorithms, and implementation patterns, see the <a href="../opensearch/">OpenSearch Introduction</a>.</p>
 <h2 id="core-differences-summary">Core Differences Summary<a class="headerlink" href="#core-differences-summary" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1069,10 +1087,16 @@
 <td>Not supported</td>
 <td>Full vector search capabilities</td>
 </tr>
+<tr>
+<td><strong>RAG Support</strong></td>
+<td>Limited to Q&amp;A format</td>
+<td>Full RAG implementation capabilities</td>
+</tr>
 </tbody>
 </table>
 <p><em>For detailed AWS Kendra features, see: <a href="https://aws.amazon.com/kendra/features/">AWS Kendra Features</a> (please verify current capabilities)</em></p>
 <p><em>For comprehensive OpenSearch vector search capabilities, algorithms, and implementation details, see: <a href="../opensearch/">OpenSearch Technical Guide</a></em></p>
+<p><em>For detailed RAG implementation patterns and architectures with OpenSearch, see: <a href="../opensearch_rag/">OpenSearch RAG Guide</a></em></p>
 <h3 id="data-handling-and-integration">Data Handling and Integration<a class="headerlink" href="#data-handling-and-integration" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -1263,6 +1287,13 @@
 <li><strong>Benefits</strong>: Faster case research, improved document discovery</li>
 </ul>
 <h3 id="when-aws-opensearch-excels">When AWS OpenSearch Excels<a class="headerlink" href="#when-aws-opensearch-excels" title="Permanent link">&para;</a></h3>
+<p><strong>RAG-Powered AI Applications</strong></p>
+<ul>
+<li><strong>Scenario</strong>: Company building an AI assistant that needs to answer questions using company knowledge base</li>
+<li><strong>Why OpenSearch</strong>: Full RAG implementation with vector search, hybrid retrieval, and custom reranking</li>
+<li><strong>Benefits</strong>: Accurate AI responses with source attribution, scalable knowledge integration</li>
+<li><strong>Implementation</strong>: See <a href="../opensearch_rag/">OpenSearch RAG Guide</a> for detailed patterns</li>
+</ul>
 <p><strong>E-commerce Product Search</strong></p>
 <ul>
 <li><strong>Scenario</strong>: Online retailer with millions of products needs advanced search with filters, facets, and recommendations</li>
@@ -1302,18 +1333,73 @@
 <li>Need full control over search relevance and ranking</li>
 <li>Building custom search applications</li>
 <li>Require vector search and semantic capabilities</li>
+<li>Implementing RAG (Retrieval-Augmented Generation) systems</li>
 <li>Have technical team capable of managing search infrastructure</li>
 <li>Multiple use cases beyond search (analytics, logging)</li>
-<li>Cost optimization is important for high query volumes </li>
+<li>Cost optimization is important for high query volumes</li>
 <li>Need real-time search and analytics capabilities</li>
+<li>Building AI-powered applications requiring knowledge retrieval</li>
 </ul>
 <h3 id="hybrid-approach-considerations">Hybrid Approach Considerations<a class="headerlink" href="#hybrid-approach-considerations" title="Permanent link">&para;</a></h3>
 <p>Some organizations use both services:</p>
 <ul>
-<li><strong>Kendra</strong> for internal enterprise search</li>
-<li><strong>OpenSearch</strong> for customer-facing applications and analytics</li>
+<li><strong>Kendra</strong> for internal enterprise search and simple Q&amp;A systems</li>
+<li><strong>OpenSearch</strong> for customer-facing applications, analytics, and advanced RAG implementations</li>
 </ul>
 <p>This approach maximizes the strengths of each service while serving different organizational needs.</p>
+<h3 id="rag-implementation-comparison">RAG Implementation Comparison<a class="headerlink" href="#rag-implementation-comparison" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>RAG Capability</th>
+<th>AWS Kendra</th>
+<th>AWS OpenSearch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Setup Complexity</strong></td>
+<td>Low - built-in Q&amp;A format</td>
+<td>High - requires custom implementation</td>
+</tr>
+<tr>
+<td><strong>Customization</strong></td>
+<td>Limited to predefined patterns</td>
+<td>Full control over retrieval and generation</td>
+</tr>
+<tr>
+<td><strong>Vector Search</strong></td>
+<td>Not available</td>
+<td>Advanced HNSW and IVF algorithms</td>
+</tr>
+<tr>
+<td><strong>Hybrid Retrieval</strong></td>
+<td>Basic metadata filtering</td>
+<td>Sophisticated text + vector combination</td>
+</tr>
+<tr>
+<td><strong>Reranking</strong></td>
+<td>Built-in ML models</td>
+<td>Custom reranking pipelines</td>
+</tr>
+<tr>
+<td><strong>Multi-modal RAG</strong></td>
+<td>Text documents only</td>
+<td>Text, images, and multimedia content</td>
+</tr>
+<tr>
+<td><strong>Production Scale</strong></td>
+<td>Managed scaling</td>
+<td>Requires infrastructure management</td>
+</tr>
+<tr>
+<td><strong>Cost for RAG</strong></td>
+<td>Higher per-query costs</td>
+<td>More cost-effective at scale</td>
+</tr>
+</tbody>
+</table>
+<p><em>For comprehensive RAG implementation guidance with OpenSearch, see: <a href="../opensearch_rag/">OpenSearch RAG Guide</a></em></p>
 <h2 id="migration-considerations">Migration Considerations<a class="headerlink" href="#migration-considerations" title="Permanent link">&para;</a></h2>
 <h3 id="key-planning-factors">Key Planning Factors<a class="headerlink" href="#key-planning-factors" title="Permanent link">&para;</a></h3>
 <p><strong>Data Architecture</strong></p>
@@ -1341,10 +1427,6 @@
 <li>Plan for ongoing operational expenses</li>
 </ul>
 <hr />
-<blockquote>
-<p><strong>📚 Additional Resources:</strong>
-- <a href="../opensearch/">OpenSearch Technical Implementation Guide</a> - Detailed technical guide for OpenSearch vector search</p>
-</blockquote>
 
 
 
