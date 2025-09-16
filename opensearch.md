@@ -10,7 +10,7 @@ A comprehensive guide to understanding and implementing modern search systems, f
 - [Traditional Text-Based Search](#traditional-text-based-search)
 - [Vector Search Evolution](#vector-search-evolution)
 - [Search Approach Comparison](#search-approach-comparison)
-- [The Progression: Text → Vector → Hybrid](#the-progression-text-vector-hybrid)
+- [The Progression: Text → Vector → Hybrid](#the-progression-text-vector-hybrid_1)
 - [Reranking: Refining Search Results](#reranking-refining-search-results)
 
 **Part II: Vector Search Algorithms**
@@ -359,7 +359,7 @@ Understanding when to use text search versus vector search—and how to combine 
    - News discovery: "stories related to artificial intelligence ethics"
    - Research paper suggestions: "papers citing similar methodologies"
 
-### The Progression: Text → Vector → Hybrid
+### The Progression: Text → Vector → Hybrid {#the-progression-text-vector-hybrid_1}
 
 Modern search systems increasingly adopt hybrid approaches that combine the precision of text search with the semantic understanding of vector search.
 

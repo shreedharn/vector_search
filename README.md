@@ -131,7 +131,7 @@ Convert text, images, or other data into mathematical vectors (embeddings) that 
 
 - [Mathematical Foundations](./opensearch.md#mathematical-foundations) - Theoretical analysis
 - [Algorithm Selection Guide](./opensearch.md#algorithm-selection-guide) - Practical decision framework
-- [Performance Optimization](./opensearch_productionize.md#performance-optimization) - Production tuning
+- [Performance Optimization](./opensearch_productionize.md#part-iii-performance-optimization) - Production tuning
 
 **🏗️ Architecture Understanding**
 
