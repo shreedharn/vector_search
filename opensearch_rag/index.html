@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="../opensearch/">
+      
+      
+        <link rel="next" href="../opensearch_productionize/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -16,7 +20,7 @@
     
     
       
-        <title>RAG with OpenSearch: From Fundamentals to Production - OpenSearch for Vector and Hybrid Search</title>
+        <title>RAG with OpenSearch - OpenSearch for Vector and Hybrid Search</title>
       
     
     
@@ -106,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              RAG with OpenSearch: From Fundamentals to Production
+              RAG with OpenSearch
             
           </span>
         </div>
@@ -225,6 +229,373 @@
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    RAG with OpenSearch
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    RAG with OpenSearch
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-rag-the-knowledge-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding RAG: The Knowledge Problem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Understanding RAG: The Knowledge Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-challenge-with-traditional-language-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Challenge with Traditional Language Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-rag-solves-these-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      How RAG Solves These Problems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rag-architecture-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAG Architecture Components
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rag-implementation-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAG Implementation Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RAG Implementation Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-rag-straightforward-document-retrieval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic RAG: Straightforward Document Retrieval
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-rag-multi-step-reasoning-and-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced RAG: Multi-Step Reasoning and Filtering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversational-rag-maintaining-context-across-interactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conversational RAG: Maintaining Context Across Interactions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opensearch-as-a-rag-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenSearch as a RAG Foundation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenSearch as a RAG Foundation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vector-search-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector Search Capabilities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#document-storage-and-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document Storage and Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-updates-and-indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-Time Updates and Indexing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-rag-with-opensearch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing RAG with OpenSearch
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementing RAG with OpenSearch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-rag-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic RAG Implementation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-rag-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced RAG Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reranking-for-rag-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reranking for RAG Optimization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-rag-architectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced RAG Architectures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced RAG Architectures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-modal-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Modal RAG
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hierarchical-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hierarchical RAG
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agentic-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agentic RAG
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rag-evaluation-and-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      RAG Evaluation and Optimization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RAG Evaluation and Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retrieval-quality-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieval Quality Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#end-to-end-rag-evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      End-to-End RAG Evaluation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-optimization-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Optimization Strategies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-rag-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production RAG Considerations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Production RAG Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scalability-and-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scalability and Performance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-and-privacy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security and Privacy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-and-observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring and Observability
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
