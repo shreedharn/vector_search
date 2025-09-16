@@ -20,13 +20,12 @@ A comprehensive guide to deploying, scaling, and managing OpenSearch vector sear
 
 **Part III: Performance Optimization**
 - [Parameter Tuning Guidelines](#parameter-tuning-guidelines)
+- [Performance Optimization](#part-iii-performance-optimization)
 - [Monitoring and Observability](#monitoring-and-observability)
 - [Troubleshooting Common Issues](#troubleshooting-common-issues)
 - [Best Practices](#best-practices)
 
 **Part IV: Integration Patterns**
-- [AWS Bedrock and Titan Embeddings](#aws-bedrock-and-titan-embeddings)
-- [Real-time Ingestion Pipelines](#real-time-ingestion-pipelines)
 - [Disaster Recovery and Backup](#disaster-recovery-and-backup)
 
 ---
@@ -85,7 +84,7 @@ Serverless architecture with auto-scaling:
 
 The managed service provides complete control over cluster configuration and performance optimization.
 
-#### Cluster Configuration Examples
+#### Cluster Configuration Examples {#index-configuration-and-setup}
 
 **Small-Scale Production (< 1M vectors):**
 

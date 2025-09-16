@@ -21,10 +21,10 @@ This repository provides a comprehensive exploration of vector search and inform
 
 ### 🎯 Choose Your Learning Path
 
-**New to vector search?** → [Complete Beginner Path](#-complete-beginner-path)
-**Have search experience?** → [Practitioner Path](#-practitioner-path)
-**Ready for production?** → [Production Deployment Path](#-production-deployment-path)
-**Just comparing tools?** → [Technology Comparison](#-technology-comparison)
+**New to vector search?** → [Complete Beginner Path](#complete-beginner-path)
+**Have search experience?** → [Practitioner Path](#practitioner-path)
+**Ready for production?** → [Production Deployment Path](#production-deployment-path)
+**Just comparing tools?** → [Technology Comparison](#technology-comparison)
 
 ---
 
@@ -57,26 +57,26 @@ This repository provides a comprehensive exploration of vector search and inform
 **Answer these questions:**
 
 1. **Vector search experience?**
-   - ❌ Never heard of it → Start with [Complete Beginner Path](#-complete-beginner-path)
-   - ✅ Know the basics → [Practitioner Path](#-practitioner-path)
+   - ❌ Never heard of it → Start with [Complete Beginner Path](#complete-beginner-path)
+   - ✅ Know the basics → [Practitioner Path](#practitioner-path)
 
 2. **Technology choice?**
-   - ❌ Don't know what to use → [Technology Comparison](#-technology-comparison)
-   - ✅ Know your platform → [Production Deployment Path](#-production-deployment-path)
+   - ❌ Don't know what to use → [Technology Comparison](#technology-comparison)
+   - ✅ Know your platform → [Production Deployment Path](#production-deployment-path)
 
 3. **Time available?**
-   - ⚡ Quick comparison → [Technology Comparison](#-technology-comparison)
-   - 📅 Focused learning → [Practitioner Path](#-practitioner-path)
-   - 📚 Comprehensive study → [Complete Beginner Path](#-complete-beginner-path)
+   - ⚡ Quick comparison → [Technology Comparison](#technology-comparison)
+   - 📅 Focused learning → [Practitioner Path](#practitioner-path)
+   - 📚 Comprehensive study → [Complete Beginner Path](#complete-beginner-path)
 
 4. **Learning style?**
-   - 🧠 Theory first → [Complete Beginner Path](#-complete-beginner-path)
-   - 🛠️ Hands-on first → [Practitioner Path](#-practitioner-path)
-   - 🚀 Production focus → [Production Deployment Path](#-production-deployment-path)
+   - 🧠 Theory first → [Complete Beginner Path](#complete-beginner-path)
+   - 🛠️ Hands-on first → [Practitioner Path](#practitioner-path)
+   - 🚀 Production focus → [Production Deployment Path](#production-deployment-path)
 
 ---
 
-### 🌟 Complete Beginner Path
+### 🌟 Complete Beginner Path {#complete-beginner-path}
 *Start here if you're new to vector search or information retrieval*
 
 #### Phase 1: Understanding Vector Search
@@ -128,7 +128,7 @@ This repository provides a comprehensive exploration of vector search and inform
 
 **🎉 Congratulations!** You now understand vector search fundamentals!
 
-### 💻 Practitioner Path
+### 💻 Practitioner Path {#practitioner-path}
 *Start here if you have experience with search or machine learning*
 
 #### Quick Start
@@ -166,7 +166,7 @@ This repository provides a comprehensive exploration of vector search and inform
 
 ---
 
-### 🔬 Production Deployment Path
+### 🔬 Production Deployment Path {#production-deployment-path}
 *Start here for enterprise production deployments*
 
 #### Architecture Planning
@@ -193,7 +193,7 @@ This repository provides a comprehensive exploration of vector search and inform
 
 ---
 
-### 🔄 Technology Comparison
+### 🔄 Technology Comparison {#technology-comparison}
 *Start here to choose the right technology*
 
 #### Quick Decision Framework
@@ -459,7 +459,7 @@ All performance metrics, benchmarks, and cost estimates in this repository are i
 ---
 
 ## License
-This project is licensed under the [MIT License](./LICENSE).
+This project is licensed under the [MIT License](./LICENSE.md).
 
 > ℹ️ **Note:** This Vector Search guide is created with the help of LLMs.
 > Please refer to the license file for full terms of use.

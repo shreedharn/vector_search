@@ -21,13 +21,9 @@ A comprehensive guide to understanding and implementing modern search systems, f
 **Part III: OpenSearch Implementation**
 - [OpenSearch Vector Architecture](#opensearch-vector-architecture)
 - [Index Configuration and Setup](#index-configuration-and-setup)
-- [Search Techniques and Examples](#search-techniques-and-examples)
-- [Hybrid Search Patterns](#hybrid-search-patterns)
 
 **Part IV: Advanced Applications**
 - [Multi-modal Search](#multi-modal-search)
-- [Recommendation Systems](#recommendation-systems)
-- [Real-time Search Applications](#real-time-search-applications)
 
 **[Glossary](glossary.md)** - Key concepts, metrics, and terminology
 

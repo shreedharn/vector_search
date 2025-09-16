@@ -11,7 +11,7 @@ This guide compares two powerful vector search technologies that help computers 
 
 Skip the technical sections if they're too complex - you'll still understand which tool fits your needs!
 
-## 🟢 Overview: Understanding Vector Search
+## 🟢 Overview: Understanding Vector Search {#understanding-vector-search}
 
 ### What is Vector Search?
 Imagine you're looking for similar songs to one you like. Instead of just matching song titles, a smart system would understand that:
@@ -139,7 +139,7 @@ Let's say you're building a movie recommendation system:
 | **Data Transfer** | AWS standard rates | Included within limits |
 | **Hidden Costs** | Management overhead | None (fully managed) |
 
-## Vector Search Examples
+## Vector Search Examples {#real-world-use-case-examples}
 
 ### OpenSearch Vector Search
 ```json
@@ -772,7 +772,7 @@ def import_to_opensearch(es_client, index_name, vectors):
 - **Alerting**: Usage limits, performance degradation
 - **Debugging**: Limited query profiling capabilities
 
-## Use Case Recommendations
+## Use Case Recommendations {#decision-framework}
 
 ### Choose OpenSearch When:
 - Need both vector and traditional search capabilities
