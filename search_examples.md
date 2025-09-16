@@ -1323,4 +1323,4 @@ async def get_metrics():
 
 ---
 
-This collection provides comprehensive Python implementation examples for building production-ready vector search systems with OpenSearch. Each section includes practical, tested code that can be adapted for specific use cases and requirements.
+This collection provides comprehensive Python implementation examples for building production-ready vector search systems with OpenSearch.
