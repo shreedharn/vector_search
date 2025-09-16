@@ -26,6 +26,9 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
       
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
       
 
 
@@ -38,10 +41,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../styles/overrides.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -53,7 +58,14 @@
   </head>
   
   
-    <body dir="ltr">
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -104,6 +116,18 @@
         </div>
       </div>
     </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
     
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
@@ -354,7 +378,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#-overview" class="md-nav__link">
     <span class="md-ellipsis">
       🎯 Overview
     </span>
@@ -425,9 +449,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cluster-configuration-examples-index-configuration-and-setup" class="md-nav__link">
+  <a href="#index-configuration-and-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      Cluster Configuration Examples {#index-configuration-and-setup}
+      Cluster Configuration Examples
     </span>
   </a>
   
@@ -837,7 +861,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#performance-and-cost-disclaimers" class="md-nav__link">
+  <a href="#-performance-and-cost-disclaimers" class="md-nav__link">
     <span class="md-ellipsis">
       ⚠️ Performance and Cost Disclaimers
     </span>
@@ -924,7 +948,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#-overview" class="md-nav__link">
     <span class="md-ellipsis">
       🎯 Overview
     </span>
@@ -995,9 +1019,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cluster-configuration-examples-index-configuration-and-setup" class="md-nav__link">
+  <a href="#index-configuration-and-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      Cluster Configuration Examples {#index-configuration-and-setup}
+      Cluster Configuration Examples
     </span>
   </a>
   
@@ -1407,7 +1431,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#performance-and-cost-disclaimers" class="md-nav__link">
+  <a href="#-performance-and-cost-disclaimers" class="md-nav__link">
     <span class="md-ellipsis">
       ⚠️ Performance and Cost Disclaimers
     </span>
@@ -1432,7 +1456,7 @@
 
 
 <h1 id="opensearch-vector-search-production-deployment-guide">OpenSearch Vector Search: Production Deployment Guide<a class="headerlink" href="#opensearch-vector-search-production-deployment-guide" title="Permanent link">&para;</a></h1>
-<h2 id="overview">🎯 Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<h2 id="-overview">🎯 Overview<a class="headerlink" href="#-overview" title="Permanent link">&para;</a></h2>
 <p>A comprehensive guide to deploying, scaling, and managing OpenSearch vector search in production environments. This guide covers everything from architecture decisions and cost optimization to performance tuning and disaster recovery for enterprise-scale vector search deployments.</p>
 <h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
 <p><strong>Part I: AWS Deployment Options</strong></p>
@@ -1467,29 +1491,29 @@
 <p>AWS OpenSearch provides two distinct deployment models, each optimized for different use cases and operational preferences.</p>
 <h4 id="architectural-differences">Architectural Differences<a class="headerlink" href="#architectural-differences" title="Permanent link">&para;</a></h4>
 <p><strong>AWS OpenSearch Managed Service:</strong></p>
-<div class="highlight"><pre><span></span><code>Traditional cluster-based architecture:
-┌─────────────────────────────────────────┐
-│           OpenSearch Cluster            │
-├─────────────┬─────────────┬─────────────┤
-│ Master Node │ Master Node │ Master Node │
-├─────────────┼─────────────┼─────────────┤
-│  Data Node  │  Data Node  │  Data Node  │
-├─────────────┼─────────────┼─────────────┤
-│Coord. Node  │Coord. Node  │             │
-└─────────────┴─────────────┴─────────────┘
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Traditional cluster-based architecture:
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>┌─────────────────────────────────────────┐
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│           OpenSearch Cluster            │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├─────────────┬─────────────┬─────────────┤
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│ Master Node │ Master Node │ Master Node │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>├─────────────┼─────────────┼─────────────┤
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│  Data Node  │  Data Node  │  Data Node  │
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├─────────────┼─────────────┼─────────────┤
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│Coord. Node  │Coord. Node  │             │
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>└─────────────┴─────────────┴─────────────┘
 </code></pre></div>
 <p><strong>AWS OpenSearch Serverless:</strong></p>
-<div class="highlight"><pre><span></span><code>Serverless architecture with auto-scaling:
-┌─────────────────────────────────────────┐
-│        OpenSearch Collection            │
-├─────────────────────────────────────────┤
-│    Auto-scaling Compute Units (OCUs)    │
-│  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐     │
-│  │OCU-1│  │OCU-2│  │OCU-3│  │OCU-4│     │
-│  └─────┘  └─────┘  └─────┘  └─────┘     │
-├─────────────────────────────────────────┤
-│        Decoupled Storage Layer          │
-└─────────────────────────────────────────┘
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Serverless architecture with auto-scaling:
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>┌─────────────────────────────────────────┐
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│        OpenSearch Collection            │
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├─────────────────────────────────────────┤
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│    Auto-scaling Compute Units (OCUs)    │
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│  ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐     │
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│  │OCU-1│  │OCU-2│  │OCU-3│  │OCU-4│     │
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│  └─────┘  └─────┘  └─────┘  └─────┘     │
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>├─────────────────────────────────────────┤
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>│        Decoupled Storage Layer          │
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>└─────────────────────────────────────────┘
 </code></pre></div>
 <h4 id="comprehensive-feature-comparison">Comprehensive Feature Comparison<a class="headerlink" href="#comprehensive-feature-comparison" title="Permanent link">&para;</a></h4>
 <table>
@@ -1554,7 +1578,7 @@
 </table>
 <h3 id="aws-opensearch-service-managed">AWS OpenSearch Service (Managed)<a class="headerlink" href="#aws-opensearch-service-managed" title="Permanent link">&para;</a></h3>
 <p>The managed service provides complete control over cluster configuration and performance optimization.</p>
-<h4 id="cluster-configuration-examples-index-configuration-and-setup">Cluster Configuration Examples {#index-configuration-and-setup}<a class="headerlink" href="#cluster-configuration-examples-index-configuration-and-setup" title="Permanent link">&para;</a></h4>
+<h4 id="index-configuration-and-setup">Cluster Configuration Examples<a class="headerlink" href="#index-configuration-and-setup" title="Permanent link">&para;</a></h4>
 <p><strong>Small-Scale Production (&lt; 1M vectors):</strong></p>
 <p><strong>Recommended Configuration:</strong></p>
 <ul>
@@ -1813,21 +1837,21 @@
 <li><strong>Characteristics</strong>: High activity during business hours, low overnight activity</li>
 <li><strong>Typical OCU usage</strong>: 10-15 OCUs during peak (8 hours), 2-3 OCUs off-peak</li>
 <li><strong>Cost advantages</strong>: Pay only for actual usage, no idle capacity costs</li>
-<li><strong>Estimated monthly range</strong>: <span class="arithmatex">\(1,000-\)</span>1,500 (illustrative, verify with current pricing)</li>
+<li><strong>Estimated monthly range</strong>: $1,000-$1,500 (illustrative, verify with current pricing)</li>
 </ul>
 <p><strong>Steady Workload Pattern:</strong></p>
 <ul>
 <li><strong>Characteristics</strong>: Consistent traffic throughout the day</li>
 <li><strong>Typical OCU usage</strong>: 6-9 OCUs consistently across 24 hours</li>
 <li><strong>Cost considerations</strong>: Higher total OCU hours but predictable costs</li>
-<li><strong>Estimated monthly range</strong>: <span class="arithmatex">\(1,500-\)</span>2,500 (illustrative, verify with current pricing)</li>
+<li><strong>Estimated monthly range</strong>: $1,500-$2,500 (illustrative, verify with current pricing)</li>
 </ul>
 <p><strong>Batch Processing Pattern:</strong></p>
 <ul>
 <li><strong>Characteristics</strong>: Intensive processing periods followed by minimal activity</li>
 <li><strong>Typical OCU usage</strong>: 15-20 OCUs during processing, 1-2 OCUs standby</li>
 <li><strong>Cost benefits</strong>: Very cost-effective for sporadic high-intensity workloads</li>
-<li><strong>Estimated monthly range</strong>: <span class="arithmatex">\(500-\)</span>800 (illustrative, verify with current pricing)</li>
+<li><strong>Estimated monthly range</strong>: $500-$800 (illustrative, verify with current pricing)</li>
 </ul>
 <h4 id="cost-optimization-strategies">Cost Optimization Strategies<a class="headerlink" href="#cost-optimization-strategies" title="Permanent link">&para;</a></h4>
 <p><strong>Reserved Instance Optimization (Managed):</strong></p>
@@ -2599,7 +2623,7 @@
 </ul>
 <p>The combination of AWS OpenSearch's robust vector capabilities with proper production practices enables scalable, reliable vector search systems that can grow with your business needs while maintaining performance and cost efficiency.</p>
 <p>Remember that vector search is a rapidly evolving field - stay current with new features, optimizations, and best practices as they emerge from both AWS and the broader search community.</p>
-<h2 id="performance-and-cost-disclaimers">⚠️ Performance and Cost Disclaimers<a class="headerlink" href="#performance-and-cost-disclaimers" title="Permanent link">&para;</a></h2>
+<h2 id="-performance-and-cost-disclaimers">⚠️ Performance and Cost Disclaimers<a class="headerlink" href="#-performance-and-cost-disclaimers" title="Permanent link">&para;</a></h2>
 <p><strong>Important Notice about Performance Data and Cost Estimates:</strong></p>
 <p>All performance metrics, cost estimates, latency figures, throughput numbers, and configuration examples presented in this document are <strong>illustrative examples</strong> designed to help with planning and understanding. These numbers are based on theoretical models, specific test configurations, or historical data points and should not be considered as guaranteed performance or pricing for your specific use case.</p>
 <p><strong>Actual performance and costs will vary significantly based on:</strong></p>
@@ -2642,8 +2666,16 @@
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -2673,7 +2705,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "content.code.copy", "content.tabs.link", "toc.follow"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>

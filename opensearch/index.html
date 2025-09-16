@@ -26,6 +26,9 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
       
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
       
 
 
@@ -38,10 +41,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../styles/overrides.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -53,7 +58,14 @@
   </head>
   
   
-    <body dir="ltr">
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -104,6 +116,18 @@
         </div>
       </div>
     </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
     
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
@@ -332,7 +356,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#-overview" class="md-nav__link">
     <span class="md-ellipsis">
       🎯 Overview
     </span>
@@ -486,7 +510,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#the-progression-text-vector-hybrid" class="md-nav__link">
+  <a href="#the-progression-text--vector--hybrid" class="md-nav__link">
     <span class="md-ellipsis">
       The Progression: Text → Vector → Hybrid
     </span>
@@ -950,7 +974,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#performance-metrics-disclaimer" class="md-nav__link">
+  <a href="#-performance-metrics-disclaimer" class="md-nav__link">
     <span class="md-ellipsis">
       ⚠️ Performance Metrics Disclaimer
     </span>
@@ -1059,7 +1083,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#-overview" class="md-nav__link">
     <span class="md-ellipsis">
       🎯 Overview
     </span>
@@ -1213,7 +1237,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#the-progression-text-vector-hybrid" class="md-nav__link">
+  <a href="#the-progression-text--vector--hybrid" class="md-nav__link">
     <span class="md-ellipsis">
       The Progression: Text → Vector → Hybrid
     </span>
@@ -1677,7 +1701,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#performance-metrics-disclaimer" class="md-nav__link">
+  <a href="#-performance-metrics-disclaimer" class="md-nav__link">
     <span class="md-ellipsis">
       ⚠️ Performance Metrics Disclaimer
     </span>
@@ -1702,7 +1726,7 @@
 
 
 <h1 id="opensearch-theory-to-implementation">OpenSearch: Theory to Implementation<a class="headerlink" href="#opensearch-theory-to-implementation" title="Permanent link">&para;</a></h1>
-<h2 id="overview">🎯 Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<h2 id="-overview">🎯 Overview<a class="headerlink" href="#-overview" title="Permanent link">&para;</a></h2>
 <p>A comprehensive guide to understanding and implementing modern search systems, from traditional text-based approaches to advanced vector search algorithms and their practical implementation in OpenSearch.</p>
 <h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
 <p><strong>Part I: Search Approaches</strong></p>
@@ -1745,11 +1769,11 @@
 </ul>
 <p>The intuition is powerful: terms that appear frequently in a specific document but rarely across the collection are likely more significant for that document's meaning.</p>
 <p><strong>Mathematical Foundation of TF-IDF:</strong></p>
-<div class="highlight"><pre><span></span><code>TF-IDF(term, document) = TF(term, document) × IDF(term)
-
-Where:
-TF(term, document) = (Number of times term appears in document) / (Total terms in document)
-IDF(term) = log(Total documents / Documents containing term)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>TF-IDF(term, document) = TF(term, document) × IDF(term)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Where:
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>TF(term, document) = (Number of times term appears in document) / (Total terms in document)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>IDF(term) = log(Total documents / Documents containing term)
 </code></pre></div>
 <p><strong>Example:</strong> </p>
 <p>Consider searching for "machine learning" in a collection of 10,000 documents:</p>
@@ -1763,14 +1787,14 @@ IDF(term) = log(Total documents / Documents containing term)
 <h4 id="bm25-the-modern-standard">BM25: The Modern Standard<a class="headerlink" href="#bm25-the-modern-standard" title="Permanent link">&para;</a></h4>
 <p><strong>Best Matching 25 (BM25)</strong> represents the current gold standard for text relevance scoring, addressing TF-IDF's limitations through sophisticated normalization and parameter tuning.</p>
 <p><strong>BM25 Formula:</strong></p>
-<div class="highlight"><pre><span></span><code>BM25(query, document) = Σ IDF(term) × (tf × (k1 + 1)) / (tf + k1 × (1 - b + b × |d|/avgdl))
-
-Where:
-- tf = term frequency in document
-- |d| = document length in words
-- avgdl = average document length in collection
-- k1 = term frequency saturation parameter (typically 1.2-2.0)
-- b = document length normalization parameter (typically 0.75)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>BM25(query, document) = Σ IDF(term) × (tf × (k1 + 1)) / (tf + k1 × (1 - b + b × |d|/avgdl))
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Where:
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>- tf = term frequency in document
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>- |d| = document length in words
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>- avgdl = average document length in collection
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>- k1 = term frequency saturation parameter (typically 1.2-2.0)
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>- b = document length normalization parameter (typically 0.75)
 </code></pre></div>
 <p><strong>Key Improvements Over TF-IDF:</strong></p>
 <ol>
@@ -1853,15 +1877,15 @@ Where:
 - Relationships become mathematical operations
 - Context determines representation</p>
 <p><strong>Example Transformation:</strong></p>
-<div class="highlight"><pre><span></span><code>Traditional Keyword Index:
-&quot;dog&quot; → Document IDs: [1, 5, 23, 67]
-&quot;puppy&quot; → Document IDs: [12, 45, 89]
-&quot;canine&quot; → Document IDs: [3, 34, 78]
-
-Vector Representation:
-&quot;dog&quot; → [0.2, -0.1, 0.8, 0.3, ..., 0.5]
-&quot;puppy&quot; → [0.3, -0.2, 0.7, 0.4, ..., 0.6] (geometrically close to &quot;dog&quot;)
-&quot;canine&quot; → [0.1, -0.3, 0.9, 0.2, ..., 0.4] (also close to &quot;dog&quot;)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Traditional Keyword Index:
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&quot;dog&quot; → Document IDs: [1, 5, 23, 67]
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>&quot;puppy&quot; → Document IDs: [12, 45, 89]
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>&quot;canine&quot; → Document IDs: [3, 34, 78]
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Vector Representation:
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>&quot;dog&quot; → [0.2, -0.1, 0.8, 0.3, ..., 0.5]
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>&quot;puppy&quot; → [0.3, -0.2, 0.7, 0.4, ..., 0.6] (geometrically close to &quot;dog&quot;)
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>&quot;canine&quot; → [0.1, -0.3, 0.9, 0.2, ..., 0.4] (also close to &quot;dog&quot;)
 </code></pre></div>
 <h4 id="how-vector-search-addresses-text-search-limitations">How Vector Search Addresses Text Search Limitations<a class="headerlink" href="#how-vector-search-addresses-text-search-limitations" title="Permanent link">&para;</a></h4>
 <p><strong>Solving Vocabulary Mismatch:</strong></p>
@@ -1902,7 +1926,7 @@ Vector Representation:
 <p><strong>Similarity Metrics:</strong></p>
 <p>The choice of similarity metric affects search behavior:</p>
 <p><strong><a href="../glossary/#cosine-similarity">Cosine Similarity</a> (Most Common):</strong></p>
-<div class="highlight"><pre><span></span><code>cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
 </code></pre></div>
 <ul>
 <li>Measures angle between vectors, ignoring magnitude</li>
@@ -2069,23 +2093,23 @@ Vector Representation:
 <li>News discovery: "stories related to artificial intelligence ethics"</li>
 <li>Research paper suggestions: "papers citing similar methodologies"</li>
 </ol>
-<h3 id="the-progression-text-vector-hybrid">The Progression: Text → Vector → Hybrid<a class="headerlink" href="#the-progression-text-vector-hybrid" title="Permanent link">&para;</a></h3>
+<h3 id="the-progression-text--vector--hybrid">The Progression: Text → Vector → Hybrid<a class="headerlink" href="#the-progression-text--vector--hybrid" title="Permanent link">&para;</a></h3>
 <p>Modern search systems increasingly adopt hybrid approaches that combine the precision of text search with the semantic understanding of vector search.</p>
 <h4 id="hybrid-search-architecture">Hybrid Search Architecture<a class="headerlink" href="#hybrid-search-architecture" title="Permanent link">&para;</a></h4>
 <p><strong>Score Combination Strategies:</strong></p>
 <ol>
 <li>
 <p><strong>Linear Combination</strong>
-   <div class="highlight"><pre><span></span><code>final_score = α × text_score + β × vector_score
-
-Where α + β = 1, and weights can be tuned based on query type
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>final_score = α × text_score + β × vector_score
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Where α + β = 1, and weights can be tuned based on query type
 </code></pre></div></p>
 </li>
 <li>
 <p><strong>Rank Fusion</strong>
-   <div class="highlight"><pre><span></span><code>RRF_score = Σ(1 / (k + rank_in_list))
-
-Combines rankings from different search methods
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>RRF_score = Σ(1 / (k + rank_in_list))
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Combines rankings from different search methods
 </code></pre></div></p>
 </li>
 <li>
@@ -2159,13 +2183,13 @@ Combines rankings from different search methods
 <h4 id="similarity-metrics-deep-dive">Similarity Metrics Deep Dive<a class="headerlink" href="#similarity-metrics-deep-dive" title="Permanent link">&para;</a></h4>
 <p><strong>Cosine Similarity: The Text Search Standard</strong></p>
 <p>Cosine similarity measures the angle between vectors, making it ideal for text embeddings where magnitude often relates to document length rather than semantic importance.</p>
-<div class="highlight"><pre><span></span><code>cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
-
-Geometric Interpretation:
-- cos(0°) = 1.0    (identical direction)
-- cos(45°) = 0.707 (moderate similarity)
-- cos(90°) = 0.0   (orthogonal, unrelated)
-- cos(180°) = -1.0 (opposite meaning)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Geometric Interpretation:
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>- cos(0°) = 1.0    (identical direction)
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>- cos(45°) = 0.707 (moderate similarity)
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>- cos(90°) = 0.0   (orthogonal, unrelated)
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>- cos(180°) = -1.0 (opposite meaning)
 </code></pre></div>
 <p><strong>Why Cosine Works for Text:</strong></p>
 <p>Consider two movie reviews:</p>
@@ -2176,7 +2200,7 @@ Geometric Interpretation:
 <p>Both reviews express positive sentiment about acting quality. Cosine similarity focuses on the semantic direction (positive sentiment + acting praise) while ignoring the length difference.</p>
 <p><strong><a href="../glossary/#euclidean-distance-l2">Euclidean Distance (L2)</a>: When Magnitude Matters</strong></p>
 <p>Euclidean distance measures straight-line distance in vector space, treating all dimensions equally:</p>
-<div class="highlight"><pre><span></span><code>euclidean_distance(A, B) = √(Σ(Aᵢ - Bᵢ)²)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>euclidean_distance(A, B) = √(Σ(Aᵢ - Bᵢ)²)
 </code></pre></div>
 <p><strong>When to Use Euclidean:</strong></p>
 <ul>
@@ -2187,7 +2211,7 @@ Geometric Interpretation:
 <p><strong>Example:</strong> Comparing product images where a bright red dress should be more similar to a bright red shirt than to a dark red dress, Euclidean distance preserves these intensity relationships.</p>
 <p><strong><a href="../glossary/#manhattan-distance-l1">Manhattan Distance (L1)</a>: Robustness in High Dimensions</strong></p>
 <p>Manhattan distance sums absolute differences along each dimension:</p>
-<div class="highlight"><pre><span></span><code>manhattan_distance(A, B) = Σ|Aᵢ - Bᵢ|
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>manhattan_distance(A, B) = Σ|Aᵢ - Bᵢ|
 </code></pre></div>
 <p><strong>Advantages in High Dimensions:</strong></p>
 <ul>
@@ -2262,10 +2286,10 @@ Geometric Interpretation:
 </ol>
 <h4 id="mathematical-foundation">Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Permanent link">&para;</a></h4>
 <p><strong>Layer Assignment Probability:</strong></p>
-<div class="highlight"><pre><span></span><code>P(node reaches layer l) = (1/2)^l
-
-Expected maximum layer: floor(-ln(uniform(0,1)) × mL)
-where mL = 1/ln(2) ≈ 1.44
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>P(node reaches layer l) = (1/2)^l
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>Expected maximum layer: floor(-ln(uniform(0,1)) × mL)
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>where mL = 1/ln(2) ≈ 1.44
 </code></pre></div>
 <p>This probability distribution creates the hierarchical structure automatically:</p>
 <ul>
@@ -2329,11 +2353,11 @@ where mL = 1/ln(2) ≈ 1.44
 <li><strong>Use case:</strong> High-precision applications, complex high-dimensional data</li>
 </ul>
 <p><strong>Memory Calculation:</strong></p>
-<div class="highlight"><pre><span></span><code>Memory per node = M × 4 bytes (connection pointers) + vector storage
-For 1M nodes, 384-dim vectors, M=24:
-- Vector storage: 1M × 384 × 4 bytes = 1.54GB
-- Graph connections: 1M × 24 × 4 bytes = 96MB
-- System overhead: ~3-4GB total
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Memory per node = M × 4 bytes (connection pointers) + vector storage
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>For 1M nodes, 384-dim vectors, M=24:
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>- Vector storage: 1M × 384 × 4 bytes = 1.54GB
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>- Graph connections: 1M × 24 × 4 bytes = 96MB
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>- System overhead: ~3-4GB total
 </code></pre></div>
 <p><strong>ef_construction (Construction Beam Width)</strong></p>
 <p>Controls the trade-off between index quality and construction time:</p>
@@ -2358,11 +2382,11 @@ For 1M nodes, 384-dim vectors, M=24:
 <p><strong>ef_search (Query-Time Beam Width)</strong></p>
 <p>The only parameter tunable at query time, allowing dynamic performance adjustment:</p>
 <p><strong>Performance Scaling:</strong></p>
-<div class="highlight"><pre><span></span><code>ef_search=10:  Ultra-fast, ~85% recall
-ef_search=50:  Fast, ~95% recall
-ef_search=100: Balanced, ~97% recall
-ef_search=200: High accuracy, ~99% recall
-ef_search=500: Near-perfect, ~99.5% recall
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ef_search=10:  Ultra-fast, ~85% recall
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>ef_search=50:  Fast, ~95% recall
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>ef_search=100: Balanced, ~97% recall
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>ef_search=200: High accuracy, ~99% recall
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>ef_search=500: Near-perfect, ~99.5% recall
 </code></pre></div>
 <p><strong>Advanced Parameter Selection Strategies:</strong></p>
 <p><em>Query-Adaptive ef_search:</em>
@@ -2575,8 +2599,8 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 <p>IVF relies on the <strong>locality principle</strong> in high-dimensional spaces:</p>
 <p><em>Formal Statement:</em> If vectors v1 and v2 are close in the original space, and if vector q is close to v1, then q is likely closer to vectors in the same cluster as v1 than to vectors in distant clusters.</p>
 <p><em>Mathematical Expression:</em>
-<div class="highlight"><pre><span></span><code>For vectors v1, v2 in cluster Ci and query q:
-P(NN(q) ∈ Ci | d(q, centroid_i) &lt; d(q, centroid_j) ∀j≠i) &gt; threshold
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>For vectors v1, v2 in cluster Ci and query q:
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>P(NN(q) ∈ Ci | d(q, centroid_i) &lt; d(q, centroid_j) ∀j≠i) &gt; threshold
 </code></pre></div></p>
 <p>This principle holds particularly well in high-dimensional spaces due to the <strong>concentration of measure phenomenon</strong> - in high dimensions, most vectors concentrate in a thin shell around the centroid, making cluster boundaries more meaningful.</p>
 <p><strong>Three-Phase IVF Architecture:</strong></p>
@@ -2611,12 +2635,12 @@ P(NN(q) ∈ Ci | d(q, centroid_i) &lt; d(q, centroid_j) ∀j≠i) &gt; threshold
 <p><strong>K-means Clustering: Beyond Basic Implementation</strong></p>
 <p><em>Objective Function and Optimization:</em>
 The k-means algorithm minimizes the within-cluster sum of squares (WCSS):</p>
-<div class="highlight"><pre><span></span><code>Objective: min Σᵢ₌₁ⁿ Σⱼ₌₁ᵏ wᵢⱼ ||xᵢ - μⱼ||²
-
-Where:
-- xᵢ = vector i
-- μⱼ = centroid of cluster j
-- wᵢⱼ = 1 if xᵢ belongs to cluster j, 0 otherwise
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Objective: min Σᵢ₌₁ⁿ Σⱼ₌₁ᵏ wᵢⱼ ||xᵢ - μⱼ||²
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>Where:
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>- xᵢ = vector i
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>- μⱼ = centroid of cluster j
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>- wᵢⱼ = 1 if xᵢ belongs to cluster j, 0 otherwise
 </code></pre></div>
 <p><em>Advanced Initialization Strategies:</em></p>
 <p><strong>K-means++ Initialization:</strong> Choose initial centroids to maximize distance between them</p>
@@ -2639,32 +2663,32 @@ Where:
 </ul>
 <p><strong>Advanced Cluster Quality Metrics:</strong></p>
 <p><em>Within-Cluster Sum of Squares (WCSS):</em>
-<div class="highlight"><pre><span></span><code>WCSS = Σⱼ₌₁ᵏ Σᵢ∈Cⱼ ||xᵢ - μⱼ||²
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>WCSS = Σⱼ₌₁ᵏ Σᵢ∈Cⱼ ||xᵢ - μⱼ||²
 </code></pre></div>
 Lower WCSS indicates tighter clusters, but must be balanced against number of clusters.</p>
 <p><em>Silhouette Coefficient:</em>
-<div class="highlight"><pre><span></span><code>For vector i: s(i) = (b(i) - a(i)) / max(a(i), b(i))
-
-Where:
-- a(i) = average distance to vectors in same cluster
-- b(i) = average distance to vectors in nearest different cluster
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>For vector i: s(i) = (b(i) - a(i)) / max(a(i), b(i))
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>Where:
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>- a(i) = average distance to vectors in same cluster
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>- b(i) = average distance to vectors in nearest different cluster
 </code></pre></div>
 Range: [-1, 1], where 1 indicates perfect clustering.</p>
 <p><em>Davies-Bouldin Index:</em>
-<div class="highlight"><pre><span></span><code>DB = (1/k) Σⱼ₌₁ᵏ maxₘ≠ⱼ ((σⱼ + σₘ) / d(cⱼ, cₘ))
-
-Where:
-- σⱼ = average distance of vectors in cluster j to centroid cⱼ
-- d(cⱼ, cₘ) = distance between centroids j and m
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>DB = (1/k) Σⱼ₌₁ᵏ maxₘ≠ⱼ ((σⱼ + σₘ) / d(cⱼ, cₘ))
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>Where:
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>- σⱼ = average distance of vectors in cluster j to centroid cⱼ
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>- d(cⱼ, cₘ) = distance between centroids j and m
 </code></pre></div>
 Lower values indicate better clustering (tighter clusters, more separated).</p>
 <p><em>Cluster Balance Metrics:</em></p>
 <p><strong>Size Variance:</strong> Measures how evenly vectors are distributed across clusters
-<div class="highlight"><pre><span></span><code>size_variance = var([|C₁|, |C₂|, ..., |Cₖ|])
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>size_variance = var([|C₁|, |C₂|, ..., |Cₖ|])
 </code></pre></div>
 Lower variance indicates more balanced clusters.</p>
 <p><strong>Load Balance Factor:</strong> For cluster i with nᵢ vectors:
-<div class="highlight"><pre><span></span><code>balance_factor = max(nᵢ) / (N/k)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>balance_factor = max(nᵢ) / (N/k)
 </code></pre></div>
 Values close to 1.0 indicate good load balance.</p>
 <p><strong>Comprehensive Complexity Analysis:</strong></p>
@@ -2686,12 +2710,12 @@ Values close to 1.0 indicate good load balance.</p>
 </ul>
 <p><em>Optimal Cluster Count Analysis:</em>
 To minimize query time, we differentiate the total cost with respect to k:</p>
-<div class="highlight"><pre><span></span><code>Total_cost = k × D + (N × nprobes × D)/k
-
-d(Total_cost)/dk = D - (N × nprobes × D)/k² = 0
-
-Solving: k² = N × nprobes
-Optimal k = √(N × nprobes)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Total_cost = k × D + (N × nprobes × D)/k
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>d(Total_cost)/dk = D - (N × nprobes × D)/k² = 0
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>Solving: k² = N × nprobes
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>Optimal k = √(N × nprobes)
 </code></pre></div>
 <p>For fixed nprobes, this gives the classic result: optimal nlist ≈ √N</p>
 <p><em>Space Complexity:</em></p>
@@ -2723,19 +2747,19 @@ The optimal number of clusters balances two competing factors:</p>
 <li><strong>Within-cluster search cost:</strong> Decreases as 1/nlist</li>
 </ol>
 <p>Mathematical derivation:
-<div class="highlight"><pre><span></span><code>Total_query_cost = α × nlist + β × N/nlist
-
-Minimizing: d(cost)/d(nlist) = α - β × N/nlist² = 0
-
-Optimal nlist = √(β × N / α) ≈ √N (when α ≈ β)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>Total_query_cost = α × nlist + β × N/nlist
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>Minimizing: d(cost)/d(nlist) = α - β × N/nlist² = 0
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>Optimal nlist = √(β × N / α) ≈ √N (when α ≈ β)
 </code></pre></div></p>
 <p><em>Advanced Formula Incorporating Real-World Factors:</em>
-<div class="highlight"><pre><span></span><code>nlist = √N × dimension_factor × distribution_factor × memory_factor
-
-Where:
-- dimension_factor = max(1.0, D/512) [higher dims need more clusters]
-- distribution_factor ∈ [0.8, 1.5] [depends on data uniformity]
-- memory_factor ∈ [0.7, 1.3] [based on available memory]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>nlist = √N × dimension_factor × distribution_factor × memory_factor
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>Where:
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>- dimension_factor = max(1.0, D/512) [higher dims need more clusters]
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>- distribution_factor ∈ [0.8, 1.5] [depends on data uniformity]
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>- memory_factor ∈ [0.7, 1.3] [based on available memory]
 </code></pre></div></p>
 <p><em>Data Distribution Considerations:</em></p>
 <p><strong>Uniform Distributions:</strong> Standard √N formula works well
@@ -2801,12 +2825,12 @@ Where:
 <p><strong>nprobes (Search Width): Advanced Selection Strategy</strong></p>
 <p><em>Accuracy-Speed Trade-off Analysis:</em>
 The relationship between nprobes and recall follows a logarithmic curve:</p>
-<div class="highlight"><pre><span></span><code>Recall(nprobes) ≈ 1 - exp(-nprobes × coverage_factor)
-
-Where coverage_factor depends on:
-- Data distribution uniformity
-- Cluster quality (silhouette score)
-- Query vector characteristics
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>Recall(nprobes) ≈ 1 - exp(-nprobes × coverage_factor)
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>Where coverage_factor depends on:
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>- Data distribution uniformity
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>- Cluster quality (silhouette score)
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>- Query vector characteristics
 </code></pre></div>
 <p><em>Adaptive nprobes Selection:</em></p>
 <p><strong>Query-Type Based:</strong></p>
@@ -2817,26 +2841,26 @@ Where coverage_factor depends on:
 <li><strong>Research/Batch:</strong> nprobes = nlist × 0.30-0.50 [30-50% of clusters]</li>
 </ul>
 <p><strong>Load-Adaptive Strategy:</strong></p>
-<div class="highlight"><pre><span></span><code>if system_load &lt; 0.5:
-    nprobes = base_nprobes × 1.5  # Higher accuracy when resources available
-elif system_load &gt; 0.8:
-    nprobes = base_nprobes × 0.7  # Preserve response time under load
-else:
-    nprobes = base_nprobes
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>if system_load &lt; 0.5:
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>    nprobes = base_nprobes × 1.5  # Higher accuracy when resources available
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>elif system_load &gt; 0.8:
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>    nprobes = base_nprobes × 0.7  # Preserve response time under load
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>else:
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>    nprobes = base_nprobes
 </code></pre></div>
 <p><strong>Quality-Adaptive Selection:</strong></p>
 <p>Adjust based on cluster quality metrics:
-<div class="highlight"><pre><span></span><code>if silhouette_score &gt; 0.7:  # Well-separated clusters
-    nprobes = base_nprobes × 0.8  # Can search fewer clusters
-elif silhouette_score &lt; 0.3:  # Poorly separated clusters
-    nprobes = base_nprobes × 1.3  # Need to search more clusters
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>if silhouette_score &gt; 0.7:  # Well-separated clusters
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>    nprobes = base_nprobes × 0.8  # Can search fewer clusters
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>elif silhouette_score &lt; 0.3:  # Poorly separated clusters
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>    nprobes = base_nprobes × 1.3  # Need to search more clusters
 </code></pre></div></p>
 <p><strong>nprobes (Search Width)</strong></p>
 <p>Controls the accuracy-speed trade-off at query time:</p>
 <p><strong>Selection Strategy:</strong></p>
-<div class="highlight"><pre><span></span><code>Conservative: nprobes = nlist × 0.05 (5% of clusters)
-Balanced:     nprobes = nlist × 0.10 (10% of clusters)
-Aggressive:   nprobes = nlist × 0.20 (20% of clusters)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>Conservative: nprobes = nlist × 0.05 (5% of clusters)
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>Balanced:     nprobes = nlist × 0.10 (10% of clusters)
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>Aggressive:   nprobes = nlist × 0.20 (20% of clusters)
 </code></pre></div>
 <p><strong>Performance Scaling:</strong></p>
 <ul>
@@ -3113,10 +3137,10 @@ Aggressive:   nprobes = nlist × 0.20 (20% of clusters)
 <p>Consider a D-dimensional vector space where each dimension requires 32 bits (float32). The total information content is 32D bits per vector. PQ recognizes that much of this precision is unnecessary for similarity preservation and that dimensions can be grouped and compressed independently.</p>
 <p><strong>The Product Space Decomposition:</strong></p>
 <p><em>Mathematical Formulation:</em>
-<div class="highlight"><pre><span></span><code>Original space: ℝᴰ
-Product decomposition: ℝᴰ ≅ ℝᴰ/ᵐ × ℝᴰ/ᵐ × ... × ℝᴰ/ᵐ (m times)
-
-Where each subspace ℝᴰ/ᵐ is quantized independently
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>Original space: ℝᴰ
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>Product decomposition: ℝᴰ ≅ ℝᴰ/ᵐ × ℝᴰ/ᵐ × ... × ℝᴰ/ᵐ (m times)
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>Where each subspace ℝᴰ/ᵐ is quantized independently
 </code></pre></div></p>
 <p><em>Key Insight:</em> If the original vector space has natural clustering structure, then subspaces will also exhibit clustering, making k-means quantization effective in each subspace.</p>
 <p><strong>Advanced Analogies:</strong></p>
@@ -3141,18 +3165,18 @@ Where each subspace ℝᴰ/ᵐ is quantized independently
 <p><strong>The Codebook Learning Process:</strong></p>
 <p>For each subvector position j:</p>
 <p><em>Step 1: Subvector Extraction</em>
-<div class="highlight"><pre><span></span><code>For all vectors v₁, v₂, ..., vₙ:
-Extract subvectors: s₁ⱼ, s₂ⱼ, ..., sₙⱼ where sᵢⱼ = vᵢ[j×(D/m) : (j+1)×(D/m)]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>For all vectors v₁, v₂, ..., vₙ:
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>Extract subvectors: s₁ⱼ, s₂ⱼ, ..., sₙⱼ where sᵢⱼ = vᵢ[j×(D/m) : (j+1)×(D/m)]
 </code></pre></div></p>
 <p><em>Step 2: Subspace Clustering</em>
-<div class="highlight"><pre><span></span><code>Apply k-means to {s₁ⱼ, s₂ⱼ, ..., sₙⱼ}:
-Minimize: Σᵢ₌₁ⁿ min_{c∈Cⱼ} ||sᵢⱼ - c||²
-
-Result: Codebook Cⱼ = {c₁ⱼ, c₂ⱼ, ..., cₖⱼ}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>Apply k-means to {s₁ⱼ, s₂ⱼ, ..., sₙⱼ}:
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>Minimize: Σᵢ₌₁ⁿ min_{c∈Cⱼ} ||sᵢⱼ - c||²
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>Result: Codebook Cⱼ = {c₁ⱼ, c₂ⱼ, ..., cₖⱼ}
 </code></pre></div></p>
 <p><em>Step 3: Quantization</em>
-<div class="highlight"><pre><span></span><code>For each subvector sᵢⱼ:
-Find: qᵢⱼ = argmin_{c∈Cⱼ} ||sᵢⱼ - c||²
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>For each subvector sᵢⱼ:
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>Find: qᵢⱼ = argmin_{c∈Cⱼ} ||sᵢⱼ - c||²
 </code></pre></div></p>
 <h4 id="advanced-mathematical-framework">Advanced Mathematical Framework<a class="headerlink" href="#advanced-mathematical-framework" title="Permanent link">&para;</a></h4>
 <p><strong>Formal Problem Definition:</strong></p>
@@ -3163,72 +3187,72 @@ Find: qᵢⱼ = argmin_{c∈Cⱼ} ||sᵢⱼ - c||²
 <li>Reconstruction functions: rⱼ: {0, 1, ..., k-1} → ℝᴰ/ᵐ for j = 1, ..., m</li>
 </ol>
 <p>Such that the quantization error is minimized:
-<div class="highlight"><pre><span></span><code>min Σᵢ₌₁ⁿ ||xᵢ - reconstruct(quantize(decompose(xᵢ)))||²
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>min Σᵢ₌₁ⁿ ||xᵢ - reconstruct(quantize(decompose(xᵢ)))||²
 </code></pre></div></p>
 <p><strong>Vector Space Decomposition Theory:</strong></p>
 <p><em>Cartesian Product Structure:</em>
-<div class="highlight"><pre><span></span><code>ℝᴰ = ℝᴰ/ᵐ × ℝᴰ/ᵐ × ... × ℝᴰ/ᵐ
-
-Decomposition operator:
-φ(x) = (x[1:D/m], x[D/m+1:2D/m], ..., x[(m-1)D/m+1:D])
-
-Reconstruction operator:
-ψ(y₁, y₂, ..., yₘ) = [y₁ ⊕ y₂ ⊕ ... ⊕ yₘ] (concatenation)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>ℝᴰ = ℝᴰ/ᵐ × ℝᴰ/ᵐ × ... × ℝᴰ/ᵐ
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>Decomposition operator:
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>φ(x) = (x[1:D/m], x[D/m+1:2D/m], ..., x[(m-1)D/m+1:D])
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>Reconstruction operator:
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>ψ(y₁, y₂, ..., yₘ) = [y₁ ⊕ y₂ ⊕ ... ⊕ yₘ] (concatenation)
 </code></pre></div></p>
 <p><em>Optimality Conditions:</em>
 The optimal codebook for subspace j satisfies:
-<div class="highlight"><pre><span></span><code>cₖⱼ* = (1/|Sₖⱼ|) Σ_{s∈Sₖⱼ} s
-
-Where Sₖⱼ = {sᵢⱼ : qⱼ(sᵢⱼ) = k} (Voronoi cell k in subspace j)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>cₖⱼ* = (1/|Sₖⱼ|) Σ_{s∈Sₖⱼ} s
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>Where Sₖⱼ = {sᵢⱼ : qⱼ(sᵢⱼ) = k} (Voronoi cell k in subspace j)
 </code></pre></div></p>
 <p><strong>Error Analysis and Bounds:</strong></p>
 <p><em>Quantization Error Decomposition:</em>
-<div class="highlight"><pre><span></span><code>E[||x - x̂||²] = Σⱼ₌₁ᵐ E[||xⱼ - x̂ⱼ||²]
-
-Where:
-
-- xⱼ = original subvector j
-- x̂ⱼ = quantized subvector j
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>E[||x - x̂||²] = Σⱼ₌₁ᵐ E[||xⱼ - x̂ⱼ||²]
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>Where:
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>- xⱼ = original subvector j
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>- x̂ⱼ = quantized subvector j
 </code></pre></div></p>
 <p><em>Lloyd's Theorem Application:</em>
 For each subspace, the optimal quantizer satisfies:
-<div class="highlight"><pre><span></span><code>Distortion_j ≥ (1/12) * (2πe/k)^(2/d) * σⱼ²
-
-Where:
-
-- d = D/m (subvector dimensionality)
-- σⱼ² = variance of subvector j
-- k = number of centroids per codebook
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>Distortion_j ≥ (1/12) * (2πe/k)^(2/d) * σⱼ²
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>Where:
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>- d = D/m (subvector dimensionality)
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>- σⱼ² = variance of subvector j
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a>- k = number of centroids per codebook
 </code></pre></div></p>
 <p><em>Total Distortion Bound:</em>
-<div class="highlight"><pre><span></span><code>Total_Distortion ≤ Σⱼ₌₁ᵐ (1/12) * (2πe/k)^(2(D/m)) * σⱼ²
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>Total_Distortion ≤ Σⱼ₌₁ᵐ (1/12) * (2πe/k)^(2(D/m)) * σⱼ²
 </code></pre></div></p>
 <p><strong>Information-Theoretic Analysis:</strong></p>
 <p><em>Rate-Distortion Trade-off:</em>
-<div class="highlight"><pre><span></span><code>Rate = m × log₂(k) bits per vector
-Distortion = E[||x - x̂||²]
-
-Optimal trade-off (for Gaussian sources):
-D(R) ≥ σ² * 2^(-2R/D)
-
-Where R = rate, D = dimensions, σ² = source variance
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>Rate = m × log₂(k) bits per vector
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>Distortion = E[||x - x̂||²]
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>Optimal trade-off (for Gaussian sources):
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>D(R) ≥ σ² * 2^(-2R/D)
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a>Where R = rate, D = dimensions, σ² = source variance
 </code></pre></div></p>
 <p><em>Compression Efficiency:</em>
-<div class="highlight"><pre><span></span><code>Compression_ratio = (32 × D) / (m × log₂(k))
-
-Efficiency = 1 - (Distortion / Original_variance)
-
-Optimal m balances:
-- Larger m: Better error independence, more codebooks to store
-- Smaller m: Fewer codebooks, potential correlation within subvectors
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>Compression_ratio = (32 × D) / (m × log₂(k))
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>Efficiency = 1 - (Distortion / Original_variance)
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>Optimal m balances:
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>- Larger m: Better error independence, more codebooks to store
+<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>- Smaller m: Fewer codebooks, potential correlation within subvectors
 </code></pre></div></p>
 <p><strong>Optimized Quantization Process:</strong></p>
 <h4 id="compression-analysis">Compression Analysis<a class="headerlink" href="#compression-analysis" title="Permanent link">&para;</a></h4>
 <p><strong>Memory Reduction Calculation:</strong></p>
-<div class="highlight"><pre><span></span><code>Original storage: D dimensions × 32 bits = 32D bits
-Quantized storage: m subquantizers × log₂(k) bits
-
-Compression ratio = 32D / (m × log₂(k))
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>Original storage: D dimensions × 32 bits = 32D bits
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>Quantized storage: m subquantizers × log₂(k) bits
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>Compression ratio = 32D / (m × log₂(k))
 </code></pre></div>
 <p><strong>Practical Examples:</strong></p>
 <p><strong>Configuration 1: 768-dimensional, 96 subquantizers, 256 centroids</strong></p>
@@ -3252,21 +3276,21 @@ Compression ratio = 32D / (m × log₂(k))
 <p><strong>Asymmetric Distance Computation (ADC): Mathematical Foundation</strong></p>
 <p>The breakthrough insight of ADC is that distance computation can be decomposed into subspace contributions and precomputed efficiently.</p>
 <p><em>Mathematical Derivation:</em>
-<div class="highlight"><pre><span></span><code>For query q and quantized vector x̂:
-
-||q - x̂||² = ||Σⱼ₌₁ᵐ (qⱼ - x̂ⱼ)||²
-            = Σⱼ₌₁ᵐ ||qⱼ - x̂ⱼ||² + 2Σᵢ&lt;ⱼ ⟨qᵢ - x̂ᵢ, qⱼ - x̂ⱼ⟩
-            ≈ Σⱼ₌₁ᵐ ||qⱼ - x̂ⱼ||² (cross-terms ≈ 0 for independent subspaces)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>For query q and quantized vector x̂:
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>||q - x̂||² = ||Σⱼ₌₁ᵐ (qⱼ - x̂ⱼ)||²
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>            = Σⱼ₌₁ᵐ ||qⱼ - x̂ⱼ||² + 2Σᵢ&lt;ⱼ ⟨qᵢ - x̂ᵢ, qⱼ - x̂ⱼ⟩
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a>            ≈ Σⱼ₌₁ᵐ ||qⱼ - x̂ⱼ||² (cross-terms ≈ 0 for independent subspaces)
 </code></pre></div></p>
 <p><em>ADC Algorithm:</em></p>
 <p><strong>Phase 1: Precomputation (O(m × k × D/m))</strong></p>
-<div class="highlight"><pre><span></span><code>For each subspace j = 1, ..., m:
-    For each centroid cₖⱼ in codebook Cⱼ:
-        distance_table[j][k] = ||qⱼ - cₖⱼ||²
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>For each subspace j = 1, ..., m:
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>    For each centroid cₖⱼ in codebook Cⱼ:
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>        distance_table[j][k] = ||qⱼ - cₖⱼ||²
 </code></pre></div>
 <p><strong>Phase 2: Distance Computation (O(m) per vector)</strong></p>
-<div class="highlight"><pre><span></span><code>For quantized vector [q₁, q₂, ..., qₘ]:
-    distance = Σⱼ₌₁ᵐ distance_table[j][qⱼ]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>For quantized vector [q₁, q₂, ..., qₘ]:
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>    distance = Σⱼ₌₁ᵐ distance_table[j][qⱼ]
 </code></pre></div>
 <p><strong>Complexity Analysis:</strong></p>
 <p><em>Traditional Approach:</em></p>
@@ -3283,94 +3307,94 @@ Compression ratio = 32D / (m × log₂(k))
 <li>Memory requirement: N × m index values + m × k × D/m codebook storage</li>
 </ul>
 <p><em>Speedup Factor:</em>
-<div class="highlight"><pre><span></span><code>Speedup = (N × D) / (k × D + N × m)
-        ≈ D/m for large N (since k &lt;&lt; N typically)
-
-For typical values (D=768, m=96): Speedup ≈ 8x
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>Speedup = (N × D) / (k × D + N × m)
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>        ≈ D/m for large N (since k &lt;&lt; N typically)
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>
+<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a>For typical values (D=768, m=96): Speedup ≈ 8x
 </code></pre></div></p>
 <p><strong>Advanced Distance Computation Variants:</strong></p>
 <p><strong>1. Optimized Product Quantization (OPQ):</strong></p>
 <p>Apply orthogonal transformation before quantization to minimize correlation:</p>
-<div class="highlight"><pre><span></span><code>Objective: min ||X - Q(RX)||²_F
-
-Where:
-
-- R is an orthogonal matrix
-- Q() is the quantization function
-- X is the data matrix
-
-Solution alternates between:
-1. Fix R, optimize codebooks
-2. Fix codebooks, optimize R using SVD
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>Objective: min ||X - Q(RX)||²_F
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>Where:
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a>- R is an orthogonal matrix
+<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a>- Q() is the quantization function
+<a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a>- X is the data matrix
+<a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a>
+<a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a>Solution alternates between:
+<a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a>1. Fix R, optimize codebooks
+<a id="__codelineno-43-11" name="__codelineno-43-11" href="#__codelineno-43-11"></a>2. Fix codebooks, optimize R using SVD
 </code></pre></div>
 <p><strong>2. Additive Quantization (AQ):</strong></p>
 <p>Use multiple codebooks additively instead of product structure:</p>
-<div class="highlight"><pre><span></span><code>x̂ = Σⱼ₌₁ᵐ cⱼ[qⱼ]
-
-Advantages:
-
-- More flexible approximation
-- Better approximation quality for same bit rate
-
-Disadvantages:
-
-- More complex training
-- Higher computational cost
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>x̂ = Σⱼ₌₁ᵐ cⱼ[qⱼ]
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>Advantages:
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a>- More flexible approximation
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a>- Better approximation quality for same bit rate
+<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a>
+<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a>Disadvantages:
+<a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a>
+<a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a>- More complex training
+<a id="__codelineno-44-11" name="__codelineno-44-11" href="#__codelineno-44-11"></a>- Higher computational cost
 </code></pre></div>
 <p><strong>3. Composite Quantization:</strong></p>
 <p>Combine dictionary learning with product quantization:</p>
-<div class="highlight"><pre><span></span><code>Objective: min ||X - DCQ||²_F
-
-Where:
-
-- D is a learned dictionary
-- C are combination weights
-- Q are quantized coefficients
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>Objective: min ||X - DCQ||²_F
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>Where:
+<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>
+<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a>- D is a learned dictionary
+<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a>- C are combination weights
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a>- Q are quantized coefficients
 </code></pre></div>
 <p><strong>Memory Access Pattern Optimization:</strong></p>
 <p><em>Cache-Friendly Storage Layout:</em>
-<div class="highlight"><pre><span></span><code>Traditional layout: [vector1][vector2]...[vectorN]
-Quantized layout:   [indices1][indices2]...[indicesN]
-
-Optimized layout:
-
-- Interleave codebooks with indices for spatial locality
-- Pack multiple indices per cache line
-- Use SIMD-friendly alignment
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>Traditional layout: [vector1][vector2]...[vectorN]
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>Quantized layout:   [indices1][indices2]...[indicesN]
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>
+<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>Optimized layout:
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>
+<a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>- Interleave codebooks with indices for spatial locality
+<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>- Pack multiple indices per cache line
+<a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>- Use SIMD-friendly alignment
 </code></pre></div></p>
 <p><em>Vectorized Distance Computation:</em>
-<div class="highlight"><pre><span></span><code>SIMD optimization:
-
-- Process 4-8 distance computations simultaneously
-- Use lookup table vectorization
-- Typical speedup: 2-4x on modern CPUs
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>SIMD optimization:
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>- Process 4-8 distance computations simultaneously
+<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a>- Use lookup table vectorization
+<a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a>- Typical speedup: 2-4x on modern CPUs
 </code></pre></div></p>
 <h4 id="advanced-parameter-selection-and-optimization">Advanced Parameter Selection and Optimization<a class="headerlink" href="#advanced-parameter-selection-and-optimization" title="Permanent link">&para;</a></h4>
 <p><strong>Mathematical Framework for Parameter Selection</strong></p>
 <p><em>Optimal m Selection:</em>
 The choice of m involves a fundamental trade-off between quantization error and computational efficiency:</p>
-<div class="highlight"><pre><span></span><code>Quantization Error ∝ (k)^(-2/d) where d = D/m
-
-For fixed total bit budget B = m × log₂(k):
-
-- Larger m, smaller k: More subspaces, fewer centroids each
-- Smaller m, larger k: Fewer subspaces, more centroids each
-
-Optimal balance (Lloyd&#39;s theorem):
-m* ≈ D / (2 × ln(training_size/k))
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>Quantization Error ∝ (k)^(-2/d) where d = D/m
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>
+<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>For fixed total bit budget B = m × log₂(k):
+<a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>
+<a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a>- Larger m, smaller k: More subspaces, fewer centroids each
+<a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a>- Smaller m, larger k: Fewer subspaces, more centroids each
+<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a>
+<a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a>Optimal balance (Lloyd&#39;s theorem):
+<a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a>m* ≈ D / (2 × ln(training_size/k))
 </code></pre></div>
 <p><em>Data-Dependent Optimization:</em></p>
 <p><strong>Correlation Analysis:</strong> Examine dimensional correlations to inform m:
-<div class="highlight"><pre><span></span><code>Correlation_matrix = corr(X)
-Block_structure = identify_low_correlation_blocks(Correlation_matrix)
-Optimal_m = number_of_blocks
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>Correlation_matrix = corr(X)
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>Block_structure = identify_low_correlation_blocks(Correlation_matrix)
+<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>Optimal_m = number_of_blocks
 </code></pre></div></p>
 <p><strong>Principal Component Analysis:</strong> Use PCA to inform subspace divisions:
-<div class="highlight"><pre><span></span><code>PCA_transform = PCA(X)
-Explained_variance_ratio = PCA_transform.explained_variance_ratio_
-
-# Divide dimensions based on variance concentration
-m = balance_variance_across_subspaces(Explained_variance_ratio)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>PCA_transform = PCA(X)
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>Explained_variance_ratio = PCA_transform.explained_variance_ratio_
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a># Divide dimensions based on variance concentration
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a>m = balance_variance_across_subspaces(Explained_variance_ratio)
 </code></pre></div></p>
 <p><strong>Advanced Configuration Guidelines:</strong></p>
 <blockquote>
@@ -3455,25 +3479,25 @@ m = balance_variance_across_subspaces(Explained_variance_ratio)
 </table>
 <p><strong>Adaptive k Selection:</strong></p>
 <p><em>Training Data Size Dependency:</em>
-<div class="highlight"><pre><span></span><code>Rule of thumb: k ≤ √(training_size_per_subspace)
-
-For subspace j with training vectors sⱼ:
-Optimal_k_j = min(256, max(16, √(|sⱼ|/10)))
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>Rule of thumb: k ≤ √(training_size_per_subspace)
+<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>
+<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>For subspace j with training vectors sⱼ:
+<a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>Optimal_k_j = min(256, max(16, √(|sⱼ|/10)))
 </code></pre></div></p>
 <p><em>Subspace Complexity Estimation:</em>
-<div class="highlight"><pre><span></span><code>Intrinsic_dimensionality = estimate_local_dimension(subspace_data)
-Complexity_factor = Intrinsic_dimensionality / (D/m)
-
-Adapted_k = base_k × Complexity_factor
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>Intrinsic_dimensionality = estimate_local_dimension(subspace_data)
+<a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>Complexity_factor = Intrinsic_dimensionality / (D/m)
+<a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a>
+<a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a>Adapted_k = base_k × Complexity_factor
 </code></pre></div></p>
 <p><strong>Quality-Compression Analysis Framework:</strong></p>
 <p><em>Pareto Efficiency Calculation:</em>
-<div class="highlight"><pre><span></span><code>For configuration (m, k):
-Compression_ratio = (32 × D) / (m × log₂(k))
-Recall@k = evaluate_recall(test_queries, configuration)
-Latency = measure_query_latency(configuration)
-
-Pareto_score = α × Recall + β × (1/Latency) + γ × Compression_ratio
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>For configuration (m, k):
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>Compression_ratio = (32 × D) / (m × log₂(k))
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a>Recall@k = evaluate_recall(test_queries, configuration)
+<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>Latency = measure_query_latency(configuration)
+<a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a>
+<a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a>Pareto_score = α × Recall + β × (1/Latency) + γ × Compression_ratio
 </code></pre></div></p>
 <p><em>Application-Specific Optimization:</em></p>
 <p><strong>Recommendation Systems:</strong></p>
@@ -3496,29 +3520,29 @@ Pareto_score = α × Recall + β × (1/Latency) + γ × Compression_ratio
 </ul>
 <p><strong>Performance Modeling:</strong></p>
 <p><em>Theoretical Recall Estimation:</em>
-<div class="highlight"><pre><span></span><code>Expected_recall ≈ 1 - (ε/σ)²
-
-Where:
-- ε = average quantization error per dimension
-- σ = standard deviation of query-database distances
-
-ε ≈ (σ_subspace) × (k)^(-1/d) × C
-C ≈ 0.5 (empirical constant)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>Expected_recall ≈ 1 - (ε/σ)²
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>Where:
+<a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>- ε = average quantization error per dimension
+<a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a>- σ = standard deviation of query-database distances
+<a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a>
+<a id="__codelineno-54-7" name="__codelineno-54-7" href="#__codelineno-54-7"></a>ε ≈ (σ_subspace) × (k)^(-1/d) × C
+<a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a>C ≈ 0.5 (empirical constant)
 </code></pre></div></p>
 <p><em>Memory Usage Prediction:</em>
-<div class="highlight"><pre><span></span><code>Codebook_memory = m × k × (D/m) × 4 bytes
-Index_memory = N × m × log₂(k)/8 bytes
-Runtime_memory = m × k × 4 bytes (distance tables)
-
-Total = Codebook_memory + Index_memory + Runtime_memory
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>Codebook_memory = m × k × (D/m) × 4 bytes
+<a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>Index_memory = N × m × log₂(k)/8 bytes
+<a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a>Runtime_memory = m × k × 4 bytes (distance tables)
+<a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a>
+<a id="__codelineno-55-5" name="__codelineno-55-5" href="#__codelineno-55-5"></a>Total = Codebook_memory + Index_memory + Runtime_memory
 </code></pre></div></p>
 <p><em>Query Latency Model:</em>
-<div class="highlight"><pre><span></span><code>Latency = T_precompute + N × T_lookup + T_sort
-
-Where:
-T_precompute = m × k × (D/m) × T_distance
-T_lookup = m × T_table_access
-T_sort = N × log(k) × T_compare
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>Latency = T_precompute + N × T_lookup + T_sort
+<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>
+<a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a>Where:
+<a id="__codelineno-56-4" name="__codelineno-56-4" href="#__codelineno-56-4"></a>T_precompute = m × k × (D/m) × T_distance
+<a id="__codelineno-56-5" name="__codelineno-56-5" href="#__codelineno-56-5"></a>T_lookup = m × T_table_access
+<a id="__codelineno-56-6" name="__codelineno-56-6" href="#__codelineno-56-6"></a>T_sort = N × log(k) × T_compare
 </code></pre></div></p>
 <h3 id="algorithm-selection-guide">Algorithm Selection Guide<a class="headerlink" href="#algorithm-selection-guide" title="Permanent link">&para;</a></h3>
 <p>Choosing the optimal vector search algorithm requires understanding your specific requirements for accuracy, speed, memory usage, and dataset characteristics.</p>
@@ -3697,18 +3721,18 @@ T_sort = N × log(k) × T_compare
 <h4 id="core-architecture-components">Core Architecture Components<a class="headerlink" href="#core-architecture-components" title="Permanent link">&para;</a></h4>
 <p><strong>Integrated Storage Model:</strong></p>
 <p>OpenSearch stores vectors alongside traditional document fields, enabling rich queries that combine text filters, metadata constraints, and vector similarity in a single operation.</p>
-<div class="highlight"><pre><span></span><code>Document Structure:
-{
-  &quot;_id&quot;: &quot;doc_123&quot;,
-  &quot;_source&quot;: {
-    &quot;title&quot;: &quot;Machine Learning Fundamentals&quot;,
-    &quot;content&quot;: &quot;Introduction to ML algorithms...&quot;,
-    &quot;category&quot;: &quot;education&quot;,
-    &quot;timestamp&quot;: &quot;2024-01-15T10:00:00Z&quot;,
-    &quot;content_vector&quot;: [0.1, -0.2, 0.8, ...],  // 384-dimensional vector
-    &quot;title_vector&quot;: [0.3, 0.1, -0.4, ...]     // Separate vector for title
-  }
-}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>Document Structure:
+<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>{
+<a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a>  &quot;_id&quot;: &quot;doc_123&quot;,
+<a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>  &quot;_source&quot;: {
+<a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a>    &quot;title&quot;: &quot;Machine Learning Fundamentals&quot;,
+<a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a>    &quot;content&quot;: &quot;Introduction to ML algorithms...&quot;,
+<a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a>    &quot;category&quot;: &quot;education&quot;,
+<a id="__codelineno-57-8" name="__codelineno-57-8" href="#__codelineno-57-8"></a>    &quot;timestamp&quot;: &quot;2024-01-15T10:00:00Z&quot;,
+<a id="__codelineno-57-9" name="__codelineno-57-9" href="#__codelineno-57-9"></a>    &quot;content_vector&quot;: [0.1, -0.2, 0.8, ...],  // 384-dimensional vector
+<a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a>    &quot;title_vector&quot;: [0.3, 0.1, -0.4, ...]     // Separate vector for title
+<a id="__codelineno-57-11" name="__codelineno-57-11" href="#__codelineno-57-11"></a>  }
+<a id="__codelineno-57-12" name="__codelineno-57-12" href="#__codelineno-57-12"></a>}
 </code></pre></div>
 <p><strong>Segment-Based Vector Storage:</strong></p>
 <p>OpenSearch leverages Lucene's segment architecture for vector storage, providing several key benefits:</p>
@@ -3719,23 +3743,23 @@ T_sort = N × log(k) × T_compare
 <li><strong>Memory Management:</strong> Vectors stored in off-heap memory-mapped files</li>
 </ol>
 <p><strong>Vector Index Files per Segment:</strong></p>
-<div class="highlight"><pre><span></span><code>Segment Directory:
-├── vectors.vec      # Raw vector data (memory-mapped)
-├── vector_meta.vem  # Vector metadata and mappings
-├── hnsw_graph.hng   # HNSW graph structure (if used)
-├── ivf_clusters.ivc # IVF cluster assignments (if used)
-└── documents.json   # Traditional Lucene document storage
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>Segment Directory:
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>├── vectors.vec      # Raw vector data (memory-mapped)
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>├── vector_meta.vem  # Vector metadata and mappings
+<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>├── hnsw_graph.hng   # HNSW graph structure (if used)
+<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a>├── ivf_clusters.ivc # IVF cluster assignments (if used)
+<a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a>└── documents.json   # Traditional Lucene document storage
 </code></pre></div>
 <h4 id="memory-management-strategy">Memory Management Strategy<a class="headerlink" href="#memory-management-strategy" title="Permanent link">&para;</a></h4>
 <p><strong>Off-Heap Vector Storage:</strong></p>
 <p>OpenSearch stores vector data off-heap to avoid garbage collection pressure and enable memory mapping:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Memory allocation example for 1M vectors, 384 dimensions</span>
-<span class="n">vector_storage</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;raw_vectors&quot;</span><span class="p">:</span> <span class="s2">&quot;1M × 384 × 4 bytes = 1.54GB (memory-mapped)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;hnsw_graph&quot;</span><span class="p">:</span> <span class="s2">&quot;1M × 24 connections × 4 bytes = 96MB (direct memory)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="s2">&quot;1M × 64 bytes = 64MB (heap)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;total_memory&quot;</span><span class="p">:</span> <span class="s2">&quot;~6GB including system overhead&quot;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="c1"># Memory allocation example for 1M vectors, 384 dimensions</span>
+<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a><span class="n">vector_storage</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a>    <span class="s2">&quot;raw_vectors&quot;</span><span class="p">:</span> <span class="s2">&quot;1M × 384 × 4 bytes = 1.54GB (memory-mapped)&quot;</span><span class="p">,</span>
+<a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a>    <span class="s2">&quot;hnsw_graph&quot;</span><span class="p">:</span> <span class="s2">&quot;1M × 24 connections × 4 bytes = 96MB (direct memory)&quot;</span><span class="p">,</span>
+<a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a>    <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="s2">&quot;1M × 64 bytes = 64MB (heap)&quot;</span><span class="p">,</span>
+<a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a>    <span class="s2">&quot;total_memory&quot;</span><span class="p">:</span> <span class="s2">&quot;~6GB including system overhead&quot;</span>
+<a id="__codelineno-59-7" name="__codelineno-59-7" href="#__codelineno-59-7"></a><span class="p">}</span>
 </code></pre></div>
 <p><strong>Query Processing Memory:</strong></p>
 <p>Temporary structures for query processing use on-heap memory:
@@ -3757,33 +3781,33 @@ T_sort = N × log(k) × T_compare
 <li>Production-ready optimizations</li>
 </ul>
 <p><strong>Query Execution Pipeline:</strong></p>
-<div class="highlight"><pre><span></span><code>1. Query Parsing → Parse knn/vector query syntax
-2. Vector Validation → Verify dimensions and format
-3. Algorithm Selection → Choose HNSW vs IVF based on index config
-4. Segment Search → Execute vector search across all segments
-5. Score Aggregation → Combine results from multiple segments
-6. Filter Application → Apply any additional query filters
-7. Result Ranking → Final ranking and relevance scoring
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>1. Query Parsing → Parse knn/vector query syntax
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>2. Vector Validation → Verify dimensions and format
+<a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a>3. Algorithm Selection → Choose HNSW vs IVF based on index config
+<a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>4. Segment Search → Execute vector search across all segments
+<a id="__codelineno-60-5" name="__codelineno-60-5" href="#__codelineno-60-5"></a>5. Score Aggregation → Combine results from multiple segments
+<a id="__codelineno-60-6" name="__codelineno-60-6" href="#__codelineno-60-6"></a>6. Filter Application → Apply any additional query filters
+<a id="__codelineno-60-7" name="__codelineno-60-7" href="#__codelineno-60-7"></a>7. Result Ranking → Final ranking and relevance scoring
 </code></pre></div>
 <h3 id="index-configuration-and-setup">Index Configuration and Setup<a class="headerlink" href="#index-configuration-and-setup" title="Permanent link">&para;</a></h3>
 <p>Proper index configuration is crucial for optimal vector search performance. OpenSearch provides extensive configuration options for different algorithms and use cases.</p>
 <h4 id="basic-vector-field-configuration">Basic Vector Field Configuration<a class="headerlink" href="#basic-vector-field-configuration" title="Permanent link">&para;</a></h4>
 <p><strong>Simple Vector Field:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;content_vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">384</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;keyword&quot;</span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;date&quot;</span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="p">{</span>
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a><span class="w">      </span><span class="nt">&quot;content_vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+<a id="__codelineno-61-6" name="__codelineno-61-6" href="#__codelineno-61-6"></a><span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">384</span><span class="p">,</span>
+<a id="__codelineno-61-7" name="__codelineno-61-7" href="#__codelineno-61-7"></a><span class="w">        </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span>
+<a id="__codelineno-61-8" name="__codelineno-61-8" href="#__codelineno-61-8"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-61-9" name="__codelineno-61-9" href="#__codelineno-61-9"></a><span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">},</span>
+<a id="__codelineno-61-10" name="__codelineno-61-10" href="#__codelineno-61-10"></a><span class="w">      </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">},</span>
+<a id="__codelineno-61-11" name="__codelineno-61-11" href="#__codelineno-61-11"></a><span class="w">      </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;keyword&quot;</span><span class="p">},</span>
+<a id="__codelineno-61-12" name="__codelineno-61-12" href="#__codelineno-61-12"></a><span class="w">      </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;date&quot;</span><span class="p">}</span>
+<a id="__codelineno-61-13" name="__codelineno-61-13" href="#__codelineno-61-13"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-61-14" name="__codelineno-61-14" href="#__codelineno-61-14"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-61-15" name="__codelineno-61-15" href="#__codelineno-61-15"></a><span class="p">}</span>
 </code></pre></div>
 <p><strong>Space Type Options:</strong></p>
 <ul>
@@ -3794,33 +3818,33 @@ T_sort = N × log(k) × T_compare
 </ul>
 <h4 id="hnsw-configuration">HNSW Configuration<a class="headerlink" href="#hnsw-configuration" title="Permanent link">&para;</a></h4>
 <p><strong>Production HNSW Setup:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;number_of_shards&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;number_of_replicas&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;refresh_interval&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30s&quot;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;content_vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">384</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;engine&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lucene&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;ef_construction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="err">Higher</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">be</span><span class="kc">tter</span><span class="w"> </span><span class="err">quali</span><span class="kc">t</span><span class="err">y</span><span class="p">,</span><span class="w"> </span><span class="err">slower</span><span class="w"> </span><span class="err">build</span>
-<span class="w">            </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">                  </span><span class="err">#</span><span class="w"> </span><span class="err">Higher</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">be</span><span class="kc">tter</span><span class="w"> </span><span class="err">recall</span><span class="p">,</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">memory</span>
-<span class="w">          </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="p">{</span>
+<a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="w">  </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a><span class="w">      </span><span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a><span class="w">      </span><span class="nt">&quot;number_of_shards&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a><span class="w">      </span><span class="nt">&quot;number_of_replicas&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-62-7" name="__codelineno-62-7" href="#__codelineno-62-7"></a><span class="w">      </span><span class="nt">&quot;refresh_interval&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30s&quot;</span>
+<a id="__codelineno-62-8" name="__codelineno-62-8" href="#__codelineno-62-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-62-9" name="__codelineno-62-9" href="#__codelineno-62-9"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-62-10" name="__codelineno-62-10" href="#__codelineno-62-10"></a><span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-62-11" name="__codelineno-62-11" href="#__codelineno-62-11"></a><span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-62-12" name="__codelineno-62-12" href="#__codelineno-62-12"></a><span class="w">      </span><span class="nt">&quot;content_vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-62-13" name="__codelineno-62-13" href="#__codelineno-62-13"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+<a id="__codelineno-62-14" name="__codelineno-62-14" href="#__codelineno-62-14"></a><span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">384</span><span class="p">,</span>
+<a id="__codelineno-62-15" name="__codelineno-62-15" href="#__codelineno-62-15"></a><span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-62-16" name="__codelineno-62-16" href="#__codelineno-62-16"></a><span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
+<a id="__codelineno-62-17" name="__codelineno-62-17" href="#__codelineno-62-17"></a><span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
+<a id="__codelineno-62-18" name="__codelineno-62-18" href="#__codelineno-62-18"></a><span class="w">          </span><span class="nt">&quot;engine&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lucene&quot;</span><span class="p">,</span>
+<a id="__codelineno-62-19" name="__codelineno-62-19" href="#__codelineno-62-19"></a><span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-62-20" name="__codelineno-62-20" href="#__codelineno-62-20"></a><span class="w">            </span><span class="nt">&quot;ef_construction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="err">Higher</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">be</span><span class="kc">tter</span><span class="w"> </span><span class="err">quali</span><span class="kc">t</span><span class="err">y</span><span class="p">,</span><span class="w"> </span><span class="err">slower</span><span class="w"> </span><span class="err">build</span>
+<a id="__codelineno-62-21" name="__codelineno-62-21" href="#__codelineno-62-21"></a><span class="w">            </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="w">                  </span><span class="err">#</span><span class="w"> </span><span class="err">Higher</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">be</span><span class="kc">tter</span><span class="w"> </span><span class="err">recall</span><span class="p">,</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">memory</span>
+<a id="__codelineno-62-22" name="__codelineno-62-22" href="#__codelineno-62-22"></a><span class="w">          </span><span class="p">}</span>
+<a id="__codelineno-62-23" name="__codelineno-62-23" href="#__codelineno-62-23"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-62-24" name="__codelineno-62-24" href="#__codelineno-62-24"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-62-25" name="__codelineno-62-25" href="#__codelineno-62-25"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-62-26" name="__codelineno-62-26" href="#__codelineno-62-26"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-62-27" name="__codelineno-62-27" href="#__codelineno-62-27"></a><span class="p">}</span>
 </code></pre></div>
 <p><strong>Parameter Selection Guidelines:</strong></p>
 <table>
@@ -3867,25 +3891,25 @@ T_sort = N × log(k) × T_compare
 </table>
 <h4 id="ivf-configuration">IVF Configuration<a class="headerlink" href="#ivf-configuration" title="Permanent link">&para;</a></h4>
 <p><strong>IVF Index Setup:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;content_vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ivf&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;l2&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;engine&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lucene&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;nlist&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w">     </span><span class="err">#</span><span class="w"> </span><span class="err">Number</span><span class="w"> </span><span class="err">o</span><span class="kc">f</span><span class="w"> </span><span class="err">clus</span><span class="kc">ters</span>
-<span class="w">            </span><span class="nt">&quot;nprobes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="err">De</span><span class="kc">fault</span><span class="w"> </span><span class="err">search</span><span class="w"> </span><span class="err">wid</span><span class="kc">t</span><span class="err">h</span>
-<span class="w">          </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="p">{</span>
+<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a><span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a><span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a><span class="w">      </span><span class="nt">&quot;content_vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-63-5" name="__codelineno-63-5" href="#__codelineno-63-5"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+<a id="__codelineno-63-6" name="__codelineno-63-6" href="#__codelineno-63-6"></a><span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span>
+<a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a><span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a><span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ivf&quot;</span><span class="p">,</span>
+<a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a><span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;l2&quot;</span><span class="p">,</span>
+<a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a><span class="w">          </span><span class="nt">&quot;engine&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lucene&quot;</span><span class="p">,</span>
+<a id="__codelineno-63-11" name="__codelineno-63-11" href="#__codelineno-63-11"></a><span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-63-12" name="__codelineno-63-12" href="#__codelineno-63-12"></a><span class="w">            </span><span class="nt">&quot;nlist&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w">     </span><span class="err">#</span><span class="w"> </span><span class="err">Number</span><span class="w"> </span><span class="err">o</span><span class="kc">f</span><span class="w"> </span><span class="err">clus</span><span class="kc">ters</span>
+<a id="__codelineno-63-13" name="__codelineno-63-13" href="#__codelineno-63-13"></a><span class="w">            </span><span class="nt">&quot;nprobes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="w">      </span><span class="err">#</span><span class="w"> </span><span class="err">De</span><span class="kc">fault</span><span class="w"> </span><span class="err">search</span><span class="w"> </span><span class="err">wid</span><span class="kc">t</span><span class="err">h</span>
+<a id="__codelineno-63-14" name="__codelineno-63-14" href="#__codelineno-63-14"></a><span class="w">          </span><span class="p">}</span>
+<a id="__codelineno-63-15" name="__codelineno-63-15" href="#__codelineno-63-15"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-63-16" name="__codelineno-63-16" href="#__codelineno-63-16"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-63-17" name="__codelineno-63-17" href="#__codelineno-63-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-63-18" name="__codelineno-63-18" href="#__codelineno-63-18"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-63-19" name="__codelineno-63-19" href="#__codelineno-63-19"></a><span class="p">}</span>
 </code></pre></div>
 <p><strong>IVF Parameter Calculation Framework:</strong></p>
 <p><em>Cluster Count Formula:</em></p>
@@ -3909,45 +3933,45 @@ T_sort = N × log(k) × T_compare
 </ul>
 <h4 id="multi-vector-field-configuration">Multi-Vector Field Configuration<a class="headerlink" href="#multi-vector-field-configuration" title="Permanent link">&para;</a></h4>
 <p><strong>Multiple Vector Fields for Different Purposes:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;keyword&quot;</span><span class="p">},</span>
-
-<span class="w">      </span><span class="nt">&quot;title_vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">384</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ef_construction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">},</span>
-
-<span class="w">      </span><span class="nt">&quot;content_vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ef_construction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">},</span>
-
-<span class="w">      </span><span class="nt">&quot;image_vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ivf&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;l2&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;nlist&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;nprobes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="p">{</span>
+<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a><span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a><span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-64-4" name="__codelineno-64-4" href="#__codelineno-64-4"></a><span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">},</span>
+<a id="__codelineno-64-5" name="__codelineno-64-5" href="#__codelineno-64-5"></a><span class="w">      </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">},</span>
+<a id="__codelineno-64-6" name="__codelineno-64-6" href="#__codelineno-64-6"></a><span class="w">      </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;keyword&quot;</span><span class="p">},</span>
+<a id="__codelineno-64-7" name="__codelineno-64-7" href="#__codelineno-64-7"></a>
+<a id="__codelineno-64-8" name="__codelineno-64-8" href="#__codelineno-64-8"></a><span class="w">      </span><span class="nt">&quot;title_vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-64-9" name="__codelineno-64-9" href="#__codelineno-64-9"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+<a id="__codelineno-64-10" name="__codelineno-64-10" href="#__codelineno-64-10"></a><span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">384</span><span class="p">,</span>
+<a id="__codelineno-64-11" name="__codelineno-64-11" href="#__codelineno-64-11"></a><span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-64-12" name="__codelineno-64-12" href="#__codelineno-64-12"></a><span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
+<a id="__codelineno-64-13" name="__codelineno-64-13" href="#__codelineno-64-13"></a><span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
+<a id="__codelineno-64-14" name="__codelineno-64-14" href="#__codelineno-64-14"></a><span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ef_construction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">}</span>
+<a id="__codelineno-64-15" name="__codelineno-64-15" href="#__codelineno-64-15"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-64-16" name="__codelineno-64-16" href="#__codelineno-64-16"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-64-17" name="__codelineno-64-17" href="#__codelineno-64-17"></a>
+<a id="__codelineno-64-18" name="__codelineno-64-18" href="#__codelineno-64-18"></a><span class="w">      </span><span class="nt">&quot;content_vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-64-19" name="__codelineno-64-19" href="#__codelineno-64-19"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+<a id="__codelineno-64-20" name="__codelineno-64-20" href="#__codelineno-64-20"></a><span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="p">,</span>
+<a id="__codelineno-64-21" name="__codelineno-64-21" href="#__codelineno-64-21"></a><span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-64-22" name="__codelineno-64-22" href="#__codelineno-64-22"></a><span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
+<a id="__codelineno-64-23" name="__codelineno-64-23" href="#__codelineno-64-23"></a><span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
+<a id="__codelineno-64-24" name="__codelineno-64-24" href="#__codelineno-64-24"></a><span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ef_construction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">}</span>
+<a id="__codelineno-64-25" name="__codelineno-64-25" href="#__codelineno-64-25"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-64-26" name="__codelineno-64-26" href="#__codelineno-64-26"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-64-27" name="__codelineno-64-27" href="#__codelineno-64-27"></a>
+<a id="__codelineno-64-28" name="__codelineno-64-28" href="#__codelineno-64-28"></a><span class="w">      </span><span class="nt">&quot;image_vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-64-29" name="__codelineno-64-29" href="#__codelineno-64-29"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+<a id="__codelineno-64-30" name="__codelineno-64-30" href="#__codelineno-64-30"></a><span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span>
+<a id="__codelineno-64-31" name="__codelineno-64-31" href="#__codelineno-64-31"></a><span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-64-32" name="__codelineno-64-32" href="#__codelineno-64-32"></a><span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ivf&quot;</span><span class="p">,</span>
+<a id="__codelineno-64-33" name="__codelineno-64-33" href="#__codelineno-64-33"></a><span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;l2&quot;</span><span class="p">,</span>
+<a id="__codelineno-64-34" name="__codelineno-64-34" href="#__codelineno-64-34"></a><span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;nlist&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;nprobes&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">}</span>
+<a id="__codelineno-64-35" name="__codelineno-64-35" href="#__codelineno-64-35"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-64-36" name="__codelineno-64-36" href="#__codelineno-64-36"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-64-37" name="__codelineno-64-37" href="#__codelineno-64-37"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-64-38" name="__codelineno-64-38" href="#__codelineno-64-38"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-64-39" name="__codelineno-64-39" href="#__codelineno-64-39"></a><span class="p">}</span>
 </code></pre></div>
 <hr />
 <h2 id="part-iv-advanced-applications">Part IV: Advanced Applications<a class="headerlink" href="#part-iv-advanced-applications" title="Permanent link">&para;</a></h2>
@@ -3978,85 +4002,85 @@ T_sort = N × log(k) × T_compare
 <p><strong>Shared Vector Space Design:</strong></p>
 <p>The core innovation of multi-modal search lies in creating a unified vector space where different content types can be meaningfully compared. This requires specialized embedding models that understand semantic relationships across modalities.</p>
 <p><strong>Implementation Architecture:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;content_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;keyword&quot;</span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;content_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;keyword&quot;</span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">},</span>
-
-<span class="w">      </span><span class="nt">&quot;text_embedding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ef_construction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">},</span>
-
-<span class="w">      </span><span class="nt">&quot;image_embedding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ef_construction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">},</span>
-
-<span class="w">      </span><span class="nt">&quot;unified_embedding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ef_construction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="p">{</span>
+<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a><span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a><span class="w">      </span><span class="nt">&quot;content_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;keyword&quot;</span><span class="p">},</span>
+<a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a><span class="w">      </span><span class="nt">&quot;content_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;keyword&quot;</span><span class="p">},</span>
+<a id="__codelineno-65-6" name="__codelineno-65-6" href="#__codelineno-65-6"></a><span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">},</span>
+<a id="__codelineno-65-7" name="__codelineno-65-7" href="#__codelineno-65-7"></a><span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">},</span>
+<a id="__codelineno-65-8" name="__codelineno-65-8" href="#__codelineno-65-8"></a>
+<a id="__codelineno-65-9" name="__codelineno-65-9" href="#__codelineno-65-9"></a><span class="w">      </span><span class="nt">&quot;text_embedding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-65-10" name="__codelineno-65-10" href="#__codelineno-65-10"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+<a id="__codelineno-65-11" name="__codelineno-65-11" href="#__codelineno-65-11"></a><span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span>
+<a id="__codelineno-65-12" name="__codelineno-65-12" href="#__codelineno-65-12"></a><span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-65-13" name="__codelineno-65-13" href="#__codelineno-65-13"></a><span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
+<a id="__codelineno-65-14" name="__codelineno-65-14" href="#__codelineno-65-14"></a><span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
+<a id="__codelineno-65-15" name="__codelineno-65-15" href="#__codelineno-65-15"></a><span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ef_construction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">}</span>
+<a id="__codelineno-65-16" name="__codelineno-65-16" href="#__codelineno-65-16"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-65-17" name="__codelineno-65-17" href="#__codelineno-65-17"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-65-18" name="__codelineno-65-18" href="#__codelineno-65-18"></a>
+<a id="__codelineno-65-19" name="__codelineno-65-19" href="#__codelineno-65-19"></a><span class="w">      </span><span class="nt">&quot;image_embedding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-65-20" name="__codelineno-65-20" href="#__codelineno-65-20"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+<a id="__codelineno-65-21" name="__codelineno-65-21" href="#__codelineno-65-21"></a><span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span>
+<a id="__codelineno-65-22" name="__codelineno-65-22" href="#__codelineno-65-22"></a><span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-65-23" name="__codelineno-65-23" href="#__codelineno-65-23"></a><span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
+<a id="__codelineno-65-24" name="__codelineno-65-24" href="#__codelineno-65-24"></a><span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
+<a id="__codelineno-65-25" name="__codelineno-65-25" href="#__codelineno-65-25"></a><span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ef_construction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">}</span>
+<a id="__codelineno-65-26" name="__codelineno-65-26" href="#__codelineno-65-26"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-65-27" name="__codelineno-65-27" href="#__codelineno-65-27"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-65-28" name="__codelineno-65-28" href="#__codelineno-65-28"></a>
+<a id="__codelineno-65-29" name="__codelineno-65-29" href="#__codelineno-65-29"></a><span class="w">      </span><span class="nt">&quot;unified_embedding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-65-30" name="__codelineno-65-30" href="#__codelineno-65-30"></a><span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+<a id="__codelineno-65-31" name="__codelineno-65-31" href="#__codelineno-65-31"></a><span class="w">        </span><span class="nt">&quot;dimension&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span>
+<a id="__codelineno-65-32" name="__codelineno-65-32" href="#__codelineno-65-32"></a><span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-65-33" name="__codelineno-65-33" href="#__codelineno-65-33"></a><span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
+<a id="__codelineno-65-34" name="__codelineno-65-34" href="#__codelineno-65-34"></a><span class="w">          </span><span class="nt">&quot;space_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
+<a id="__codelineno-65-35" name="__codelineno-65-35" href="#__codelineno-65-35"></a><span class="w">          </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;ef_construction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;m&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="p">}</span>
+<a id="__codelineno-65-36" name="__codelineno-65-36" href="#__codelineno-65-36"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-65-37" name="__codelineno-65-37" href="#__codelineno-65-37"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-65-38" name="__codelineno-65-38" href="#__codelineno-65-38"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-65-39" name="__codelineno-65-39" href="#__codelineno-65-39"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-65-40" name="__codelineno-65-40" href="#__codelineno-65-40"></a><span class="p">}</span>
 </code></pre></div>
 <p><strong>Cross-Modal Query Examples:</strong></p>
 <p><em>Text-to-Image Search:</em>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;bool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;must&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span><span class="nt">&quot;term&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;content_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;image&quot;</span><span class="p">}},</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;unified_embedding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">              </span><span class="nt">&quot;vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">-0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">],</span>
-<span class="w">              </span><span class="nt">&quot;k&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">          </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">]</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="p">{</span>
+<a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a><span class="w">  </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a><span class="w">    </span><span class="nt">&quot;bool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-66-4" name="__codelineno-66-4" href="#__codelineno-66-4"></a><span class="w">      </span><span class="nt">&quot;must&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-66-5" name="__codelineno-66-5" href="#__codelineno-66-5"></a><span class="w">        </span><span class="p">{</span><span class="nt">&quot;term&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;content_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;image&quot;</span><span class="p">}},</span>
+<a id="__codelineno-66-6" name="__codelineno-66-6" href="#__codelineno-66-6"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-66-7" name="__codelineno-66-7" href="#__codelineno-66-7"></a><span class="w">          </span><span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-66-8" name="__codelineno-66-8" href="#__codelineno-66-8"></a><span class="w">            </span><span class="nt">&quot;unified_embedding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-66-9" name="__codelineno-66-9" href="#__codelineno-66-9"></a><span class="w">              </span><span class="nt">&quot;vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">-0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">],</span>
+<a id="__codelineno-66-10" name="__codelineno-66-10" href="#__codelineno-66-10"></a><span class="w">              </span><span class="nt">&quot;k&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
+<a id="__codelineno-66-11" name="__codelineno-66-11" href="#__codelineno-66-11"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-66-12" name="__codelineno-66-12" href="#__codelineno-66-12"></a><span class="w">          </span><span class="p">}</span>
+<a id="__codelineno-66-13" name="__codelineno-66-13" href="#__codelineno-66-13"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-66-14" name="__codelineno-66-14" href="#__codelineno-66-14"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-66-15" name="__codelineno-66-15" href="#__codelineno-66-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-66-16" name="__codelineno-66-16" href="#__codelineno-66-16"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-66-17" name="__codelineno-66-17" href="#__codelineno-66-17"></a><span class="p">}</span>
 </code></pre></div></p>
 <p><em>Image-to-Text Search:</em>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;bool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;must&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span><span class="nt">&quot;term&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;content_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">}},</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;unified_embedding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">              </span><span class="nt">&quot;vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">-0.4</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">],</span>
-<span class="w">              </span><span class="nt">&quot;k&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">          </span><span class="p">}</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">]</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="p">{</span>
+<a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a><span class="w">  </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="w">    </span><span class="nt">&quot;bool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a><span class="w">      </span><span class="nt">&quot;must&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-67-5" name="__codelineno-67-5" href="#__codelineno-67-5"></a><span class="w">        </span><span class="p">{</span><span class="nt">&quot;term&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;content_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">}},</span>
+<a id="__codelineno-67-6" name="__codelineno-67-6" href="#__codelineno-67-6"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-67-7" name="__codelineno-67-7" href="#__codelineno-67-7"></a><span class="w">          </span><span class="nt">&quot;knn&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-67-8" name="__codelineno-67-8" href="#__codelineno-67-8"></a><span class="w">            </span><span class="nt">&quot;unified_embedding&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-67-9" name="__codelineno-67-9" href="#__codelineno-67-9"></a><span class="w">              </span><span class="nt">&quot;vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">-0.4</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">],</span>
+<a id="__codelineno-67-10" name="__codelineno-67-10" href="#__codelineno-67-10"></a><span class="w">              </span><span class="nt">&quot;k&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
+<a id="__codelineno-67-11" name="__codelineno-67-11" href="#__codelineno-67-11"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-67-12" name="__codelineno-67-12" href="#__codelineno-67-12"></a><span class="w">          </span><span class="p">}</span>
+<a id="__codelineno-67-13" name="__codelineno-67-13" href="#__codelineno-67-13"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-67-14" name="__codelineno-67-14" href="#__codelineno-67-14"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-67-15" name="__codelineno-67-15" href="#__codelineno-67-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-67-16" name="__codelineno-67-16" href="#__codelineno-67-16"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-67-17" name="__codelineno-67-17" href="#__codelineno-67-17"></a><span class="p">}</span>
 </code></pre></div></p>
 <p><strong>Multi-Modal Embedding Models:</strong></p>
 <ul>
@@ -4076,7 +4100,7 @@ T_sort = N × log(k) × T_compare
 <p>This comprehensive guide provides the foundation for building production-ready vector search systems with OpenSearch. The progression from traditional text search through advanced hybrid approaches, combined with deep algorithmic understanding and practical implementation patterns, enables you to create sophisticated search experiences that understand meaning rather than just matching keywords.</p>
 <p>The key to successful vector search implementation lies in understanding your specific use case requirements, choosing appropriate algorithms and parameters, and continuously monitoring and optimizing performance based on real-world usage patterns.</p>
 <hr />
-<h2 id="performance-metrics-disclaimer">⚠️ Performance Metrics Disclaimer<a class="headerlink" href="#performance-metrics-disclaimer" title="Permanent link">&para;</a></h2>
+<h2 id="-performance-metrics-disclaimer">⚠️ Performance Metrics Disclaimer<a class="headerlink" href="#-performance-metrics-disclaimer" title="Permanent link">&para;</a></h2>
 <p><strong>Important Notice about Performance Data:</strong></p>
 <p>All performance metrics, benchmarks, latency figures, memory usage statistics, and cost examples presented in this document are <strong>illustrative examples</strong> designed to help with understanding and planning. These numbers are based on theoretical models, synthetic tests, or specific hardware configurations and should not be considered as guaranteed performance metrics for your specific use case.</p>
 <p><strong>Actual performance will vary significantly based on:</strong></p>
@@ -4116,8 +4140,16 @@ T_sort = N × log(k) × T_compare
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
         
       </main>
       
@@ -4147,7 +4179,7 @@ T_sort = N × log(k) × T_compare
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "content.code.copy", "content.tabs.link", "toc.follow"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
