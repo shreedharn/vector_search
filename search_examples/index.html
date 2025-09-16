@@ -1,0 +1,2357 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../opensearch_vs_pinecone/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>OpenSearch Vector Search: Python Examples - Vector and Hybrid Search</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#opensearch-vector-search-python-examples" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Vector and Hybrid Search" class="md-header__button md-logo" aria-label="Vector and Hybrid Search" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Vector and Hybrid Search
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OpenSearch Vector Search: Python Examples
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Vector and Hybrid Search" class="md-nav__button md-logo" aria-label="Vector and Hybrid Search" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Vector and Hybrid Search
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vector Search and Information Retrieval: A Comprehensive Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LICENSE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LICENSE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vector Search and Information Retrieval Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kendra_vs_opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AWS Kendra vs AWS OpenSearch: Service Comparison Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch: Theory to Implementation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_productionize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch Vector Search: Production Deployment Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_vs_pinecone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AWS OpenSearch vs Pinecone: The Ultimate Vector Search Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch Vector Search: Python Examples
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch Vector Search: Python Examples
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-setup-and-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index Setup and Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Index Setup and Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opensearch-client-setup-and-index-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenSearch Client Setup and Index Creation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#document-indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document Indexing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Document Indexing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-document-indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single Document Indexing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimized-bulk-indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimized Bulk Indexing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-vector-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Vector Search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic Vector Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-k-nn-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Simple k-NN Search
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-vector-search-with-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Vector Search with Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-search-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Search Techniques
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Search Techniques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text-search-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Text Search Implementation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rank-fusion-for-combined-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rank Fusion for Combined Results
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hybrid-search-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Search Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hybrid Search Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-hybrid-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Hybrid Search
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adaptive-hybrid-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adaptive Hybrid Search
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-modal-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Modal Search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multi-Modal Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-modal-index-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Modal Index Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-modal-search-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Modal Search Functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modality-specific-boosting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modality-Specific Boosting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommendation-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recommendation Systems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recommendation Systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-profile-vector-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Profile Vector Creation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#personalized-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Personalized Recommendations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collaborative-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collaborative Filtering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hybrid-recommendation-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Recommendation Systems
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-time-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-Time Applications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Real-Time Applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#real-time-indexing-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-Time Indexing System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#high-performance-search-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      High-Performance Search API
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-setup-and-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index Setup and Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Index Setup and Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opensearch-client-setup-and-index-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenSearch Client Setup and Index Creation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#document-indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Document Indexing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Document Indexing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-document-indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single Document Indexing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optimized-bulk-indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimized Bulk Indexing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-vector-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Vector Search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic Vector Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-k-nn-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Simple k-NN Search
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-vector-search-with-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Vector Search with Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-search-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Search Techniques
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Search Techniques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#text-search-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Text Search Implementation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rank-fusion-for-combined-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rank Fusion for Combined Results
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hybrid-search-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Search Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hybrid Search Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-hybrid-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Hybrid Search
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adaptive-hybrid-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adaptive Hybrid Search
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-modal-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Modal Search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multi-Modal Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-modal-index-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Modal Index Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-modal-search-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cross-Modal Search Functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modality-specific-boosting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modality-Specific Boosting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommendation-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recommendation Systems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recommendation Systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-profile-vector-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Profile Vector Creation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#personalized-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Personalized Recommendations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collaborative-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collaborative Filtering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hybrid-recommendation-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Recommendation Systems
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#real-time-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-Time Applications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Real-Time Applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#real-time-indexing-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-Time Indexing System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#high-performance-search-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      High-Performance Search API
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="opensearch-vector-search-python-examples">OpenSearch Vector Search: Python Examples<a class="headerlink" href="#opensearch-vector-search-python-examples" title="Permanent link">&para;</a></h1>
+<p>This document contains practical Python code examples for implementing vector search with OpenSearch.</p>
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#index-setup-and-configuration">Index Setup and Configuration</a></li>
+<li><a href="#document-indexing">Document Indexing</a></li>
+<li><a href="#basic-vector-search">Basic Vector Search</a></li>
+<li><a href="#advanced-search-techniques">Advanced Search Techniques</a></li>
+<li><a href="#hybrid-search-implementation">Hybrid Search Implementation</a></li>
+<li><a href="#multi-modal-search">Multi-Modal Search</a></li>
+<li><a href="#recommendation-systems">Recommendation Systems</a></li>
+<li><a href="#real-time-applications">Real-Time Applications</a></li>
+</ul>
+<hr />
+<h2 id="index-setup-and-configuration">Index Setup and Configuration<a class="headerlink" href="#index-setup-and-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="opensearch-client-setup-and-index-creation">OpenSearch Client Setup and Index Creation<a class="headerlink" href="#opensearch-client-setup-and-index-creation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">opensearchpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenSearch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># Client configuration</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">OpenSearch</span><span class="p">([</span>
+    <span class="p">{</span><span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="mi">9200</span><span class="p">}</span>
+<span class="p">],</span>
+<span class="n">http_auth</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">),</span>  <span class="c1"># Configure authentication</span>
+<span class="n">use_ssl</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="n">verify_certs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="n">ssl_show_warn</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_optimized_vector_index</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">vector_config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create vector index with optimized settings&quot;&quot;&quot;</span>
+
+    <span class="n">index_body</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;number_of_shards&quot;</span><span class="p">:</span> <span class="n">calculate_optimal_shards</span><span class="p">(</span><span class="n">vector_config</span><span class="p">[</span><span class="s1">&#39;expected_docs&#39;</span><span class="p">]),</span>
+                <span class="s2">&quot;number_of_replicas&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;refresh_interval&quot;</span><span class="p">:</span> <span class="s2">&quot;30s&quot;</span><span class="p">,</span>  <span class="c1"># Batch refresh for better performance</span>
+                <span class="s2">&quot;codec&quot;</span><span class="p">:</span> <span class="s2">&quot;best_compression&quot;</span><span class="p">,</span>  <span class="c1"># Reduce disk usage</span>
+                <span class="s2">&quot;max_result_window&quot;</span><span class="p">:</span> <span class="mi">50000</span>  <span class="c1"># Allow larger result sets</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;mappings&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="n">create_vector_mapping</span><span class="p">(</span><span class="n">vector_config</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index_name</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">index_body</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created index </span><span class="si">{</span><span class="n">index_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error creating index: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_optimal_shards</span><span class="p">(</span><span class="n">expected_docs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate optimal shard count based on data size&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">expected_docs</span> <span class="o">&lt;</span> <span class="mi">100_000</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">expected_docs</span> <span class="o">&lt;</span> <span class="mi">1_000_000</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="n">expected_docs</span> <span class="o">&lt;</span> <span class="mi">10_000_000</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">3</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">5</span>  <span class="c1"># Balance parallelism with overhead</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_vector_mapping</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate vector field mappings&quot;&quot;&quot;</span>
+    <span class="n">properties</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;analyzer&quot;</span><span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;analyzer&quot;</span><span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;date&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span> <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>  <span class="c1"># Store but don&#39;t index</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Add vector fields</span>
+    <span class="k">for</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">field_config</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;vector_fields&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">properties</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="n">field_config</span><span class="p">[</span><span class="s1">&#39;dimension&#39;</span><span class="p">],</span>
+            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">field_config</span><span class="p">[</span><span class="s1">&#39;algorithm&#39;</span><span class="p">],</span>
+                <span class="s2">&quot;space_type&quot;</span><span class="p">:</span> <span class="n">field_config</span><span class="p">[</span><span class="s1">&#39;space_type&#39;</span><span class="p">],</span>
+                <span class="s2">&quot;engine&quot;</span><span class="p">:</span> <span class="s2">&quot;lucene&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="n">field_config</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">properties</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">vector_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;expected_docs&quot;</span><span class="p">:</span> <span class="mi">1_000_000</span><span class="p">,</span>
+    <span class="s2">&quot;vector_fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;content_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="mi">384</span><span class="p">,</span>
+            <span class="s2">&quot;algorithm&quot;</span><span class="p">:</span> <span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;space_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;ef_construction&quot;</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">create_optimized_vector_index</span><span class="p">(</span><span class="s2">&quot;my_documents&quot;</span><span class="p">,</span> <span class="n">vector_config</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="document-indexing">Document Indexing<a class="headerlink" href="#document-indexing" title="Permanent link">&para;</a></h2>
+<h3 id="single-document-indexing">Single Document Indexing<a class="headerlink" href="#single-document-indexing" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">index_document_with_vector</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">doc_id</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Index a single document with vector&quot;&quot;&quot;</span>
+
+    <span class="n">document</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">content</span><span class="p">,</span>
+        <span class="s2">&quot;content_vector&quot;</span><span class="p">:</span> <span class="n">vector</span><span class="p">,</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="s2">&quot;doc_length&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">),</span>
+        <span class="o">**</span><span class="p">(</span><span class="n">metadata</span> <span class="ow">or</span> <span class="p">{})</span>
+    <span class="p">}</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">index</span><span class="p">(</span>
+            <span class="n">index</span><span class="o">=</span><span class="n">index_name</span><span class="p">,</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">doc_id</span><span class="p">,</span>
+            <span class="n">body</span><span class="o">=</span><span class="n">document</span><span class="p">,</span>
+            <span class="n">refresh</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># Don&#39;t force immediate refresh</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;created&#39;</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error indexing document </span><span class="si">{</span><span class="n">doc_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div>
+<h3 id="optimized-bulk-indexing">Optimized Bulk Indexing<a class="headerlink" href="#optimized-bulk-indexing" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">bulk_index_documents</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">documents</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Efficiently bulk index documents with vectors&quot;&quot;&quot;</span>
+
+    <span class="n">total_docs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+    <span class="n">successful</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">total_docs</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">batch</span> <span class="o">=</span> <span class="n">documents</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+        <span class="n">bulk_body</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">:</span>
+            <span class="c1"># Index action</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;_index&quot;</span><span class="p">:</span> <span class="n">index_name</span><span class="p">,</span>
+                    <span class="s2">&quot;_id&quot;</span><span class="p">:</span> <span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;doc_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">bulk_body</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="c1"># Document body</span>
+            <span class="n">doc_body</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">doc</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">doc</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;content_vector&quot;</span><span class="p">:</span> <span class="n">doc</span><span class="p">[</span><span class="s2">&quot;vector&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()),</span>
+                <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="s2">&quot;general&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;doc_length&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">])</span>
+            <span class="p">}</span>
+
+            <span class="n">bulk_body</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">action</span><span class="p">,</span> <span class="n">doc_body</span><span class="p">])</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">bulk</span><span class="p">(</span>
+                <span class="n">body</span><span class="o">=</span><span class="n">bulk_body</span><span class="p">,</span>
+                <span class="n">refresh</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Batch refresh later</span>
+                <span class="n">timeout</span><span class="o">=</span><span class="s1">&#39;60s&#39;</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Count successful operations</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="s1">&#39;index&#39;</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">][</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">201</span><span class="p">]:</span>
+                    <span class="n">successful</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in bulk indexing batch </span><span class="si">{</span><span class="n">i</span><span class="o">//</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Force refresh after bulk operations</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index_name</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully indexed </span><span class="si">{</span><span class="n">successful</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total_docs</span><span class="si">}</span><span class="s2"> documents&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">successful</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;doc_1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Introduction to Machine Learning&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Machine learning is a subset of artificial intelligence...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vector&quot;</span><span class="p">:</span> <span class="n">generate_embedding</span><span class="p">(</span><span class="s2">&quot;Introduction to Machine Learning...&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;education&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/ml-intro&quot;</span>
+    <span class="p">},</span>
+    <span class="c1"># ... more documents</span>
+<span class="p">]</span>
+
+<span class="n">bulk_index_documents</span><span class="p">(</span><span class="s2">&quot;my_documents&quot;</span><span class="p">,</span> <span class="n">documents</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="basic-vector-search">Basic Vector Search<a class="headerlink" href="#basic-vector-search" title="Permanent link">&para;</a></h2>
+<h3 id="simple-k-nn-search">Simple k-NN Search<a class="headerlink" href="#simple-k-nn-search" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">simple_vector_search</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">query_vector</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform basic vector similarity search&quot;&quot;&quot;</span>
+
+    <span class="n">search_body</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;content_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;vector&quot;</span><span class="p">:</span> <span class="n">query_vector</span><span class="p">,</span>
+                    <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="n">k</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;_source&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index_name</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">search_body</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">format_search_results</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">format_search_results</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Format OpenSearch response for easy consumption&quot;&quot;&quot;</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;hits&quot;</span><span class="p">][</span><span class="s2">&quot;hits&quot;</span><span class="p">]:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">hit</span><span class="p">[</span><span class="s2">&quot;_id&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">hit</span><span class="p">[</span><span class="s2">&quot;_score&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">hit</span><span class="p">[</span><span class="s2">&quot;_source&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">hit</span><span class="p">[</span><span class="s2">&quot;_source&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)[:</span><span class="mi">200</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="n">hit</span><span class="p">[</span><span class="s2">&quot;_source&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">hit</span><span class="p">[</span><span class="s2">&quot;_source&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;total_hits&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;hits&quot;</span><span class="p">][</span><span class="s2">&quot;total&quot;</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;max_score&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;hits&quot;</span><span class="p">][</span><span class="s2">&quot;max_score&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;results&quot;</span><span class="p">:</span> <span class="n">results</span><span class="p">,</span>
+        <span class="s2">&quot;took_ms&quot;</span><span class="p">:</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;took&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">query_embedding</span> <span class="o">=</span> <span class="n">generate_embedding</span><span class="p">(</span><span class="s2">&quot;machine learning algorithms&quot;</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">simple_vector_search</span><span class="p">(</span><span class="s2">&quot;my_documents&quot;</span><span class="p">,</span> <span class="n">query_embedding</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Score: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="advanced-vector-search-with-parameters">Advanced Vector Search with Parameters<a class="headerlink" href="#advanced-vector-search-with-parameters" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">advanced_vector_search</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">query_vector</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ef_search</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">algorithm_params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Vector search with algorithm-specific parameter tuning&quot;&quot;&quot;</span>
+
+    <span class="n">knn_query</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;content_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;vector&quot;</span><span class="p">:</span> <span class="n">query_vector</span><span class="p">,</span>
+            <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="n">k</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Add algorithm-specific parameters</span>
+    <span class="k">if</span> <span class="n">ef_search</span><span class="p">:</span>  <span class="c1"># [HNSW](./glossary.md#hnsw-hierarchical-navigable-small-world) parameter</span>
+        <span class="n">knn_query</span><span class="p">[</span><span class="s2">&quot;content_vector&quot;</span><span class="p">][</span><span class="s2">&quot;ef_search&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ef_search</span>
+
+    <span class="k">if</span> <span class="n">algorithm_params</span><span class="p">:</span>  <span class="c1"># Additional algorithm parameters</span>
+        <span class="n">knn_query</span><span class="p">[</span><span class="s2">&quot;content_vector&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">algorithm_params</span><span class="p">)</span>
+
+    <span class="n">search_body</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="n">knn_query</span><span class="p">},</span>
+        <span class="s2">&quot;_source&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;explain&quot;</span><span class="p">:</span> <span class="kc">False</span>  <span class="c1"># Set to True for debugging relevance scores</span>
+    <span class="p">}</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index_name</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">search_body</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">format_search_results</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="c1"># Examples of parameter tuning</span>
+<span class="c1"># High accuracy search (slower)</span>
+<span class="n">high_accuracy_results</span> <span class="o">=</span> <span class="n">advanced_vector_search</span><span class="p">(</span>
+    <span class="s2">&quot;my_documents&quot;</span><span class="p">,</span>
+    <span class="n">query_vector</span><span class="p">,</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">ef_search</span><span class="o">=</span><span class="mi">200</span>
+<span class="p">)</span>
+
+<span class="c1"># Balanced search</span>
+<span class="n">balanced_results</span> <span class="o">=</span> <span class="n">advanced_vector_search</span><span class="p">(</span>
+    <span class="s2">&quot;my_documents&quot;</span><span class="p">,</span>
+    <span class="n">query_vector</span><span class="p">,</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">ef_search</span><span class="o">=</span><span class="mi">100</span>
+<span class="p">)</span>
+
+<span class="c1"># Fast search (lower accuracy)</span>
+<span class="n">fast_results</span> <span class="o">=</span> <span class="n">advanced_vector_search</span><span class="p">(</span>
+    <span class="s2">&quot;my_documents&quot;</span><span class="p">,</span>
+    <span class="n">query_vector</span><span class="p">,</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">ef_search</span><span class="o">=</span><span class="mi">50</span>
+<span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="advanced-search-techniques">Advanced Search Techniques<a class="headerlink" href="#advanced-search-techniques" title="Permanent link">&para;</a></h2>
+<h3 id="text-search-implementation">Text Search Implementation<a class="headerlink" href="#text-search-implementation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">text_search</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">query_text</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform traditional text search&quot;&quot;&quot;</span>
+
+    <span class="n">search_body</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;multi_match&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">query_text</span><span class="p">,</span>
+                <span class="s2">&quot;fields&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;title^2&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;best_fields&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index_name</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">search_body</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">format_search_results</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">vector_search</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">query_vector</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform pure vector search&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">simple_vector_search</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">query_vector</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="rank-fusion-for-combined-results">Rank Fusion for Combined Results<a class="headerlink" href="#rank-fusion-for-combined-results" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">rank_fusion_search</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">query_text</span><span class="p">,</span> <span class="n">query_vector</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use reciprocal rank fusion to combine text and vector search results&quot;&quot;&quot;</span>
+
+    <span class="c1"># Perform separate text and vector searches</span>
+    <span class="n">text_results</span> <span class="o">=</span> <span class="n">text_search</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">query_text</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">vector_results</span> <span class="o">=</span> <span class="n">vector_search</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">query_vector</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Apply reciprocal rank fusion</span>
+    <span class="n">fused_scores</span> <span class="o">=</span> <span class="n">reciprocal_rank_fusion</span><span class="p">(</span>
+        <span class="n">text_results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">],</span>
+        <span class="n">vector_results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">],</span>
+        <span class="n">k_constant</span><span class="o">=</span><span class="mi">60</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Get final results</span>
+    <span class="n">final_results</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fused_scores</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="n">k</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">format_fusion_results</span><span class="p">(</span><span class="n">final_results</span><span class="p">,</span> <span class="n">index_name</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">reciprocal_rank_fusion</span><span class="p">(</span><span class="n">text_results</span><span class="p">,</span> <span class="n">vector_results</span><span class="p">,</span> <span class="n">k_constant</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply reciprocal rank fusion algorithm&quot;&quot;&quot;</span>
+
+    <span class="n">doc_scores</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Add text search scores</span>
+    <span class="k">for</span> <span class="n">rank</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">text_results</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">doc_id</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+        <span class="n">doc_scores</span><span class="p">[</span><span class="n">doc_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">doc_scores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">doc_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">k_constant</span> <span class="o">+</span> <span class="n">rank</span><span class="p">)</span>
+
+    <span class="c1"># Add vector search scores</span>
+    <span class="k">for</span> <span class="n">rank</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vector_results</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">doc_id</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+        <span class="n">doc_scores</span><span class="p">[</span><span class="n">doc_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">doc_scores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">doc_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">k_constant</span> <span class="o">+</span> <span class="n">rank</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">doc_scores</span>
+</code></pre></div>
+<hr />
+<h2 id="hybrid-search-implementation">Hybrid Search Implementation<a class="headerlink" href="#hybrid-search-implementation" title="Permanent link">&para;</a></h2>
+<h3 id="basic-hybrid-search">Basic Hybrid Search<a class="headerlink" href="#basic-hybrid-search" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hybrid_search</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">text_query</span><span class="p">,</span> <span class="n">query_vector</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">text_boost</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">vector_boost</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Combine text and vector search using OpenSearch hybrid query&quot;&quot;&quot;</span>
+
+    <span class="n">search_body</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;hybrid&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;queries&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;match&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">text_query</span><span class="p">,</span>
+                                <span class="s2">&quot;boost&quot;</span><span class="p">:</span> <span class="n">text_boost</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;content_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="s2">&quot;vector&quot;</span><span class="p">:</span> <span class="n">query_vector</span><span class="p">,</span>
+                                <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+                                <span class="s2">&quot;boost&quot;</span><span class="p">:</span> <span class="n">vector_boost</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index_name</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">search_body</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">format_search_results</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">hybrid_search</span><span class="p">(</span>
+    <span class="s2">&quot;my_documents&quot;</span><span class="p">,</span>
+    <span class="n">text_query</span><span class="o">=</span><span class="s2">&quot;machine learning algorithms&quot;</span><span class="p">,</span>
+    <span class="n">query_vector</span><span class="o">=</span><span class="n">generate_embedding</span><span class="p">(</span><span class="s2">&quot;machine learning algorithms&quot;</span><span class="p">),</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">text_boost</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>  <span class="c1"># Slightly favor text matches</span>
+    <span class="n">vector_boost</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="adaptive-hybrid-search">Adaptive Hybrid Search<a class="headerlink" href="#adaptive-hybrid-search" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">adaptive_hybrid_search</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">query_text</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Automatically adjust hybrid search strategy based on query characteristics&quot;&quot;&quot;</span>
+
+    <span class="c1"># Generate query vector</span>
+    <span class="n">query_vector</span> <span class="o">=</span> <span class="n">generate_embedding</span><span class="p">(</span><span class="n">query_text</span><span class="p">)</span>
+
+    <span class="c1"># Analyze query characteristics</span>
+    <span class="n">query_analysis</span> <span class="o">=</span> <span class="n">analyze_query</span><span class="p">(</span><span class="n">query_text</span><span class="p">)</span>
+
+    <span class="c1"># Adjust search strategy based on analysis</span>
+    <span class="k">if</span> <span class="n">query_analysis</span><span class="p">[</span><span class="s2">&quot;is_factual&quot;</span><span class="p">]:</span>
+        <span class="c1"># Factual queries benefit from text search</span>
+        <span class="n">text_boost</span><span class="p">,</span> <span class="n">vector_boost</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.8</span>
+    <span class="k">elif</span> <span class="n">query_analysis</span><span class="p">[</span><span class="s2">&quot;is_conceptual&quot;</span><span class="p">]:</span>
+        <span class="c1"># Conceptual queries benefit from vector search</span>
+        <span class="n">text_boost</span><span class="p">,</span> <span class="n">vector_boost</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">2.0</span>
+    <span class="k">elif</span> <span class="n">query_analysis</span><span class="p">[</span><span class="s2">&quot;has_specific_terms&quot;</span><span class="p">]:</span>
+        <span class="c1"># Queries with specific terms benefit from balanced approach</span>
+        <span class="n">text_boost</span><span class="p">,</span> <span class="n">vector_boost</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Default balanced approach</span>
+        <span class="n">text_boost</span><span class="p">,</span> <span class="n">vector_boost</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span>
+
+    <span class="k">return</span> <span class="n">hybrid_search</span><span class="p">(</span><span class="n">index_name</span><span class="p">,</span> <span class="n">query_text</span><span class="p">,</span> <span class="n">query_vector</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">text_boost</span><span class="p">,</span> <span class="n">vector_boost</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_query</span><span class="p">(</span><span class="n">query_text</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze query characteristics to inform search strategy&quot;&quot;&quot;</span>
+
+    <span class="c1"># Simple heuristics (can be replaced with ML models)</span>
+    <span class="n">lower_query</span> <span class="o">=</span> <span class="n">query_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="n">factual_indicators</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;what is&quot;</span><span class="p">,</span> <span class="s2">&quot;how to&quot;</span><span class="p">,</span> <span class="s2">&quot;when did&quot;</span><span class="p">,</span> <span class="s2">&quot;where is&quot;</span><span class="p">,</span> <span class="s2">&quot;who&quot;</span><span class="p">,</span> <span class="s2">&quot;definition&quot;</span><span class="p">]</span>
+    <span class="n">conceptual_indicators</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;similar to&quot;</span><span class="p">,</span> <span class="s2">&quot;like&quot;</span><span class="p">,</span> <span class="s2">&quot;about&quot;</span><span class="p">,</span> <span class="s2">&quot;related to&quot;</span><span class="p">,</span> <span class="s2">&quot;concepts&quot;</span><span class="p">]</span>
+    <span class="n">specific_terms</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;api&quot;</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s2">&quot;method&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;code&quot;</span><span class="p">]</span>
+
+    <span class="n">analysis</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;is_factual&quot;</span><span class="p">:</span> <span class="nb">any</span><span class="p">(</span><span class="n">indicator</span> <span class="ow">in</span> <span class="n">lower_query</span> <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">factual_indicators</span><span class="p">),</span>
+        <span class="s2">&quot;is_conceptual&quot;</span><span class="p">:</span> <span class="nb">any</span><span class="p">(</span><span class="n">indicator</span> <span class="ow">in</span> <span class="n">lower_query</span> <span class="k">for</span> <span class="n">indicator</span> <span class="ow">in</span> <span class="n">conceptual_indicators</span><span class="p">),</span>
+        <span class="s2">&quot;has_specific_terms&quot;</span><span class="p">:</span> <span class="nb">any</span><span class="p">(</span><span class="n">term</span> <span class="ow">in</span> <span class="n">lower_query</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">specific_terms</span><span class="p">),</span>
+        <span class="s2">&quot;query_length&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">query_text</span><span class="o">.</span><span class="n">split</span><span class="p">()),</span>
+        <span class="s2">&quot;has_quotes&quot;</span><span class="p">:</span> <span class="s1">&#39;&quot;&#39;</span> <span class="ow">in</span> <span class="n">query_text</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">analysis</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">adaptive_hybrid_search</span><span class="p">(</span><span class="s2">&quot;my_documents&quot;</span><span class="p">,</span> <span class="s2">&quot;what is machine learning?&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="multi-modal-search">Multi-Modal Search<a class="headerlink" href="#multi-modal-search" title="Permanent link">&para;</a></h2>
+<h3 id="multi-modal-index-setup">Multi-Modal Index Setup<a class="headerlink" href="#multi-modal-index-setup" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">setup_multimodal_index</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create index supporting multiple content modalities&quot;&quot;&quot;</span>
+
+    <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;mappings&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="c1"># Content metadata</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;content_type&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">},</span>  <span class="c1"># &quot;text&quot;, &quot;image&quot;, &quot;audio&quot;, &quot;video&quot;</span>
+                <span class="s2">&quot;source_url&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;date&quot;</span><span class="p">},</span>
+
+                <span class="c1"># Raw content storage</span>
+                <span class="s2">&quot;text_content&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;image_url&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span> <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                <span class="s2">&quot;image_metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+                        <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">},</span>
+                        <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">},</span>
+                        <span class="s2">&quot;file_size&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;long&quot;</span><span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+
+                <span class="c1"># Unified embedding for cross-modal search</span>
+                <span class="s2">&quot;unified_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>  <span class="c1"># Shared embedding dimension</span>
+                    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;space_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;ef_construction&quot;</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+
+                <span class="c1"># Modality-specific vectors for within-modal search</span>
+                <span class="s2">&quot;text_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="mi">384</span><span class="p">,</span>
+                    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;space_type&quot;</span><span class="p">:</span> <span class="s2">&quot;cosinesimil&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;ef_construction&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+
+                <span class="s2">&quot;image_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;knn_vector&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
+                    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;hnsw&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;space_type&quot;</span><span class="p">:</span> <span class="s2">&quot;l2&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;ef_construction&quot;</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">client</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;multimodal_content&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">mapping</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="cross-modal-search-functions">Cross-Modal Search Functions<a class="headerlink" href="#cross-modal-search-functions" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">text_to_image_search</span><span class="p">(</span><span class="n">text_query</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">similarity_threshold</span><span class="o">=</span><span class="mf">0.7</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find images using text descriptions&quot;&quot;&quot;</span>
+
+    <span class="c1"># Generate text embedding using multimodal model</span>
+    <span class="n">text_embedding</span> <span class="o">=</span> <span class="n">generate_multimodal_embedding</span><span class="p">(</span><span class="n">text_query</span><span class="p">,</span> <span class="n">modality</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">)</span>
+
+    <span class="n">search_body</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;bool&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;must&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;unified_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="s2">&quot;vector&quot;</span><span class="p">:</span> <span class="n">text_embedding</span><span class="p">,</span>
+                                <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># Get extra results for filtering</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;filter&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span><span class="s2">&quot;term&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;content_type&quot;</span><span class="p">:</span> <span class="s2">&quot;image&quot;</span><span class="p">}}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;min_score&quot;</span><span class="p">:</span> <span class="n">similarity_threshold</span>  <span class="c1"># Filter low-similarity results</span>
+    <span class="p">}</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;multimodal_content&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">search_body</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">format_multimodal_results</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">text_to_image_search</span><span class="p">(</span><span class="s2">&quot;sunset over mountains&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Score: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Image: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;image_url&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">image_to_text_search</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find text content similar to an image&quot;&quot;&quot;</span>
+
+    <span class="c1"># Generate image embedding</span>
+    <span class="n">image_embedding</span> <span class="o">=</span> <span class="n">generate_multimodal_embedding</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">modality</span><span class="o">=</span><span class="s2">&quot;image&quot;</span><span class="p">)</span>
+
+    <span class="n">search_body</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;bool&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;must&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;unified_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="s2">&quot;vector&quot;</span><span class="p">:</span> <span class="n">image_embedding</span><span class="p">,</span>
+                                <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">2</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;filter&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span><span class="s2">&quot;term&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;content_type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">}}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;multimodal_content&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">search_body</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">format_multimodal_results</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">universal_multimodal_search</span><span class="p">(</span><span class="n">query_content</span><span class="p">,</span> <span class="n">query_type</span><span class="p">,</span> <span class="n">target_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Search across all modalities with any input type&quot;&quot;&quot;</span>
+
+    <span class="c1"># Generate embedding based on input type</span>
+    <span class="k">if</span> <span class="n">query_type</span> <span class="o">==</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span>
+        <span class="n">query_embedding</span> <span class="o">=</span> <span class="n">generate_multimodal_embedding</span><span class="p">(</span><span class="n">query_content</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">query_type</span> <span class="o">==</span> <span class="s2">&quot;image&quot;</span><span class="p">:</span>
+        <span class="n">query_embedding</span> <span class="o">=</span> <span class="n">generate_multimodal_embedding</span><span class="p">(</span><span class="n">query_content</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">query_type</span> <span class="o">==</span> <span class="s2">&quot;audio&quot;</span><span class="p">:</span>
+        <span class="n">query_embedding</span> <span class="o">=</span> <span class="n">generate_multimodal_embedding</span><span class="p">(</span><span class="n">query_content</span><span class="p">,</span> <span class="s2">&quot;audio&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported query type: </span><span class="si">{</span><span class="n">query_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Build search query</span>
+    <span class="n">search_query</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;unified_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;vector&quot;</span><span class="p">:</span> <span class="n">query_embedding</span><span class="p">,</span>
+                <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">2</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Filter by target content types if specified</span>
+    <span class="k">if</span> <span class="n">target_types</span><span class="p">:</span>
+        <span class="n">search_query</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;bool&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;must&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">search_query</span><span class="p">],</span>
+                <span class="s2">&quot;filter&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span><span class="s2">&quot;terms&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;content_type&quot;</span><span class="p">:</span> <span class="n">target_types</span><span class="p">}}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+    <span class="n">search_body</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span> <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">search_query</span><span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;multimodal_content&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">search_body</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">format_multimodal_results</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+<span class="c1"># Examples</span>
+<span class="c1"># Find any content similar to an image</span>
+<span class="n">all_results</span> <span class="o">=</span> <span class="n">universal_multimodal_search</span><span class="p">(</span><span class="s2">&quot;path/to/image.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Find only text and video content similar to audio</span>
+<span class="n">text_video_results</span> <span class="o">=</span> <span class="n">universal_multimodal_search</span><span class="p">(</span>
+    <span class="s2">&quot;path/to/audio.mp3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;audio&quot;</span><span class="p">,</span>
+    <span class="n">target_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;video&quot;</span><span class="p">],</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="modality-specific-boosting">Modality-Specific Boosting<a class="headerlink" href="#modality-specific-boosting" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">boosted_multimodal_search</span><span class="p">(</span><span class="n">query_embedding</span><span class="p">,</span> <span class="n">query_type</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply different boosting strategies based on query modality&quot;&quot;&quot;</span>
+
+    <span class="c1"># Define boost weights based on typical cross-modal similarities</span>
+    <span class="n">boost_matrix</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;audio&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s2">&quot;video&quot;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">},</span>
+        <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;audio&quot;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span> <span class="s2">&quot;video&quot;</span><span class="p">:</span> <span class="mf">1.8</span><span class="p">},</span>
+        <span class="s2">&quot;audio&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span> <span class="s2">&quot;audio&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;video&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">should_queries</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">target_type</span><span class="p">,</span> <span class="n">boost</span> <span class="ow">in</span> <span class="n">boost_matrix</span><span class="p">[</span><span class="n">query_type</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">should_queries</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;bool&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;must&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;unified_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="s2">&quot;vector&quot;</span><span class="p">:</span> <span class="n">query_embedding</span><span class="p">,</span>
+                                <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="n">k</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;filter&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;term&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;content_type&quot;</span><span class="p">:</span> <span class="n">target_type</span><span class="p">}}],</span>
+                <span class="s2">&quot;boost&quot;</span><span class="p">:</span> <span class="n">boost</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+
+    <span class="n">search_body</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;bool&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;should&quot;</span><span class="p">:</span> <span class="n">should_queries</span><span class="p">,</span>
+                <span class="s2">&quot;minimum_should_match&quot;</span><span class="p">:</span> <span class="mi">1</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;multimodal_content&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">search_body</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="recommendation-systems">Recommendation Systems<a class="headerlink" href="#recommendation-systems" title="Permanent link">&para;</a></h2>
+<h3 id="user-profile-vector-creation">User Profile Vector Creation<a class="headerlink" href="#user-profile-vector-creation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_user_profile_vector</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">interaction_history</span><span class="p">,</span> <span class="n">decay_factor</span><span class="o">=</span><span class="mf">0.95</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build user preference vector from interaction history&quot;&quot;&quot;</span>
+
+    <span class="n">content_vectors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">interaction</span> <span class="ow">in</span> <span class="n">interaction_history</span><span class="p">:</span>
+        <span class="c1"># Get content vector</span>
+        <span class="n">content_doc</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">index</span><span class="o">=</span><span class="s2">&quot;content_library&quot;</span><span class="p">,</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;content_id&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">content_vector</span> <span class="o">=</span> <span class="n">content_doc</span><span class="p">[</span><span class="s2">&quot;_source&quot;</span><span class="p">][</span><span class="s2">&quot;content_vector&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Calculate weight based on interaction type and recency</span>
+        <span class="n">interaction_weights</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;view&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s2">&quot;like&quot;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+            <span class="s2">&quot;share&quot;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span>
+            <span class="s2">&quot;bookmark&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span>
+            <span class="s2">&quot;download&quot;</span><span class="p">:</span> <span class="mf">6.0</span><span class="p">,</span>
+            <span class="s2">&quot;purchase&quot;</span><span class="p">:</span> <span class="mf">10.0</span>
+        <span class="p">}</span>
+
+        <span class="n">base_weight</span> <span class="o">=</span> <span class="n">interaction_weights</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="mf">1.0</span><span class="p">)</span>
+
+        <span class="c1"># Apply temporal decay</span>
+        <span class="n">days_ago</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_time</span> <span class="o">-</span> <span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">days</span>
+        <span class="n">temporal_weight</span> <span class="o">=</span> <span class="n">decay_factor</span> <span class="o">**</span> <span class="n">days_ago</span>
+
+        <span class="n">final_weight</span> <span class="o">=</span> <span class="n">base_weight</span> <span class="o">*</span> <span class="n">temporal_weight</span>
+
+        <span class="n">content_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content_vector</span><span class="p">)</span>
+        <span class="n">weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">final_weight</span><span class="p">)</span>
+
+    <span class="c1"># Calculate weighted average</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">content_vectors</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">user_vector</span> <span class="o">=</span> <span class="n">weighted_vector_average</span><span class="p">(</span><span class="n">content_vectors</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">normalize_vector</span><span class="p">(</span><span class="n">user_vector</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">weighted_vector_average</span><span class="p">(</span><span class="n">vectors</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate weighted average of vectors&quot;&quot;&quot;</span>
+    <span class="n">total_weight</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">total_weight</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">vectors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">result_vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">vectors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">vector</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vectors</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vector</span><span class="p">):</span>
+            <span class="n">result_vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">value</span> <span class="o">*</span> <span class="n">weight</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">value</span> <span class="o">/</span> <span class="n">total_weight</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">result_vector</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="personalized-recommendations">Personalized Recommendations<a class="headerlink" href="#personalized-recommendations" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">generate_personalized_recommendations</span><span class="p">(</span><span class="n">user_vector</span><span class="p">,</span> <span class="n">exclude_content</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                        <span class="n">diversity_factor</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate recommendations balancing relevance and diversity&quot;&quot;&quot;</span>
+
+    <span class="c1"># Base similarity search</span>
+    <span class="n">search_body</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>  <span class="c1"># Get extra results for diversity filtering</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;content_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;vector&quot;</span><span class="p">:</span> <span class="n">user_vector</span><span class="p">,</span>
+                    <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">3</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Exclude already seen content</span>
+    <span class="k">if</span> <span class="n">exclude_content</span><span class="p">:</span>
+        <span class="n">search_body</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;bool&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;must&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">search_body</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">]],</span>
+                <span class="s2">&quot;must_not&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span><span class="s2">&quot;terms&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;_id&quot;</span><span class="p">:</span> <span class="n">exclude_content</span><span class="p">}}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;content_library&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">search_body</span><span class="p">)</span>
+    <span class="n">candidates</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;hits&quot;</span><span class="p">][</span><span class="s2">&quot;hits&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Apply diversity and business logic filtering</span>
+    <span class="n">recommendations</span> <span class="o">=</span> <span class="n">diversified_selection</span><span class="p">(</span>
+        <span class="n">candidates</span><span class="p">,</span>
+        <span class="n">diversity_factor</span><span class="o">=</span><span class="n">diversity_factor</span><span class="p">,</span>
+        <span class="n">final_count</span><span class="o">=</span><span class="n">k</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">format_recommendations</span><span class="p">(</span><span class="n">recommendations</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">diversified_selection</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">diversity_factor</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">final_count</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Select diverse recommendations using maximal marginal relevance&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">candidates</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">final_count</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">candidates</span>
+
+    <span class="n">selected</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">remaining</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">candidates</span><span class="p">)</span>
+
+    <span class="c1"># Always select the top result first</span>
+    <span class="n">selected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">remaining</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+    <span class="c1"># Select remaining items balancing relevance and diversity</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">final_count</span> <span class="ow">and</span> <span class="n">remaining</span><span class="p">:</span>
+        <span class="n">best_score</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">best_idx</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">remaining</span><span class="p">):</span>
+            <span class="c1"># Relevance score (similarity to user vector)</span>
+            <span class="n">relevance</span> <span class="o">=</span> <span class="n">candidate</span><span class="p">[</span><span class="s2">&quot;_score&quot;</span><span class="p">]</span>
+
+            <span class="c1"># Diversity score (distance from already selected items)</span>
+            <span class="k">if</span> <span class="n">selected</span><span class="p">:</span>
+                <span class="n">similarities</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">candidate_vector</span> <span class="o">=</span> <span class="n">candidate</span><span class="p">[</span><span class="s2">&quot;_source&quot;</span><span class="p">][</span><span class="s2">&quot;content_vector&quot;</span><span class="p">]</span>
+
+                <span class="k">for</span> <span class="n">selected_item</span> <span class="ow">in</span> <span class="n">selected</span><span class="p">:</span>
+                    <span class="n">selected_vector</span> <span class="o">=</span> <span class="n">selected_item</span><span class="p">[</span><span class="s2">&quot;_source&quot;</span><span class="p">][</span><span class="s2">&quot;content_vector&quot;</span><span class="p">]</span>
+                    <span class="n">sim</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">candidate_vector</span><span class="p">,</span> <span class="n">selected_vector</span><span class="p">)</span>
+                    <span class="n">similarities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+
+                <span class="n">diversity</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="n">similarities</span><span class="p">)</span>  <span class="c1"># Distance from closest selected</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">diversity</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+            <span class="c1"># Combined score</span>
+            <span class="n">combined_score</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">diversity_factor</span><span class="p">)</span> <span class="o">*</span> <span class="n">relevance</span> <span class="o">+</span> <span class="n">diversity_factor</span> <span class="o">*</span> <span class="n">diversity</span>
+
+            <span class="k">if</span> <span class="n">combined_score</span> <span class="o">&gt;</span> <span class="n">best_score</span><span class="p">:</span>
+                <span class="n">best_score</span> <span class="o">=</span> <span class="n">combined_score</span>
+                <span class="n">best_idx</span> <span class="o">=</span> <span class="n">i</span>
+
+        <span class="n">selected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">remaining</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">best_idx</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">selected</span>
+</code></pre></div>
+<h3 id="collaborative-filtering">Collaborative Filtering<a class="headerlink" href="#collaborative-filtering" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">collaborative_vector_recommendations</span><span class="p">(</span><span class="n">target_user_id</span><span class="p">,</span> <span class="n">user_vectors_index</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate recommendations based on similar users&#39; preferences&quot;&quot;&quot;</span>
+
+    <span class="c1"># Get target user&#39;s profile vector</span>
+    <span class="n">target_user_doc</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="n">index</span><span class="o">=</span><span class="n">user_vectors_index</span><span class="p">,</span>
+        <span class="nb">id</span><span class="o">=</span><span class="n">target_user_id</span>
+    <span class="p">)</span>
+    <span class="n">target_vector</span> <span class="o">=</span> <span class="n">target_user_doc</span><span class="p">[</span><span class="s2">&quot;_source&quot;</span><span class="p">][</span><span class="s2">&quot;user_vector&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Find similar users</span>
+    <span class="n">similar_users</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+        <span class="n">index</span><span class="o">=</span><span class="n">user_vectors_index</span><span class="p">,</span>
+        <span class="n">body</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>  <span class="c1"># Consider top 50 similar users</span>
+            <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;knn&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;user_vector&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;vector&quot;</span><span class="p">:</span> <span class="n">target_vector</span><span class="p">,</span>
+                        <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="mi">50</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Aggregate content preferences from similar users</span>
+    <span class="n">content_scores</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">user_hit</span> <span class="ow">in</span> <span class="n">similar_users</span><span class="p">[</span><span class="s2">&quot;hits&quot;</span><span class="p">][</span><span class="s2">&quot;hits&quot;</span><span class="p">]:</span>
+        <span class="n">user_similarity</span> <span class="o">=</span> <span class="n">user_hit</span><span class="p">[</span><span class="s2">&quot;_score&quot;</span><span class="p">]</span>
+        <span class="n">user_preferences</span> <span class="o">=</span> <span class="n">user_hit</span><span class="p">[</span><span class="s2">&quot;_source&quot;</span><span class="p">][</span><span class="s2">&quot;recent_interactions&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">content_id</span><span class="p">,</span> <span class="n">interaction_strength</span> <span class="ow">in</span> <span class="n">user_preferences</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">content_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">content_scores</span><span class="p">:</span>
+                <span class="n">content_scores</span><span class="p">[</span><span class="n">content_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c1"># Weight by user similarity and interaction strength</span>
+            <span class="n">content_scores</span><span class="p">[</span><span class="n">content_id</span><span class="p">]</span> <span class="o">+=</span> <span class="n">user_similarity</span> <span class="o">*</span> <span class="n">interaction_strength</span>
+
+    <span class="c1"># Get top content recommendations</span>
+    <span class="n">top_content_ids</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+        <span class="n">content_scores</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span>
+        <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)[:</span><span class="n">k</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">format_collaborative_recommendations</span><span class="p">(</span><span class="n">top_content_ids</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="hybrid-recommendation-systems">Hybrid Recommendation Systems<a class="headerlink" href="#hybrid-recommendation-systems" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hybrid_recommendations</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">content_based_weight</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+                          <span class="n">collaborative_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">popularity_weight</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Combine multiple recommendation signals&quot;&quot;&quot;</span>
+
+    <span class="c1"># Get different types of recommendations</span>
+    <span class="n">content_based</span> <span class="o">=</span> <span class="n">generate_content_based_recs</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">collaborative</span> <span class="o">=</span> <span class="n">generate_collaborative_recs</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">popularity_based</span> <span class="o">=</span> <span class="n">get_trending_content</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Combine scores using weighted fusion</span>
+    <span class="n">combined_scores</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Content-based recommendations</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">content_based</span><span class="p">):</span>
+        <span class="n">content_id</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;content_id&quot;</span><span class="p">]</span>
+        <span class="c1"># Decay rank-based score</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">content_based_weight</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">combined_scores</span><span class="p">[</span><span class="n">content_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">combined_scores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">content_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">score</span>
+
+    <span class="c1"># Collaborative recommendations</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">collaborative</span><span class="p">):</span>
+        <span class="n">content_id</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;content_id&quot;</span><span class="p">]</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">collaborative_weight</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">combined_scores</span><span class="p">[</span><span class="n">content_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">combined_scores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">content_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">score</span>
+
+    <span class="c1"># Popularity boost</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">popularity_based</span><span class="p">):</span>
+        <span class="n">content_id</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="s2">&quot;content_id&quot;</span><span class="p">]</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">popularity_weight</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">combined_scores</span><span class="p">[</span><span class="n">content_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">combined_scores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">content_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">score</span>
+
+    <span class="c1"># Sort and return top k</span>
+    <span class="n">final_recommendations</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+        <span class="n">combined_scores</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span>
+        <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)[:</span><span class="n">k</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">enrich_recommendations</span><span class="p">(</span><span class="n">final_recommendations</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="real-time-applications">Real-Time Applications<a class="headerlink" href="#real-time-applications" title="Permanent link">&para;</a></h2>
+<h3 id="real-time-indexing-system">Real-Time Indexing System<a class="headerlink" href="#real-time-indexing-system" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">queue</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RealTimeVectorIndexer</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index_name</span><span class="p">,</span> <span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index_name</span> <span class="o">=</span> <span class="n">index_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_workers</span> <span class="o">=</span> <span class="n">max_workers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">document_queue</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executor</span> <span class="o">=</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">max_workers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">start_indexing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start background indexing process&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Start batch processing coroutines</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_workers</span><span class="p">):</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">process_document_batches</span><span class="p">())</span>
+            <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">process_document_batches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process documents in batches for efficiency&quot;&quot;&quot;</span>
+        <span class="n">batch</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Collect batch</span>
+                <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">doc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document_queue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+                        <span class="n">batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="n">queue</span><span class="o">.</span><span class="n">Empty</span><span class="p">:</span>
+                        <span class="k">break</span>
+
+                <span class="k">if</span> <span class="n">batch</span><span class="p">:</span>
+                    <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">index_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+                    <span class="n">batch</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># Brief pause if no documents</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error processing batch: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">index_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">documents</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Index a batch of documents&quot;&quot;&quot;</span>
+        <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+
+        <span class="c1"># Run indexing in thread pool to avoid blocking</span>
+        <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">executor</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sync_index_batch</span><span class="p">,</span>
+            <span class="n">documents</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_sync_index_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">documents</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Synchronous batch indexing&quot;&quot;&quot;</span>
+        <span class="n">bulk_body</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">:</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;_index&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">index_name</span><span class="p">,</span> <span class="s2">&quot;_id&quot;</span><span class="p">:</span> <span class="n">doc</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]}}</span>
+            <span class="n">bulk_body</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">action</span><span class="p">,</span> <span class="n">doc</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]])</span>
+
+        <span class="k">if</span> <span class="n">bulk_body</span><span class="p">:</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">bulk</span><span class="p">(</span><span class="n">body</span><span class="o">=</span><span class="n">bulk_body</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add document to indexing queue&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">document_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop indexing process&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># Usage example</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">RealTimeVectorIndexer</span><span class="p">(</span><span class="s2">&quot;live_content&quot;</span><span class="p">)</span>
+
+<span class="c1"># Start indexing in background</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">indexer</span><span class="o">.</span><span class="n">start_indexing</span><span class="p">())</span>
+
+<span class="c1"># Add documents as they arrive</span>
+<span class="n">new_document</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;doc_123&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Breaking News&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Latest developments in AI...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content_vector&quot;</span><span class="p">:</span> <span class="n">generate_embedding</span><span class="p">(</span><span class="s2">&quot;Latest developments in AI...&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">indexer</span><span class="o">.</span><span class="n">add_document</span><span class="p">(</span><span class="n">new_document</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="high-performance-search-api">High-Performance Search API<a class="headerlink" href="#high-performance-search-api" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">HTTPException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SearchRequest</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">query</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">query_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hybrid&quot;</span>  <span class="c1"># &quot;text&quot;, &quot;vector&quot;, &quot;hybrid&quot;</span>
+    <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">filters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">ef_search</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SearchResult</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">content</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">score</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">timestamp</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SearchResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SearchResult</span><span class="p">]</span>
+    <span class="n">total_hits</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">took_ms</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">query_info</span><span class="p">:</span> <span class="nb">dict</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">HighPerformanceSearchAPI</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opensearch_client</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">opensearch_client</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_cache</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">SearchRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SearchResponse</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Main search endpoint with async processing&quot;&quot;&quot;</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">query_type</span> <span class="o">==</span> <span class="s2">&quot;vector&quot;</span><span class="p">:</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector_search</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">query_type</span> <span class="o">==</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_search</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># hybrid</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">hybrid_search</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+            <span class="n">end_time</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">took_ms</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">SearchResponse</span><span class="p">(</span>
+                <span class="n">results</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">],</span>
+                <span class="n">total_hits</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;total_hits&quot;</span><span class="p">],</span>
+                <span class="n">took_ms</span><span class="o">=</span><span class="n">took_ms</span><span class="p">,</span>
+                <span class="n">query_info</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;query_type&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">query_type</span><span class="p">,</span>
+                    <span class="s2">&quot;processed_query&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">query</span><span class="p">,</span>
+                    <span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">k</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">vector_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">SearchRequest</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Async vector search with caching&quot;&quot;&quot;</span>
+        <span class="c1"># Get or generate embedding</span>
+        <span class="n">query_vector</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_embedding_cached</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">query</span><span class="p">)</span>
+
+        <span class="n">search_body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_vector_query</span><span class="p">(</span>
+            <span class="n">query_vector</span><span class="p">,</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">k</span><span class="p">,</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">filters</span><span class="p">,</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">ef_search</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Execute search in thread pool</span>
+        <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span>
+            <span class="kc">None</span><span class="p">,</span>
+            <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;live_content&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">search_body</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_results</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_embedding_cached</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get embedding with LRU cache&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">text</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_cache</span><span class="p">[</span><span class="n">text</span><span class="p">]</span>
+
+        <span class="c1"># Generate embedding asynchronously</span>
+        <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+        <span class="n">embedding</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span>
+            <span class="kc">None</span><span class="p">,</span>
+            <span class="n">generate_embedding</span><span class="p">,</span>
+            <span class="n">text</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Cache with size limit</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding_cache</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+            <span class="c1"># Remove oldest entry</span>
+            <span class="n">oldest_key</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding_cache</span><span class="p">))</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding_cache</span><span class="p">[</span><span class="n">oldest_key</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_cache</span><span class="p">[</span><span class="n">text</span><span class="p">]</span> <span class="o">=</span> <span class="n">embedding</span>
+        <span class="k">return</span> <span class="n">embedding</span>
+
+<span class="c1"># FastAPI endpoints</span>
+<span class="n">search_api</span> <span class="o">=</span> <span class="n">HighPerformanceSearchAPI</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/search&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">SearchResponse</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">search_endpoint</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">SearchRequest</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">search_api</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/health&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">health_check</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;healthy&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()}</span>
+
+<span class="c1"># WebSocket for real-time search</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">websocket</span><span class="p">(</span><span class="s2">&quot;/ws/search&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">websocket_search</span><span class="p">(</span><span class="n">websocket</span><span class="p">):</span>
+    <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># Receive search request</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">receive_json</span><span class="p">()</span>
+            <span class="n">request</span> <span class="o">=</span> <span class="n">SearchRequest</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+
+            <span class="c1"># Process search</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">search_api</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+            <span class="c1"># Send results</span>
+            <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_json</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">dict</span><span class="p">())</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">send_json</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)})</span>
+        <span class="k">await</span> <span class="n">websocket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="performance-monitoring">Performance Monitoring<a class="headerlink" href="#performance-monitoring" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">deque</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SearchPerformanceMonitor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_size</span> <span class="o">=</span> <span class="n">window_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">latencies</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">window_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">query_types</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">window_size</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_counts</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_queries</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">record_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">latency_ms</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Record query performance metrics&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_queries</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">latencies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">latency_ms</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">query_types</span><span class="p">[</span><span class="n">query_type</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">latency_ms</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_counts</span><span class="p">[</span><span class="n">query_type</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_performance_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current performance statistics&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">latencies</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;no_data&quot;</span><span class="p">}</span>
+
+        <span class="n">overall_stats</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;total_queries&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_queries</span><span class="p">,</span>
+            <span class="s2">&quot;avg_latency_ms&quot;</span><span class="p">:</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">latencies</span><span class="p">),</span>
+            <span class="s2">&quot;p95_latency_ms&quot;</span><span class="p">:</span> <span class="n">statistics</span><span class="o">.</span><span class="n">quantiles</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">latencies</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">)[</span><span class="mi">18</span><span class="p">],</span>  <span class="c1"># 95th percentile</span>
+            <span class="s2">&quot;p99_latency_ms&quot;</span><span class="p">:</span> <span class="n">statistics</span><span class="o">.</span><span class="n">quantiles</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">latencies</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">)[</span><span class="mi">98</span><span class="p">],</span>  <span class="c1"># 99th percentile</span>
+            <span class="s2">&quot;error_rate&quot;</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error_counts</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_queries</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Per-query-type stats</span>
+        <span class="n">type_stats</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">query_type</span><span class="p">,</span> <span class="n">latencies</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">query_types</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">latencies</span><span class="p">:</span>
+                <span class="n">type_stats</span><span class="p">[</span><span class="n">query_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">latencies</span><span class="p">),</span>
+                    <span class="s2">&quot;avg_latency_ms&quot;</span><span class="p">:</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">latencies</span><span class="p">),</span>
+                    <span class="s2">&quot;p95_latency_ms&quot;</span><span class="p">:</span> <span class="n">statistics</span><span class="o">.</span><span class="n">quantiles</span><span class="p">(</span><span class="n">latencies</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">)[</span><span class="mi">18</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">latencies</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">20</span> <span class="k">else</span> <span class="nb">max</span><span class="p">(</span><span class="n">latencies</span><span class="p">)</span>
+                <span class="p">}</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;overall&quot;</span><span class="p">:</span> <span class="n">overall_stats</span><span class="p">,</span>
+            <span class="s2">&quot;by_type&quot;</span><span class="p">:</span> <span class="n">type_stats</span><span class="p">,</span>
+            <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error_counts</span><span class="p">)</span>
+        <span class="p">}</span>
+
+<span class="c1"># Integration with search API</span>
+<span class="n">monitor</span> <span class="o">=</span> <span class="n">SearchPerformanceMonitor</span><span class="p">()</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">middleware</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">performance_middleware</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">call_next</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;/search&quot;</span><span class="p">):</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">call_next</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+            <span class="n">latency_ms</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+
+            <span class="c1"># Extract query type from request or response</span>
+            <span class="n">query_type</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>  <span class="c1"># Extract from actual request</span>
+
+            <span class="n">monitor</span><span class="o">.</span><span class="n">record_query</span><span class="p">(</span><span class="n">query_type</span><span class="p">,</span> <span class="n">latency_ms</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">response</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">latency_ms</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+            <span class="n">monitor</span><span class="o">.</span><span class="n">record_query</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">latency_ms</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="k">raise</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">call_next</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/metrics&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_metrics</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">monitor</span><span class="o">.</span><span class="n">get_performance_stats</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<p>This collection provides comprehensive Python implementation examples for building production-ready vector search systems with OpenSearch.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+    
+  </body>
+</html>

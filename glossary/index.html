@@ -1,0 +1,2411 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../LICENSE/">
+      
+      
+        <link rel="next" href="../kendra_vs_opensearch/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Vector Search and Information Retrieval Glossary - Vector and Hybrid Search</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vector-search-and-information-retrieval-glossary" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Vector and Hybrid Search" class="md-header__button md-logo" aria-label="Vector and Hybrid Search" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Vector and Hybrid Search
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Vector Search and Information Retrieval Glossary
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Vector and Hybrid Search" class="md-nav__button md-logo" aria-label="Vector and Hybrid Search" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Vector and Hybrid Search
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vector Search and Information Retrieval: A Comprehensive Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LICENSE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LICENSE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Vector Search and Information Retrieval Glossary
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vector Search and Information Retrieval Glossary
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      B
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="B">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bm25-best-matching-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      BM25 (Best Matching 25)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert-bidirectional-encoder-representations-from-transformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      BERT (Bidirectional Encoder Representations from Transformers)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backpressure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backpressure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bit-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bit Rate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloom-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloom Filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build Time
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cache-hit-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cache Hit Rate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circuit-breaker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Circuit Breaker
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cold-start-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cold Start Problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compression-ratio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compression Ratio
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contrastive-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contrastive Learning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cosine-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cosine Similarity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curse-of-dimensionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Curse of Dimensionality
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d" class="md-nav__link">
+    <span class="md-ellipsis">
+      D
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="D">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dense-passage-retrieval-dpr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dense Passage Retrieval (DPR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disk-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disk I/O
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dot-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dot Product
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#e" class="md-nav__link">
+    <span class="md-ellipsis">
+      E
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="E">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Embedding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#euclidean-distance-l2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Euclidean Distance (L2)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#f" class="md-nav__link">
+    <span class="md-ellipsis">
+      F
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="F">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#f1-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      F1-Score
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#faceted-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Faceted Search
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#g" class="md-nav__link">
+    <span class="md-ellipsis">
+      G
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="G">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#graph-data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph Data Structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#h" class="md-nav__link">
+    <span class="md-ellipsis">
+      H
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="H">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hamming-distance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hamming Distance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hnsw-hierarchical-navigable-small-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      HNSW (Hierarchical Navigable Small World)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i" class="md-nav__link">
+    <span class="md-ellipsis">
+      I
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#index-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index Size
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inverted-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inverted Index
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ivf-inverted-file-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      IVF (Inverted File Index)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#j" class="md-nav__link">
+    <span class="md-ellipsis">
+      J
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="J">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jaccard-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jaccard Similarity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#l" class="md-nav__link">
+    <span class="md-ellipsis">
+      L
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="L">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lsh-locality-sensitive-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      LSH (Locality Sensitive Hashing)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lsh-hash-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      LSH Hash Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Latency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-balancing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Load Balancing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m" class="md-nav__link">
+    <span class="md-ellipsis">
+      M
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="M">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#manhattan-distance-l1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manhattan Distance (L1)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mean-average-precision-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mean Average Precision (MAP)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mean-reciprocal-rank-mrr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mean Reciprocal Rank (MRR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Usage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#n" class="md-nav__link">
+    <span class="md-ellipsis">
+      N
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="N">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nsw-navigable-small-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      NSW (Navigable Small World)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalized-discounted-cumulative-gain-ndcg" class="md-nav__link">
+    <span class="md-ellipsis">
+      Normalized Discounted Cumulative Gain (NDCG)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p" class="md-nav__link">
+    <span class="md-ellipsis">
+      P
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="P">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Precision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#precisionk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Precision@K
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#product-quantization-pq" class="md-nav__link">
+    <span class="md-ellipsis">
+      Product Quantization (PQ)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#q" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Q">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#query-expansion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Expansion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#r" class="md-nav__link">
+    <span class="md-ellipsis">
+      R
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="R">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recall" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recall
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recallk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recall@K
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relevance-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relevance Feedback
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#s" class="md-nav__link">
+    <span class="md-ellipsis">
+      S
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="S">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sentence-bert-sbert" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sentence-BERT (SBERT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simd-single-instruction-multiple-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      SIMD (Single Instruction, Multiple Data)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sharding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sharding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stemming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stemming
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-words" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stop Words
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#t" class="md-nav__link">
+    <span class="md-ellipsis">
+      T
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="T">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tf-idf-term-frequency-inverse-document-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      TF-IDF (Term Frequency-Inverse Document Frequency)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#throughput-qps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Throughput (QPS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transformer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v" class="md-nav__link">
+    <span class="md-ellipsis">
+      V
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="V">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vector-space-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector Space Model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k" class="md-nav__link">
+    <span class="md-ellipsis">
+      K
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="K">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#k-d-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      K-D Tree
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kendra_vs_opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AWS Kendra vs AWS OpenSearch: Service Comparison Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch: Theory to Implementation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_productionize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch Vector Search: Production Deployment Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_vs_pinecone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AWS OpenSearch vs Pinecone: The Ultimate Vector Search Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search_examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch Vector Search: Python Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      B
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="B">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bm25-best-matching-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      BM25 (Best Matching 25)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bert-bidirectional-encoder-representations-from-transformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      BERT (Bidirectional Encoder Representations from Transformers)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backpressure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backpressure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bit-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bit Rate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bloom-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bloom Filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build Time
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cache-hit-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cache Hit Rate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circuit-breaker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Circuit Breaker
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cold-start-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cold Start Problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compression-ratio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compression Ratio
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contrastive-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contrastive Learning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cosine-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cosine Similarity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curse-of-dimensionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Curse of Dimensionality
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d" class="md-nav__link">
+    <span class="md-ellipsis">
+      D
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="D">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dense-passage-retrieval-dpr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dense Passage Retrieval (DPR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disk-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disk I/O
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dot-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dot Product
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#e" class="md-nav__link">
+    <span class="md-ellipsis">
+      E
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="E">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Embedding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#euclidean-distance-l2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Euclidean Distance (L2)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#f" class="md-nav__link">
+    <span class="md-ellipsis">
+      F
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="F">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#f1-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      F1-Score
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#faceted-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Faceted Search
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#g" class="md-nav__link">
+    <span class="md-ellipsis">
+      G
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="G">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#graph-data-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Graph Data Structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#h" class="md-nav__link">
+    <span class="md-ellipsis">
+      H
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="H">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hamming-distance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hamming Distance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hnsw-hierarchical-navigable-small-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      HNSW (Hierarchical Navigable Small World)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#i" class="md-nav__link">
+    <span class="md-ellipsis">
+      I
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#index-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index Size
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inverted-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inverted Index
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ivf-inverted-file-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      IVF (Inverted File Index)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#j" class="md-nav__link">
+    <span class="md-ellipsis">
+      J
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="J">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jaccard-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jaccard Similarity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#l" class="md-nav__link">
+    <span class="md-ellipsis">
+      L
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="L">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lsh-locality-sensitive-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      LSH (Locality Sensitive Hashing)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lsh-hash-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      LSH Hash Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Latency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-balancing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Load Balancing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#m" class="md-nav__link">
+    <span class="md-ellipsis">
+      M
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="M">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#manhattan-distance-l1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manhattan Distance (L1)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mean-average-precision-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mean Average Precision (MAP)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mean-reciprocal-rank-mrr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mean Reciprocal Rank (MRR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Usage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#n" class="md-nav__link">
+    <span class="md-ellipsis">
+      N
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="N">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nsw-navigable-small-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      NSW (Navigable Small World)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalized-discounted-cumulative-gain-ndcg" class="md-nav__link">
+    <span class="md-ellipsis">
+      Normalized Discounted Cumulative Gain (NDCG)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p" class="md-nav__link">
+    <span class="md-ellipsis">
+      P
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="P">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Precision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#precisionk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Precision@K
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#product-quantization-pq" class="md-nav__link">
+    <span class="md-ellipsis">
+      Product Quantization (PQ)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#q" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Q">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#query-expansion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Expansion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#r" class="md-nav__link">
+    <span class="md-ellipsis">
+      R
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="R">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recall" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recall
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recallk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recall@K
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relevance-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relevance Feedback
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#s" class="md-nav__link">
+    <span class="md-ellipsis">
+      S
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="S">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sentence-bert-sbert" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sentence-BERT (SBERT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simd-single-instruction-multiple-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      SIMD (Single Instruction, Multiple Data)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sharding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sharding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stemming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stemming
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-words" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stop Words
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#t" class="md-nav__link">
+    <span class="md-ellipsis">
+      T
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="T">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tf-idf-term-frequency-inverse-document-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      TF-IDF (Term Frequency-Inverse Document Frequency)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#throughput-qps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Throughput (QPS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transformer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v" class="md-nav__link">
+    <span class="md-ellipsis">
+      V
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="V">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vector-space-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector Space Model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k" class="md-nav__link">
+    <span class="md-ellipsis">
+      K
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="K">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#k-d-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      K-D Tree
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="vector-search-and-information-retrieval-glossary">Vector Search and Information Retrieval Glossary<a class="headerlink" href="#vector-search-and-information-retrieval-glossary" title="Permanent link">&para;</a></h1>
+<p>A comprehensive reference guide to key concepts, metrics, and terminology used in vector search, information retrieval, and related machine learning fields.</p>
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#b">B</a> | <a href="#c">C</a> | <a href="#d">D</a> | <a href="#e">E</a> | <a href="#f">F</a> | <a href="#g">G</a> | <a href="#h">H</a> | <a href="#i">I</a> | <a href="#j">J</a> | <a href="#l">L</a> | <a href="#m">M</a> | <a href="#n">N</a> | <a href="#p">P</a> | <a href="#q">Q</a> | <a href="#r">R</a> | <a href="#s">S</a> | <a href="#t">T</a> | <a href="#v">V</a></li>
+</ul>
+<hr />
+<h2 id="b">B<a class="headerlink" href="#b" title="Permanent link">&para;</a></h2>
+<h3 id="bm25-best-matching-25">BM25 (Best Matching 25)<a class="headerlink" href="#bm25-best-matching-25" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Ranking function used by search engines to estimate relevance of documents.</p>
+<p><strong>Improvement over TF-IDF:</strong> Term frequency saturation, document length normalization</p>
+<p><strong>Parameters:</strong> k1 (term frequency saturation), b (length normalization)</p>
+<h3 id="bert-bidirectional-encoder-representations-from-transformers">BERT (Bidirectional Encoder Representations from Transformers)<a class="headerlink" href="#bert-bidirectional-encoder-representations-from-transformers" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Pre-trained transformer model creating contextual word embeddings.</p>
+<p><strong>Key Feature:</strong> Bidirectional context understanding</p>
+<p><strong>Output:</strong> 768 or 1024-dimensional vectors per token</p>
+<h3 id="backpressure">Backpressure<a class="headerlink" href="#backpressure" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Mechanism to prevent system overload by slowing input rate.</p>
+<p><strong>Implementation:</strong> Queue limits, rate limiting, circuit breakers</p>
+<h3 id="bit-rate">Bit Rate<a class="headerlink" href="#bit-rate" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Number of bits used to represent each vector or component.</p>
+<p><strong>Common Values:</strong> 1-bit (binary), 8-bit (byte), 32-bit (float)</p>
+<p><strong>Impact:</strong> Lower bit rates reduce memory but may decrease accuracy</p>
+<h3 id="bloom-filter">Bloom Filter<a class="headerlink" href="#bloom-filter" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Space-efficient probabilistic data structure for set membership testing.</p>
+<p><strong>Properties:</strong> False positives possible, no false negatives</p>
+<p><strong>Use Case:</strong> Pre-filtering, reducing expensive operations</p>
+<h3 id="build-time">Build Time<a class="headerlink" href="#build-time" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Time required to construct search index from data.</p>
+<p><strong>Factors:</strong> Dataset size, algorithm complexity, hardware resources</p>
+<p><strong>Consideration:</strong> One-time cost for batch systems, ongoing for streaming</p>
+<hr />
+<h2 id="c">C<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
+<h3 id="cache-hit-rate">Cache Hit Rate<a class="headerlink" href="#cache-hit-rate" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Percentage of data requests served from cache vs disk.</p>
+<p><strong>Formula:</strong> Cache hits / (Cache hits + Cache misses)</p>
+<p><strong>Impact:</strong> Higher hit rates significantly improve performance</p>
+<h3 id="circuit-breaker">Circuit Breaker<a class="headerlink" href="#circuit-breaker" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Design pattern to prevent cascading failures in distributed systems.</p>
+<p><strong>States:</strong> Closed (normal), open (failing), half-open (testing recovery)</p>
+<h3 id="cold-start-problem">Cold Start Problem<a class="headerlink" href="#cold-start-problem" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Performance degradation when system caches are empty.</p>
+<p><strong>Solution:</strong> Cache warming, prefetching, gradual traffic ramp-up</p>
+<h3 id="compression-ratio">Compression Ratio<a class="headerlink" href="#compression-ratio" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Ratio of original size to compressed size.</p>
+<p><strong>Formula:</strong> Original_size / Compressed_size</p>
+<p><strong>Example:</strong> 32:1 ratio means compressed version is 32× smaller</p>
+<h3 id="contrastive-learning">Contrastive Learning<a class="headerlink" href="#contrastive-learning" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Training approach that learns representations by contrasting positive and negative examples.</p>
+<p><strong>Key Idea:</strong> Pull similar examples together, push dissimilar examples apart</p>
+<p><strong>Examples:</strong> SimCLR, InfoNCE, triplet loss</p>
+<h3 id="cosine-similarity">Cosine Similarity<a class="headerlink" href="#cosine-similarity" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Measures angle between vectors, ignoring magnitude.</p>
+<p><strong>Formula:</strong> cos(θ) = (A · B) / (||A|| × ||B||)</p>
+<p><strong>Range:</strong> -1 to 1 (higher is more similar)</p>
+<p><strong>Best For:</strong> Text embeddings, normalized vectors, when magnitude is irrelevant</p>
+<h3 id="curse-of-dimensionality">Curse of Dimensionality<a class="headerlink" href="#curse-of-dimensionality" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Phenomena where high-dimensional spaces behave counterintuitively.</p>
+<p><strong>Effects:</strong> Distance concentration, sparsity, increased computation</p>
+<p><strong>Mitigation:</strong> Dimensionality reduction, approximate algorithms</p>
+<hr />
+<h2 id="d">D<a class="headerlink" href="#d" title="Permanent link">&para;</a></h2>
+<h3 id="dense-passage-retrieval-dpr">Dense Passage Retrieval (DPR)<a class="headerlink" href="#dense-passage-retrieval-dpr" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Approach using dense vector representations for passage retrieval.</p>
+<p><strong>Components:</strong> Question encoder, passage encoder</p>
+<p><strong>Advantage:</strong> Better than sparse methods for semantic matching</p>
+<h3 id="disk-io">Disk I/O<a class="headerlink" href="#disk-io" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Read/write operations to persistent storage.</p>
+<p><strong>Impact:</strong> Can dominate query latency for large datasets</p>
+<p><strong>Optimization:</strong> Memory mapping, SSD storage, prefetching</p>
+<h3 id="dot-product">Dot Product<a class="headerlink" href="#dot-product" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Sum of products of corresponding vector components.</p>
+<p><strong>Formula:</strong> A · B = Σ(Ai × Bi)</p>
+<p><strong>Range:</strong> -∞ to ∞ (higher typically more similar)</p>
+<p><strong>Best For:</strong> When both direction and magnitude matter</p>
+<hr />
+<h2 id="e">E<a class="headerlink" href="#e" title="Permanent link">&para;</a></h2>
+<h3 id="embedding">Embedding<a class="headerlink" href="#embedding" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Dense vector representation of data (text, images, etc.) in continuous space.</p>
+<p><strong>Properties:</strong> Fixed dimensionality, semantic similarity preserved as geometric proximity</p>
+<p><strong>Example:</strong> Word2Vec, BERT, ResNet features</p>
+<h3 id="euclidean-distance-l2">Euclidean Distance (L2)<a class="headerlink" href="#euclidean-distance-l2" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Straight-line distance between vectors in Euclidean space.</p>
+<p><strong>Formula:</strong> d = √(Σ(Ai - Bi)²)</p>
+<p><strong>Range:</strong> 0 to ∞ (lower is more similar)</p>
+<p><strong>Best For:</strong> Image embeddings, when magnitude matters, normalized embeddings</p>
+<hr />
+<h2 id="f">F<a class="headerlink" href="#f" title="Permanent link">&para;</a></h2>
+<h3 id="f1-score">F1-Score<a class="headerlink" href="#f1-score" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Harmonic mean of precision and recall, providing a balanced measure.</p>
+<p><strong>Formula:</strong> F1 = 2 × (Precision × Recall) / (Precision + Recall)</p>
+<p><strong>Range:</strong> 0.0 to 1.0 (higher is better)</p>
+<p><strong>Use Case:</strong> When you need a single metric balancing precision and recall</p>
+<h3 id="faceted-search">Faceted Search<a class="headerlink" href="#faceted-search" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Search interface allowing filtering by multiple attributes simultaneously.</p>
+<p><strong>Example:</strong> E-commerce filters for price, brand, color, size</p>
+<p><strong>Implementation:</strong> Combines text/vector search with structured filters</p>
+<hr />
+<h2 id="g">G<a class="headerlink" href="#g" title="Permanent link">&para;</a></h2>
+<h3 id="graph-data-structure">Graph Data Structure<a class="headerlink" href="#graph-data-structure" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Network of nodes connected by edges, used in HNSW and NSW algorithms.</p>
+<p><strong>Properties:</strong> Nodes = vectors, edges = similarity relationships</p>
+<p><strong>Operations:</strong> Navigation, insertion, deletion</p>
+<hr />
+<h2 id="h">H<a class="headerlink" href="#h" title="Permanent link">&para;</a></h2>
+<h3 id="hamming-distance">Hamming Distance<a class="headerlink" href="#hamming-distance" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Number of positions where binary vectors differ.</p>
+<p><strong>Formula:</strong> Count of positions where Ai ≠ Bi</p>
+<p><strong>Best For:</strong> Binary vectors, hash codes, error detection</p>
+<h3 id="hnsw-hierarchical-navigable-small-world">HNSW (Hierarchical Navigable Small World)<a class="headerlink" href="#hnsw-hierarchical-navigable-small-world" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Graph-based approximate nearest neighbor algorithm using multiple layers for efficient navigation.</p>
+<p><strong>Key Features:</strong> Logarithmic search complexity, high recall, tunable parameters</p>
+<p><strong>Parameters:</strong> M (connections per node), ef_construction (build quality), ef_search (query quality)</p>
+<p><strong>Best For:</strong> High-accuracy applications, moderate memory budgets</p>
+<hr />
+<h2 id="i">I<a class="headerlink" href="#i" title="Permanent link">&para;</a></h2>
+<h3 id="index-size">Index Size<a class="headerlink" href="#index-size" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Storage space required for search index.</p>
+<p><strong>Measurement:</strong> Bytes, compression ratio vs original data</p>
+<p><strong>Factors:</strong> Algorithm choice, parameters, compression techniques</p>
+<h3 id="inverted-index">Inverted Index<a class="headerlink" href="#inverted-index" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Data structure mapping each unique term to list of documents containing it.</p>
+<p><strong>Structure:</strong> Term → [Doc1, Doc2, ...] with frequency/position information</p>
+<p><strong>Use Case:</strong> Foundation of text search engines</p>
+<h3 id="ivf-inverted-file-index">IVF (Inverted File Index)<a class="headerlink" href="#ivf-inverted-file-index" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Clustering-based algorithm that partitions vector space and searches only relevant clusters.</p>
+<p><strong>Key Features:</strong> Predictable performance, good for large datasets, memory efficient</p>
+<p><strong>Parameters:</strong> nlist (number of clusters), nprobes (clusters searched per query)</p>
+<p><strong>Best For:</strong> Large-scale deployments, memory-constrained environments</p>
+<hr />
+<h2 id="j">J<a class="headerlink" href="#j" title="Permanent link">&para;</a></h2>
+<h3 id="jaccard-similarity">Jaccard Similarity<a class="headerlink" href="#jaccard-similarity" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Size of intersection divided by size of union of two sets.</p>
+<p><strong>Formula:</strong> J(A,B) = |A ∩ B| / |A ∪ B|</p>
+<p><strong>Range:</strong> 0 to 1 (higher is more similar)</p>
+<p><strong>Best For:</strong> Set-based data, sparse binary vectors, document similarity</p>
+<hr />
+<h2 id="l">L<a class="headerlink" href="#l" title="Permanent link">&para;</a></h2>
+<h3 id="lsh-locality-sensitive-hashing">LSH (Locality Sensitive Hashing)<a class="headerlink" href="#lsh-locality-sensitive-hashing" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Hash-based algorithm where similar vectors have high probability of same hash values.</p>
+<p><strong>Key Features:</strong> Sub-linear query time, probabilistic guarantees</p>
+<p><strong>Best For:</strong> Very high-dimensional sparse vectors, streaming applications</p>
+<h3 id="lsh-hash-table">LSH Hash Table<a class="headerlink" href="#lsh-hash-table" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Hash table where similar items have high probability of same hash bucket.</p>
+<p><strong>Property:</strong> Locality-sensitive hash functions</p>
+<p><strong>Use Case:</strong> Approximate nearest neighbor search</p>
+<h3 id="latency">Latency<a class="headerlink" href="#latency" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Time required to process a single query and return results.</p>
+<p><strong>Measurement:</strong> Milliseconds (ms) or microseconds (μs)</p>
+<p><strong>Components:</strong> Index access, computation, network transmission</p>
+<p><strong>Targets:</strong> &lt;1ms (real-time), &lt;10ms (interactive), &lt;100ms (batch)</p>
+<h3 id="load-balancing">Load Balancing<a class="headerlink" href="#load-balancing" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Distribution of computational work across multiple processors or machines.</p>
+<p><strong>Goals:</strong> Maximize throughput, minimize latency, ensure fault tolerance</p>
+<p><strong>Methods:</strong> Round-robin, consistent hashing, load-aware routing</p>
+<hr />
+<h2 id="m">M<a class="headerlink" href="#m" title="Permanent link">&para;</a></h2>
+<h3 id="manhattan-distance-l1">Manhattan Distance (L1)<a class="headerlink" href="#manhattan-distance-l1" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Sum of absolute differences along each dimension.</p>
+<p><strong>Formula:</strong> d = Σ|Ai - Bi|</p>
+<p><strong>Range:</strong> 0 to ∞ (lower is more similar)</p>
+<p><strong>Best For:</strong> Sparse vectors, categorical data, high-dimensional spaces</p>
+<h3 id="mean-average-precision-map">Mean Average Precision (MAP)<a class="headerlink" href="#mean-average-precision-map" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Average of precision values calculated at each relevant document position.</p>
+<p><strong>Formula:</strong> MAP = (1/|Q|) × Σ(AP(q)) for all queries q in Q</p>
+<p><strong>Use Case:</strong> Comprehensive evaluation metric for ranking quality across multiple queries</p>
+<h3 id="mean-reciprocal-rank-mrr">Mean Reciprocal Rank (MRR)<a class="headerlink" href="#mean-reciprocal-rank-mrr" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Average of reciprocal ranks of the first relevant document for each query.</p>
+<p><strong>Formula:</strong> MRR = (1/|Q|) × Σ(1/rank_of_first_relevant_result)</p>
+<p><strong>Use Case:</strong> Evaluating systems where users typically want just one good result</p>
+<h3 id="memory-mapping">Memory Mapping<a class="headerlink" href="#memory-mapping" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Technique mapping file contents directly into memory address space.</p>
+<p><strong>Advantage:</strong> OS handles caching, reduces memory copies</p>
+<p><strong>Use Case:</strong> Large datasets that don't fit in RAM</p>
+<h3 id="memory-usage">Memory Usage<a class="headerlink" href="#memory-usage" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> RAM required for index storage and query processing.</p>
+<p><strong>Components:</strong> Vector storage, graph structures, codebooks, caches</p>
+<p><strong>Optimization:</strong> Compression, memory mapping, tiered storage</p>
+<hr />
+<h2 id="n">N<a class="headerlink" href="#n" title="Permanent link">&para;</a></h2>
+<h3 id="nsw-navigable-small-world">NSW (Navigable Small World)<a class="headerlink" href="#nsw-navigable-small-world" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Predecessor to HNSW, uses single-layer graph for vector navigation.</p>
+<p><strong>Key Features:</strong> Simple implementation, good baseline performance</p>
+<p><strong>Limitation:</strong> Single layer limits scalability compared to HNSW</p>
+<h3 id="normalized-discounted-cumulative-gain-ndcg">Normalized Discounted Cumulative Gain (NDCG)<a class="headerlink" href="#normalized-discounted-cumulative-gain-ndcg" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Ranking quality metric that considers both relevance and position.</p>
+<p><strong>Formula:</strong> NDCG@K = DCG@K / IDCG@K</p>
+<p><strong>Range:</strong> 0.0 to 1.0 (higher is better)</p>
+<p><strong>Use Case:</strong> When document relevance has multiple levels (not just binary relevant/irrelevant)</p>
+<hr />
+<h2 id="p">P<a class="headerlink" href="#p" title="Permanent link">&para;</a></h2>
+<h3 id="precision">Precision<a class="headerlink" href="#precision" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> The fraction of retrieved documents that are relevant to the query.</p>
+<p><strong>Formula:</strong> Precision = (True Positives) / (True Positives + False Positives)</p>
+<p><strong>Range:</strong> 0.0 to 1.0 (higher is better)</p>
+<p><strong>Example:</strong> If a search returns 10 documents and 7 are relevant, precision = 0.7</p>
+<p><strong>Use Case:</strong> Critical when false positives are costly (medical diagnosis, legal research)</p>
+<h3 id="precisionk">Precision@K<a class="headerlink" href="#precisionk" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Precision calculated only for the top K retrieved results.</p>
+<p><strong>Formula:</strong> P@K = (Relevant documents in top K) / K</p>
+<p><strong>Example:</strong> P@5 = 0.8 means 4 out of top 5 results were relevant</p>
+<p><strong>Use Case:</strong> Evaluating search quality for user-facing applications where only top results matter</p>
+<h3 id="product-quantization-pq">Product Quantization (PQ)<a class="headerlink" href="#product-quantization-pq" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Compression technique that decomposes vectors into subvectors and quantizes each independently.</p>
+<p><strong>Key Features:</strong> Extreme memory reduction (10-100x), approximate distance computation</p>
+<p><strong>Parameters:</strong> m (number of subquantizers), k (centroids per codebook)</p>
+<p><strong>Best For:</strong> Memory-critical applications, mobile/edge deployments</p>
+<hr />
+<h2 id="q">Q<a class="headerlink" href="#q" title="Permanent link">&para;</a></h2>
+<h3 id="query-expansion">Query Expansion<a class="headerlink" href="#query-expansion" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Process of adding related terms to original query to improve retrieval.</p>
+<p><strong>Methods:</strong> Thesaurus-based, relevance feedback, word embeddings</p>
+<p><strong>Goal:</strong> Bridge vocabulary gap between queries and documents</p>
+<h3 id="quantization">Quantization<a class="headerlink" href="#quantization" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Process of reducing precision of numerical values to save memory.</p>
+<p><strong>Types:</strong> Scalar quantization, vector quantization, product quantization</p>
+<p><strong>Trade-off:</strong> Memory savings vs accuracy loss</p>
+<hr />
+<h2 id="r">R<a class="headerlink" href="#r" title="Permanent link">&para;</a></h2>
+<h3 id="recall">Recall<a class="headerlink" href="#recall" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> The fraction of relevant documents that are successfully retrieved.</p>
+<p><strong>Formula:</strong> Recall = (True Positives) / (True Positives + False Negatives)</p>
+<p><strong>Range:</strong> 0.0 to 1.0 (higher is better)</p>
+<p><strong>Example:</strong> If there are 20 relevant documents total and 15 are found, recall = 0.75</p>
+<p><strong>Use Case:</strong> Important when missing relevant results is costly (academic research, comprehensive analysis)</p>
+<h3 id="recallk">Recall@K<a class="headerlink" href="#recallk" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Fraction of all relevant documents found within the top K results.</p>
+<p><strong>Formula:</strong> R@K = (Relevant documents in top K) / (Total relevant documents)</p>
+<p><strong>Use Case:</strong> Understanding how many relevant items users can find without scrolling</p>
+<h3 id="relevance-feedback">Relevance Feedback<a class="headerlink" href="#relevance-feedback" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Technique to improve search results based on user feedback.</p>
+<p><strong>Types:</strong> Explicit (user marks relevant), implicit (click behavior)</p>
+<p><strong>Implementation:</strong> Query modification, result re-ranking</p>
+<h3 id="replication">Replication<a class="headerlink" href="#replication" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Maintaining copies of data across multiple nodes.</p>
+<p><strong>Benefits:</strong> Fault tolerance, load distribution, geographic distribution</p>
+<p><strong>Consistency:</strong> Strong vs eventual consistency trade-offs</p>
+<hr />
+<h2 id="s">S<a class="headerlink" href="#s" title="Permanent link">&para;</a></h2>
+<h3 id="sentence-bert-sbert">Sentence-BERT (SBERT)<a class="headerlink" href="#sentence-bert-sbert" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Modified BERT architecture optimized for sentence-level embeddings.</p>
+<p><strong>Advantage:</strong> Enables efficient sentence similarity computation</p>
+<p><strong>Use Case:</strong> Semantic search, clustering, classification</p>
+<h3 id="simd-single-instruction-multiple-data">SIMD (Single Instruction, Multiple Data)<a class="headerlink" href="#simd-single-instruction-multiple-data" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Computer architecture allowing parallel processing of multiple data elements.</p>
+<p><strong>Application:</strong> Accelerating distance calculations, vector operations</p>
+<p><strong>Examples:</strong> AVX2, AVX-512 instruction sets</p>
+<h3 id="sharding">Sharding<a class="headerlink" href="#sharding" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Horizontal partitioning of data across multiple nodes.</p>
+<p><strong>Purpose:</strong> Distribute load, enable parallel processing</p>
+<p><strong>Challenge:</strong> Load balancing, cross-shard queries</p>
+<h3 id="stemming">Stemming<a class="headerlink" href="#stemming" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Process of reducing words to their root form.</p>
+<p><strong>Example:</strong> "running," "runs," "ran" → "run"</p>
+<p><strong>Purpose:</strong> Improve recall by matching morphological variants</p>
+<h3 id="stop-words">Stop Words<a class="headerlink" href="#stop-words" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Common words filtered out during text processing.</p>
+<p><strong>Examples:</strong> "the," "and," "or," "but"</p>
+<p><strong>Rationale:</strong> Low discriminative value, high frequency</p>
+<hr />
+<h2 id="t">T<a class="headerlink" href="#t" title="Permanent link">&para;</a></h2>
+<h3 id="tf-idf-term-frequency-inverse-document-frequency">TF-IDF (Term Frequency-Inverse Document Frequency)<a class="headerlink" href="#tf-idf-term-frequency-inverse-document-frequency" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Numerical statistic reflecting term importance in document relative to collection.</p>
+<p><strong>Formula:</strong> TF-IDF = (term_freq / total_terms) × log(total_docs / docs_with_term)</p>
+<p><strong>Purpose:</strong> Downweight common terms, upweight rare discriminative terms</p>
+<h3 id="throughput-qps">Throughput (QPS)<a class="headerlink" href="#throughput-qps" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Number of queries processed per second.</p>
+<p><strong>Measurement:</strong> Queries Per Second (QPS)</p>
+<p><strong>Factors:</strong> System resources, query complexity, concurrency</p>
+<p><strong>Scaling:</strong> Often limited by CPU, memory bandwidth, or storage I/O</p>
+<h3 id="transformer">Transformer<a class="headerlink" href="#transformer" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Neural network architecture using attention mechanisms for sequence processing.</p>
+<p><strong>Key Innovation:</strong> Self-attention allows modeling long-range dependencies</p>
+<p><strong>Examples:</strong> BERT, GPT, T5, RoBERTa</p>
+<hr />
+<h2 id="v">V<a class="headerlink" href="#v" title="Permanent link">&para;</a></h2>
+<h3 id="vector-space-model">Vector Space Model<a class="headerlink" href="#vector-space-model" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Mathematical model representing documents as vectors in multi-dimensional space.</p>
+<p><strong>Key Idea:</strong> Similar documents have similar vector representations</p>
+<p><strong>Applications:</strong> Information retrieval, recommendation systems</p>
+<hr />
+<h2 id="k">K<a class="headerlink" href="#k" title="Permanent link">&para;</a></h2>
+<h3 id="k-d-tree">K-D Tree<a class="headerlink" href="#k-d-tree" title="Permanent link">&para;</a></h3>
+<p><strong>Definition:</strong> Binary tree data structure for organizing points in k-dimensional space.</p>
+<p><strong>Properties:</strong> Recursive spatial subdivision</p>
+<p><strong>Limitation:</strong> Performance degrades in high dimensions (curse of dimensionality)</p>
+<hr />
+<p>This glossary provides essential vocabulary for understanding and implementing vector search systems, from basic concepts to advanced optimization techniques.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "content.code.copy"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+    
+  </body>
+</html>
