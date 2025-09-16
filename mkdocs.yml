@@ -59,5 +59,6 @@ nav:
   - OpenSearch vs PineCone: opensearch_vs_pinecone.md
   - Examples: search_examples.md 
   - Glossary: glossary.md
+  - README: README.md
   - LICENSE: LICENSE.md
 
