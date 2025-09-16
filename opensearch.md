@@ -65,18 +65,21 @@ TF(term, document) = (Number of times term appears in document) / (Total terms i
 IDF(term) = log(Total documents / Documents containing term)
 ```
 
-**Example:** Consider searching for "machine learning" in a collection of 10,000 documents:
-- Document A: Contains "machine" 10 times out of 1,000 words, "learning" 8 times
-- "machine" appears in 3,000 documents, "learning" appears in 2,000 documents
+**Example:** 
 
-For "machine": TF = 10/1,000 = 0.01, IDF = log(10,000/3,000) = 0.52, TF-IDF = 0.0052
-For "learning": TF = 8/1,000 = 0.008, IDF = log(10,000/2,000) = 0.70, TF-IDF = 0.0056
+Consider searching for "machine learning" in a collection of 10,000 documents:
+
+Document A: Contains "machine" 10 times out of 1,000 words, "learning" 8 times
+"machine" appears in 3,000 documents, "learning" appears in 2,000 documents
+
+- For "machine": TF = 10/1,000 = 0.01, IDF = log(10,000/3,000) = 0.52, TF-IDF = 0.0052
+- For "learning": TF = 8/1,000 = 0.008, IDF = log(10,000/2,000) = 0.70, TF-IDF = 0.0056
 
 The term "learning" scores higher despite lower frequency because it's rarer across the collection.
 
 #### BM25: The Modern Standard
 
-**Best Matching 25 ([BM25](glossary.md#bm25-best-matching-25))** represents the current gold standard for text relevance scoring, addressing TF-IDF's limitations through sophisticated normalization and parameter tuning.
+**Best Matching 25 (BM25)** represents the current gold standard for text relevance scoring, addressing TF-IDF's limitations through sophisticated normalization and parameter tuning.
 
 **BM25 Formula:**
 
@@ -104,14 +107,14 @@ Where:
 
 Consider searching for "sustainable energy solutions" across technical papers:
 
-*Document A (500 words):* Contains "sustainable" 3 times, "energy" 5 times, "solutions" 2 times
-*Document B (2,000 words):* Contains "sustainable" 8 times, "energy" 12 times, "solutions" 6 times
+- *Document A (500 words):* Contains "sustainable" 3 times, "energy" 5 times, "solutions" 2 times
+- *Document B (2,000 words):* Contains "sustainable" 8 times, "energy" 12 times, "solutions" 6 times
 
 Traditional TF would favor Document B due to higher absolute term frequencies. BM25's length normalization ensures Document A isn't penalized for being concise, while term frequency saturation prevents Document B from dominating solely due to repetition.
 
 #### Where Text Search Excels
 
-**[Precision](glossary.md#precision)-Critical Scenarios:**
+**Precision-Critical Scenarios:**
 
 - **Legal Document Retrieval:** Finding contracts containing specific clauses like "force majeure" or "intellectual property"
 - **Technical Documentation:** Locating API references with exact method names like "getUserById()"
@@ -149,6 +152,7 @@ This fundamental limitation occurs because text search operates on exact string 
 **Context Insensitivity:**
 
 The word "bank" could refer to:
+
 - Financial institution
 - River bank
 - Memory bank (computing)
@@ -159,6 +163,7 @@ Text search cannot distinguish between these contexts without additional semanti
 **Language Barriers:**
 
 Text search struggles with:
+
 - **Synonyms:** "happy" vs "joyful" vs "cheerful"
 - **Multilingual Content:** English query missing Spanish documents with same meaning
 - **Acronyms and Abbreviations:** "AI" vs "Artificial Intelligence"
@@ -167,6 +172,7 @@ Text search struggles with:
 **Query Formulation Challenges:**
 
 Users often struggle to formulate effective keyword queries:
+
 - **Conceptual Queries:** "companies similar to Netflix" (user wants concept similarity, not exact matches)
 - **Natural Language:** "best laptop for college students under $800" (contains intent and constraints)
 - **Exploratory Search:** "new developments in renewable energy" (seeking discovery, not specific documents)
@@ -226,9 +232,9 @@ These contextual embeddings enable more precise semantic matching.
 
 Multilingual embedding models create shared semantic spaces across languages:
 
-*English Query:* "machine learning algorithms"
-*Spanish Match:* "algoritmos de aprendizaje automático"
-*French Match:* "algorithmes d'apprentissage automatique"
+- *English Query:* "machine learning algorithms"
+- *Spanish Match:* "algoritmos de aprendizaje automático"
+- *French Match:* "algorithmes d'apprentissage automatique"
 
 All three phrases map to similar regions in vector space, enabling cross-language search without translation.
 
@@ -236,15 +242,16 @@ All three phrases map to similar regions in vector space, enabling cross-languag
 
 Vector search excels with conversational, intent-driven queries:
 
-*Query:* "best affordable laptops for college students"
-*Understanding:* The vector captures concepts of "budget-friendly," "portable computers," "educational use," "student needs"
-*Matches:* Reviews, comparisons, and recommendations that discuss these concepts even without exact keywords
+- *Query:* "best affordable laptops for college students"
+- *Understanding:* The vector captures concepts of "budget-friendly," "portable computers," "educational use," "student needs"
+- *Matches:* Reviews, comparisons, and recommendations that discuss these concepts even without exact keywords
 
 #### The Mathematics of Semantic Similarity
 
 **High-Dimensional Semantic Space:**
 
 Embedding models typically generate vectors with 384 to 1,536 dimensions. Each dimension captures different aspects of meaning:
+
 - Dimension 127: Might encode "technology-related" concepts
 - Dimension 445: Might capture "positive sentiment"
 - Dimension 892: Might represent "temporal aspects"
@@ -258,6 +265,7 @@ The choice of similarity metric affects search behavior:
 ```
 cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
 ```
+
 - Measures angle between vectors, ignoring magnitude
 - Range: -1 (opposite) to 1 (identical)
 - Best for text where length doesn't indicate semantic importance
@@ -602,6 +610,7 @@ where mL = 1/ln(2) ≈ 1.44
 ```
 
 This probability distribution creates the hierarchical structure automatically:
+
 - ~50% of nodes only in layer 0
 - ~25% reach layer 1
 - ~12.5% reach layer 2

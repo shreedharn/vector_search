@@ -229,22 +229,22 @@ AWS OpenSearch is a distributed search and analytics suite based on Elasticsearc
 
 ### Choose AWS Kendra When:
 
-✅ **Primary use case is enterprise document search**
-✅ **Users need natural language query interface**
-✅ **Quick deployment with minimal technical resources**
-✅ **Built-in connectors match your data sources**
-✅ **Willing to pay premium for managed AI/ML capabilities**
-✅ **Limited search customization requirements**
+- **Primary use case is enterprise document search**
+- **Users need natural language query interface**
+- **Quick deployment with minimal technical resources**
+- **Built-in connectors match your data sources**
+- **Willing to pay premium for managed AI/ML capabilities**
+- **Limited search customization requirements**
 
 ### Choose AWS OpenSearch When:
 
-✅ **Need full control over search relevance and ranking**
-✅ **Building custom search applications**
-✅ **Require vector search and semantic capabilities**
-✅ **Have technical team capable of managing search infrastructure**
-✅ **Multiple use cases beyond search (analytics, logging)**
-✅ **Cost optimization is important for high query volumes**
-✅ **Need real-time search and analytics capabilities**
+- **Need full control over search relevance and ranking**
+- **Building custom search applications**
+- **Require vector search and semantic capabilities**
+- **Have technical team capable of managing search infrastructure**
+- **Multiple use cases beyond search (analytics, logging)**
+- **Cost optimization is important for high query volumes** 
+- **Need real-time search and analytics capabilities**
 
 ### Hybrid Approach Considerations
 
