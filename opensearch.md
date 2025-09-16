@@ -11,6 +11,7 @@ A comprehensive guide to understanding and implementing modern search systems, f
 - [Vector Search Evolution](#vector-search-evolution)
 - [Search Approach Comparison](#search-approach-comparison)
 - [The Progression: Text → Vector → Hybrid](#the-progression-text-vector-hybrid)
+- [Reranking: Refining Search Results](#reranking-refining-search-results)
 
 **Part II: Vector Search Algorithms**
 
@@ -24,6 +25,7 @@ A comprehensive guide to understanding and implementing modern search systems, f
 
 - [OpenSearch Vector Architecture](#opensearch-vector-architecture)
 - [Index Configuration and Setup](#index-configuration-and-setup)
+- [Reranking in OpenSearch](#reranking-in-opensearch)
 
 **Part IV: Advanced Applications**
 
@@ -84,7 +86,7 @@ The term "learning" scores higher despite lower frequency because it's rarer acr
 **BM25 Formula:**
 
 ```
-BM25(query, document) = Σ IDF(term) × (tf × (k1 + 1)) / (tf + k1 × (1 - b + b × |d|/avgdl))
+[BM25](glossary.md#bm25-best-matching-25)(query, document) = Σ IDF(term) × (tf × (k1 + 1)) / (tf + k1 × (1 - b + b × |d|/avgdl))
 
 Where:
 - tf = term frequency in document
@@ -187,9 +189,9 @@ Vector search emerged to address the fundamental limitations of text-based searc
 
 Vector search transforms the paradigm from "what words are present?" to "what does this mean?" By converting text into dense numerical vectors, semantically similar content produces geometrically similar vectors, regardless of exact wording.
 
-**The [Embedding](glossary.md#embedding) Revolution:**
+**The Embedding Revolution:**
 
-Modern embedding models, trained on vast text corpora, learn to represent concepts in continuous vector spaces where:
+Modern [embedding](glossary.md#embedding) models, trained on vast text corpora, learn to represent concepts in continuous vector spaces where:
 - Similar meanings cluster together
 - Relationships become mathematical operations
 - Context determines representation
@@ -427,6 +429,110 @@ Search interfaces can provide different experiences based on the search approach
 - **Text-heavy results:** Show keyword highlighting, exact matches, filters
 - **Vector-heavy results:** Display "because you searched for," related concepts, exploration suggestions
 - **Hybrid results:** Combine both approaches with clear result categorization
+
+### Reranking: Refining Search Results
+
+While initial retrieval systems (text search, vector search, or hybrid approaches) excel at quickly identifying potentially relevant candidates from large datasets, they often lack the computational resources to perform deep analysis of each result. **Reranking** addresses this limitation by applying sophisticated scoring models to a smaller set of initial results, dramatically improving relevance and user satisfaction.
+
+#### The Two-Stage Search Architecture
+
+**Stage 1: Fast Retrieval (Recall-Focused)**
+- Primary goal: Cast a wide net to capture potentially relevant content
+- Algorithms: BM25, HNSW, IVF, or hybrid combinations
+- Speed: Optimized for millisecond response times
+- Scope: Search entire corpus (millions to billions of documents)
+
+**Stage 2: Precise Reranking (Precision-Focused)**
+
+- Primary goal: Apply sophisticated relevance modeling to refine rankings
+- Algorithms: Cross-encoders, learning-to-rank, neural rerankers
+- Speed: More computationally intensive but applied to fewer candidates
+- Scope: Rerank top 100-1000 candidates from Stage 1
+
+#### Why Reranking is Essential
+
+**Computational Trade-offs in Search:**
+
+Initial retrieval systems face a fundamental constraint: they must balance speed with accuracy across massive datasets. A brute-force approach applying sophisticated relevance modeling to every document would be computationally prohibitive.
+
+*Example: E-commerce Search*
+
+- **Without Reranking:** Fast keyword/vector search returns "wireless headphones" but may rank by basic relevance signals
+- **With Reranking:** Additional factors like user preferences, product ratings, price sensitivity, and seasonal trends refine the ranking
+
+**Quality Improvements:**
+
+Reranking typically improves key search metrics:
+- **NDCG@10:** 15-30% improvement in ranking quality
+- **Click-through Rate:** 10-25% increase in user engagement
+- **Conversion Rate:** 5-15% improvement in e-commerce scenarios
+
+#### Types of Reranking Approaches
+
+**Cross-Encoder Reranking:**
+
+Cross-encoders jointly encode the query and each candidate document, enabling rich interaction modeling that captures nuanced relevance signals impossible in the initial retrieval stage.
+
+```
+Architecture:
+Query: "best wireless headphones for running"
+Candidate: "Sony WH-1000XM5 Noise Canceling Headphones"
+
+Cross-Encoder Input: [CLS] best wireless headphones for running [SEP] Sony WH-1000XM5 Noise Canceling Headphones - Premium noise canceling... [SEP]
+```
+
+**Learning-to-Rank (LTR):**
+
+Machine learning models trained on historical user interactions, combining multiple relevance features to optimize ranking metrics directly.
+
+*Feature Categories:*
+
+- Query-document similarity scores
+- User interaction signals (clicks, dwell time)
+- Document quality indicators (freshness, authority)
+- Contextual factors (time, location, device)
+
+**Neural Reranking Models:**
+
+Advanced transformer-based models that can capture complex semantic relationships and user intent patterns beyond traditional relevance matching.
+
+#### Implementation Approaches
+
+Reranking can be implemented through various approaches depending on your search infrastructure:
+
+**Native Search Engine Integration:**
+- Use built-in rescoring capabilities (OpenSearch `rescore`, Elasticsearch rescoring)
+- Leverage function scoring and custom ranking algorithms
+- Integrate machine learning models directly into the search pipeline
+
+**External Reranking Services:**
+- Microservice architecture with dedicated reranking endpoints
+- Post-processing pipeline that refines initial search results
+- Real-time model serving for neural reranking
+
+**Hybrid Approaches:**
+- Combine multiple reranking stages (rule-based → ML-based → neural)
+- Use different reranking intensity based on query characteristics
+- Implement fallback strategies for high-load scenarios
+
+*For specific OpenSearch implementation examples and configurations, see [Reranking in OpenSearch](#reranking-in-opensearch) in Part III.*
+
+#### Performance Considerations
+
+**Latency Impact:**
+- Initial retrieval: 5-20ms
+- Reranking overhead: 10-50ms additional
+- Total query time: 15-70ms (still well within acceptable limits)
+
+**Resource Usage:**
+- Reranking models require additional compute resources
+- GPU acceleration recommended for neural rerankers
+- Memory usage scales with reranking window size
+
+**Scalability Strategies:**
+- **Async Reranking:** Return initial results immediately, update with reranked results
+- **Cached Reranking:** Cache reranked results for popular queries
+- **Tiered Reranking:** Apply different reranking intensity based on query importance
 
 ---
 
@@ -1362,6 +1468,280 @@ Proper index configuration is crucial for optimal vector search performance. Ope
 }
 ```
 
+### Reranking in OpenSearch
+
+OpenSearch provides several built-in mechanisms for implementing reranking, from simple rescoring queries to integration with external machine learning models. Understanding these capabilities enables you to improve search relevance significantly.
+
+#### Native Rescoring with OpenSearch
+
+**Basic Rescore Query Structure:**
+
+OpenSearch's `rescore` query allows you to apply a secondary query to refine the top results from your initial search:
+
+```json
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "multi_match": {
+            "query": "wireless headphones",
+            "fields": ["title^2", "description"]
+          }
+        }
+      ]
+    }
+  },
+  "rescore": {
+    "window_size": 50,
+    "query": {
+      "rescore_query": {
+        "function_score": {
+          "functions": [
+            {
+              "field_value_factor": {
+                "field": "rating",
+                "factor": 1.2,
+                "modifier": "log1p"
+              }
+            },
+            {
+              "field_value_factor": {
+                "field": "review_count",
+                "factor": 0.1,
+                "modifier": "sqrt"
+              }
+            }
+          ]
+        }
+      },
+      "query_weight": 0.7,
+      "rescore_query_weight": 0.3
+    }
+  }
+}
+```
+
+**Key Parameters:**
+
+- **window_size:** Number of top documents to rescore (typically 50-200)
+- **query_weight:** Weight given to original query score (0.0-1.0)
+- **rescore_query_weight:** Weight given to rescore query score (0.0-1.0)
+
+#### Advanced Function Scoring
+
+**Multi-Signal Reranking:**
+
+Combine multiple relevance signals for sophisticated ranking:
+
+```json
+{
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "match": {
+                "title": {
+                  "query": "machine learning",
+                  "boost": 2.0
+                }
+              }
+            },
+            {
+              "knn": {
+                "content_vector": {
+                  "vector": [0.1, -0.2, 0.8],
+                  "k": 50
+                }
+              }
+            }
+          ]
+        }
+      },
+      "functions": [
+        {
+          "field_value_factor": {
+            "field": "popularity_score",
+            "factor": 1.5,
+            "modifier": "sqrt",
+            "missing": 0
+          }
+        },
+        {
+          "gauss": {
+            "publish_date": {
+              "origin": "now",
+              "scale": "30d",
+              "decay": 0.5
+            }
+          }
+        },
+        {
+          "script_score": {
+            "script": {
+              "source": "Math.log(doc['view_count'].value + 1) * params.factor",
+              "params": {
+                "factor": 0.2
+              }
+            }
+          }
+        }
+      ],
+      "score_mode": "sum",
+      "boost_mode": "multiply"
+    }
+  }
+}
+```
+
+**Function Types:**
+
+- **field_value_factor:** Use document field values as scoring factors
+- **gauss/linear/exp:** Distance-based decay functions for date, location, numerical ranges
+- **script_score:** Custom scoring logic using Painless scripts
+- **random_score:** Add controlled randomization to prevent result staleness
+
+#### Hybrid Search with Reranking
+
+**Combining Text and Vector Search with Reranking:**
+
+```json
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "multi_match": {
+            "query": "sustainable energy solutions",
+            "fields": ["title^3", "content", "tags^2"],
+            "type": "best_fields"
+          }
+        },
+        {
+          "knn": {
+            "content_vector": {
+              "vector": [0.2, -0.1, 0.9],
+              "k": 100
+            }
+          }
+        }
+      ]
+    }
+  },
+  "rescore": {
+    "window_size": 100,
+    "query": {
+      "rescore_query": {
+        "function_score": {
+          "functions": [
+            {
+              "field_value_factor": {
+                "field": "authority_score",
+                "factor": 2.0,
+                "modifier": "log1p"
+              }
+            },
+            {
+              "field_value_factor": {
+                "field": "recency_boost",
+                "factor": 1.0,
+                "modifier": "none"
+              }
+            }
+          ],
+          "score_mode": "multiply"
+        }
+      },
+      "query_weight": 0.8,
+      "rescore_query_weight": 0.2
+    }
+  }
+}
+```
+
+#### External Neural Reranking Integration
+
+**Pipeline Architecture for Neural Reranking:**
+
+Modern OpenSearch deployments often integrate with external reranking services for advanced neural reranking:
+
+**Step 1: Initial Retrieval**
+```bash
+# OpenSearch returns top 100-200 candidates
+curl -X POST "localhost:9200/documents/_search" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "size": 200,
+    "query": {
+      "bool": {
+        "should": [
+          {"match": {"content": "machine learning"}},
+          {"knn": {"content_vector": {"vector": [...], "k": 100}}}
+        ]
+      }
+    }
+  }'
+```
+
+**Step 2: Feature Extraction**
+```python
+# Extract additional signals for reranking
+features = {
+    "query_document_similarity": cosine_similarity(query_vector, doc_vector),
+    "user_click_score": user_interaction_data.get(doc_id, 0),
+    "content_quality": quality_metrics.get(doc_id, 0.5),
+    "temporal_relevance": calculate_temporal_decay(doc.publish_date)
+}
+```
+
+**Step 3: Neural Reranking**
+```python
+# Apply transformer-based reranking model
+reranked_scores = neural_reranker.predict(
+    query_text=query,
+    document_texts=[doc.content for doc in candidates],
+    features=features
+)
+```
+
+**Step 4: Result Integration**
+```python
+# Return reranked results to user
+final_results = sorted(
+    zip(candidates, reranked_scores),
+    key=lambda x: x[1],
+    reverse=True
+)
+```
+
+#### Performance Optimization
+
+**Reranking Performance Tuning:**
+
+- **Window Size Optimization:** Start with 50, increase to 100-200 for better quality
+- **Weight Balancing:** Use 70-80% original query weight, 20-30% rescore weight
+- **Caching Strategies:** Cache rescore results for popular queries
+- **Async Processing:** Implement asynchronous reranking for real-time applications
+
+**Resource Management:**
+
+```json
+{
+  "search": {
+    "max_buckets": 10000,
+    "max_rescore_window": 10000
+  },
+  "indices": {
+    "query": {
+      "bool": {
+        "max_clause_count": 2048
+      }
+    }
+  }
+}
+```
 
 ---
 
