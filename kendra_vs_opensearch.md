@@ -1,5 +1,6 @@
 # AWS Kendra vs AWS OpenSearch: Service Comparison Guide
 
+
 ## 🎯 Overview
 
 This guide provides a comprehensive comparison between AWS Kendra and AWS OpenSearch to help you choose the right search solution for your needs. Both services offer powerful search capabilities but serve different use cases and technical requirements.
@@ -7,17 +8,23 @@ This guide provides a comprehensive comparison between AWS Kendra and AWS OpenSe
 ## Table of Contents
 
 **Part I: Service Foundation**
+
+
 - [Service Philosophy and Approach](#service-philosophy-and-approach)
 - [Core Differences Summary](#core-differences-summary)
 - [Detailed Feature Comparison](#detailed-feature-comparison)
 
 **Part II: Technical Capabilities**
+
+
 - [Search Capabilities](#search-capabilities)
 - [Data Handling and Integration](#data-handling-and-integration)
 - [Scalability and Performance](#scalability-and-performance)
 - [Security and Compliance](#security-and-compliance)
 
 **Part III: Implementation and Costs**
+
+
 - [Cost Comparison](#cost-comparison)
 - [Real-World Use Case Examples](#real-world-use-case-examples)
 - [Decision Framework](#decision-framework)
@@ -30,7 +37,9 @@ This guide provides a comprehensive comparison between AWS Kendra and AWS OpenSe
 ### AWS Kendra - Intelligent Enterprise Search
 AWS Kendra is a fully managed enterprise search service that uses machine learning to deliver intelligent search capabilities. It's designed for organizations that want to provide natural language search across their enterprise content without extensive technical configuration.
 
+
 **Key characteristics:**
+
 - **Managed AI/ML**: Pre-trained models handle query understanding and relevance
 - **Natural language interface**: Users can ask questions as they would to a person
 - **Enterprise-focused**: Built specifically for organizational knowledge management
@@ -39,7 +48,9 @@ AWS Kendra is a fully managed enterprise search service that uses machine learni
 ### AWS OpenSearch - Flexible Search and Analytics Platform
 AWS OpenSearch is a distributed search and analytics suite based on Elasticsearch and Kibana. It provides full control over search implementation and supports both traditional text search and modern vector search capabilities.
 
+
 **Key characteristics:**
+
 - **Full control**: Configure every aspect of search behavior and relevance
 - **Multi-purpose**: Supports search, analytics, logging, and monitoring use cases
 - **Extensible architecture**: Build custom search experiences and applications
@@ -118,12 +129,14 @@ AWS OpenSearch is a distributed search and analytics suite based on Elasticsearc
 ### AWS Kendra Pricing Structure
 *Current pricing information: [AWS Kendra Pricing](https://aws.amazon.com/kendra/pricing/)*
 
+
 - **Index-based pricing**: Monthly fee per search index
 - **Query-based charges**: Per query pricing model
 - **Developer Edition**: Lower-cost tier with reduced capacity
 - **Enterprise Edition**: Full features and higher capacity
 
 **Typical cost factors:**
+
 - Base index fee (varies by edition)
 - Per-query charges
 - Additional capacity units
@@ -134,12 +147,14 @@ AWS OpenSearch is a distributed search and analytics suite based on Elasticsearc
 
 *Current pricing information: [AWS OpenSearch Pricing](https://aws.amazon.com/opensearch-service/pricing/)*
 
+
 - **Instance-based pricing**: Hourly rates for compute instances
 - **Storage charges**: Separate EBS storage costs
 - **Data transfer**: Standard AWS data transfer rates
 - **Reserved instances**: Available for cost optimization
 
 **Typical cost factors:**
+
 - Instance hours (master, data, and UltraWarm nodes)
 - Storage volume and type
 - Data transfer costs
@@ -148,12 +163,14 @@ AWS OpenSearch is a distributed search and analytics suite based on Elasticsearc
 ### Cost Optimization Considerations
 
 **Kendra cost optimization:**
+
 - Choose appropriate edition for your needs
 - Optimize query patterns to reduce query charges
 - Use incremental updates efficiently
 - Monitor usage with AWS Cost Explorer
 
 **OpenSearch cost optimization:**
+
 - Right-size instances for your workload
 - Use Reserved Instances for predictable workloads
 - Implement data lifecycle policies
@@ -165,16 +182,19 @@ AWS OpenSearch is a distributed search and analytics suite based on Elasticsearc
 ### When AWS Kendra Excels
 
 **Enterprise Knowledge Base**
+
 - **Scenario**: Company with 50,000 employees needs to search across HR policies, procedures, and documentation
 - **Why Kendra**: Employees can ask natural questions like "What's the remote work policy?" without training
 - **Benefits**: Quick deployment, built-in connectors to existing systems, automatic relevance tuning
 
 **Customer Support FAQ**
+
 - **Scenario**: Customer service needs intelligent search across support documents
 - **Why Kendra**: Natural language understanding improves answer accuracy
 - **Benefits**: Reduced support ticket volume, faster resolution times
 
 **Legal and Compliance Search**
+
 - **Scenario**: Law firm needs to search across case documents and legal precedents
 - **Why Kendra**: Understanding of legal terminology and document context
 - **Benefits**: Faster case research, improved document discovery
@@ -182,21 +202,25 @@ AWS OpenSearch is a distributed search and analytics suite based on Elasticsearc
 ### When AWS OpenSearch Excels
 
 **E-commerce Product Search**
+
 - **Scenario**: Online retailer with millions of products needs advanced search with filters, facets, and recommendations
 - **Why OpenSearch**: Full control over ranking, faceting, and custom scoring
 - **Benefits**: Optimized conversion rates, personalized search experiences
 
 **Application Monitoring and Logging**
+
 - **Scenario**: Technology company needs to search and analyze application logs
 - **Why OpenSearch**: Real-time ingestion, powerful analytics, custom dashboards
 - **Benefits**: Faster incident resolution, proactive monitoring
 
 **Content Discovery Platform**
+
 - **Scenario**: Media company needs semantic search across articles, videos, and podcasts
 - **Why OpenSearch**: Vector search enables content similarity and recommendation
 - **Benefits**: Improved content discovery, user engagement
 
 **Multi-tenant SaaS Application**
+
 - **Scenario**: Software platform needs to provide search functionality to multiple clients
 - **Why OpenSearch**: Flexible architecture supports multi-tenancy and customization
 - **Benefits**: Scalable solution, client-specific search experiences
@@ -225,6 +249,7 @@ AWS OpenSearch is a distributed search and analytics suite based on Elasticsearc
 ### Hybrid Approach Considerations
 
 Some organizations use both services:
+
 - **Kendra** for internal enterprise search
 - **OpenSearch** for customer-facing applications and analytics
 
@@ -235,21 +260,25 @@ This approach maximizes the strengths of each service while serving different or
 ### Key Planning Factors
 
 **Data Architecture**
+
 - Evaluate current data formats and sources
 - Plan for data transformation requirements
 - Consider ongoing data synchronization needs
 
 **User Experience**
+
 - Assess user expectations and training requirements
 - Plan for query interface changes
 - Design for gradual migration if needed
 
 **Technical Implementation**
+
 - Evaluate existing integrations and APIs
 - Plan for infrastructure changes
 - Consider development resource requirements
 
 **Cost Impact**
+
 - Model costs under different usage scenarios
 - Factor in migration and development costs
 - Plan for ongoing operational expenses
@@ -258,5 +287,6 @@ This approach maximizes the strengths of each service while serving different or
 
 > **📚 Additional Resources:**
 > - [OpenSearch Technical Implementation Guide](opensearch.md) - Detailed technical guide for OpenSearch vector search
+
 
 

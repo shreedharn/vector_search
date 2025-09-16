@@ -7,18 +7,21 @@ A comprehensive guide to deploying, scaling, and managing OpenSearch vector sear
 ## Table of Contents
 
 **Part I: AWS Deployment Options**
+
 - [Managed vs Serverless Comparison](#managed-vs-serverless-comparison)
 - [AWS OpenSearch Service (Managed)](#aws-opensearch-service-managed)
 - [AWS OpenSearch Serverless](#aws-opensearch-serverless)
 - [Cost Analysis and Optimization](#cost-analysis-and-optimization)
 
 **Part II: Production Architecture**
+
 - [Cluster Design Patterns](#cluster-design-patterns)
 - [Capacity Planning and Scaling](#capacity-planning-and-scaling)
 - [Memory Management and Optimization](#memory-management-and-optimization)
 - [Security and Access Control](#security-and-access-control)
 
 **Part III: Performance Optimization**
+
 - [Parameter Tuning Guidelines](#parameter-tuning-guidelines)
 - [Performance Optimization](#part-iii-performance-optimization)
 - [Monitoring and Observability](#monitoring-and-observability)
@@ -26,6 +29,7 @@ A comprehensive guide to deploying, scaling, and managing OpenSearch vector sear
 - [Best Practices](#best-practices)
 
 **Part IV: Integration Patterns**
+
 - [Disaster Recovery and Backup](#disaster-recovery-and-backup)
 
 ---
@@ -39,6 +43,7 @@ AWS OpenSearch provides two distinct deployment models, each optimized for diffe
 #### Architectural Differences
 
 **AWS OpenSearch Managed Service:**
+
 ```
 Traditional cluster-based architecture:
 ┌─────────────────────────────────────────┐
@@ -53,6 +58,7 @@ Traditional cluster-based architecture:
 ```
 
 **AWS OpenSearch Serverless:**
+
 ```
 Serverless architecture with auto-scaling:
 ┌─────────────────────────────────────────┐
@@ -88,7 +94,9 @@ The managed service provides complete control over cluster configuration and per
 
 **Small-Scale Production (< 1M vectors):**
 
+
 **Recommended Configuration:**
+
 - **Data nodes**: 2x r6g.large.search (16GB RAM, 2 vCPU each)
 - **Master nodes**: 3x c6g.medium.search (2GB RAM, 1 vCPU each)
 - **Storage**: 500GB EBS gp3 per node with 3,000 IOPS
@@ -96,18 +104,22 @@ The managed service provides complete control over cluster configuration and per
 - **Security**: Encryption at rest and in transit enabled
 
 **Performance characteristics:**
+
 - Expected throughput: 50-200 queries per second (illustrative)
 - Target latency: Sub-50ms response times (varies by query complexity)
 - Vector capacity: Up to 1M vectors with good performance
 
 **Cost considerations:**
+
 - Estimated range: $600-800/month (verify current AWS pricing)
 - Reserved instances can reduce costs by 30-50%
 - Consider serverless for variable workloads
 
 **Medium-Scale Production (1M-10M vectors):**
 
+
 **Recommended Configuration:**
+
 - **Data nodes**: 4x r6g.2xlarge.search (64GB RAM, 8 vCPU each)
 - **Master nodes**: 3x c6g.large.search (4GB RAM, 2 vCPU each)
 - **Storage**: 1TB EBS gp3 per node with 4,000 IOPS and 250 MB/s throughput
@@ -115,20 +127,24 @@ The managed service provides complete control over cluster configuration and per
 - **Warm tier**: 2x ultrawarm1.medium.search nodes for cost optimization
 
 **Performance characteristics:**
+
 - Expected throughput: 200-1,000 queries per second (illustrative)
 - Target latency: Sub-30ms response times (varies by complexity)
 - Vector capacity: 1M-10M vectors with balanced performance and cost
 
 **Cost considerations:**
+
 - Estimated range: $2,200-2,800/month (verify current AWS pricing)
 - UltraWarm tier reduces storage costs for older data
 - Reserved instances provide significant savings for predictable workloads
 
 **Enterprise-Scale Production (10M+ vectors):**
 
+
 Enterprise-scale vector search deployments require careful architecture planning, robust infrastructure, and sophisticated operational practices. These deployments typically serve millions of queries per day and require 99.9%+ availability with sub-second response times even under heavy load.
 
 **Recommended Configuration:**
+
 - **Hot data nodes**: 8x r6g.4xlarge.search (128GB RAM, 16 vCPU each)
 - **Master nodes**: 3x c6g.xlarge.search (8GB RAM, 4 vCPU each)
 - **Storage**: 2TB EBS gp3 per node with 8,000 IOPS and 500 MB/s throughput
@@ -137,12 +153,14 @@ Enterprise-scale vector search deployments require careful architecture planning
 - **Cold storage**: Enabled for long-term data archival and compliance
 
 **Performance characteristics:**
+
 - Expected throughput: 1,000+ queries per second (illustrative)
 - Target latency: Sub-20ms response times (optimized configuration)
 - Vector capacity: 10M+ vectors with enterprise-grade performance
 - High availability: 99.9%+ uptime with proper configuration
 
 **Cost considerations:**
+
 - Estimated range: $7,500-9,000/month (verify current AWS pricing)
 - Tiered storage strategy significantly reduces total cost of ownership
 - Enterprise support and professional services recommended
@@ -151,19 +169,23 @@ Enterprise-scale vector search deployments require careful architecture planning
 
 **Multi-AZ Configuration Strategy:**
 
+
 **Zone Awareness Configuration:**
+
 - **Availability zones**: Deploy across 3 AZs for maximum resilience
 - **Node distribution**: Distribute data and master nodes evenly across zones
 - **Subnet strategy**: Use private subnets in each AZ for security
 - **Load balancing**: Automatic cross-zone load distribution
 
 **Network Architecture:**
+
 - **Private subnets**: Place nodes in dedicated private subnets per AZ
 - **Security groups**: Restrict access to necessary ports and sources
 - **VPC isolation**: Deploy within dedicated VPC for network security
 - **Cross-AZ traffic**: Account for data transfer costs between zones
 
 **High Availability Benefits:**
+
 - **Automatic failover**: Seamless failover between availability zones
 - **Fault tolerance**: Resilience to single AZ failures or maintenance
 - **Load distribution**: Even distribution of queries across zones
@@ -171,13 +193,16 @@ Enterprise-scale vector search deployments require careful architecture planning
 
 **Custom Endpoint Configuration:**
 
+
 **HTTPS and TLS Configuration:**
+
 - **HTTPS enforcement**: Require HTTPS for all API communications
 - **TLS policy**: Use minimum TLS 1.2 for security compliance
 - **Certificate management**: Use AWS Certificate Manager for SSL certificates
 - **Custom domains**: Configure branded domain names for production access
 
 **Security Policies:**
+
 - **TLS version**: Enforce TLS 1.2 or higher for compliance requirements
 - **Certificate rotation**: Automatic certificate renewal through ACM
 - **Domain validation**: Ensure proper DNS configuration and validation
@@ -191,44 +216,53 @@ Serverless OpenSearch automatically manages capacity while abstracting cluster o
 
 **Serverless Collection Configuration:**
 
+
 **Collection Type Selection:**
+
 - **SEARCH collections**: Optimized for search workloads and vector operations
 - **TIMESERIES collections**: Designed for log analytics and time-based data
 - **Collection naming**: Use descriptive names following organizational conventions
 
 **High Availability Features:**
+
 - **Standby replicas**: Enable for production deployments to ensure availability
 - **Multi-AZ deployment**: Automatic distribution across availability zones
 - **Fault tolerance**: Built-in resilience to infrastructure failures
 
 **Capacity Management:**
+
 - **OCU limits**: Set maximum indexing and search capacity limits for cost control
 - **Auto-scaling**: Automatic scaling based on workload demands
 - **Performance isolation**: Separate indexing and search capacity allocation
 
 **Serverless Security Configuration:**
 
+
 OpenSearch Serverless implements a comprehensive security model through policies that control network access, data encryption, and data access permissions. This multi-layered approach ensures enterprise-grade security while maintaining the simplicity of serverless operations.
 
 **Network Access Policies:**
+
 - **VPC-only access**: Restrict collection access to VPC endpoints for enhanced security
 - **Public dashboard access**: Allow dashboard access from public networks if needed
 - **Principal-based access**: Define specific IAM roles and users with collection access
 - **Resource patterns**: Use wildcards for scalable policy management
 
 **Encryption Policies:**
+
 - **Encryption at rest**: Enable automatic encryption using AWS KMS keys
 - **Custom KMS keys**: Use customer-managed keys for compliance requirements
 - **Key rotation**: Implement automatic key rotation policies
 - **Cross-region encryption**: Configure encryption for multi-region deployments
 
 **Data Access Policies:**
+
 - **Index-level permissions**: Control access to specific index patterns
 - **Operation-specific access**: Grant minimal required permissions (read, write, admin)
 - **Role-based access**: Map IAM roles to specific data access requirements
 - **Audit trail**: Monitor and log all data access activities
 
 **Security Best Practices:**
+
 - **Principle of least privilege**: Grant minimum necessary permissions
 - **Policy testing**: Validate policies in development before production deployment
 - **Regular audits**: Review and update security policies periodically
@@ -238,9 +272,11 @@ OpenSearch Serverless implements a comprehensive security model through policies
 
 **OpenSearch Compute Units (OCUs) Explained:**
 
+
 OpenSearch Compute Units (OCUs) are the fundamental scaling unit for Serverless collections. Each OCU provides a fixed amount of compute and memory resources that automatically scale based on your workload demands. Understanding OCU characteristics is essential for capacity planning and cost optimization.
 
 **OCU Specifications:**
+
 - **Memory**: 6GB per OCU for data processing and storage
 - **Compute**: 2 vCPU per OCU for query processing and indexing
 - **Storage I/O**: Proportional storage bandwidth shared across OCUs
@@ -248,26 +284,32 @@ OpenSearch Compute Units (OCUs) are the fundamental scaling unit for Serverless 
 
 **OCU Requirements Estimation:**
 
+
 Accurate OCU estimation requires analyzing both memory requirements for vector storage and compute requirements for query processing. The estimation process involves calculating storage needs, overhead factors, and performance targets to determine optimal OCU allocation.
 
 **Memory-Based Calculation:**
+
 - **Vector storage**: Calculate memory needed for raw vector data (4 bytes × dimensions × vector count)
 - **[HNSW](glossary.md#hnsw-hierarchical-navigable-small-world) overhead**: Add approximately 150% overhead for graph structures
 - **Total memory requirement**: Sum vector storage and HNSW overhead
 - **Required OCUs**: Divide total memory by 6GB per OCU
 
 **Compute-Based Calculation:**
+
 - **Query throughput**: Estimate ~50 queries per second per OCU for vector search (illustrative)
 - **Required OCUs**: Divide target QPS by per-OCU capacity
 - **Final requirement**: Use the maximum of memory-based or compute-based OCU count
 
 **OCU Allocation Strategy:**
+
 - **Indexing OCUs**: Handle data ingestion and index building operations
 - **Search OCUs**: Handle query processing (typically 50% of indexing OCUs)
 - **Minimum allocation**: At least 2 search OCUs for high availability
 
 **Example OCU Estimation:**
+
 For 1M vectors (384 dimensions) targeting 100 QPS:
+
 - **Vector memory**: ~1.4GB for raw vectors
 - **Total with overhead**: ~3.5GB including [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world) structures
 - **Memory-based OCUs**: 1 OCU (6GB capacity)
@@ -281,9 +323,11 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 
 **Managed Service Cost Components:**
 
+
 > **⚠️ Pricing Disclaimer:** AWS pricing changes frequently and varies by region. The following information is for planning guidance only. Always refer to the [AWS OpenSearch Service Pricing](https://aws.amazon.com/opensearch-service/pricing/) page for current, accurate pricing information.
 
 **Primary Cost Components for Managed OpenSearch:**
+
 
 1. **Instance Costs (Largest component)**
    - **Data nodes**: Primary cost driver based on instance type and count
@@ -307,6 +351,7 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
    - **Cold storage**: Lowest cost option for archival data
 
 **Cost Estimation Factors:**
+
 - Instance hours are typically 60-80% of total costs
 - Storage costs scale with data volume
 - Reserved Instances can reduce costs by 30-50% for steady workloads
@@ -314,28 +359,34 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 
 **Serverless Costs (variable based on usage):**
 
+
 > **⚠️ Pricing Disclaimer:** OpenSearch Serverless pricing is based on OpenSearch Compute Units (OCUs) and changes frequently. Always refer to the [AWS OpenSearch Serverless Pricing](https://aws.amazon.com/opensearch-service/pricing/) page for current rates and detailed cost calculations.
 
 **OpenSearch Compute Units (OCUs)**
+
 - **Search OCUs**: Handle query processing and data retrieval operations
 - **Indexing OCUs**: Handle data ingestion and index building operations
 - **Current pricing**: Approximately $0.24 per OCU per hour (verify current rates)
 
 **Common Usage Patterns and Cost Implications:**
 
+
 **Bursty Workload Pattern:**
+
 - **Characteristics**: High activity during business hours, low overnight activity
 - **Typical OCU usage**: 10-15 OCUs during peak (8 hours), 2-3 OCUs off-peak
 - **Cost advantages**: Pay only for actual usage, no idle capacity costs
 - **Estimated monthly range**: $1,000-$1,500 (illustrative, verify with current pricing)
 
 **Steady Workload Pattern:**
+
 - **Characteristics**: Consistent traffic throughout the day
 - **Typical OCU usage**: 6-9 OCUs consistently across 24 hours
 - **Cost considerations**: Higher total OCU hours but predictable costs
 - **Estimated monthly range**: $1,500-$2,500 (illustrative, verify with current pricing)
 
 **Batch Processing Pattern:**
+
 - **Characteristics**: Intensive processing periods followed by minimal activity
 - **Typical OCU usage**: 15-20 OCUs during processing, 1-2 OCUs standby
 - **Cost benefits**: Very cost-effective for sporadic high-intensity workloads
@@ -345,29 +396,35 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 
 **Reserved Instance Optimization (Managed):**
 
+
 > **⚠️ Pricing Disclaimer:** Reserved Instance pricing and savings percentages vary by instance type and AWS region. Consult the [AWS OpenSearch Reserved Instance Pricing](https://aws.amazon.com/opensearch-service/pricing/) page for current rates and specific savings calculations.
 
 **Reserved Instance Options:**
 
+
 **1-Year No Upfront:**
+
 - **Savings**: Typically 25-35% compared to On-Demand pricing
 - **Payment**: Monthly payments with no upfront cost
 - **Flexibility**: High - can be modified or exchanged
 - **Best for**: Growing businesses with predictable workloads
 
 **1-Year All Upfront:**
+
 - **Savings**: Typically 30-40% compared to On-Demand pricing
 - **Payment**: Single upfront payment for the entire year
 - **Flexibility**: Medium - modifications possible but limited
 - **Best for**: Established workloads with strong cash flow
 
 **3-Year All Upfront:**
+
 - **Savings**: Typically 45-55% compared to On-Demand pricing
 - **Payment**: Single upfront payment for three years
 - **Flexibility**: Low - minimal modification options
 - **Best for**: Stable, long-term production workloads
 
 **Recommendations by Use Case:**
+
 - **Stable Production Workload**: 3-year All Upfront for maximum savings
 - **Growing Business**: 1-year No Upfront for flexibility
 - **Uncertain Demand**: On-Demand with Spot Instances for cost control
@@ -375,25 +432,30 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 
 **Serverless Cost Optimization:**
 
+
 **Capacity Limits:**
+
 - **Benefit**: Prevent unexpected cost spikes from runaway queries or indexing operations
 - **Implementation**: Configure `maxIndexingCapacityInOCU` and `maxSearchCapacityInOCU` parameters
 - **Cost impact**: Can reduce costs by 10-30% by preventing over-provisioning
 - **Best practice**: Set limits based on 95th percentile usage patterns
 
 **Usage Monitoring:**
+
 - **Benefit**: Identify optimization opportunities and unusual cost patterns
 - **Implementation**: Use CloudWatch metrics with custom dashboards and alerts
 - **Key metrics**: OCU usage, query patterns, indexing volume, error rates
 - **Cost impact**: Enables proactive optimization leading to 15-25% savings
 
 **Workload Scheduling:**
+
 - **Benefit**: Minimize idle time and optimize resource utilization
 - **Implementation**: Schedule batch processing during predictable low-traffic periods
 - **Strategies**: Consolidate indexing operations, defer non-critical searches
 - **Cost impact**: Can achieve 20-40% savings through better resource utilization
 
 **Data Lifecycle Management:**
+
 - **Benefit**: Reduce storage costs for aging data
 - **Implementation**: Archive older, less-accessed data to Amazon S3
 - **Strategy**: Use index templates with lifecycle policies for automatic archiving
@@ -411,11 +473,14 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 
 **Hot-Warm-Cold Architecture:**
 
+
 > **⚠️ Pricing Disclaimer:** Instance and storage costs vary by AWS region and change frequently. Refer to [AWS OpenSearch Pricing](https://aws.amazon.com/opensearch-service/pricing/) for current rates.
 
 **Data Tier Design Strategy:**
 
+
 **Hot Tier (0-30 days):**
+
 - **Purpose**: Real-time search operations and recently indexed vectors
 - **Recommended instances**: Memory-optimized (r6g family) for high-performance search
 - **Storage**: Instance store NVMe or high-IOPS EBS (gp3/io2) for lowest latency
@@ -424,6 +489,7 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 - **Cost characteristics**: Highest per-GB cost but essential for user experience
 
 **Warm Tier (30-90 days):**
+
 - **Purpose**: Frequently accessed data with acceptable latency requirements
 - **Recommended instances**: Balanced compute and memory (r6g.xlarge to 2xlarge)
 - **Storage**: EBS gp3 provides good balance of performance and cost
@@ -432,6 +498,7 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 - **Cost characteristics**: Moderate per-GB cost with good performance
 
 **Cold Tier (3 months - 1 year):**
+
 - **Purpose**: Infrequently accessed historical data
 - **Recommended instances**: Storage-optimized instances (i3 family)
 - **Storage**: EBS st1 (throughput optimized) for cost-effective bulk storage
@@ -440,6 +507,7 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 - **Cost characteristics**: Low per-GB cost for long-term retention
 
 **Frozen Tier (1+ years):**
+
 - **Purpose**: Long-term retention for compliance and occasional analysis
 - **Storage**: Amazon S3 with lifecycle policies (Standard → IA → Glacier)
 - **Performance**: Batch access only, restore times measured in hours
@@ -447,6 +515,7 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 - **Cost characteristics**: Lowest per-GB cost for archival requirements
 
 **Typical Data Distribution Pattern:**
+
 - **Hot tier**: 10% of data (most recent, highest access frequency)
 - **Warm tier**: 30% of data (recent, frequent access)
 - **Cold tier**: 50% of data (older, occasional access)
@@ -454,7 +523,9 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 
 **Dedicated Master Node Configuration:**
 
+
 **Purpose and Benefits:**
+
 - **Primary function**: Cluster state management without storing data
 - **Split-brain prevention**: Maintains cluster consensus during network partitions
 - **Stability**: Isolates cluster management from data processing workloads
@@ -463,22 +534,27 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 
 **Sizing Guidelines:**
 
+
 **Small Clusters (up to 10 data nodes):**
+
 - **Recommended instances**: c6g.medium.search (2GB RAM, 1 vCPU)
 - **Master nodes**: 3 nodes for high availability
 - **Use case**: Development, testing, small production workloads
 
 **Medium Clusters (10-50 data nodes):**
+
 - **Recommended instances**: c6g.large.search (4GB RAM, 2 vCPU)
 - **Master nodes**: 3 nodes (standard configuration)
 - **Use case**: Production workloads with moderate scale
 
 **Large Clusters (50+ data nodes):**
+
 - **Recommended instances**: c6g.xlarge.search (8GB RAM, 4 vCPU)
 - **Master nodes**: 3 or 5 nodes depending on complexity
 - **Use case**: Enterprise-scale production deployments
 
 **Configuration Best Practices:**
+
 - **Odd numbers only**: Use 3 or 5 master nodes to maintain quorum
 - **Separation principle**: Deploy master nodes separately from data nodes
 - **Sizing strategy**: Base sizing on cluster complexity, not data volume
@@ -489,7 +565,9 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 
 **Optimal Shard Calculation Strategy:**
 
+
 **Memory-Based Sharding Considerations:**
+
 - **Vector memory calculation**: Each vector requires 4 bytes per dimension (float32)
 - **[HNSW](glossary.md#hnsw-hierarchical-navigable-small-world) overhead**: Graph structures add ~80% memory overhead
 - **JVM overhead**: Additional memory for garbage collection and operations
@@ -497,34 +575,42 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 
 **Sharding Decision Factors:**
 
+
 **Vector Count Constraints:**
+
 - **Minimum vectors per shard**: 10,000 vectors for efficient indexing
 - **Maximum vectors per shard**: ~1M vectors to maintain query performance
 - **Balance point**: Aim for 100K-500K vectors per shard for most workloads
 
 **Memory-Based Constraints:**
+
 - **Per-shard memory target**: 20-30GB for balanced performance
 - **Instance memory utilization**: Keep below 75% for stability
 - **Query overhead**: Reserve memory for concurrent search operations
 
 **Sharding Examples:**
 
+
 **Small Dataset (1M vectors, 384 dimensions):**
+
 - **Estimated memory**: ~4GB vectors + ~3GB [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world) = ~7GB total
 - **Recommended shards**: 1-2 shards for simplicity
 - **Vectors per shard**: 500K-1M vectors
 
 **Medium Dataset (10M vectors, 768 dimensions):**
+
 - **Estimated memory**: ~30GB vectors + ~24GB [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world) = ~54GB total
 - **Recommended shards**: 2-3 shards for performance balance
 - **Vectors per shard**: 3-5M vectors
 
 **Large Dataset (50M vectors, 384 dimensions):**
+
 - **Estimated memory**: ~76GB vectors + ~61GB [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world) = ~137GB total
 - **Recommended shards**: 5-7 shards for optimal distribution
 - **Vectors per shard**: 7-10M vectors
 
 **Sharding Best Practices:**
+
 - **Start conservative**: Begin with fewer shards, scale as needed
 - **Monitor performance**: Track query latency and memory usage
 - **Consider growth**: Plan for 2-3x data growth in shard strategy
@@ -536,29 +622,35 @@ For 1M vectors (384 dimensions) targeting 100 QPS:
 
 **Growth Projection Analysis:**
 
+
 Effective capacity planning requires analyzing historical growth patterns, business projections, and seasonal variations to predict future infrastructure needs. This analysis forms the foundation for proactive scaling decisions and cost optimization strategies.
 
 **Planning Framework for Capacity Growth:**
+
 
 A structured approach to capacity planning involves establishing baseline metrics, defining growth triggers, and creating response playbooks. This framework ensures consistent decision-making and prevents both over-provisioning and capacity shortfalls.
 
 **Growth Scenario Planning:**
 
+
 Different growth patterns require distinct infrastructure strategies. Planning for multiple scenarios ensures preparedness for various business outcomes and enables rapid adaptation to changing conditions.
 
 **Conservative Growth (15% monthly):**
+
 - **Characteristics**: Steady organic user acquisition and usage growth
 - **Planning horizon**: 12-18 months ahead
 - **Infrastructure approach**: Gradual capacity increases with 2-3 month planning cycles
 - **Risk level**: Low - predictable scaling requirements
 
 **Aggressive Growth (35% monthly):**
+
 - **Characteristics**: Rapid expansion through marketing campaigns or feature launches
 - **Planning horizon**: 6-12 months ahead
 - **Infrastructure approach**: More frequent capacity reviews and scaling events
 - **Risk level**: Medium - requires closer monitoring and faster response
 
 **Exponential Growth (75% monthly):**
+
 - **Characteristics**: Viral growth patterns or product-market fit scenarios
 - **Planning horizon**: 3-6 months ahead
 - **Infrastructure approach**: Proactive over-provisioning with rapid scaling capabilities
@@ -566,24 +658,29 @@ Different growth patterns require distinct infrastructure strategies. Planning f
 
 **Capacity Planning Methodology:**
 
+
 **Memory Requirements Calculation:**
+
 - **Vector storage**: 4 bytes per dimension × vector count
 - **[HNSW](glossary.md#hnsw-hierarchical-navigable-small-world) overhead**: ~80% additional memory for graph structures
 - **JVM overhead**: ~30% for garbage collection and operations
 - **Safety margin**: 25% buffer for peak usage and growth
 
 **Performance Scaling Factors:**
+
 - **Queries per second per node**: ~200-300 QPS for vector search workloads
 - **Memory utilization target**: 70-75% to maintain performance
 - **Node sizing**: Balance between too many small nodes vs. few large nodes
 
 **Scaling Timeline Considerations:**
+
 - **Managed service scaling**: 15-30 minutes for instance additions
 - **Serverless scaling**: Near-instantaneous OCU scaling
 - **Index rebalancing**: 1-4 hours depending on data volume
 - **Planning lead time**: 2-4 weeks for significant capacity changes
 
 **Key Planning Metrics:**
+
 - **Current utilization**: Memory, CPU, and query performance baselines
 - **Growth rate**: Historical growth patterns and business projections
 - **Peak usage patterns**: Seasonal or event-driven traffic spikes
@@ -593,25 +690,30 @@ Different growth patterns require distinct infrastructure strategies. Planning f
 
 **CloudWatch-Based Auto-Scaling Strategy:**
 
+
 CloudWatch provides comprehensive monitoring and alerting capabilities that enable intelligent auto-scaling decisions. By leveraging multiple metrics and sophisticated policies, you can create responsive scaling that maintains performance while optimizing costs.
 
 **Core Scaling Policies:**
 
+
 Effective auto-scaling relies on well-tuned policies that respond to capacity pressure without causing oscillations. Core policies should address memory pressure, query performance, and resource utilization with appropriate cooldown periods to ensure stability.
 
 **Scale-Up Triggers:**
+
 - **JVM Memory Pressure**: Threshold at 80% utilization
 - **Evaluation period**: 2 consecutive periods of 5 minutes each
 - **Action**: Add data nodes to distribute memory load
 - **Cooldown**: 10 minutes to allow stabilization before next scaling action
 
 **Scale-Down Triggers:**
+
 - **JVM Memory Pressure**: Threshold below 40% utilization
 - **Evaluation period**: 6 periods (30 minutes) for conservative scale-down
 - **Action**: Remove data nodes to optimize costs
 - **Cooldown**: 30 minutes to prevent rapid scaling cycles
 
 **Query Performance Scaling:**
+
 - **Search [Latency](glossary.md#latency)**: Threshold above 100ms average response time
 - **Evaluation period**: 3 periods (15 minutes) to confirm performance issues
 - **Action**: Add coordinating nodes to handle query load
@@ -619,12 +721,15 @@ Effective auto-scaling relies on well-tuned policies that respond to capacity pr
 
 **Advanced Scaling Considerations:**
 
+
 **Custom Scaling Logic:**
+
 - **Vector ingestion spikes**: Proactive scaling based on data pipeline metrics
 - **Search pattern changes**: Adaptive scaling for different query types
 - **Seasonal patterns**: Predictive scaling for known traffic patterns
 
 **Scaling Best Practices:**
+
 - **Gradual scaling**: Add/remove one node at a time for stability
 - **Health checks**: Validate cluster health before and after scaling
 - **Cost optimization**: Longer evaluation periods for scale-down actions
@@ -636,23 +741,28 @@ Effective auto-scaling relies on well-tuned policies that respond to capacity pr
 
 **Optimal Heap Configuration Strategy:**
 
+
 Vector workloads have unique memory requirements that differ significantly from traditional text search. The optimal heap configuration balances JVM heap memory for query processing with off-heap memory for vector storage and graph structures, requiring careful tuning based on workload characteristics.
 
 **Heap Sizing by Workload Type:**
 
+
 **Vector-Heavy Workloads:**
+
 - **Heap allocation**: 40% of total node memory
 - **Rationale**: Vector data and [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world) graphs require significant off-heap memory
 - **Off-heap usage**: 60% available for vector storage and graph structures
 - **Optimal for**: Primarily vector search applications with minimal text processing
 
 **Mixed Workloads:**
+
 - **Heap allocation**: 50% of total node memory
 - **Rationale**: Balanced approach for text and vector processing
 - **Off-heap usage**: 50% for vector data, sufficient heap for text operations
 - **Optimal for**: Applications combining traditional search with vector capabilities
 
 **Text-Heavy Workloads:**
+
 - **Heap allocation**: 60% of total node memory
 - **Rationale**: Text processing requires more heap memory for indexing and querying
 - **Off-heap usage**: 40% available for limited vector operations
@@ -660,30 +770,37 @@ Vector workloads have unique memory requirements that differ significantly from 
 
 **JVM Configuration Best Practices:**
 
+
 **Garbage Collection Settings:**
+
 - **Collector**: G1GC for balanced throughput and low latency
 - **Max pause time**: 200ms target for responsive search operations
 - **Heap region size**: 32MB for large heap optimization
 - **Advanced optimizations**: JVMCI compiler for improved performance
 
 **Memory Management:**
+
 - **Pre-touch memory**: Allocate and touch all memory pages at startup
 - **Disable explicit GC**: Prevent application-triggered garbage collection
 - **OOM handling**: Fast fail on out-of-memory errors for rapid recovery
 
 **Configuration Examples:**
 
+
 **32GB Node (r6g.xlarge) - Vector Heavy:**
+
 - **Heap size**: ~13GB (40% of 32GB)
 - **Off-heap available**: ~19GB for vectors
 - **Suitable vector capacity**: ~15GB effective storage
 
 **64GB Node (r6g.2xlarge) - Vector Heavy:**
+
 - **Heap size**: ~26GB (40% of 64GB)
 - **Off-heap available**: ~38GB for vectors
 - **Suitable vector capacity**: ~30GB effective storage
 
 **128GB Node (r6g.4xlarge) - Mixed Workload:**
+
 - **Heap size**: ~64GB (50% of 128GB)
 - **Off-heap available**: ~64GB for vectors and other operations
 - **Suitable vector capacity**: ~50GB effective storage
@@ -691,9 +808,11 @@ Vector workloads have unique memory requirements that differ significantly from 
 
 **Configuration Best Practices:**
 
+
 Circuit breakers protect OpenSearch from memory pressure by preventing operations that would exceed available resources. Proper configuration prevents out-of-memory errors while maintaining query performance under load conditions.
 
 **OpenSearch Settings:**
+
 - **Total limit**: `indices.breaker.total.limit: 90%`
 - **Fielddata limit**: `indices.breaker.fielddata.limit: 40%`
 - **Request limit**: `indices.breaker.request.limit: 60%`
@@ -701,6 +820,7 @@ Circuit breakers protect OpenSearch from memory pressure by preventing operation
 - **Real memory usage**: `indices.breaker.total.use_real_memory: true`
 
 **Monitoring and Alerting:**
+
 - **Circuit breaker trips**: Monitor frequency and patterns of breaker activation
 - **Memory pressure**: Track heap utilization approaching breaker thresholds
 - **Query patterns**: Identify queries consistently triggering breakers
@@ -712,13 +832,16 @@ Circuit breakers protect OpenSearch from memory pressure by preventing operation
 
 **Production IAM Roles:**
 
+
 Production IAM roles should follow the principle of least privilege, with clearly defined responsibilities and scope limitations. Each role serves specific functions in the production environment with appropriate security boundaries.
 
 **IAM Role Configuration Guidelines:**
 
+
 IAM role configuration requires careful consideration of access patterns, security requirements, and operational needs. Proper role design enables secure automation while maintaining necessary access controls for different user types and system components.
 
 **Application Service Role:**
+
 - **Purpose**: Production application access to OpenSearch cluster
 - **Permissions**: Limited to search operations (GET, POST, PUT)
 - **Resource scope**: Restricted to specific domain pattern (e.g., `vector-search/*`)
@@ -726,6 +849,7 @@ IAM role configuration requires careful consideration of access patterns, securi
 - **Integration permissions**: Access to Bedrock for embedding generation (Titan models)
 
 **Administration Role:**
+
 - **Purpose**: Infrastructure management and cluster operations
 - **Permissions**: Full OpenSearch domain management capabilities
 - **Scope**: Domain creation, deletion, configuration management
@@ -733,6 +857,7 @@ IAM role configuration requires careful consideration of access patterns, securi
 - **Restriction**: Separate from application roles for security isolation
 
 **Read-Only Analyst Role:**
+
 - **Purpose**: Business intelligence and monitoring access
 - **Permissions**: Read-only access to OpenSearch data
 - **Scope**: Limited to specific analysis and reporting needs
@@ -742,7 +867,9 @@ IAM role configuration requires careful consideration of access patterns, securi
 
 **OpenSearch Role-Based Access Control:**
 
+
 **Vector Indexer Role:**
+
 - **Cluster permissions**: k-NN model management and monitoring capabilities
 - **Index permissions**: Write access to vector indices including bulk operations
 - **Allowed actions**: Index creation, data ingestion, updates, and read operations
@@ -750,6 +877,7 @@ IAM role configuration requires careful consideration of access patterns, securi
 - **Use case**: Data ingestion services and ETL pipelines
 
 **Vector Searcher Role:**
+
 - **Cluster permissions**: Basic monitoring and health check access
 - **Index permissions**: Read-only access to vector data
 - **Allowed actions**: Search, get, multi-get, and stats monitoring
@@ -757,6 +885,7 @@ IAM role configuration requires careful consideration of access patterns, securi
 - **Use case**: Application search services and user-facing queries
 
 **Vector Administrator Role:**
+
 - **Cluster permissions**: Full k-NN plugin management and cluster settings
 - **Index permissions**: Complete control over vector indices
 - **Scope**: All administrative operations on vector-related infrastructure
@@ -764,14 +893,17 @@ IAM role configuration requires careful consideration of access patterns, securi
 
 **Field-Level Security Implementation:**
 
+
 Field-level security enables granular control over data access, allowing different users and applications to access subsets of document fields based on their roles and requirements. This capability is essential for multi-tenant applications and compliance scenarios.
 **PII Protection Strategy:**
+
 - **Access pattern**: Grant access to content and vectors while protecting sensitive fields
 - **Allowed fields**: `title`, `content`, `content_vector` for search functionality
 - **Restricted fields**: `user_email`, `user_ip`, `sensitive_metadata` for privacy protection
 - **Use case**: Multi-tenant applications requiring data privacy compliance
 
 **Security Best Practices:**
+
 - **Principle of least privilege**: Grant minimum necessary permissions for each role
 - **Regular access reviews**: Audit and update role permissions periodically
 - **Field-level controls**: Protect sensitive data while enabling search functionality
@@ -781,17 +913,22 @@ Field-level security enables granular control over data access, allowing differe
 
 **VPC and Security Group Setup:**
 
+
 **Network Security Configuration Strategy:**
+
 
 Network security forms the foundation of OpenSearch cluster protection, requiring careful design of VPC architecture, security groups, and access controls. A well-designed network security strategy provides defense in depth while enabling necessary connectivity for applications and management.
 **VPC Architecture Design:**
+
 **Multi-AZ Private Subnet Strategy:**
+
 - **Data node subnets**: Deploy across multiple AZs (e.g., us-west-2a, us-west-2b)
 - **Master node subnet**: Separate subnet for dedicated master nodes (e.g., us-west-2c)
 - **CIDR allocation**: Use non-overlapping ranges (10.0.1.0/24, 10.0.2.0/24, 10.0.3.0/24)
 - **Purpose isolation**: Dedicated subnets for different node types and functions
 
 **OpenSearch Cluster Security Group:**
+
 - **HTTPS access**: Port 443 from application tier for API access
 - **OpenSearch API**: Port 9200 within VPC CIDR for cluster management
 - **Cluster transport**: Port range 9300-9400 for inter-node communication
@@ -799,6 +936,7 @@ Network security forms the foundation of OpenSearch cluster protection, requirin
 - **Self-referencing**: Allow cluster nodes to communicate with each other
 
 **Application Tier Security Group:**
+
 - **OpenSearch connectivity**: Outbound HTTPS to OpenSearch cluster security group
 - **Bedrock integration**: Outbound HTTPS for embedding generation services
 - **Principle of least privilege**: Minimal required connectivity only
@@ -806,27 +944,32 @@ Network security forms the foundation of OpenSearch cluster protection, requirin
 
 **Web Application Firewall (WAF) Protection:**
 
+
 AWS WAF provides application-layer protection against common web exploits and abuse patterns. For OpenSearch deployments, WAF rules should focus on protecting API endpoints from malicious queries, rate limiting, and geographic restrictions based on business requirements.
 
 **Rate Limiting Rules:**
+
 - **Request throttling**: Limit to 1000 requests per 5-minute window per IP
 - **Scope**: Per-IP address to prevent individual abuse
 - **Action**: Block or delay excessive requests
 - **Monitoring**: Track blocked requests and adjust limits based on usage patterns
 
 **Geographic Access Control:**
+
 - **Country allowlist**: Restrict access to approved geographic regions
 - **Configuration**: Define allowed countries based on business requirements
 - **Compliance**: Support data residency and regulatory constraints
 - **Flexibility**: Emergency access procedures for legitimate blocked traffic
 
 **Attack Protection:**
+
 - **SQL injection**: Managed rule sets for database injection attempts
 - **XSS protection**: Block cross-site scripting attacks
 - **Common vulnerabilities**: AWS managed rule groups for OWASP Top 10
 - **Custom rules**: Application-specific threat patterns
 
 **Network Security Best Practices:**
+
 - **Private deployment**: Keep all OpenSearch nodes in private subnets
 - **VPC endpoints**: Use VPC endpoints for AWS service communication
 - **Network ACLs**: Additional subnet-level security controls
@@ -843,18 +986,21 @@ AWS WAF provides application-layer protection against common web exploits and ab
 
 
 **Development Environment:**
+
 - **Range**: 64-128 (recommended: 128)
 - **Build time**: Fast indexing for rapid iteration
 - **[Recall](glossary.md#recall)**: Good performance (94-96%, illustrative)
 - **Use case**: Rapid prototyping, testing, proof of concepts
 
 **Production Environment:**
+
 - **Range**: 128-256 (recommended: 256)
 - **Build time**: Moderate indexing time
 - **[Recall](glossary.md#recall)**: Excellent performance (97-99%, illustrative)
 - **Use case**: Standard production workloads requiring good balance
 
 **High-Accuracy Applications:**
+
 - **Range**: 256-512 (recommended: 384)
 - **Build time**: Slower indexing for maximum quality
 - **[Recall](glossary.md#recall)**: Outstanding performance (99%+, illustrative)
@@ -862,46 +1008,55 @@ AWS WAF provides application-layer protection against common web exploits and ab
 
 
 **Memory-Constrained Deployments:**
+
 - **Range**: 8-16 (recommended: 12)
 - **Memory overhead**: Low graph storage requirements
 - **Search speed**: Good performance with resource efficiency
 - **[Recall](glossary.md#recall)**: Acceptable performance (90-94%, illustrative)
 
 **Balanced Performance:**
+
 - **Range**: 16-32 (recommended: 24)
 - **Memory overhead**: Moderate graph storage
 - **Search speed**: Excellent query performance
 - **[Recall](glossary.md#recall)**: High performance (95-98%, illustrative)
 
 **High-Performance Deployments:**
+
 - **Range**: 32-64 (recommended: 48)
 - **Memory overhead**: High graph storage requirements
 - **Search speed**: Outstanding query performance
 - **[Recall](glossary.md#recall)**: Maximum performance (98-99%, illustrative)
 
 **Memory Constraint Analysis:**
+
 - Calculate available memory per vector based on total cluster memory
 - Account for vector storage (4 bytes × dimensions × vector count)
 - Reserve memory for [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world) graph structures and operational overhead
 - Limit m parameter to fit within memory constraints
 
 **[Latency](glossary.md#latency) Requirements:**
+
 - Sub-1ms targets: Use lower ef_construction (64-128) for faster indexing
 - 1-5ms targets: Balanced ef_construction (128-256)
 - >5ms acceptable: Higher ef_construction (256-512) for maximum recall
 
 **[Recall](glossary.md#recall) Requirements:**
+
 - >98% recall needed: Use ef_construction ≥256 and m ≥32
 - 95-98% recall: Use ef_construction ≥128 and m ≥16
 - <95% acceptable: Use ef_construction ≥64 and m ≥8
 
 **Runtime ef_search Recommendations:**
+
 - **Fast queries**: Set ef_search = m × 2
 - **Balanced performance**: Set ef_search = m × 4
 - **Maximum accuracy**: Set ef_search = m × 8
 
 **Example Parameter Selection:**
+
 For a 1M vector dataset (384 dimensions) with 64GB memory budget:
+
 - **Memory calculation**: ~4GB vectors + graph overhead
 - **Recommended m**: 24 (balanced performance)
 - **Recommended ef_construction**: 256 (production quality)
@@ -911,25 +1066,30 @@ For a 1M vector dataset (384 dimensions) with 64GB memory budget:
 
 **Dynamic ef_search Selection Strategy:**
 
+
 Dynamic ef_search selection enables optimal performance across different query types and system conditions. By adjusting search parameters based on application requirements and current system load, you can balance response time with result quality.
 
 **Performance Profile Categories:**
 
+
 Different application types require distinct performance profiles, with varying priorities between speed and accuracy. Understanding these categories helps in selecting appropriate parameters for each use case scenario.
 
 **Real-Time Applications:**
+
 - **Max latency target**: 10ms for responsive user interfaces
 - **ef_search multiplier**: 1.5x index m parameter for speed optimization
 - **Use cases**: User-facing search, interactive applications, live recommendations
 - **Priority**: Speed over absolute accuracy
 
 **API Service Applications:**
+
 - **Max latency target**: 50ms for API response times
 - **ef_search multiplier**: 2.5x index m parameter for balanced performance
 - **Use cases**: API endpoints, microservices, application integration
 - **Priority**: Balanced speed and accuracy
 
 **Batch Processing Applications:**
+
 - **Max latency target**: 1000ms for high-accuracy offline processing
 - **ef_search multiplier**: 4.0x index m parameter for maximum accuracy
 - **Use cases**: Offline analysis, research workloads, data science applications
@@ -937,9 +1097,11 @@ Different application types require distinct performance profiles, with varying 
 
 **Dynamic ef_search Calculation:**
 
+
 The ef_search parameter should be calculated dynamically based on the number of neighbors requested (k), the index configuration (m), and the application's performance requirements. This ensures optimal search coverage while maintaining acceptable response times.
 
 **Base Calculation:**
+
 - **Minimum value**: Use the larger of k_neighbors or (m × multiplier)
 - **K-value adjustments**: Scale ef_search based on neighbor count requirements
 - **Large k (>100)**: Increase ef_search by 50% for wider search coverage
@@ -947,19 +1109,23 @@ The ef_search parameter should be calculated dynamically based on the number of 
 
 **Query Routing Optimization:**
 
+
 **Low QPS Environments (<100 QPS):**
+
 - **Strategy**: Round-robin distribution for simple load balancing
 - **Connection pooling**: Minimal overhead for low traffic
 - **Caching**: Disabled to reduce complexity and memory usage
 - **Best for**: Development environments, small applications
 
 **Medium QPS Environments (100-1000 QPS):**
+
 - **Strategy**: Least-connections routing for better load distribution
 - **Connection pooling**: Moderate pooling for efficiency
 - **Caching**: Result caching enabled for performance improvement
 - **Best for**: Production applications with moderate traffic
 
 **High QPS Environments (>1000 QPS):**
+
 - **Strategy**: Weighted round-robin for advanced load balancing
 - **Connection pooling**: Aggressive pooling for maximum efficiency
 - **Caching**: Multi-level caching for optimal performance
@@ -973,13 +1139,16 @@ Comprehensive monitoring is essential for maintaining high-performance vector se
 A well-designed monitoring strategy provides visibility into all aspects of your OpenSearch vector deployment, from infrastructure health to application performance. This multi-layered approach enables proactive issue detection and resolution.
 **CloudWatch Dashboard Strategy for Vector Search:**
 
+
 CloudWatch dashboards should provide at-a-glance visibility into system health and performance trends. For vector search workloads, dashboards must balance infrastructure metrics with vector-specific performance indicators.
 
 **Essential Dashboard Widgets:**
 
+
 Dashboard widgets should prioritize the most critical metrics for vector search operations, providing immediate insight into system health and performance trends. Each widget serves a specific monitoring purpose with appropriate visualization and alerting integration.
 
 **Cluster Health Monitoring:**
+
 - **Widget type**: CloudWatch metrics display
 - **Key metrics**: ClusterStatus (green/yellow/red) from AWS/ES namespace
 - **Update period**: 5-minute intervals for responsive monitoring
@@ -987,6 +1156,7 @@ Dashboard widgets should prioritize the most critical metrics for vector search 
 - **Purpose**: Core cluster availability and health status tracking
 
 **Vector Search Performance:**
+
 - **Widget type**: Performance metrics visualization
 - **Key metrics**: Search[Latency](glossary.md#latency) and Indexing[Latency](glossary.md#latency) from AWS/ES namespace
 - **Update period**: 5-minute intervals for trend analysis
@@ -994,6 +1164,7 @@ Dashboard widgets should prioritize the most critical metrics for vector search 
 - **Purpose**: Monitor query response times and indexing performance
 
 **Resource Utilization:**
+
 - **Widget type**: Resource monitoring display
 - **Key metrics**: JVMMemoryPressure and CPUUtilization from AWS/ES namespace
 - **Update period**: 5-minute intervals for capacity management
@@ -1001,6 +1172,7 @@ Dashboard widgets should prioritize the most critical metrics for vector search 
 - **Purpose**: Track resource consumption and scaling needs
 
 **Vector-Specific Metrics:**
+
 - **Widget type**: Custom metrics dashboard
 - **Key metrics**: Custom namespace metrics for vector operations
 - **Metrics to track**: Query [latency](glossary.md#latency) P99, indexing [throughput](glossary.md#throughput-qps), [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world) memory usage
@@ -1008,6 +1180,7 @@ Dashboard widgets should prioritize the most critical metrics for vector search 
 - **Purpose**: Monitor vector-specific performance characteristics
 
 **Slow Query Analysis:**
+
 - **Widget type**: CloudWatch Logs Insights
 - **Log source**: OpenSearch domain search logs
 - **Query focus**: Queries taking >100ms response time
@@ -1017,27 +1190,32 @@ Dashboard widgets should prioritize the most critical metrics for vector search 
 
 **Custom Metrics Collection:**
 
+
 Custom metrics provide application-specific insights that standard infrastructure metrics cannot capture. For vector search systems, custom metrics focus on search quality, embedding pipeline performance, and business-relevant KPIs that directly impact user experience.
 
 **Vector Quality Metrics:**
+
 - **Recall rate monitoring**: Track search result quality through application instrumentation
 - **Target threshold**: Maintain >95% recall for production workloads
 - **Collection method**: Application-level measurement and reporting
 - **Alert triggers**: Set up notifications for recall degradation
 
 **Embedding Pipeline Metrics:**
+
 - **Generation latency**: Monitor AWS Bedrock API response times
 - **Target threshold**: Keep embedding generation <200ms
 - **Collection method**: API timing instrumentation
 - **Performance impact**: Track embedding bottlenecks in ingestion pipeline
 
 **Capacity Planning Metrics:**
+
 - **Index growth tracking**: Monitor daily document and vector additions
 - **Target behavior**: Stable growth within capacity projections
 - **Collection method**: Daily aggregation of index statistics
 - **Planning value**: Inform scaling decisions and capacity planning
 
 **Dashboard Organization Best Practices:**
+
 - **Critical metrics first**: Place health and performance metrics prominently
 - **Logical grouping**: Group related metrics in adjacent widgets
 - **Consistent time ranges**: Use matching time periods across related widgets
@@ -1072,6 +1250,7 @@ Performance optimization requires systematic analysis of query patterns, resourc
 
 **Multi-Layer Backup Architecture:**
 
+
 A robust backup strategy implements multiple backup layers with different recovery time objectives (RTO) and recovery point objectives (RPO). This multi-layer approach ensures data protection against various failure scenarios while balancing cost and recovery requirements.
 
 ## Conclusion
@@ -1079,21 +1258,25 @@ A robust backup strategy implements multiple backup layers with different recove
 This production deployment guide provides comprehensive coverage of deploying OpenSearch vector search at scale. The key success factors include:
 
 **Strategic Planning:**
+
 - Choose the right deployment model (Managed vs Serverless) based on your workload characteristics
 - Plan for 3x growth in capacity planning
 - Implement comprehensive monitoring from day one
 
 **Technical Excellence:**
+
 - Optimize HNSW parameters for your specific dataset and requirements
 - Implement proper security controls and access management
 - Design for reliability with multi-AZ deployment and proper backup strategies
 
 **Operational Maturity:**
+
 - Establish clear troubleshooting procedures and runbooks
 - Implement automated scaling and alerting
 - Plan for disaster recovery and business continuity
 
 **Cost Management:**
+
 - Regularly review and optimize resource allocation
 - Implement data lifecycle management
 - Monitor and control embedding generation costs
@@ -1106,9 +1289,11 @@ Remember that vector search is a rapidly evolving field - stay current with new 
 
 **Important Notice about Performance Data and Cost Estimates:**
 
+
 All performance metrics, cost estimates, latency figures, throughput numbers, and configuration examples presented in this document are **illustrative examples** designed to help with planning and understanding. These numbers are based on theoretical models, specific test configurations, or historical data points and should not be considered as guaranteed performance or pricing for your specific use case.
 
 **Actual performance and costs will vary significantly based on:**
+
 - Your specific data characteristics (vector dimensions, dataset size, query patterns)
 - AWS region, instance types, and service configurations
 - Network latency, infrastructure setup, and operational patterns
@@ -1116,6 +1301,7 @@ All performance metrics, cost estimates, latency figures, throughput numbers, an
 - Current AWS pricing (which changes frequently)
 
 **Before making production decisions:**
+
 - Conduct performance testing with your actual data and query patterns
 - Test scaling scenarios with realistic load patterns
 - Verify current AWS pricing through the official [AWS OpenSearch Pricing](https://aws.amazon.com/opensearch-service/pricing/) page
@@ -1123,6 +1309,7 @@ All performance metrics, cost estimates, latency figures, throughput numbers, an
 - Benchmark different configuration options for your specific requirements
 
 **For current official guidance, refer to:**
+
 - [AWS OpenSearch Service Documentation](https://docs.aws.amazon.com/opensearch-service/)
 - [OpenSearch Performance Tuning Guide](https://opensearch.org/docs/latest/tuning/)
 - [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/)

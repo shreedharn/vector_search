@@ -6,12 +6,14 @@ A comprehensive guide to understanding and implementing modern search systems, f
 ## Table of Contents
 
 **Part I: Search Approaches**
+
 - [Traditional Text-Based Search](#traditional-text-based-search)
 - [Vector Search Evolution](#vector-search-evolution)
 - [Search Approach Comparison](#search-approach-comparison)
 - [The Progression: Text → Vector → Hybrid](#the-progression-text-vector-hybrid)
 
 **Part II: Vector Search Algorithms**
+
 - [Mathematical Foundations](#mathematical-foundations)
 - [HNSW: Hierarchical Navigable Small World](#hnsw-hierarchical-navigable-small-world)
 - [IVF: Inverted File Index](#ivf-inverted-file-index)
@@ -19,41 +21,16 @@ A comprehensive guide to understanding and implementing modern search systems, f
 - [Algorithm Selection Guide](#algorithm-selection-guide)
 
 **Part III: OpenSearch Implementation**
+
 - [OpenSearch Vector Architecture](#opensearch-vector-architecture)
 - [Index Configuration and Setup](#index-configuration-and-setup)
 
 **Part IV: Advanced Applications**
+
 - [Multi-modal Search](#multi-modal-search)
 
 **[Glossary](glossary.md)** - Key concepts, metrics, and terminology
 
----
-
-## ⚠️ Performance Metrics Disclaimer
-
-**Important Notice about Performance Data:**
-
-All performance metrics, benchmarks, latency figures, memory usage statistics, and cost examples presented in this document are **illustrative examples** designed to help with understanding and planning. These numbers are based on theoretical models, synthetic tests, or specific hardware configurations and should not be considered as guaranteed performance metrics for your specific use case.
-
-**Actual performance will vary significantly based on:**
-- Hardware specifications and configurations
-- Data characteristics (vector dimensions, dataset size, distribution)
-- Query patterns and concurrency levels
-- Network latency and infrastructure setup
-- OpenSearch version and configuration settings
-- Operating system and environment factors
-
-**Before making production decisions:**
-- Conduct benchmarks with your actual data and infrastructure
-- Test with realistic query patterns and load
-- Consult official OpenSearch and AWS documentation for current capabilities
-- Consider engaging with AWS support for production sizing guidance
-
-For current official benchmarks and performance guidance, refer to:
-- [OpenSearch Performance Guidelines](https://opensearch.org/docs/latest/tuning/)
-- [AWS OpenSearch Service Best Practices](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/bp.html)
-
----
 
 ## Part I: Search Approaches
 
@@ -66,9 +43,11 @@ Text-based search has been the cornerstone of information retrieval for decades.
 #### The Evolution of Keyword Search
 
 **Early Days: Simple Keyword Matching**
+
 The earliest search systems operated on exact keyword matching - a document was relevant if it contained the search terms. This binary approach worked for small collections but failed to capture semantic meaning or handle variations in language.
 
 **Statistical Revolution: TF-IDF**
+
 Term Frequency-Inverse Document Frequency ([TF-IDF](glossary.md#tf-idf-term-frequency-inverse-document-frequency)) introduced statistical sophistication to search by considering two key factors:
 
 - **Term Frequency (TF):** How often a term appears in a document
@@ -77,6 +56,7 @@ Term Frequency-Inverse Document Frequency ([TF-IDF](glossary.md#tf-idf-term-freq
 The intuition is powerful: terms that appear frequently in a specific document but rarely across the collection are likely more significant for that document's meaning.
 
 **Mathematical Foundation of TF-IDF:**
+
 ```
 TF-IDF(term, document) = TF(term, document) × IDF(term)
 
@@ -99,6 +79,7 @@ The term "learning" scores higher despite lower frequency because it's rarer acr
 **Best Matching 25 ([BM25](glossary.md#bm25-best-matching-25))** represents the current gold standard for text relevance scoring, addressing TF-IDF's limitations through sophisticated normalization and parameter tuning.
 
 **BM25 Formula:**
+
 ```
 BM25(query, document) = Σ IDF(term) × (tf × (k1 + 1)) / (tf + k1 × (1 - b + b × |d|/avgdl))
 
@@ -112,6 +93,7 @@ Where:
 
 **Key Improvements Over TF-IDF:**
 
+
 1. **Term Frequency Saturation:** As term frequency increases, the contribution grows logarithmically rather than linearly, preventing keyword stuffing from dominating scores.
 
 2. **Document Length Normalization:** Longer documents don't automatically score higher simply due to containing more words. The parameter `b` controls how much document length affects scoring.
@@ -119,6 +101,7 @@ Where:
 3. **Tunable Parameters:** `k1` and `b` can be adjusted based on collection characteristics and user preferences.
 
 **Real-World Example:**
+
 Consider searching for "sustainable energy solutions" across technical papers:
 
 *Document A (500 words):* Contains "sustainable" 3 times, "energy" 5 times, "solutions" 2 times
@@ -129,20 +112,24 @@ Traditional TF would favor Document B due to higher absolute term frequencies. B
 #### Where Text Search Excels
 
 **[Precision](glossary.md#precision)-Critical Scenarios:**
+
 - **Legal Document Retrieval:** Finding contracts containing specific clauses like "force majeure" or "intellectual property"
 - **Technical Documentation:** Locating API references with exact method names like "getUserById()"
 - **Product Catalogs:** Matching precise specifications like "iPhone 15 Pro Max 256GB Blue"
 
 **Transparent Relevance:**
+
 Users can easily understand why results matched their query. When searching for "Python pandas DataFrame," it's clear that documents containing these exact terms are relevant. This transparency builds user trust and enables query refinement.
 
 **Computational Efficiency:**
+
 Text search operations are computationally lightweight:
 - Index creation: O(N × M) where N = documents, M = average document length
 - Query processing: O(log N) for term lookups plus scoring
 - Memory requirements: Modest inverted index storage
 
 **Query Flexibility:**
+
 - **Boolean Operators:** "machine learning" AND "Python" NOT "R"
 - **Phrase Matching:** "artificial intelligence" (exact phrase)
 - **Wildcards:** "comput*" (matches compute, computer, computing)
@@ -151,6 +138,7 @@ Text search operations are computationally lightweight:
 #### Limitations of Text-Based Search
 
 **The Vocabulary Mismatch Problem:**
+
 Text search fails when users and documents employ different terminology for the same concepts:
 
 *Query:* "car repair"
@@ -159,6 +147,7 @@ Text search fails when users and documents employ different terminology for the 
 This fundamental limitation occurs because text search operates on exact string matching without understanding that "car," "automobile," and "vehicle" refer to the same concept.
 
 **Context Insensitivity:**
+
 The word "bank" could refer to:
 - Financial institution
 - River bank
@@ -168,6 +157,7 @@ The word "bank" could refer to:
 Text search cannot distinguish between these contexts without additional semantic understanding.
 
 **Language Barriers:**
+
 Text search struggles with:
 - **Synonyms:** "happy" vs "joyful" vs "cheerful"
 - **Multilingual Content:** English query missing Spanish documents with same meaning
@@ -175,6 +165,7 @@ Text search struggles with:
 - **Misspellings:** "recieve" vs "receive"
 
 **Query Formulation Challenges:**
+
 Users often struggle to formulate effective keyword queries:
 - **Conceptual Queries:** "companies similar to Netflix" (user wants concept similarity, not exact matches)
 - **Natural Language:** "best laptop for college students under $800" (contains intent and constraints)
@@ -187,15 +178,18 @@ Vector search emerged to address the fundamental limitations of text-based searc
 #### The Semantic Understanding Breakthrough
 
 **From Keywords to Meaning:**
+
 Vector search transforms the paradigm from "what words are present?" to "what does this mean?" By converting text into dense numerical vectors, semantically similar content produces geometrically similar vectors, regardless of exact wording.
 
 **The [Embedding](glossary.md#embedding) Revolution:**
+
 Modern embedding models, trained on vast text corpora, learn to represent concepts in continuous vector spaces where:
 - Similar meanings cluster together
 - Relationships become mathematical operations
 - Context determines representation
 
 **Example Transformation:**
+
 ```
 Traditional Keyword Index:
 "dog" → Document IDs: [1, 5, 23, 67]
@@ -211,6 +205,7 @@ Vector Representation:
 #### How Vector Search Addresses Text Search Limitations
 
 **Solving Vocabulary Mismatch:**
+
 Vector search naturally handles synonyms and related concepts because embedding models learn that different words with similar meanings should have similar representations.
 
 *Query Vector:* "automobile maintenance"
@@ -219,6 +214,7 @@ Vector search naturally handles synonyms and related concepts because embedding 
 The system finds these matches not through keyword overlap but through semantic similarity in vector space.
 
 **Context-Aware Understanding:**
+
 Advanced embedding models like [BERT](glossary.md#bert-bidirectional-encoder-representations-from-transformers) and [transformer](glossary.md#transformer)-based architectures consider context when generating vectors:
 
 - "The bank approved my loan" → Vector emphasizing financial context
@@ -227,6 +223,7 @@ Advanced embedding models like [BERT](glossary.md#bert-bidirectional-encoder-rep
 These contextual embeddings enable more precise semantic matching.
 
 **Cross-Language Capabilities:**
+
 Multilingual embedding models create shared semantic spaces across languages:
 
 *English Query:* "machine learning algorithms"
@@ -236,6 +233,7 @@ Multilingual embedding models create shared semantic spaces across languages:
 All three phrases map to similar regions in vector space, enabling cross-language search without translation.
 
 **Natural Language Query Handling:**
+
 Vector search excels with conversational, intent-driven queries:
 
 *Query:* "best affordable laptops for college students"
@@ -245,15 +243,18 @@ Vector search excels with conversational, intent-driven queries:
 #### The Mathematics of Semantic Similarity
 
 **High-Dimensional Semantic Space:**
+
 Embedding models typically generate vectors with 384 to 1,536 dimensions. Each dimension captures different aspects of meaning:
 - Dimension 127: Might encode "technology-related" concepts
 - Dimension 445: Might capture "positive sentiment"
 - Dimension 892: Might represent "temporal aspects"
 
 **Similarity Metrics:**
+
 The choice of similarity metric affects search behavior:
 
 **[Cosine Similarity](glossary.md#cosine-similarity) (Most Common):**
+
 ```
 cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
 ```
@@ -271,6 +272,7 @@ Understanding when to use text search versus vector search—and how to combine 
 
 **[Precision](glossary.md#precision) vs [Recall](glossary.md#recall) Trade-offs:**
 
+
 | Scenario | Text Search | Vector Search | Winner |
 |----------|-------------|---------------|---------|
 | **Exact product lookup** | "MacBook Pro M3 16GB" → Perfect match | May find similar products | **Text Search** |
@@ -279,6 +281,7 @@ Understanding when to use text search versus vector search—and how to combine 
 | **Intent-based queries** | "best laptop for programming" → Keyword luck | Understands programming needs | **Vector Search** |
 
 **Performance Characteristics:**
+
 
 | Metric | Text Search | Vector Search |
 |--------|-------------|---------------|
@@ -294,39 +297,48 @@ Understanding when to use text search versus vector search—and how to combine 
 
 **Use Text Search When:**
 
+
 1. **Exact Matching is Critical**
+
    - Legal document retrieval: "habeas corpus," "force majeure"
    - Medical codes: "ICD-10 J44.0" (COPD diagnosis)
    - Product catalogs: "SKU-12345-RED-L"
 
 2. **Users Provide Specific Keywords**
+
    - Technical documentation: "numpy.array.reshape()"
    - Database queries: "SELECT statement syntax"
    - API references: "REST POST /users endpoint"
 
 3. **Computational Resources are Limited**
+
    - Mobile applications with limited processing power
    - Real-time systems requiring sub-millisecond responses
    - High-volume systems needing minimal infrastructure
 
 4. **Transparency and Explainability Required**
+
    - Regulatory compliance scenarios where relevance must be explained
    - User interfaces showing why results matched
    - A/B testing where ranking factors need clear attribution
 
 **Use Vector Search When:**
 
+
 1. **Semantic Understanding is Essential**
+
    - Customer support: "my order hasn't arrived" → find shipping delay content
    - Research: "climate change impacts" → find global warming, environmental effects
    - Content discovery: "similar to The Matrix" → find sci-fi, cyberpunk themes
 
 2. **Cross-Language Search Needed**
+
    - Global content platforms with multilingual documents
    - International e-commerce with product descriptions in multiple languages
    - Academic research across different language publications
 
 3. **Natural Language Queries Expected**
+
    - Voice search: "What's a good Italian restaurant nearby?"
    - Conversational AI: "Show me articles about renewable energy policies"
    - Mobile search: "cheap flights to Europe next month"
@@ -343,6 +355,7 @@ Modern search systems increasingly adopt hybrid approaches that combine the prec
 #### Hybrid Search Architecture
 
 **Score Combination Strategies:**
+
 
 1. **Linear Combination**
    ```
@@ -364,6 +377,7 @@ Modern search systems increasingly adopt hybrid approaches that combine the prec
 #### Real-World Hybrid Examples
 
 **E-commerce Search:**
+
 *Query:* "wireless bluetooth headphones under $100"
 
 - **Text Component:** Finds products with exact specifications and price range
@@ -371,6 +385,7 @@ Modern search systems increasingly adopt hybrid approaches that combine the prec
 - **Combined Result:** Comprehensive coverage including exact matches and semantically related products
 
 **Customer Support:**
+
 *Query:* "How do I reset my password?"
 
 - **Text Component:** Finds FAQ entries with exact phrase "reset password"
@@ -378,6 +393,7 @@ Modern search systems increasingly adopt hybrid approaches that combine the prec
 - **Combined Result:** Complete support coverage from exact matches to related topics
 
 **Academic Research:**
+
 *Query:* "deep learning applications in medical imaging"
 
 - **Text Component:** Papers explicitly mentioning these exact terms
@@ -387,6 +403,7 @@ Modern search systems increasingly adopt hybrid approaches that combine the prec
 #### Implementation Strategy
 
 **Query Classification:**
+
 Intelligent systems can dynamically adjust the balance between text and vector search based on query characteristics:
 
 - **Exact identifiers** (SKUs, codes, names): 80% text, 20% vector weight
@@ -395,7 +412,9 @@ Intelligent systems can dynamically adjust the balance between text and vector s
 - **Default queries**: 50% text, 50% vector weight (balanced approach)
 
 **User Interface Adaptation:**
+
 Search interfaces can provide different experiences based on the search approach:
+
 - **Text-heavy results:** Show keyword highlighting, exact matches, filters
 - **Vector-heavy results:** Display "because you searched for," related concepts, exploration suggestions
 - **Hybrid results:** Combine both approaches with clear result categorization
@@ -411,12 +430,15 @@ Vector search algorithms operate in high-dimensional spaces where traditional in
 #### High-Dimensional Geometry Challenges
 
 **The [Curse of Dimensionality](glossary.md#curse-of-dimensionality):**
+
 As vector dimensions increase beyond ~100, several mathematical phenomena fundamentally change how search algorithms must operate:
 
 **1. Distance Concentration**
+
 In high-dimensional spaces, the difference between the nearest and farthest points becomes negligible relative to the absolute distances. This means naive distance calculations become less discriminative.
 
 *Mathematical Intuition:* Consider random points in a hypersphere. As dimensions increase:
+
 - All points concentrate near the surface
 - Distances between any two points become approximately equal
 - Traditional distance-based nearest neighbor search loses effectiveness
@@ -424,10 +446,13 @@ In high-dimensional spaces, the difference between the nearest and farthest poin
 **Example:** In 1000-dimensional space, if the closest point is distance 10.0 and the farthest is distance 12.0, the difference (2.0) becomes insignificant for practical ranking purposes.
 
 **2. Volume Distribution**
+
 Most of a high-dimensional hypersphere's volume exists in a thin shell near its surface, making uniform sampling and clustering challenging.
 
 **3. Computational Complexity**
+
 Brute-force search complexity grows as O(N × D) where N = number of vectors, D = dimensions:
+
 - 1M vectors × 768 dimensions = 768M calculations per query
 - At 1B operations/second: 0.768 seconds per query
 - For 100 QPS: requires 76.8 seconds of CPU time per second (impossible!)
@@ -435,6 +460,7 @@ Brute-force search complexity grows as O(N × D) where N = number of vectors, D 
 #### Similarity Metrics Deep Dive
 
 **Cosine Similarity: The Text Search Standard**
+
 
 Cosine similarity measures the angle between vectors, making it ideal for text embeddings where magnitude often relates to document length rather than semantic importance.
 
@@ -449,13 +475,16 @@ Geometric Interpretation:
 ```
 
 **Why Cosine Works for Text:**
+
 Consider two movie reviews:
+
 - Review A (short): "Great movie, excellent acting" → Vector magnitude: 5.2
 - Review B (long): "This film represents an outstanding achievement in cinematic excellence with superb performances..." → Vector magnitude: 12.8
 
 Both reviews express positive sentiment about acting quality. Cosine similarity focuses on the semantic direction (positive sentiment + acting praise) while ignoring the length difference.
 
 **[Euclidean Distance (L2)](glossary.md#euclidean-distance-l2): When Magnitude Matters**
+
 
 Euclidean distance measures straight-line distance in vector space, treating all dimensions equally:
 
@@ -464,6 +493,7 @@ euclidean_distance(A, B) = √(Σ(Aᵢ - Bᵢ)²)
 ```
 
 **When to Use Euclidean:**
+
 - **Image embeddings:** Where color intensity, brightness, and other magnitude-based features matter
 - **Sensor data:** Where absolute values carry meaning (temperature, pressure readings)
 - **Normalized embeddings:** When all vectors are pre-normalized to unit length
@@ -472,6 +502,7 @@ euclidean_distance(A, B) = √(Σ(Aᵢ - Bᵢ)²)
 
 **[Manhattan Distance (L1)](glossary.md#manhattan-distance-l1): Robustness in High Dimensions**
 
+
 Manhattan distance sums absolute differences along each dimension:
 
 ```
@@ -479,11 +510,13 @@ manhattan_distance(A, B) = Σ|Aᵢ - Bᵢ|
 ```
 
 **Advantages in High Dimensions:**
+
 - Less sensitive to outliers in individual dimensions
 - More stable in sparse vector spaces
 - Computationally efficient (no squaring operations)
 
 **Use Cases:**
+
 - Sparse embeddings where many dimensions are zero
 - Categorical data encoded as vectors
 - Situations where dimension independence is important
@@ -493,10 +526,12 @@ manhattan_distance(A, B) = Σ|Aᵢ - Bᵢ|
 The mathematical challenge of high-dimensional search drives the need for approximate algorithms that trade small accuracy losses for massive speed improvements.
 
 **The Approximation Trade-off:**
+
 - **Exact search:** Guarantees finding the true nearest neighbors but computationally expensive
 - **Approximate search:** Finds "good enough" neighbors (95-99% accuracy) at 10-1000× speed improvement
 
 **Quality Metrics:**
+
 - **[Recall@K](glossary.md#recallk):** Percentage of true top-k neighbors found by the algorithm
 - **Query time:** Milliseconds per search operation
 - **Index size:** Memory required to store the search structure
@@ -511,9 +546,11 @@ The goal is maximizing recall while minimizing query time and memory usage.
 
 **The Small World Phenomenon in Vector Space**
 
+
 The algorithm draws inspiration from Stanley Milgram's famous "six degrees of separation" experiment, which demonstrated that any two people in the world are connected through an average of six social connections. HNSW applies this principle to high-dimensional vector search by creating multiple layers of connectivity that enable efficient navigation.
 
 **Multi-Scale Navigation Analogy:**
+
 
 Consider how you might navigate from New York to a specific address in Tokyo:
 
@@ -529,6 +566,7 @@ HNSW mirrors this hierarchical approach in vector space:
 
 **Graph Construction Philosophy:**
 
+
 *Probabilistic Hierarchy:* Rather than deterministically assigning nodes to layers, HNSW uses probabilistic assignment where each node has a decreasing probability of existing in higher layers. This creates a natural hierarchy where:
 
 - **Layer 0:** Contains all vectors (100% density)
@@ -543,6 +581,7 @@ HNSW mirrors this hierarchical approach in vector space:
 
 **Why This Architecture Works:**
 
+
 1. **Logarithmic Scaling:** Search complexity scales as O(log N) rather than O(N), making it practical for massive datasets
 
 2. **Greedy Search Efficiency:** At each layer, greedy local search quickly moves toward the target region, with higher layers providing faster convergence
@@ -554,6 +593,7 @@ HNSW mirrors this hierarchical approach in vector space:
 #### Mathematical Foundation
 
 **Layer Assignment Probability:**
+
 ```
 P(node reaches layer l) = (1/2)^l
 
@@ -569,7 +609,9 @@ This probability distribution creates the hierarchical structure automatically:
 
 **Detailed Search Algorithm Mechanics:**
 
+
 *Phase 1: Global Navigation (Top Layers)*
+
 1. **Entry Point Selection:** Begin at the designated entry point in the highest layer
 2. **Greedy Descent:** At each layer, perform greedy search to find the local minimum
    - Calculate distances from current position to all connected neighbors
@@ -578,6 +620,7 @@ This probability distribution creates the hierarchical structure automatically:
 3. **Layer Transition:** Use the final position as the starting point for the next layer down
 
 *Phase 2: Precision Navigation (Bottom Layer)*
+
 4. **Beam Search Expansion:** Instead of simple greedy search, maintain a candidate set of size ef_search
 5. **Dynamic Candidate Management:**
    - Track the ef_search closest points found so far
@@ -586,6 +629,7 @@ This probability distribution creates the hierarchical structure automatically:
 6. **Termination:** Stop when no new candidates improve the current best set
 
 **Mathematical Intuition Behind Effectiveness:**
+
 
 *Logarithmic Layer Reduction:* With each layer containing approximately half the nodes of the layer below, the search space reduces exponentially. For a dataset of N points:
 - Layer L contains ~N/(2^L) points
@@ -608,24 +652,29 @@ This probability distribution creates the hierarchical structure automatically:
 
 **M (Maximum Connections per Node)**
 
+
 The M parameter fundamentally affects the graph's connectivity and search performance:
 
 **Low M (8-16):**
+
 - **Advantages:** Lower memory usage, faster construction
 - **Disadvantages:** Potential for disconnected regions, lower recall
 - **Use case:** Memory-constrained environments, simple similarity patterns
 
 **Medium M (16-32):**
+
 - **Advantages:** Good balance of performance and memory
 - **Disadvantages:** None significant for most applications
 - **Use case:** General-purpose text search, balanced performance requirements
 
 **High M (32-64):**
+
 - **Advantages:** Excellent recall, robust against difficult data distributions
 - **Disadvantages:** High memory usage, slower construction
 - **Use case:** High-precision applications, complex high-dimensional data
 
 **Memory Calculation:**
+
 ```
 Memory per node = M × 4 bytes (connection pointers) + vector storage
 For 1M nodes, 384-dim vectors, M=24:
@@ -636,28 +685,34 @@ For 1M nodes, 384-dim vectors, M=24:
 
 **ef_construction (Construction Beam Width)**
 
+
 Controls the trade-off between index quality and construction time:
 
 **Low ef_construction (64-128):**
+
 - Fast construction but potentially lower-quality graph
 - Risk of poor connections that hurt search recall
 - Suitable for development, rapid prototyping
 
 **Medium ef_construction (128-256):**
+
 - Balanced approach for production systems
 - Good graph quality without excessive construction time
 - Recommended for most applications
 
 **High ef_construction (256-512+):**
+
 - Highest quality graph structure
 - Slow construction but maximum search performance
 - Use when construction time is less critical than search quality
 
 **ef_search (Query-Time Beam Width)**
 
+
 The only parameter tunable at query time, allowing dynamic performance adjustment:
 
 **Performance Scaling:**
+
 ```
 ef_search=10:  Ultra-fast, ~85% recall
 ef_search=50:  Fast, ~95% recall
@@ -668,10 +723,12 @@ ef_search=500: Near-perfect, ~99.5% recall
 
 **Advanced Parameter Selection Strategies:**
 
+
 *Query-Adaptive ef_search:*
 The ef_search parameter can be dynamically adjusted based on query characteristics and system load:
 
 **Application-Specific Tuning:**
+
 - **Real-time autocomplete:** ef_search = 15-25 (ultra-low latency, 85-90% recall acceptable)
 - **Main search results:** ef_search = 80-120 (balanced latency/accuracy for user-facing results)
 - **Recommendation systems:** ef_search = 150-250 (higher accuracy for better user experience)
@@ -679,12 +736,15 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 - **Batch processing:** ef_search = 200-400 (optimize for throughput over individual query speed)
 
 **System Load Adaptation:**
+
 - **High load periods:** Reduce ef_search to maintain response times
 - **Low load periods:** Increase ef_search to improve result quality
 - **SLA-based scaling:** Automatically adjust based on current system latency percentiles
 
 **Query Complexity Estimation:**
+
 Some queries inherently require more exploration:
+
 - **Outlier queries:** Vectors far from typical data distribution need higher ef_search
 - **Ambiguous queries:** Queries near decision boundaries between clusters benefit from broader search
 - **High-precision requirements:** Critical applications (medical, financial) should use conservative (high) ef_search values
@@ -692,12 +752,14 @@ Some queries inherently require more exploration:
 #### Real-World Performance Characteristics
 
 **Scaling Behavior:**
+
 HNSW performance scales favorably with dataset size:
 - **Construction time:** O(N × log(N) × M × ef_construction)
 - **Search time:** O(log(N) × ef_search)
 - **Memory usage:** Linear with dataset size
 
 **Comprehensive Performance Analysis:**
+
 
 > **⚠️ Illustrative Example:** The following performance metrics are theoretical examples for planning purposes only. Actual performance will vary significantly based on your specific hardware, data characteristics, and configuration. Always benchmark with your own data and infrastructure.
 
@@ -706,6 +768,7 @@ HNSW performance scales favorably with dataset size:
 *Example Configuration: M=32, ef_construction=256*
 
 **Construction Metrics:**
+
 - **Build Time:** 45 minutes (single-threaded), 12 minutes (8 threads)
 - **Index Size:** 6.2GB total
   - Vector storage: 1.54GB (raw data)
@@ -714,6 +777,7 @@ HNSW performance scales favorably with dataset size:
   - System overhead: 3.7GB (OS buffers, fragmentation)
 
 **Search Performance Analysis:**
+
 
 | ef_search | Latency (ms) | Recall@10 | Recall@100 | QPS (single thread) | Memory Touches |
 |-----------|--------------|-----------|-------------|---------------------|----------------|
@@ -725,13 +789,16 @@ HNSW performance scales favorably with dataset size:
 
 **Scaling Characteristics:**
 
+
 *Dataset Size Impact:*
+
 - **100K vectors:** 0.08ms avg latency, 95% recall@10 (ef_search=50)
 - **1M vectors:** 0.12ms avg latency, 94% recall@10 (ef_search=50)
 - **10M vectors:** 0.18ms avg latency, 93% recall@10 (ef_search=50)
 - **100M vectors:** 0.28ms avg latency, 92% recall@10 (ef_search=50)
 
 *Dimensionality Impact:*
+
 - **128 dims:** 0.08ms, 96% recall (faster distance calculations)
 - **384 dims:** 0.12ms, 94% recall (baseline)
 - **768 dims:** 0.19ms, 93% recall (more expensive distances)
@@ -739,17 +806,20 @@ HNSW performance scales favorably with dataset size:
 
 **Production Deployment Insights:**
 
+
 *Memory Usage Patterns:*
 - **Working Set:** ~2-3GB actively accessed during search
 - **Peak Memory:** 8-10GB during index construction
 - **Steady State:** 6.5GB with OS caching
 
 *CPU Utilization:*
+
 - **Single Query:** 15-25% CPU utilization (memory-bound)
 - **Concurrent Queries:** Scales linearly up to ~8 threads
 - **Batch Processing:** 85-95% CPU utilization achievable
 
 *Real-World Performance Observations:*
+
 - **Cold Start:** First few queries 2-3x slower (cache warming)
 - **Steady State:** Performance stabilizes after ~1000 queries
 - **Load Variation:** Minimal performance degradation up to 80% memory utilization
@@ -757,7 +827,9 @@ HNSW performance scales favorably with dataset size:
 
 **Advanced Optimization Strategies:**
 
+
 **Construction Optimizations:**
+
 1. **Parallel Construction:** Distribute index building across multiple threads
    - Partition vectors into chunks for concurrent processing
    - Use lock-free data structures for thread-safe updates
@@ -775,6 +847,7 @@ HNSW performance scales favorably with dataset size:
 
 **Query-Time Optimizations:**
 
+
 4. **[SIMD](glossary.md#simd-single-instruction-multiple-data) Vectorization:** Accelerate distance calculations
    - Use AVX2/AVX-512 instructions for parallel arithmetic
    - Achieve 4-16x speedup in distance computations
@@ -791,6 +864,7 @@ HNSW performance scales favorably with dataset size:
    - Reduce cold-start latency in production systems
 
 **Memory Layout Optimizations:**
+
 
 7. **Data Structure Packing:** Minimize memory overhead
    - Pack connection lists efficiently
@@ -810,6 +884,7 @@ HNSW performance scales favorably with dataset size:
 
 **The Divide-and-Conquer Philosophy**
 
+
 IVF embodies a classic divide-and-conquer strategy adapted for high-dimensional spaces:
 
 *Geographic Analogy:* Consider finding the nearest coffee shop in a large city:
@@ -821,6 +896,7 @@ IVF embodies a classic divide-and-conquer strategy adapted for high-dimensional 
 - **Dewey Decimal System (IVF):** Books organized by topic - go directly to relevant sections
 
 **Mathematical Foundation: The Locality Hypothesis**
+
 
 IVF relies on the **locality principle** in high-dimensional spaces:
 
@@ -836,24 +912,29 @@ This principle holds particularly well in high-dimensional spaces due to the **c
 
 **Three-Phase IVF Architecture:**
 
+
 *Phase 1: Offline Clustering (Training)*
+
 - Analyze the entire vector dataset to identify natural groupings
 - Use k-means or more sophisticated clustering algorithms
 - Create centroids that represent cluster "centers of mass"
 - Build inverted lists mapping centroids to their member vectors
 
 *Phase 2: Vector Assignment (Indexing)*
+
 - For each new vector, determine its nearest cluster centroid
 - Add the vector to that cluster's inverted list
 - Update cluster statistics for future optimization
 
 *Phase 3: Query Processing (Search)*
+
 - Calculate distances from query to all cluster centroids
 - Select the k most promising clusters (nprobes parameter)
 - Search within selected clusters using exhaustive comparison
 - Merge results across clusters for final ranking
 
 **Why This Architecture Scales**
+
 
 *Complexity Reduction:* Instead of O(N) comparisons for brute force search, IVF achieves:
 - O(√N) centroid comparisons (for optimal nlist ≈ √N)
@@ -867,6 +948,7 @@ This principle holds particularly well in high-dimensional spaces due to the **c
 #### Advanced Mathematical Foundation
 
 **K-means Clustering: Beyond Basic Implementation**
+
 
 *Objective Function and Optimization:*
 The k-means algorithm minimizes the within-cluster sum of squares (WCSS):
@@ -883,21 +965,25 @@ Where:
 *Advanced Initialization Strategies:*
 
 **K-means++ Initialization:** Choose initial centroids to maximize distance between them
+
 - Select first centroid randomly
 - For each subsequent centroid, choose with probability proportional to squared distance from nearest existing centroid
 - Provides better initial configuration, leading to superior final clustering
 
 **Spherical K-means:** Optimize for cosine similarity instead of Euclidean distance
+
 - Normalize all vectors to unit length
 - Update rule: μⱼ = Σᵢ∈Cⱼ xᵢ / ||Σᵢ∈Cⱼ xᵢ||
 - Better suited for text embeddings and normalized vectors
 
 **Mini-batch K-means:** Handle datasets too large for memory
+
 - Process random subsets (mini-batches) of data
 - Update centroids incrementally
 - Enables clustering of billion-scale datasets
 
 **Advanced Cluster Quality Metrics:**
+
 
 *Within-Cluster Sum of Squares (WCSS):*
 ```
@@ -941,9 +1027,11 @@ Values close to 1.0 indicate good load balance.
 
 **Comprehensive Complexity Analysis:**
 
+
 *Time Complexity Breakdown:*
 
 **Training Phase (One-time cost):**
+
 - K-means clustering: O(I × N × k × D)
   - I = number of iterations (typically 10-50)
   - N = number of vectors
@@ -951,6 +1039,7 @@ Values close to 1.0 indicate good load balance.
   - D = vector dimensions
 
 **Query Phase (Per-query cost):**
+
 - Centroid distance calculation: O(k × D)
 - Cluster selection: O(k × log(nprobes))
 - Within-cluster search: O((N/k) × nprobes × D)
@@ -971,6 +1060,7 @@ Optimal k = √(N × nprobes)
 For fixed nprobes, this gives the classic result: optimal nlist ≈ √N
 
 *Space Complexity:*
+
 - Centroids storage: O(k × D)
 - Inverted lists: O(N) (same as original data)
 - Cluster assignments: O(N × log(k)) bits
@@ -979,11 +1069,13 @@ For fixed nprobes, this gives the classic result: optimal nlist ≈ √N
 *Practical Performance Scaling:*
 
 **Dataset Size Impact:**
+
 - 100K vectors: Query time ∝ √100K = 316 centroid operations
 - 1M vectors: Query time ∝ √1M = 1,000 centroid operations
 - 10M vectors: Query time ∝ √10M = 3,162 centroid operations
 
 **Dimensionality Impact:**
+
 - Linear scaling with D for both centroid comparisons and within-cluster search
 - Higher dimensions benefit more from clustering (curse of dimensionality helps)
 - Memory bandwidth often becomes bottleneck for D > 1000
@@ -992,8 +1084,10 @@ For fixed nprobes, this gives the classic result: optimal nlist ≈ √N
 
 **nlist (Number of Clusters): Mathematical Foundation**
 
+
 *Theoretical Optimization:*
 The optimal number of clusters balances two competing factors:
+
 1. **Centroid search cost:** Increases linearly with nlist
 2. **Within-cluster search cost:** Decreases as 1/nlist
 
@@ -1036,6 +1130,7 @@ Where:
 
 **nprobes (Search Width): Advanced Selection Strategy**
 
+
 *Accuracy-Speed Trade-off Analysis:*
 The relationship between nprobes and recall follows a logarithmic curve:
 
@@ -1051,12 +1146,14 @@ Where coverage_factor depends on:
 *Adaptive nprobes Selection:*
 
 **Query-Type Based:**
+
 - **Autocomplete/Real-time:** nprobes = max(1, nlist × 0.01) [1% of clusters]
 - **Standard search:** nprobes = nlist × 0.05-0.10 [5-10% of clusters]
 - **High-precision:** nprobes = nlist × 0.15-0.25 [15-25% of clusters]
 - **Research/Batch:** nprobes = nlist × 0.30-0.50 [30-50% of clusters]
 
 **Load-Adaptive Strategy:**
+
 ```
 if system_load < 0.5:
     nprobes = base_nprobes × 1.5  # Higher accuracy when resources available
@@ -1067,6 +1164,7 @@ else:
 ```
 
 **Quality-Adaptive Selection:**
+
 Adjust based on cluster quality metrics:
 ```
 if silhouette_score > 0.7:  # Well-separated clusters
@@ -1077,9 +1175,11 @@ elif silhouette_score < 0.3:  # Poorly separated clusters
 
 **nprobes (Search Width)**
 
+
 Controls the accuracy-speed trade-off at query time:
 
 **Selection Strategy:**
+
 ```
 Conservative: nprobes = nlist × 0.05 (5% of clusters)
 Balanced:     nprobes = nlist × 0.10 (10% of clusters)
@@ -1087,6 +1187,7 @@ Aggressive:   nprobes = nlist × 0.20 (20% of clusters)
 ```
 
 **Performance Scaling:**
+
 - **nprobes=1:** Fastest, ~60-70% recall
 - **nprobes=nlist×0.05:** Fast, ~85-90% recall
 - **nprobes=nlist×0.10:** Balanced, ~92-96% recall
@@ -1097,18 +1198,22 @@ Aggressive:   nprobes = nlist × 0.20 (20% of clusters)
 *Modern IVF implementations incorporate sophisticated optimizations that significantly improve both accuracy and performance beyond the basic algorithm.*
 
 **Multi-Probe LSH (Locality Sensitive Hashing):**
+
 Instead of only searching the closest cluster centroids, examine multiple probe sequences that might contain query neighbors. This technique particularly helps when query vectors lie near cluster boundaries.
 
 **Cluster Refinement:**
+
 Periodically retrain cluster centroids using updated vector distributions, especially important for dynamic datasets where new vectors might shift optimal partitioning.
 
 **Asymmetric vs Symmetric Distance Computation:**
+
 
 - **Asymmetric Distance:** More accurate, computes direct distance between query and clustered vector
 - **Symmetric Distance:** Faster approximation using centroid as intermediate point
 - **Trade-off:** Asymmetric provides better accuracy at higher computational cost
 
 **Comprehensive Performance Benchmarks**
+
 
 > **⚠️ Illustrative Example:** The following performance data represents theoretical examples for educational purposes. Real-world performance depends heavily on your specific data distribution, hardware configuration, and usage patterns. Conduct thorough benchmarking with your actual use case before making production decisions.
 
@@ -1117,18 +1222,21 @@ Periodically retrain cluster centroids using updated vector distributions, espec
 *Example Configuration: nlist=4000, optimized implementation*
 
 **Training Phase Analysis:**
+
 - **K-means clustering:** 8 minutes (single-threaded), 2.5 minutes (16 threads)
 - **Index construction:** 3 minutes (building inverted lists)
 - **Total setup time:** 11 minutes (single-threaded), 4.5 minutes (parallel)
 - **Memory peak during training:** 45GB (includes working copies)
 
 **Storage Requirements:**
+
 - **Raw vectors:** 10M × 512 × 4 bytes = 20.48GB
 - **Centroids:** 4000 × 512 × 4 bytes = 8.2MB
 - **Inverted lists metadata:** ~150MB (cluster assignments, offsets)
 - **Total index size:** 20.6GB (minimal overhead)
 
 **Query Performance Deep Dive:**
+
 
 | nprobes | Latency | Recall@10 | Recall@100 | QPS | Clusters Hit | Vectors Examined |
 |---------|---------|-----------|-------------|-----|--------------|------------------|
@@ -1140,6 +1248,7 @@ Periodically retrain cluster centroids using updated vector distributions, espec
 | 400     | 18.7ms  | 97.8%     | 99.0%       | 53    | 400/4000    | ~1,000,000      |
 
 **Scaling Analysis Across Different Dataset Sizes:**
+
 
 *Fixed Configuration: nprobes = nlist × 0.10*
 
@@ -1153,6 +1262,7 @@ Periodically retrain cluster centroids using updated vector distributions, espec
 | 50M          | 7071  | 707     | 12.5ms      | 91.9%     | 205GB        |
 
 **Dimensionality Impact Analysis:**
+
 
 *Fixed: 1M vectors, nlist=1000, nprobes=100*
 
@@ -1168,7 +1278,9 @@ Periodically retrain cluster centroids using updated vector distributions, espec
 
 **Production Deployment Insights:**
 
+
 *Multi-Threaded Performance:*
+
 - **Single thread:** Baseline performance as shown above
 - **4 threads:** 3.2x throughput improvement
 - **8 threads:** 5.8x throughput improvement
@@ -1181,6 +1293,7 @@ Periodically retrain cluster centroids using updated vector distributions, espec
 - **Vector data access:** 15-25% cache hit rate (too large for cache)
 
 *Network/Distributed Considerations:*
+
 - **Index replication:** Full index copy per search node
 - **Query distribution:** Load balance across nodes
 - **Typical deployment:** 2-4 replicas for high availability
@@ -1194,13 +1307,16 @@ Periodically retrain cluster centroids using updated vector distributions, espec
 
 **The Dimensional Independence Hypothesis**
 
+
 Product Quantization is based on a key insight about high-dimensional vector spaces: different dimensions often capture orthogonal or semi-orthogonal aspects of the underlying semantic space. This allows us to compress each subspace independently without catastrophic information loss.
 
 **Information-Theoretic Perspective:**
 
+
 Consider a D-dimensional vector space where each dimension requires 32 bits (float32). The total information content is 32D bits per vector. PQ recognizes that much of this precision is unnecessary for similarity preservation and that dimensions can be grouped and compressed independently.
 
 **The Product Space Decomposition:**
+
 
 *Mathematical Formulation:*
 ```
@@ -1214,23 +1330,28 @@ Where each subspace ℝᴰ/ᵐ is quantized independently
 
 **Advanced Analogies:**
 
+
 *Digital Image Compression:*
+
 - **JPEG approach:** Transform to frequency domain, quantize coefficients
 - **PQ approach:** Spatial decomposition into blocks, quantize each block independently
 - **Key difference:** PQ learns optimal quantization codebooks from data rather than using predetermined schemes
 
 *Dictionary Compression:*
+
 - **Traditional:** Build one dictionary for entire document
 - **PQ approach:** Build specialized dictionaries for different parts of speech/topics
 - **Advantage:** Each dictionary captures local patterns more effectively
 
 **Why Dimensional Independence Works in High Dimensions:**
 
+
 1. **Curse of Dimensionality Benefits:** In high-dimensional spaces, vectors become increasingly orthogonal, making dimensional correlations weaker
 2. **Embedding Structure:** Modern embedding models often encode different semantic aspects in distinct dimensional ranges
 3. **Local Similarity Preservation:** PQ preserves local neighborhood structure even with quantization errors
 
 **The Codebook Learning Process:**
+
 
 For each subvector position j:
 
@@ -1258,7 +1379,9 @@ Find: qᵢⱼ = argmin_{c∈Cⱼ} ||sᵢⱼ - c||²
 
 **Formal Problem Definition:**
 
+
 Given a dataset X = {x₁, x₂, ..., xₙ} where xᵢ ∈ ℝᴰ, find:
+
 1. A decomposition function: φ: ℝᴰ → (ℝᴰ/ᵐ)ᵐ
 2. Quantization functions: qⱼ: ℝᴰ/ᵐ → {0, 1, ..., k-1} for j = 1, ..., m
 3. Reconstruction functions: rⱼ: {0, 1, ..., k-1} → ℝᴰ/ᵐ for j = 1, ..., m
@@ -1269,6 +1392,7 @@ min Σᵢ₌₁ⁿ ||xᵢ - reconstruct(quantize(decompose(xᵢ)))||²
 ```
 
 **Vector Space Decomposition Theory:**
+
 
 *Cartesian Product Structure:*
 ```
@@ -1291,11 +1415,13 @@ Where Sₖⱼ = {sᵢⱼ : qⱼ(sᵢⱼ) = k} (Voronoi cell k in subspace j)
 
 **Error Analysis and Bounds:**
 
+
 *Quantization Error Decomposition:*
 ```
 E[||x - x̂||²] = Σⱼ₌₁ᵐ E[||xⱼ - x̂ⱼ||²]
 
 Where:
+
 - xⱼ = original subvector j
 - x̂ⱼ = quantized subvector j
 ```
@@ -1306,6 +1432,7 @@ For each subspace, the optimal quantizer satisfies:
 Distortion_j ≥ (1/12) * (2πe/k)^(2/d) * σⱼ²
 
 Where:
+
 - d = D/m (subvector dimensionality)
 - σⱼ² = variance of subvector j
 - k = number of centroids per codebook
@@ -1317,6 +1444,7 @@ Total_Distortion ≤ Σⱼ₌₁ᵐ (1/12) * (2πe/k)^(2(D/m)) * σⱼ²
 ```
 
 **Information-Theoretic Analysis:**
+
 
 *Rate-Distortion Trade-off:*
 ```
@@ -1342,9 +1470,11 @@ Optimal m balances:
 
 **Optimized Quantization Process:**
 
+
 #### Compression Analysis
 
 **Memory Reduction Calculation:**
+
 
 ```
 Original storage: D dimensions × 32 bits = 32D bits
@@ -1355,23 +1485,28 @@ Compression ratio = 32D / (m × log₂(k))
 
 **Practical Examples:**
 
+
 **Configuration 1: 768-dimensional, 96 subquantizers, 256 centroids**
+
 - Original: 768 × 32 = 24,576 bits (3,072 bytes)
 - Quantized: 96 × 8 = 768 bits (96 bytes)
 - **Compression: 32:1** (32× memory reduction)
 
 **Configuration 2: 1536-dimensional, 128 subquantizers, 256 centroids**
+
 - Original: 1536 × 32 = 49,152 bits (6,144 bytes)
 - Quantized: 128 × 8 = 1,024 bits (128 bytes)
 - **Compression: 48:1** (48× memory reduction)
 
 **Extreme Compression: 4-bit quantization (16 centroids)**
+
 - Quantized: 96 × 4 = 384 bits (48 bytes)
 - **Compression: 64:1** but with increased accuracy loss
 
 #### Advanced Distance Computation and Optimization
 
 **Asymmetric Distance Computation (ADC): Mathematical Foundation**
+
 
 The breakthrough insight of ADC is that distance computation can be decomposed into subspace contributions and precomputed efficiently.
 
@@ -1387,6 +1522,7 @@ For query q and quantized vector x̂:
 *ADC Algorithm:*
 
 **Phase 1: Precomputation (O(m × k × D/m))**
+
 ```
 For each subspace j = 1, ..., m:
     For each centroid cₖⱼ in codebook Cⱼ:
@@ -1394,6 +1530,7 @@ For each subspace j = 1, ..., m:
 ```
 
 **Phase 2: Distance Computation (O(m) per vector)**
+
 ```
 For quantized vector [q₁, q₂, ..., qₘ]:
     distance = Σⱼ₌₁ᵐ distance_table[j][qⱼ]
@@ -1401,12 +1538,15 @@ For quantized vector [q₁, q₂, ..., qₘ]:
 
 **Complexity Analysis:**
 
+
 *Traditional Approach:*
+
 - Distance computation: O(D) per vector
 - For N vectors: O(N × D)
 - Memory requirement: N × D float values
 
 *ADC Approach:*
+
 - Precomputation: O(m × k × D/m) = O(k × D) once per query
 - Distance computation: O(m) per vector
 - For N vectors: O(k × D + N × m)
@@ -1422,13 +1562,16 @@ For typical values (D=768, m=96): Speedup ≈ 8x
 
 **Advanced Distance Computation Variants:**
 
+
 **1. Optimized Product Quantization (OPQ):**
+
 Apply orthogonal transformation before quantization to minimize correlation:
 
 ```
 Objective: min ||X - Q(RX)||²_F
 
 Where:
+
 - R is an orthogonal matrix
 - Q() is the quantization function
 - X is the data matrix
@@ -1439,27 +1582,32 @@ Solution alternates between:
 ```
 
 **2. Additive Quantization (AQ):**
+
 Use multiple codebooks additively instead of product structure:
 
 ```
 x̂ = Σⱼ₌₁ᵐ cⱼ[qⱼ]
 
 Advantages:
+
 - More flexible approximation
 - Better approximation quality for same bit rate
 
 Disadvantages:
+
 - More complex training
 - Higher computational cost
 ```
 
 **3. Composite Quantization:**
+
 Combine dictionary learning with product quantization:
 
 ```
 Objective: min ||X - DCQ||²_F
 
 Where:
+
 - D is a learned dictionary
 - C are combination weights
 - Q are quantized coefficients
@@ -1467,12 +1615,14 @@ Where:
 
 **Memory Access Pattern Optimization:**
 
+
 *Cache-Friendly Storage Layout:*
 ```
 Traditional layout: [vector1][vector2]...[vectorN]
 Quantized layout:   [indices1][indices2]...[indicesN]
 
 Optimized layout:
+
 - Interleave codebooks with indices for spatial locality
 - Pack multiple indices per cache line
 - Use SIMD-friendly alignment
@@ -1481,6 +1631,7 @@ Optimized layout:
 *Vectorized Distance Computation:*
 ```
 SIMD optimization:
+
 - Process 4-8 distance computations simultaneously
 - Use lookup table vectorization
 - Typical speedup: 2-4x on modern CPUs
@@ -1490,6 +1641,7 @@ SIMD optimization:
 
 **Mathematical Framework for Parameter Selection**
 
+
 *Optimal m Selection:*
 The choice of m involves a fundamental trade-off between quantization error and computational efficiency:
 
@@ -1497,6 +1649,7 @@ The choice of m involves a fundamental trade-off between quantization error and 
 Quantization Error ∝ (k)^(-2/d) where d = D/m
 
 For fixed total bit budget B = m × log₂(k):
+
 - Larger m, smaller k: More subspaces, fewer centroids each
 - Smaller m, larger k: Fewer subspaces, more centroids each
 
@@ -1524,6 +1677,7 @@ m = balance_variance_across_subspaces(Explained_variance_ratio)
 
 **Advanced Configuration Guidelines:**
 
+
 > **⚠️ Note:** The following configurations are illustrative examples for guidance. Optimal parameters depend on your specific data characteristics, hardware, and performance requirements. Test different configurations with your actual dataset.
 
 *High-Dimensional Embeddings (D ≥ 1024):*
@@ -1545,6 +1699,7 @@ m = balance_variance_across_subspaces(Explained_variance_ratio)
 
 **Adaptive k Selection:**
 
+
 *Training Data Size Dependency:*
 ```
 Rule of thumb: k ≤ √(training_size_per_subspace)
@@ -1563,6 +1718,7 @@ Adapted_k = base_k × Complexity_factor
 
 **Quality-Compression Analysis Framework:**
 
+
 *Pareto Efficiency Calculation:*
 ```
 For configuration (m, k):
@@ -1576,21 +1732,25 @@ Pareto_score = α × Recall + β × (1/Latency) + γ × Compression_ratio
 *Application-Specific Optimization:*
 
 **Recommendation Systems:**
+
 - Prioritize recall over compression
 - Typical: m = D/16, k = 256
 - Accept 20-30:1 compression for 95%+ recall
 
 **Mobile/Edge Applications:**
+
 - Prioritize memory efficiency
 - Typical: m = D/4, k = 64
 - Accept 80% recall for 64:1 compression
 
 **Real-time Search:**
+
 - Balance latency and accuracy
 - Typical: m = D/8, k = 128
 - Target: 40:1 compression, <1ms query time
 
 **Performance Modeling:**
+
 
 *Theoretical Recall Estimation:*
 ```
@@ -1644,20 +1804,24 @@ Choosing the optimal vector search algorithm requires understanding your specifi
 
 **HNSW Parameter Optimization Guidelines:**
 
+
 *Base Parameter Selection by Latency Requirements:*
 - **Ultra-low latency (<1ms):** M=16, ef_construction=128
 - **Low latency (<5ms):** M=24, ef_construction=256
 - **Standard latency:** M=32, ef_construction=512
 
 *Memory-Constrained Adjustments:*
+
 - Reduce M by half if memory budget exceeded
 - Maintain minimum M=8 for connectivity
 
 *Large Dataset Scaling:*
+
 - Limit ef_construction=256 for datasets >5M vectors
 - Balance construction time vs quality
 
 *Runtime ef_search Selection by Use Case:*
+
 - **Autocomplete:** 20 (speed priority)
 - **Main search:** 100 (balanced)
 - **Research:** 300 (accuracy priority)
@@ -1666,60 +1830,74 @@ Choosing the optimal vector search algorithm requires understanding your specifi
 
 **IVF Parameter Optimization Framework:**
 
+
 *Cluster Count (nlist) Calculation:*
+
 - **Base formula:** √dataset_size × dimension_factor
 - **Dimension factor:** max(1.0, dimensions/512)
 - **Constraints:** min=32, max=dataset_size/39
 
 *Search Width (nprobes) by Target Recall:*
+
 - **95%+ recall:** 15% of clusters (min 100)
 - **90%+ recall:** 10% of clusters (min 50)
 - **<90% recall:** 5% of clusters (min 20)
 
 *Example Configurations:*
+
 - 1M vectors, 384 dims, 95% recall → nlist=1,260, nprobes=189
 - 10M vectors, 768 dims, 90% recall → nlist=4,800, nprobes=480
 
 **Product Quantization Parameter Selection:**
 
+
 *Subquantizer Count (m) by Memory Budget:*
+
 - **<10% memory budget:** m = dimensions/4 (aggressive compression)
 - **<20% memory budget:** m = dimensions/8 (balanced compression)
 - **>20% memory budget:** m = dimensions/16 (conservative compression)
 - **Constraint:** m must divide dimensions evenly
 
 *Centroids per Codebook (k) by Accuracy Requirements:*
+
 - **>90% accuracy:** k=256 (8-bit indices)
 - **>85% accuracy:** k=128 (7-bit indices)
 - **<85% accuracy:** k=64 (6-bit indices)
 
 *Example Configurations:*
+
 - 768 dims, 15% memory, 90% accuracy → m=96, k=256 (32:1 compression)
 - 1536 dims, 8% memory, 85% accuracy → m=192, k=128 (85:1 compression)
 
 #### Hybrid Algorithm Strategies
 
 **Cascading Search Strategy:**
+
 Use fast approximate algorithms to filter candidates, then refine with more accurate methods:
 
 *Two-Stage Process:*
+
 1. **Stage 1:** Fast filtering with PQ (retrieve k×10 candidates)
 2. **Stage 2:** Rerank with full precision using exact distance calculations
 
 *Benefits:*
+
 - Combines speed of approximate search with accuracy of exact ranking
 - Reduces computational cost while maintaining high precision
 - Particularly effective for large-scale deployments
 
 **Dynamic Algorithm Selection:**
+
 Choose algorithms based on query and dataset characteristics:
 
 *Selection Criteria:*
+
 - **High-magnitude queries:** Use exact search (<50K vectors) or HNSW (larger datasets)
 - **Sparse queries:** Prefer IVF clustering approach
 - **Standard queries:** HNSW for <5M vectors, IVF for larger datasets
 
 *Benefits:*
+
 - Optimizes performance for different query types
 - Adapts to dataset characteristics automatically
 - Balances accuracy and computational efficiency
@@ -1735,6 +1913,7 @@ OpenSearch extends Apache Lucene's robust document storage and search capabiliti
 #### Core Architecture Components
 
 **Integrated Storage Model:**
+
 OpenSearch stores vectors alongside traditional document fields, enabling rich queries that combine text filters, metadata constraints, and vector similarity in a single operation.
 
 ```
@@ -1753,6 +1932,7 @@ Document Structure:
 ```
 
 **Segment-Based Vector Storage:**
+
 OpenSearch leverages Lucene's segment architecture for vector storage, providing several key benefits:
 
 1. **Immutable Segments:** Once written, segments don't change, enabling efficient memory mapping and caching
@@ -1761,6 +1941,7 @@ OpenSearch leverages Lucene's segment architecture for vector storage, providing
 4. **Memory Management:** Vectors stored in off-heap memory-mapped files
 
 **Vector Index Files per Segment:**
+
 ```
 Segment Directory:
 ├── vectors.vec      # Raw vector data (memory-mapped)
@@ -1773,6 +1954,7 @@ Segment Directory:
 #### Memory Management Strategy
 
 **Off-Heap Vector Storage:**
+
 OpenSearch stores vector data off-heap to avoid garbage collection pressure and enable memory mapping:
 
 ```python
@@ -1786,12 +1968,14 @@ vector_storage = {
 ```
 
 **Query Processing Memory:**
+
 Temporary structures for query processing use on-heap memory:
 - Query vector parsing and normalization
 - Similarity score calculations
 - Result ranking and aggregation
 
 **Caching Strategy:**
+
 - **Vector cache:** Recently accessed vectors cached in direct memory
 - **Graph cache:** Frequently traversed graph regions kept in memory
 - **Query cache:** Common query patterns cached for repeated execution
@@ -1799,12 +1983,15 @@ Temporary structures for query processing use on-heap memory:
 #### Engine Architecture
 
 **Lucene Integration:**
+
 OpenSearch vector search builds on Lucene's KnnVectorField implementation while adding:
+
 - Multiple algorithm support (HNSW, IVF)
 - Advanced parameter tuning
 - Production-ready optimizations
 
 **Query Execution Pipeline:**
+
 ```
 1. Query Parsing → Parse knn/vector query syntax
 2. Vector Validation → Verify dimensions and format
@@ -1822,6 +2009,7 @@ Proper index configuration is crucial for optimal vector search performance. Ope
 #### Basic Vector Field Configuration
 
 **Simple Vector Field:**
+
 ```json
 {
   "mappings": {
@@ -1841,6 +2029,7 @@ Proper index configuration is crucial for optimal vector search performance. Ope
 ```
 
 **Space Type Options:**
+
 - **"cosinesimil":** Cosine similarity (recommended for text embeddings)
 - **"l2":** Euclidean distance (good for normalized embeddings)
 - **"l1":** Manhattan distance (robust for sparse vectors)
@@ -1849,6 +2038,7 @@ Proper index configuration is crucial for optimal vector search performance. Ope
 #### HNSW Configuration
 
 **Production HNSW Setup:**
+
 ```json
 {
   "settings": {
@@ -1881,6 +2071,7 @@ Proper index configuration is crucial for optimal vector search performance. Ope
 
 **Parameter Selection Guidelines:**
 
+
 | Use Case | ef_construction | M | Reasoning |
 |----------|----------------|---|-----------|
 | **Development/Testing** | 128 | 16 | Fast iteration, adequate quality |
@@ -1892,6 +2083,7 @@ Proper index configuration is crucial for optimal vector search performance. Ope
 #### IVF Configuration
 
 **IVF Index Setup:**
+
 ```json
 {
   "mappings": {
@@ -1916,24 +2108,30 @@ Proper index configuration is crucial for optimal vector search performance. Ope
 
 **IVF Parameter Calculation Framework:**
 
+
 *Cluster Count Formula:*
+
 - Base: √expected_vector_count
 - Adjusted: base × max(1.0, dimensions/512)
 - Constrained: max(32, calculated_value)
 
 *Search Width:*
+
 - Conservative: 10% of cluster count (minimum 8)
 
 *Memory Estimation:*
+
 - Formula: vector_count × dimensions × 4 bytes
 
 *Example Results:*
+
 - 500K vectors, 384 dims → nlist=707, nprobes=71, ~0.7GB
 - 5M vectors, 768 dims → nlist=3,464, nprobes=346, ~14.4GB
 
 #### Multi-Vector Field Configuration
 
 **Multiple Vector Fields for Different Purposes:**
+
 ```json
 {
   "mappings": {
@@ -1988,18 +2186,22 @@ Multi-modal search enables searching across different content types (text, image
 #### Understanding Multi-Modal Vector Search
 
 **Cross-Modal Understanding:**
+
 Multi-modal search transcends traditional single-content-type search by enabling queries across heterogeneous data types. This capability allows users to search for images using text descriptions, find videos using audio queries, or discover text documents using image inputs.
 
 **Key Advantages:**
+
 - **Natural Query Expression:** Users can express intent using the most convenient modality
 - **Content Discovery:** Find related content across different media types
 - **Accessibility:** Enable alternative access methods for users with different needs
 - **Rich Results:** Provide diverse result sets combining multiple content types
 
 **Technical Foundation:**
+
 Multi-modal search relies on embedding models trained on paired data across modalities, such as CLIP (Contrastive Language-Image Pre-training) for text-image pairs, or specialized audio-text models. These models learn shared representations where semantically similar content clusters together regardless of its original format.
 
 **Common Use Cases:**
+
 - **E-commerce:** Search for products using text descriptions to find matching images
 - **Media Libraries:** Find videos or images using natural language descriptions
 - **Educational Content:** Discover learning materials across text, video, and image formats
@@ -2008,12 +2210,15 @@ Multi-modal search relies on embedding models trained on paired data across moda
 #### Cross-Modal Search Architecture
 
 **Unified Embedding Space:**
+
 Multi-modal search relies on embedding models that map different content types into a shared semantic space where similar concepts cluster together regardless of modality.
 
 **Shared Vector Space Design:**
+
 The core innovation of multi-modal search lies in creating a unified vector space where different content types can be meaningfully compared. This requires specialized embedding models that understand semantic relationships across modalities.
 
 **Implementation Architecture:**
+
 
 ```json
 {
@@ -2060,6 +2265,7 @@ The core innovation of multi-modal search lies in creating a unified vector spac
 
 **Cross-Modal Query Examples:**
 
+
 *Text-to-Image Search:*
 ```json
 {
@@ -2103,12 +2309,14 @@ The core innovation of multi-modal search lies in creating a unified vector spac
 ```
 
 **Multi-Modal Embedding Models:**
+
 - **CLIP (OpenAI):** Text-image understanding with 512-dimensional embeddings
 - **ALIGN (Google):** Large-scale text-image alignment with 640-dimensional vectors
 - **AudioCLIP:** Extension to audio-text-image modalities
 - **VideoCLIP:** Video-text understanding for temporal content
 
 **Practical Implementation Considerations:**
+
 - **Dimension Alignment:** Ensure all modalities use the same vector dimensions
 - **Normalization:** Apply consistent normalization across different embedding models
 - **Quality Control:** Validate cross-modal similarity using human evaluation
@@ -2120,3 +2328,34 @@ The core innovation of multi-modal search lies in creating a unified vector spac
 This comprehensive guide provides the foundation for building production-ready vector search systems with OpenSearch. The progression from traditional text search through advanced hybrid approaches, combined with deep algorithmic understanding and practical implementation patterns, enables you to create sophisticated search experiences that understand meaning rather than just matching keywords.
 
 The key to successful vector search implementation lies in understanding your specific use case requirements, choosing appropriate algorithms and parameters, and continuously monitoring and optimizing performance based on real-world usage patterns.
+
+---
+
+## ⚠️ Performance Metrics Disclaimer
+
+**Important Notice about Performance Data:**
+
+
+All performance metrics, benchmarks, latency figures, memory usage statistics, and cost examples presented in this document are **illustrative examples** designed to help with understanding and planning. These numbers are based on theoretical models, synthetic tests, or specific hardware configurations and should not be considered as guaranteed performance metrics for your specific use case.
+
+**Actual performance will vary significantly based on:**
+
+- Hardware specifications and configurations
+- Data characteristics (vector dimensions, dataset size, distribution)
+- Query patterns and concurrency levels
+- Network latency and infrastructure setup
+- OpenSearch version and configuration settings
+- Operating system and environment factors
+
+**Before making production decisions:**
+
+- Conduct benchmarks with your actual data and infrastructure
+- Test with realistic query patterns and load
+- Consult official OpenSearch and AWS documentation for current capabilities
+- Consider engaging with AWS support for production sizing guidance
+
+For current official benchmarks and performance guidance, refer to:
+- [OpenSearch Performance Guidelines](https://opensearch.org/docs/latest/tuning/)
+- [AWS OpenSearch Service Best Practices](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/bp.html)
+
+---

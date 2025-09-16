@@ -5,6 +5,7 @@
 This guide compares two powerful vector search technologies that help computers understand meaning, not just match exact words. Whether you're a curious student, a developer building AI applications, or a technical architect choosing the right tool, this guide has you covered.
 
 **📖 Reading Guide:**
+
 - **🟢 Basic sections** - Perfect for beginners and understanding core concepts
 - **🔵 Intermediate sections** - For developers and technical decision-makers  
 - **🔴 Advanced sections** - Deep technical details for specialists and architects
@@ -15,6 +16,7 @@ Skip the technical sections if they're too complex - you'll still understand whi
 
 ### What is Vector Search?
 Imagine you're looking for similar songs to one you like. Instead of just matching song titles, a smart system would understand that:
+
 - "Bohemian Rhapsody" by Queen is similar to other epic rock ballads
 - "Hotel California" by Eagles shares musical themes with classic rock stories
 - Even if the titles share no common words!
@@ -28,6 +30,7 @@ Vector search works similarly - it converts text, images, or other data into mat
 **Pinecone** is like a specialized precision instrument - it's built specifically and only for vector search, making it incredibly good at that one thing.
 
 ### The Key Difference
+
 - **OpenSearch**: "I can do vector search plus many other search tasks"
 - **Pinecone**: "I do vector search better than anyone, and that's all I focus on"
 
@@ -40,6 +43,7 @@ Before we dive in, let's decode some key concepts:
 **Vector Dimensions**: Think of this like describing a person - you might use height, weight, age, income, etc. More dimensions = more detailed description. In vector search, more dimensions usually mean better accuracy but require more computing power.
 
 **Similarity Metrics**: Different ways to measure "how similar" two things are:
+
 - **Cosine**: Like measuring the angle between two arrows (good for text)
 - **Euclidean**: Like measuring straight-line distance on a map (good for images)
 - **Dot Product**: Like measuring both direction and magnitude (good for recommendations)
@@ -59,6 +63,7 @@ Before we dive in, let's decode some key concepts:
 Let's say you're building a movie recommendation system:
 
 **With OpenSearch:**
+
 - Store movie data: title, plot summary, genre, cast, user reviews
 - Create vectors from plot summaries and reviews (captures movie "meaning")
 - User searches: "funny romantic comedies with strong female leads"
@@ -68,6 +73,7 @@ Let's say you're building a movie recommendation system:
   - Result: Both keyword matches and movies with similar themes but different words
 
 **With Pinecone:**
+
 - Store movie vectors (mathematical representations of movie characteristics)
 - User's viewing history becomes a user vector
 - System finds: movies with vectors similar to user's preference vector
@@ -232,6 +238,7 @@ pinecone.init(
 ```
 
 **🤓 What's Happening:**
+
 - **api_key**: Your unique identifier and password combined
 - **environment**: Physical location of servers (affects speed for users in different regions)
 
@@ -253,6 +260,7 @@ index = pinecone.Index("vector-search-index")
 ```
 
 **🤓 What's Really Happening:**
+
 - **dimension=768**: This matches the output of popular AI models like sentence-transformers
 - **metric="cosine"**: Measures similarity by angle, not distance (perfect for text meaning)
 - **pods**: Think of these like individual search engines working together
@@ -287,12 +295,14 @@ index.upsert(vectors=[
 ```
 
 **🤓 What's Really Happening:**
+
 1. **id**: Like a library catalog number - unique for each document
 2. **values**: The mathematical representation of the document's meaning (768 decimal numbers)
 3. **metadata**: Human-readable information you can filter and display
 4. **upsert**: If "doc1" already exists, it updates it; if not, it creates it
 
 **Real Example:**
+
 If your document says "The quick brown fox jumps over the lazy dog," the AI model converts this to a vector like [0.15, -0.23, 0.87, 0.12, ..., 0.45] that mathematically represents its meaning.
 
 ### 🔵 Step 4: Basic Search (Finding Similar Documents)
@@ -315,12 +325,14 @@ for match in results.matches:
 ```
 
 **🤓 What's Really Happening:**
+
 1. Convert your search question to a vector (same 768 numbers format)
 2. Pinecone compares your search vector to all document vectors
 3. Returns the most mathematically similar documents
 4. **filter**: Only looks at documents matching your criteria
 
 **Real Example:**
+
 - You search: "artificial intelligence tutorials"
 - Gets converted to: [0.22, -0.15, 0.78, ...]
 - Finds documents with similar vectors, might include:
@@ -354,6 +366,7 @@ for i, query_vector in enumerate(query_vectors):
 ```
 
 **🤓 Advanced Concepts:**
+
 - **namespace**: Like having separate folders - "production" vs "test" vs "development"
 - **include_values=False**: Saves network bandwidth by not returning the actual vectors
 - **Batch processing**: More efficient than individual queries for multiple searches
@@ -475,6 +488,7 @@ advanced_ai_courses = search_courses("machine learning neural networks", min_rat
 ```
 
 **🤓 What This Production Example Shows:**
+
 1. **Real embedding model**: Uses sentence-transformers to convert text to vectors
 2. **Batch operations**: Efficiently handles multiple courses at once
 3. **Complex filtering**: Combines similarity search with difficulty and rating filters
@@ -517,6 +531,7 @@ This is how you'd actually implement vector search in a real application!
 ```
 
 **OpenSearch Optimization Tips:**
+
 - Set `ef_construction` higher for better recall (slower indexing)
 - Adjust `ef_search` based on latency vs accuracy requirements
 - Use appropriate shard count: `ceil(total_vectors / 1M)`
@@ -557,6 +572,7 @@ pinecone.create_index(
 
 ### OpenSearch Embedding Management
 **Advantages:**
+
 - Full control over embedding generation pipeline
 - Can store multiple embedding versions in same index
 - Custom preprocessing and postprocessing
@@ -564,6 +580,7 @@ pinecone.create_index(
 - Batch processing optimization
 
 **Challenges:**
+
 - Need to manage embedding model lifecycle
 - Responsible for model versioning and updates
 - Must handle embedding dimension consistency
@@ -603,12 +620,14 @@ class EmbeddingPipeline:
 
 ### Pinecone Embedding Management
 **Advantages:**
+
 - Simplified integration with popular embedding models
 - Built-in support for sparse-dense hybrid vectors
 - Automatic handling of embedding updates
 - Integrated with popular ML frameworks
 
 **Considerations:**
+
 - Less flexibility in embedding pipeline customization
 - Vendor dependence for certain optimizations
 - Need to manage embedding generation separately
@@ -625,6 +644,7 @@ class EmbeddingPipeline:
 
 ### Pinecone Algorithms
 Pinecone uses proprietary algorithms optimized for different scenarios:
+
 - **Standard**: Balanced performance for most use cases
 - **High Performance**: Optimized for low latency
 - **High Memory**: Better recall for complex similarity patterns
@@ -761,12 +781,14 @@ def import_to_opensearch(es_client, index_name, vectors):
 ## Monitoring and Observability
 
 ### OpenSearch Monitoring
+
 - **Metrics**: Cluster health, indexing rate, query latency
 - **Tools**: CloudWatch, Kibana dashboards, custom monitoring
 - **Alerting**: Based on performance thresholds, error rates
 - **Debugging**: Detailed query profiling, slow query logs
 
 ### Pinecone Monitoring
+
 - **Metrics**: Query count, latency, index utilization
 - **Tools**: Built-in dashboard, API metrics
 - **Alerting**: Usage limits, performance degradation
@@ -775,6 +797,7 @@ def import_to_opensearch(es_client, index_name, vectors):
 ## Use Case Recommendations {#decision-framework}
 
 ### Choose OpenSearch When:
+
 - Need both vector and traditional search capabilities
 - Require complex filtering and aggregations
 - Have existing Elasticsearch/OpenSearch expertise
@@ -784,6 +807,7 @@ def import_to_opensearch(es_client, index_name, vectors):
 - Require on-premises or hybrid deployment options
 
 ### Choose Pinecone When:
+
 - Primary focus is vector similarity search
 - Want zero-maintenance managed service
 - Need rapid prototyping and deployment
@@ -796,6 +820,7 @@ def import_to_opensearch(es_client, index_name, vectors):
 ## Performance Optimization Best Practices
 
 ### OpenSearch Optimization
+
 1. **Hardware Configuration**
    - Use memory-optimized instances (r5, r6i)
    - SSD storage for vector indices
