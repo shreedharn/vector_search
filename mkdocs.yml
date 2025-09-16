@@ -2,21 +2,43 @@ site_name: Vector and Hybrid Search
 theme:
   name: material
   features:
+    - navigation.sections
+    - navigation.top
     - navigation.instant
-    - navigation.tracking
     - content.code.copy
+    - content.tabs.link
+    - toc.follow
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+  font:
+    text: Inter
+    code: JetBrains Mono
 plugins:
   - search
   - awesome-pages
   - roamlinks         # keep if you use [[Wiki Links]]; safe to leave on
 markdown_extensions:
+  # core niceties
   - admonition
   - toc:
       permalink: true
-  - pymdownx.arithmatex:
-      generic: true   # LaTeX via MathJax/KaTeX wrappers
-  - pymdownx.highlight
+      slugify: !!python/name:pymdownx.slugs.uslugify
+  - attr_list
+  - def_list
+  - md_in_html
+
+  # pymdownx goodies (lists, tabs, better emphasis)
   - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed:
+      alternate_style: true
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - javascripts/mathjax.js
@@ -24,4 +46,6 @@ extra:
   arithmatex:
     inlineWrap: ["\\(", "\\)"]
     generic: true
+extra_css:
+  - styles/overrides.css
 docs_dir: docs

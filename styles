@@ -1,0 +1,44 @@
+/* Tighter, more even typography */
+:root {
+  --md-typeset-font-size: 0.98rem;
+  --md-typeset-line-height: 1.65;
+}
+
+/* Better lists (indent, spacing, bullet alignment) */
+.md-typeset ul,
+.md-typeset ol { margin: 0.35rem 0 0.9rem 1.4rem; }
+.md-typeset li { margin: 0.18rem 0; }
+
+/* Nicer headings spacing */
+.md-typeset h1, .md-typeset h2, .md-typeset h3 {
+  margin-top: 1.4em;
+  margin-bottom: .5em;
+}
+
+/* Content width (feel free to tweak 900–1100px) */
+.md-grid { max-width: 1080px; }
+
+/* Images & “figures” */
+.md-typeset img { border-radius: 8px; }
+figure { margin: 1rem 0; text-align: center; }
+figure > img { max-width: 100%; }
+figcaption { color: var(--md-default-fg-color--light); font-style: italic; margin-top: .4rem; }
+
+/* Inline code readability */
+.md-typeset code { padding: .08em .3em; border-radius: .35rem; }
+
+/* --- Typography overrides for better sizing --- */
+
+/* Reduce base paragraph size */
+:root {
+  --md-typeset-font-size: 0.9rem;  /* 0.9–0.95rem usually feels good */
+  --md-typeset-line-height: 1.6;
+}
+
+/* Reduce heading scale slightly */
+.md-typeset h1 { font-size: 1.6rem; }
+.md-typeset h2 { font-size: 1.35rem; }
+.md-typeset h3 { font-size: 1.15rem; }
+
+/* max width for readability */
+.md-grid { max-width: 900px; }
