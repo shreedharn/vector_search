@@ -1257,7 +1257,7 @@
 <p><strong>Statistical Revolution: TF-IDF</strong></p>
 <p>Term Frequency-Inverse Document Frequency (<a href="../glossary/#tf-idf-term-frequency-inverse-document-frequency">TF-IDF</a>) introduced statistical sophistication to search by considering two key factors:</p>
 <ul>
-<li><strong>Term Frequency (TF):</strong> How often a term appears in a document</li>
+<li>Term Frequency (TF): How often a term appears in a document</li>
 <li>Inverse Document Frequency (IDF): How rare or common a term is across the entire collection</li>
 </ul>
 <p>The intuition is powerful: terms that appear frequently in a specific document but rarely across the collection are likely more significant for that document's meaning.</p>
@@ -1310,8 +1310,8 @@
 <h3 id="where-text-search-excels">Where Text Search Excels<a class="headerlink" href="#where-text-search-excels" title="Permanent link">&para;</a></h3>
 <p><strong>Precision-Critical Scenarios:</strong></p>
 <ul>
-<li><strong>Legal Document Retrieval:</strong> Finding contracts containing specific clauses like "force majeure" or "intellectual property"</li>
-<li><strong>Technical Documentation:</strong> Locating API references with exact method names like "getUserById()"</li>
+<li>Legal Document Retrieval: Finding contracts containing specific clauses like "force majeure" or "intellectual property"</li>
+<li>Technical Documentation: Locating API references with exact method names like "getUserById()"</li>
 <li>Product Catalogs: Matching precise specifications like "iPhone 15 Pro Max 256GB Blue"</li>
 </ul>
 <p><strong>Transparent Relevance:</strong></p>
@@ -1347,8 +1347,8 @@
 <p>Text search struggles with:</p>
 <ul>
 <li>Synonyms: "happy" vs "joyful" vs "cheerful"</li>
-<li><strong>Multilingual Content:</strong> English query missing Spanish documents with same meaning</li>
-<li><strong>Acronyms and Abbreviations:</strong> "AI" vs "Artificial Intelligence"</li>
+<li>Multilingual Content: English query missing Spanish documents with same meaning</li>
+<li>Acronyms and Abbreviations: "AI" vs "Artificial Intelligence"</li>
 <li>Misspellings: "recieve" vs "receive"</li>
 </ul>
 <p><strong>Query Formulation Challenges:</strong></p>
@@ -1442,28 +1442,28 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Exact product lookup</strong></td>
+<td>Exact product lookup</td>
 <td>"MacBook Pro M3 16GB" → Perfect match</td>
 <td>May find similar products</td>
-<td><strong>Text Search</strong></td>
+<td>Text Search</td>
 </tr>
 <tr>
-<td><strong>Concept exploration</strong></td>
+<td>Concept exploration</td>
 <td>"sustainable energy" → Only exact phrase</td>
 <td>Finds renewable, green, clean energy</td>
-<td><strong>Vector Search</strong></td>
+<td>Vector Search</td>
 </tr>
 <tr>
-<td><strong>Technical specifications</strong></td>
+<td>Technical specifications</td>
 <td>"RAM &gt;= 16GB AND SSD" → Precise filtering</td>
 <td>Cannot handle logical constraints</td>
-<td><strong>Text Search</strong></td>
+<td>Text Search</td>
 </tr>
 <tr>
-<td><strong>Intent-based queries</strong></td>
+<td>Intent-based queries</td>
 <td>"best laptop for programming" → Keyword luck</td>
 <td>Understands programming needs</td>
-<td><strong>Vector Search</strong></td>
+<td>Vector Search</td>
 </tr>
 </tbody>
 </table>
@@ -1478,27 +1478,27 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Index Build Time</strong></td>
+<td>Index Build Time</td>
 <td>Minutes</td>
 <td>Hours (embedding generation)</td>
 </tr>
 <tr>
-<td><strong>Query <a href="../glossary/#latency">Latency</a></strong></td>
+<td>Query <a href="../glossary/#latency">Latency</a></td>
 <td>&lt;1ms</td>
 <td>1-100ms (depending on algorithm)</td>
 </tr>
 <tr>
-<td><strong><a href="../glossary/#memory-usage">Memory Usage</a></strong></td>
+<td><a href="../glossary/#memory-usage">Memory Usage</a></td>
 <td>Low (inverted index)</td>
 <td>High (vector storage)</td>
 </tr>
 <tr>
-<td><strong>Accuracy</strong></td>
+<td>Accuracy</td>
 <td>Perfect for keywords</td>
 <td>85-99% approximate</td>
 </tr>
 <tr>
-<td><strong>Scalability</strong></td>
+<td>Scalability</td>
 <td>Excellent</td>
 <td>Good (with proper algorithms)</td>
 </tr>
@@ -1606,16 +1606,16 @@
 <p><strong>Query Classification:</strong></p>
 <p>Intelligent systems can dynamically adjust the balance between text and vector search based on query characteristics:</p>
 <ul>
-<li><strong>Exact identifiers</strong> (SKUs, codes, names): 80% text, 20% vector weight</li>
-<li><strong>Conceptual queries</strong> ("similar to," "like," "about"): 30% text, 70% vector weight</li>
-<li><strong>Factual queries</strong> ("how to," "what is"): 60% text, 40% vector weight</li>
+<li>Exact identifiers (SKUs, codes, names): 80% text, 20% vector weight</li>
+<li>Conceptual queries ("similar to," "like," "about"): 30% text, 70% vector weight</li>
+<li>Factual queries ("how to," "what is"): 60% text, 40% vector weight</li>
 <li>Default queries: 50% text, 50% vector weight (balanced approach)</li>
 </ul>
 <p><strong>User Interface Adaptation:</strong></p>
 <p>Search interfaces can provide different experiences based on the search approach:</p>
 <ul>
 <li>Text-heavy results: Show keyword highlighting, exact matches, filters</li>
-<li><strong>Vector-heavy results:</strong> Display "because you searched for," related concepts, exploration suggestions</li>
+<li>Vector-heavy results: Display "because you searched for," related concepts, exploration suggestions</li>
 <li>Hybrid results: Combine both approaches with clear result categorization</li>
 </ul>
 <h2 id="reranking-refining-search-results">Reranking: Refining Search Results<a class="headerlink" href="#reranking-refining-search-results" title="Permanent link">&para;</a></h2>

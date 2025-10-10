@@ -1514,7 +1514,7 @@
 <ul>
 <li>Memory Mapping: Immutable segments allow efficient memory-mapped file access for large vector datasets</li>
 <li>Cache Efficiency: Vectors in segments can be cached effectively without invalidation concerns</li>
-<li><strong>Parallel Processing:</strong> Vector search across segments can leverage multi-core processors</li>
+<li>Parallel Processing: Vector search across segments can leverage multi-core processors</li>
 <li>Index Growth: New vectors added as new segments without disrupting existing searches</li>
 </ul>
 <h3 id="lucenes-inverted-index">Lucene's Inverted Index<a class="headerlink" href="#lucenes-inverted-index" title="Permanent link">&para;</a></h3>
@@ -1746,31 +1746,31 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Development/Testing</strong></td>
+<td>Development/Testing</td>
 <td>128</td>
 <td>16</td>
 <td>Fast iteration, adequate quality</td>
 </tr>
 <tr>
-<td><strong>Production (Balanced)</strong></td>
+<td>Production (Balanced)</td>
 <td>256</td>
 <td>24</td>
 <td>Good performance, manageable resources</td>
 </tr>
 <tr>
-<td><strong>High Accuracy</strong></td>
+<td>High Accuracy</td>
 <td>512</td>
 <td>32</td>
 <td>Maximum quality, higher resource usage</td>
 </tr>
 <tr>
-<td><strong>Memory Constrained</strong></td>
+<td>Memory Constrained</td>
 <td>128</td>
 <td>12</td>
 <td>Reduced memory footprint</td>
 </tr>
 <tr>
-<td><strong>Large Scale (10M+)</strong></td>
+<td>Large Scale (10M+)</td>
 <td>256</td>
 <td>24</td>
 <td>Balanced for large datasets</td>
@@ -1991,7 +1991,7 @@
 <ul>
 <li>window_size: Number of top documents to rescore (typically 50-200)</li>
 <li>query_weight: Weight given to original query score (0.0-1.0)</li>
-<li><strong>rescore_query_weight:</strong> Weight given to rescore query score (0.0-1.0)</li>
+<li>rescore_query_weight: Weight given to rescore query score (0.0-1.0)</li>
 </ul>
 <h3 id="advanced-function-scoring">Advanced Function Scoring<a class="headerlink" href="#advanced-function-scoring" title="Permanent link">&para;</a></h3>
 <p><strong>Multi-Signal Reranking:</strong></p>
@@ -2164,7 +2164,7 @@
 <h3 id="performance-optimization">Performance Optimization<a class="headerlink" href="#performance-optimization" title="Permanent link">&para;</a></h3>
 <p><strong>Reranking Performance Tuning:</strong></p>
 <ul>
-<li><strong>Window Size Optimization:</strong> Start with 50, increase to 100-200 for better quality</li>
+<li>Window Size Optimization: Start with 50, increase to 100-200 for better quality</li>
 <li>Weight Balancing: Use 70-80% original query weight, 20-30% rescore weight</li>
 <li>Caching Strategies: Cache rescore results for popular queries</li>
 <li>Async Processing: Implement asynchronous reranking for real-time applications</li>
@@ -2192,7 +2192,7 @@
 <p>Multi-modal search transcends traditional single-content-type search by enabling queries across heterogeneous data types. This capability allows users to search for images using text descriptions, find videos using audio queries, or discover text documents using image inputs.</p>
 <p>Key Advantages:</p>
 <ul>
-<li><strong>Natural Query Expression:</strong> Users can express intent using the most convenient modality</li>
+<li>Natural Query Expression: Users can express intent using the most convenient modality</li>
 <li>Content Discovery: Find related content across different media types</li>
 <li>Accessibility: Enable alternative access methods for users with different needs</li>
 <li>Rich Results: Provide diverse result sets combining multiple content types</li>
@@ -2203,7 +2203,7 @@
 <ul>
 <li>E-commerce: Search for products using text descriptions to find matching images</li>
 <li>Media Libraries: Find videos or images using natural language descriptions</li>
-<li><strong>Educational Content:</strong> Discover learning materials across text, video, and image formats</li>
+<li>Educational Content: Discover learning materials across text, video, and image formats</li>
 <li>Research Databases: Cross-reference findings across papers, diagrams, and datasets</li>
 </ul>
 <h4 id="cross-modal-search-architecture">Cross-Modal Search Architecture<a class="headerlink" href="#cross-modal-search-architecture" title="Permanent link">&para;</a></h4>
@@ -2301,10 +2301,10 @@
 </ul>
 <p><strong>Practical Implementation Considerations:</strong></p>
 <ul>
-<li><strong>Dimension Alignment:</strong> Ensure all modalities use the same vector dimensions</li>
+<li>Dimension Alignment: Ensure all modalities use the same vector dimensions</li>
 <li>Normalization: Apply consistent normalization across different embedding models</li>
 <li>Quality Control: Validate cross-modal similarity using human evaluation</li>
-<li><strong>Performance Optimization:</strong> Use separate indexes per modality for complex queries</li>
+<li>Performance Optimization: Use separate indexes per modality for complex queries</li>
 </ul>
 <h2 id="production-best-practices">Production Best Practices<a class="headerlink" href="#production-best-practices" title="Permanent link">&para;</a></h2>
 <h3 id="index-optimization">Index Optimization<a class="headerlink" href="#index-optimization" title="Permanent link">&para;</a></h3>
@@ -2332,7 +2332,7 @@
 <li>Query latency: P50, P95, P99 percentiles</li>
 <li>Index size: Track growth over time</li>
 <li>Memory usage: JVM heap and off-heap memory</li>
-<li><strong>Cache hit rates:</strong> Query cache, request cache</li>
+<li>Cache hit rates: Query cache, request cache</li>
 <li>Merge statistics: Segment count and merge times</li>
 </ul>
 <p><strong>Example Monitoring Query:</strong></p>

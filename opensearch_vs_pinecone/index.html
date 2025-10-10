@@ -1929,9 +1929,9 @@
 <p>This guide compares two powerful vector search technologies that help computers understand meaning, not just match exact words. Whether you're a curious student, a developer building AI applications, or a technical architect choosing the right tool, this guide has you covered.</p>
 <p><strong>📖 Reading Guide:</strong></p>
 <ul>
-<li><strong>Basic sections</strong> - Perfect for beginners and understanding core concepts</li>
-<li><strong>Intermediate sections</strong> - For developers and technical decision-makers  </li>
-<li><strong>Advanced sections</strong> - Deep technical details for specialists and architects</li>
+<li>Basic sections - Perfect for beginners and understanding core concepts</li>
+<li>Intermediate sections - For developers and technical decision-makers  </li>
+<li>Advanced sections - Deep technical details for specialists and architects</li>
 </ul>
 <p>Skip the technical sections if they're too complex - you'll still understand which tool fits your needs!</p>
 <h2 id="understanding-vector-search">Overview: Understanding Vector Search<a class="headerlink" href="#understanding-vector-search" title="Permanent link">&para;</a></h2>
@@ -1972,49 +1972,49 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Vector Search</strong></td>
+<td>Vector Search</td>
 <td>k-NN with <a href="../glossary/#hnsw-hierarchical-navigable-small-world">HNSW</a>, <a href="../glossary/#ivf-inverted-file-index">IVF</a> algorithms</td>
 <td>Proprietary optimized algorithms</td>
-<td>OpenSearch: Uses standard, proven methods (<a href="../opensearch/#hnsw-hierarchical-navigable-small-world">details</a>). Pinecone: Uses custom-built, specialized methods</td>
+<td>OpenSearch: Uses standard, proven methods (<a href="../opensearch/#hnsw-configuration">details</a>). Pinecone: Uses custom-built, specialized methods</td>
 </tr>
 <tr>
-<td><strong>Vector Dimensions</strong></td>
+<td>Vector Dimensions</td>
 <td>Up to 16,000 dimensions</td>
 <td>Up to 20,000 dimensions</td>
 <td>Both handle very detailed data representations. Pinecone handles slightly more complex data</td>
 </tr>
 <tr>
-<td><strong>Similarity Metrics</strong></td>
+<td>Similarity Metrics</td>
 <td>Cosine, Euclidean, Inner Product</td>
 <td>Cosine, Euclidean, Dot Product</td>
 <td>Both offer the main similarity measurement methods you'd need</td>
 </tr>
 <tr>
-<td><strong>Hybrid Search</strong></td>
+<td>Hybrid Search</td>
 <td>Vector + full-text search</td>
 <td>Vector + metadata filtering</td>
-<td>OpenSearch: Can combine meaning-based and keyword search (<a href="../opensearch/#the-progression-text-vector-hybrid_1">details</a>). Pinecone: Combines meaning-based search with data filters</td>
+<td>OpenSearch: Can combine meaning-based and keyword search (<a href="../opensearch/#hybrid-search-queries">details</a>). Pinecone: Combines meaning-based search with data filters</td>
 </tr>
 <tr>
-<td><strong>RAG Support</strong></td>
+<td>RAG Support</td>
 <td>Full RAG implementation capabilities</td>
 <td>Vector retrieval for RAG pipelines</td>
 <td>OpenSearch: Complete RAG ecosystem (<a href="../opensearch_rag/">guide</a>). Pinecone: Specialized vector retrieval component</td>
 </tr>
 <tr>
-<td><strong>Real-time Updates</strong></td>
+<td>Real-time Updates</td>
 <td>Supported with small delay</td>
 <td>Real-time with immediate consistency</td>
 <td>OpenSearch: Few seconds delay after updates. Pinecone: Instant availability after updates</td>
 </tr>
 <tr>
-<td><strong>Approximate Search</strong></td>
+<td>Approximate Search</td>
 <td><a href="../glossary/#hnsw-hierarchical-navigable-small-world">HNSW</a>, <a href="../glossary/#ivf-inverted-file-index">IVF</a> approximate algorithms</td>
 <td>Proprietary approximate algorithms</td>
 <td>Both use "good enough" fast search instead of perfect but slow search</td>
 </tr>
 <tr>
-<td><strong>Exact Search</strong></td>
+<td>Exact Search</td>
 <td>Brute force option available</td>
 <td>Not optimized for exact search</td>
 <td>OpenSearch: Can do perfect matching (slow). Pinecone: Focuses on fast approximate matching</td>
@@ -2051,32 +2051,32 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Deployment Model</strong></td>
+<td>Deployment Model</td>
 <td>Self-managed or AWS managed</td>
 <td>Fully managed SaaS</td>
 </tr>
 <tr>
-<td><strong>Infrastructure</strong></td>
+<td>Infrastructure</td>
 <td>EC2 instances, customizable</td>
 <td>Serverless, auto-scaling</td>
 </tr>
 <tr>
-<td><strong>Multi-region</strong></td>
+<td>Multi-region</td>
 <td>Manual setup required</td>
 <td>Built-in multi-region support</td>
 </tr>
 <tr>
-<td><strong>High Availability</strong></td>
+<td>High Availability</td>
 <td>Master/data node configuration</td>
 <td>Built-in with automatic failover</td>
 </tr>
 <tr>
-<td><strong>Backup/Recovery</strong></td>
+<td>Backup/Recovery</td>
 <td>Manual snapshots required</td>
 <td>Automatic backups included</td>
 </tr>
 <tr>
-<td><strong>Maintenance</strong></td>
+<td>Maintenance</td>
 <td>OS patches, updates required</td>
 <td>Zero maintenance required</td>
 </tr>
@@ -2093,32 +2093,32 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Horizontal Scaling</strong></td>
+<td>Horizontal Scaling</td>
 <td>Manual node addition</td>
 <td>Automatic scaling</td>
 </tr>
 <tr>
-<td><strong>Index Size</strong></td>
+<td>Index Size</td>
 <td>Limited by cluster resources</td>
 <td>Up to billions of vectors</td>
 </tr>
 <tr>
-<td><strong>Query <a href="../glossary/#latency">Latency</a></strong></td>
+<td>Query <a href="../glossary/#latency">Latency</a></td>
 <td>10-100ms (varies by config)</td>
 <td>Sub-10ms typical</td>
 </tr>
 <tr>
-<td><strong><a href="../glossary/#throughput-qps">Throughput (QPS)</a></strong></td>
+<td><a href="../glossary/#throughput-qps">Throughput (QPS)</a></td>
 <td>Thousands of QPS</td>
 <td>Thousands to millions of QPS</td>
 </tr>
 <tr>
-<td><strong>Storage Type</strong></td>
+<td>Storage Type</td>
 <td>EBS, instance storage</td>
 <td>Proprietary storage system</td>
 </tr>
 <tr>
-<td><strong>Memory Requirements</strong></td>
+<td>Memory Requirements</td>
 <td>High for vector operations</td>
 <td>Optimized memory usage</td>
 </tr>
@@ -2135,32 +2135,32 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Data Ingestion</strong></td>
+<td>Data Ingestion</td>
 <td>Bulk API, streaming</td>
 <td>REST API, batch upserts</td>
 </tr>
 <tr>
-<td><strong>Update Operations</strong></td>
+<td>Update Operations</td>
 <td>Update, upsert, delete</td>
 <td>Upsert, delete, partial updates</td>
 </tr>
 <tr>
-<td><strong>Data Format</strong></td>
+<td>Data Format</td>
 <td>JSON documents with vectors</td>
 <td>Vectors with metadata</td>
 </tr>
 <tr>
-<td><strong>Schema Flexibility</strong></td>
+<td>Schema Flexibility</td>
 <td>Dynamic mapping</td>
 <td>Metadata-only schema</td>
 </tr>
 <tr>
-<td><strong>Indexing Speed</strong></td>
+<td>Indexing Speed</td>
 <td>Moderate (configurable)</td>
 <td>Optimized for fast indexing</td>
 </tr>
 <tr>
-<td><strong>Data Durability</strong></td>
+<td>Data Durability</td>
 <td>Replica configuration</td>
 <td>Built-in durability</td>
 </tr>
@@ -2177,32 +2177,32 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Vector Queries</strong></td>
+<td>Vector Queries</td>
 <td>k-NN, approximate search</td>
 <td>Similarity search, filtering</td>
 </tr>
 <tr>
-<td><strong>Text Search</strong></td>
+<td>Text Search</td>
 <td>Full-text search capabilities</td>
 <td>No native text search</td>
 </tr>
 <tr>
-<td><strong>Complex Filtering</strong></td>
+<td>Complex Filtering</td>
 <td>Advanced query DSL</td>
 <td>Metadata filtering</td>
 </tr>
 <tr>
-<td><strong>Aggregations</strong></td>
+<td>Aggregations</td>
 <td>Full aggregation support</td>
 <td>Limited aggregation</td>
 </tr>
 <tr>
-<td><strong>Geospatial</strong></td>
+<td>Geospatial</td>
 <td>Geo-point, geo-shape queries</td>
 <td>No native geo support</td>
 </tr>
 <tr>
-<td><strong>Time Series</strong></td>
+<td>Time Series</td>
 <td>Time-based queries, rollups</td>
 <td>Basic timestamp filtering</td>
 </tr>
@@ -2219,32 +2219,32 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>ML Frameworks</strong></td>
+<td>ML Frameworks</td>
 <td>Manual integration required</td>
 <td>Native integrations (LangChain, etc.)</td>
 </tr>
 <tr>
-<td><strong>APIs</strong></td>
+<td>APIs</td>
 <td>REST, various client libraries</td>
 <td>REST API, Python/Node.js SDKs</td>
 </tr>
 <tr>
-<td><strong>Authentication</strong></td>
+<td>Authentication</td>
 <td>IAM, SAML, basic auth</td>
 <td>API keys, SAML SSO</td>
 </tr>
 <tr>
-<td><strong>Monitoring</strong></td>
+<td>Monitoring</td>
 <td>CloudWatch, custom dashboards</td>
 <td>Built-in monitoring dashboard</td>
 </tr>
 <tr>
-<td><strong>Alerting</strong></td>
+<td>Alerting</td>
 <td>Custom alerting rules</td>
 <td>Usage alerts and notifications</td>
 </tr>
 <tr>
-<td><strong>Data Connectors</strong></td>
+<td>Data Connectors</td>
 <td>Custom development required</td>
 <td>Pre-built integrations available</td>
 </tr>
@@ -2261,32 +2261,32 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Pricing Model</strong></td>
+<td>Pricing Model</td>
 <td>Instance hours + storage</td>
 <td>Vector storage + operations</td>
 </tr>
 <tr>
-<td><strong>Base Cost</strong></td>
+<td>Base Cost</td>
 <td>$15-100+/month (varies by instance)</td>
 <td>$70/month (starter tier)</td>
 </tr>
 <tr>
-<td><strong>Storage Cost</strong></td>
+<td>Storage Cost</td>
 <td>EBS storage rates</td>
 <td>Included in tier pricing</td>
 </tr>
 <tr>
-<td><strong>Query Cost</strong></td>
+<td>Query Cost</td>
 <td>No per-query charges</td>
 <td>Included in tier pricing</td>
 </tr>
 <tr>
-<td><strong>Data Transfer</strong></td>
+<td>Data Transfer</td>
 <td>AWS standard rates</td>
 <td>Included within limits</td>
 </tr>
 <tr>
-<td><strong>Hidden Costs</strong></td>
+<td>Hidden Costs</td>
 <td>Management overhead</td>
 <td>None (fully managed)</td>
 </tr>
@@ -2599,7 +2599,7 @@
 </ul>
 <h2 id="advanced-vector-search-algorithms">Advanced Vector Search Algorithms<a class="headerlink" href="#advanced-vector-search-algorithms" title="Permanent link">&para;</a></h2>
 <h3 id="opensearch-algorithms">OpenSearch Algorithms<a class="headerlink" href="#opensearch-algorithms" title="Permanent link">&para;</a></h3>
-<p>OpenSearch supports multiple vector search algorithms including HNSW, IVF, and flat search. For detailed algorithm comparisons, parameter tuning, and selection guidance, see the <a href="../opensearch/#algorithm-selection-guide">OpenSearch Technical Guide</a>.</p>
+<p>OpenSearch supports multiple vector search algorithms including HNSW, IVF, and flat search. For detailed algorithm comparisons, parameter tuning, and selection guidance, see the <a href="../index_deep_dive/#algorithm-selection-guide">Index Deep Dive</a>.</p>
 <h3 id="pinecone-algorithms">Pinecone Algorithms<a class="headerlink" href="#pinecone-algorithms" title="Permanent link">&para;</a></h3>
 <p>Pinecone uses proprietary algorithms optimized for different scenarios:</p>
 <ul>
@@ -2619,31 +2619,31 @@
 </thead>
 <tbody>
 <tr>
-<td><strong><a href="../glossary/#cosine-similarity">Cosine Similarity</a></strong></td>
+<td><a href="../glossary/#cosine-similarity">Cosine Similarity</a></td>
 <td>✅ Default</td>
 <td>✅ Recommended</td>
 <td>Normalized vectors, text embeddings</td>
 </tr>
 <tr>
-<td><strong><a href="../glossary/#euclidean-distance-l2">Euclidean Distance (L2)</a></strong></td>
+<td><a href="../glossary/#euclidean-distance-l2">Euclidean Distance (L2)</a></td>
 <td>✅ L2 space</td>
 <td>✅ Available</td>
 <td>Computer vision, spatial data</td>
 </tr>
 <tr>
-<td><strong>Inner Product</strong></td>
+<td>Inner Product</td>
 <td>✅ Available</td>
 <td>✅ Dot product</td>
 <td>Recommendation systems</td>
 </tr>
 <tr>
-<td><strong>Hamming Distance</strong></td>
+<td>Hamming Distance</td>
 <td>❌ Not supported</td>
 <td>❌ Not supported</td>
 <td>Binary vectors</td>
 </tr>
 <tr>
-<td><strong>Manhattan Distance</strong></td>
+<td>Manhattan Distance</td>
 <td>❌ Not supported</td>
 <td>❌ Not supported</td>
 <td>Sparse vectors</td>
@@ -2702,32 +2702,32 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Data Encryption</strong></td>
+<td>Data Encryption</td>
 <td>At rest and in transit</td>
 <td>At rest and in transit</td>
 </tr>
 <tr>
-<td><strong>Network Security</strong></td>
+<td>Network Security</td>
 <td>VPC, security groups</td>
 <td>TLS, private endpoints</td>
 </tr>
 <tr>
-<td><strong>Access Control</strong></td>
+<td>Access Control</td>
 <td>Fine-grained IAM roles</td>
 <td>API keys, SAML SSO</td>
 </tr>
 <tr>
-<td><strong>Audit Logging</strong></td>
+<td>Audit Logging</td>
 <td>CloudTrail integration</td>
 <td>Built-in audit logs</td>
 </tr>
 <tr>
-<td><strong>Compliance</strong></td>
+<td>Compliance</td>
 <td>SOC, HIPAA, PCI DSS</td>
 <td>SOC 2 Type 2, GDPR</td>
 </tr>
 <tr>
-<td><strong>Data Residency</strong></td>
+<td>Data Residency</td>
 <td>AWS region control</td>
 <td>Limited region options</td>
 </tr>
@@ -2854,32 +2854,32 @@ For comprehensive RAG implementation patterns, architectures, and production exa
 </thead>
 <tbody>
 <tr>
-<td><strong>Retrieval Latency</strong></td>
+<td>Retrieval Latency</td>
 <td>10-100ms (configurable)</td>
 <td>Sub-10ms typical</td>
 </tr>
 <tr>
-<td><strong>Hybrid Search</strong></td>
+<td>Hybrid Search</td>
 <td>Native support</td>
 <td>Requires external text search</td>
 </tr>
 <tr>
-<td><strong>Reranking</strong></td>
+<td>Reranking</td>
 <td>Built-in rescoring</td>
 <td>External implementation</td>
 </tr>
 <tr>
-<td><strong>Context Assembly</strong></td>
+<td>Context Assembly</td>
 <td>Flexible document handling</td>
 <td>Vector + metadata only</td>
 </tr>
 <tr>
-<td><strong>Scalability</strong></td>
+<td>Scalability</td>
 <td>Manual scaling required</td>
 <td>Automatic scaling</td>
 </tr>
 <tr>
-<td><strong>Operational Complexity</strong></td>
+<td>Operational Complexity</td>
 <td>High (full search platform)</td>
 <td>Low (managed vector service)</td>
 </tr>
