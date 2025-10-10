@@ -14,7 +14,7 @@ Vector search algorithms operate in high-dimensional spaces where traditional in
 
 ### High-Dimensional Geometry Challenges
 
-**The [Curse of Dimensionality](glossary.md#curse-of-dimensionality):**
+The [Curse of Dimensionality](glossary.md#curse-of-dimensionality):
 
 As vector dimensions increase beyond ~100, several mathematical phenomena fundamentally change how search algorithms must operate:
 
@@ -28,7 +28,7 @@ In high-dimensional spaces, the difference between the nearest and farthest poin
 - Distances between any two points become approximately equal
 - Traditional distance-based nearest neighbor search loses effectiveness
 
-**Example:** In 1000-dimensional space, if the closest point is distance 10.0 and the farthest is distance 12.0, the difference (2.0) becomes insignificant for practical ranking purposes.
+Example: In 1000-dimensional space, if the closest point is distance 10.0 and the farthest is distance 12.0, the difference (2.0) becomes insignificant for practical ranking purposes.
 
 **2. Volume Distribution**
 
@@ -44,7 +44,7 @@ Brute-force search complexity grows as O(N × D) where N = number of vectors, D 
 
 ### Similarity Metrics Deep Dive
 
-**Cosine Similarity: The Text Search Standard**
+Cosine Similarity: The Text Search Standard
 
 Cosine similarity measures the angle between vectors, making it ideal for text embeddings where magnitude often relates to document length rather than semantic importance.
 
@@ -58,7 +58,7 @@ Geometric Interpretation:
 - cos(180°) = -1.0 (opposite meaning)
 ```
 
-**Why Cosine Works for Text:**
+Why Cosine Works for Text:
 
 Consider two movie reviews:
 
@@ -67,7 +67,7 @@ Consider two movie reviews:
 
 Both reviews express positive sentiment about acting quality. Cosine similarity focuses on the semantic direction (positive sentiment + acting praise) while ignoring the length difference.
 
-**[Euclidean Distance (L2)](glossary.md#euclidean-distance-l2): When Magnitude Matters**
+[Euclidean Distance (L2)](glossary.md#euclidean-distance-l2): When Magnitude Matters
 
 Euclidean distance measures straight-line distance in vector space, treating all dimensions equally:
 
@@ -75,15 +75,15 @@ Euclidean distance measures straight-line distance in vector space, treating all
 euclidean_distance(A, B) = √(Σ(Aᵢ - Bᵢ)²)
 ```
 
-**When to Use Euclidean:**
+When to Use Euclidean:
 
-- **Image embeddings:** Where color intensity, brightness, and other magnitude-based features matter
-- **Sensor data:** Where absolute values carry meaning (temperature, pressure readings)
+- Image embeddings: Where color intensity, brightness, and other magnitude-based features matter
+- Sensor data: Where absolute values carry meaning (temperature, pressure readings)
 - **Normalized embeddings:** When all vectors are pre-normalized to unit length
 
-**Example:** Comparing product images where a bright red dress should be more similar to a bright red shirt than to a dark red dress, Euclidean distance preserves these intensity relationships.
+Example: Comparing product images where a bright red dress should be more similar to a bright red shirt than to a dark red dress, Euclidean distance preserves these intensity relationships.
 
-**[Manhattan Distance (L1)](glossary.md#manhattan-distance-l1): Robustness in High Dimensions**
+[Manhattan Distance (L1)](glossary.md#manhattan-distance-l1): Robustness in High Dimensions
 
 Manhattan distance sums absolute differences along each dimension:
 
@@ -91,13 +91,13 @@ Manhattan distance sums absolute differences along each dimension:
 manhattan_distance(A, B) = Σ|Aᵢ - Bᵢ|
 ```
 
-**Advantages in High Dimensions:**
+Advantages in High Dimensions:
 
 - Less sensitive to outliers in individual dimensions
 - More stable in sparse vector spaces
 - Computationally efficient (no squaring operations)
 
-**Use Cases:**
+Use Cases:
 
 - Sparse embeddings where many dimensions are zero
 - Categorical data encoded as vectors
@@ -109,14 +109,14 @@ The mathematical challenge of high-dimensional search drives the need for approx
 
 **The Approximation Trade-off:**
 
-- **Exact search:** Guarantees finding the true nearest neighbors but computationally expensive
-- **Approximate search:** Finds "good enough" neighbors (95-99% accuracy) at 10-1000× speed improvement
+- Exact search: Guarantees finding the true nearest neighbors but computationally expensive
+- Approximate search: Finds "good enough" neighbors (95-99% accuracy) at 10-1000× speed improvement
 
-**Quality Metrics:**
+Quality Metrics:
 
 - **[Recall@K](glossary.md#recallk):** Percentage of true top-k neighbors found by the algorithm
-- **Query time:** Milliseconds per search operation
-- **Index size:** Memory required to store the search structure
+- Query time: Milliseconds per search operation
+- Index size: Memory required to store the search structure
 
 The goal is maximizing recall while minimizing query time and memory usage.
 
@@ -126,7 +126,7 @@ The goal is maximizing recall while minimizing query time and memory usage.
 
 ### Conceptual Understanding
 
-**The Small World Phenomenon in Vector Space**
+The Small World Phenomenon in Vector Space
 
 The algorithm draws inspiration from Stanley Milgram's famous "six degrees of separation" experiment, which demonstrated that any two people in the world are connected through an average of six social connections. HNSW applies this principle to high-dimensional vector search by creating multiple layers of connectivity that enable efficient navigation.
 
@@ -134,13 +134,13 @@ The algorithm draws inspiration from Stanley Milgram's famous "six degrees of se
 
 Consider how you might navigate from New York to a specific address in Tokyo:
 
-1. **Global Scale (Layer 2):** Use intercontinental connections - direct flight from JFK to Narita Airport
-2. **Regional Scale (Layer 1):** Use regional transportation - train from Narita to Tokyo city center
-3. **Local Scale (Layer 0):** Use local navigation - walking directions to the specific building
+1. Global Scale (Layer 2): Use intercontinental connections - direct flight from JFK to Narita Airport
+2. Regional Scale (Layer 1): Use regional transportation - train from Narita to Tokyo city center
+3. Local Scale (Layer 0): Use local navigation - walking directions to the specific building
 
 HNSW mirrors this hierarchical approach in vector space:
 
-- **Top Layers (2, 3, 4...):** Sparse networks with long-distance "highways" connecting distant regions of vector space
+- Top Layers (2, 3, 4...): Sparse networks with long-distance "highways" connecting distant regions of vector space
 - **Middle Layers (1):** Regional connections that bridge local neighborhoods
 - **Bottom Layer (0):** Dense local neighborhoods where every point connects to its immediate neighbors
 
@@ -148,25 +148,25 @@ HNSW mirrors this hierarchical approach in vector space:
 
 *Probabilistic Hierarchy:* Rather than deterministically assigning nodes to layers, HNSW uses probabilistic assignment where each node has a decreasing probability of existing in higher layers. This creates a natural hierarchy where:
 
-- **Layer 0:** Contains all vectors (100% density)
-- **Layer 1:** Contains ~50% of vectors
-- **Layer 2:** Contains ~25% of vectors
-- **Layer L:** Contains ~(1/2)^L percentage of vectors
+- Layer 0: Contains all vectors (100% density)
+- Layer 1: Contains ~50% of vectors
+- Layer 2: Contains ~25% of vectors
+- Layer L: Contains ~(1/2)^L percentage of vectors
 
 *Connectivity Strategy:* Each node connects to its M nearest neighbors within each layer it participates in. This ensures that:
 - Higher layers provide "express routes" across large distances
 - Lower layers provide detailed local connectivity
 - Navigation remains efficient at every scale
 
-**Why This Architecture Works:**
+Why This Architecture Works:
 
 1. **Logarithmic Scaling:** Search complexity scales as O(log N) rather than O(N), making it practical for massive datasets
 
 2. **Greedy Search Efficiency:** At each layer, greedy local search quickly moves toward the target region, with higher layers providing faster convergence
 
-3. **Fault Tolerance:** Multiple paths exist between any two points, making the structure robust against locally poor connections
+3. Fault Tolerance: Multiple paths exist between any two points, making the structure robust against locally poor connections
 
-4. **Memory Locality:** Dense connections in lower layers ensure good cache performance during the final precise search phase
+4. Memory Locality: Dense connections in lower layers ensure good cache performance during the final precise search phase
 
 ### Mathematical Foundation
 
@@ -186,16 +186,16 @@ This probability distribution creates the hierarchical structure automatically:
 - ~12.5% reach layer 2
 - And so on...
 
-**Detailed Search Algorithm Mechanics:**
+Detailed Search Algorithm Mechanics:
 
 *Phase 1: Global Navigation (Top Layers)*
 
 1. **Entry Point Selection:** Begin at the designated entry point in the highest layer
-2. **Greedy Descent:** At each layer, perform greedy search to find the local minimum
+2. Greedy Descent: At each layer, perform greedy search to find the local minimum
    - Calculate distances from current position to all connected neighbors
    - Move to the neighbor with smallest distance to query vector
    - Repeat until no neighbor is closer than current position
-3. **Layer Transition:** Use the final position as the starting point for the next layer down
+3. Layer Transition: Use the final position as the starting point for the next layer down
 
 *Phase 2: Precision Navigation (Bottom Layer)*
 
@@ -204,9 +204,9 @@ This probability distribution creates the hierarchical structure automatically:
    - Track the ef_search closest points found so far
    - Explore neighbors of all candidates in the current beam
    - Update beam with newly discovered closer points
-6. **Termination:** Stop when no new candidates improve the current best set
+6. Termination: Stop when no new candidates improve the current best set
 
-**Mathematical Intuition Behind Effectiveness:**
+Mathematical Intuition Behind Effectiveness:
 
 *Logarithmic Layer Reduction:* With each layer containing approximately half the nodes of the layer below, the search space reduces exponentially. For a dataset of N points:
 - Layer L contains ~N/(2^L) points
@@ -227,29 +227,29 @@ This probability distribution creates the hierarchical structure automatically:
 
 *HNSW's performance characteristics are highly dependent on proper parameter selection. Understanding the mathematical relationships between parameters enables optimal configuration for specific use cases.*
 
-**M (Maximum Connections per Node)**
+M (Maximum Connections per Node)
 
 The M parameter fundamentally affects the graph's connectivity and search performance:
 
 **Low M (8-16):**
 
-- **Advantages:** Lower memory usage, faster construction
-- **Disadvantages:** Potential for disconnected regions, lower recall
-- **Use case:** Memory-constrained environments, simple similarity patterns
+- Advantages: Lower memory usage, faster construction
+- Disadvantages: Potential for disconnected regions, lower recall
+- Use case: Memory-constrained environments, simple similarity patterns
 
 **Medium M (16-32):**
 
-- **Advantages:** Good balance of performance and memory
-- **Disadvantages:** None significant for most applications
-- **Use case:** General-purpose text search, balanced performance requirements
+- Advantages: Good balance of performance and memory
+- Disadvantages: None significant for most applications
+- Use case: General-purpose text search, balanced performance requirements
 
 **High M (32-64):**
 
-- **Advantages:** Excellent recall, robust against difficult data distributions
-- **Disadvantages:** High memory usage, slower construction
-- **Use case:** High-precision applications, complex high-dimensional data
+- Advantages: Excellent recall, robust against difficult data distributions
+- Disadvantages: High memory usage, slower construction
+- Use case: High-precision applications, complex high-dimensional data
 
-**Memory Calculation:**
+Memory Calculation:
 
 ```
 Memory per node = M × 4 bytes (connection pointers) + vector storage
@@ -259,7 +259,7 @@ For 1M nodes, 384-dim vectors, M=24:
 - System overhead: ~3-4GB total
 ```
 
-**ef_construction (Construction Beam Width)**
+ef_construction (Construction Beam Width)
 
 Controls the trade-off between index quality and construction time:
 
@@ -281,7 +281,7 @@ Controls the trade-off between index quality and construction time:
 - Slow construction but maximum search performance
 - Use when construction time is less critical than search quality
 
-**ef_search (Query-Time Beam Width)**
+ef_search (Query-Time Beam Width)
 
 The only parameter tunable at query time, allowing dynamic performance adjustment:
 
@@ -295,7 +295,7 @@ ef_search=200: High accuracy, ~99% recall
 ef_search=500: Near-perfect, ~99.5% recall
 ```
 
-**Advanced Parameter Selection Strategies:**
+Advanced Parameter Selection Strategies:
 
 *Query-Adaptive ef_search:*
 The ef_search parameter can be dynamically adjusted based on query characteristics and system load:
@@ -305,31 +305,31 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 - **Real-time autocomplete:** ef_search = 15-25 (ultra-low latency, 85-90% recall acceptable)
 - **Main search results:** ef_search = 80-120 (balanced latency/accuracy for user-facing results)
 - **Recommendation systems:** ef_search = 150-250 (higher accuracy for better user experience)
-- **Research/analytics:** ef_search = 300-500 (maximum accuracy, latency less critical)
-- **Batch processing:** ef_search = 200-400 (optimize for throughput over individual query speed)
+- Research/analytics: ef_search = 300-500 (maximum accuracy, latency less critical)
+- Batch processing: ef_search = 200-400 (optimize for throughput over individual query speed)
 
 **System Load Adaptation:**
 
 - **High load periods:** Reduce ef_search to maintain response times
 - **Low load periods:** Increase ef_search to improve result quality
-- **SLA-based scaling:** Automatically adjust based on current system latency percentiles
+- SLA-based scaling: Automatically adjust based on current system latency percentiles
 
 **Query Complexity Estimation:**
 
 Some queries inherently require more exploration:
 
-- **Outlier queries:** Vectors far from typical data distribution need higher ef_search
-- **Ambiguous queries:** Queries near decision boundaries between clusters benefit from broader search
+- Outlier queries: Vectors far from typical data distribution need higher ef_search
+- Ambiguous queries: Queries near decision boundaries between clusters benefit from broader search
 - **High-precision requirements:** Critical applications (medical, financial) should use conservative (high) ef_search values
 
 ### Real-World Performance Characteristics
 
-**Scaling Behavior:**
+Scaling Behavior:
 
 HNSW performance scales favorably with dataset size:
-- **Construction time:** O(N × log(N) × M × ef_construction)
-- **Search time:** O(log(N) × ef_search)
-- **Memory usage:** Linear with dataset size
+- Construction time: O(N × log(N) × M × ef_construction)
+- Search time: O(log(N) × ef_search)
+- Memory usage: Linear with dataset size
 
 **Construction Optimizations:**
 
@@ -365,7 +365,7 @@ HNSW performance scales favorably with dataset size:
    - Better CPU cache utilization
    - Improved memory bandwidth efficiency
 
-**Warm-up Strategies:** Preload critical index regions
+Warm-up Strategies: Preload critical index regions
 
    - Touch frequently accessed memory pages
    - Pre-compute entry points for different query types
@@ -397,15 +397,15 @@ IVF embodies a classic divide-and-conquer strategy adapted for high-dimensional 
 
 *Geographic Analogy:* Consider finding the nearest coffee shop in a large city:
 
-- **Naive approach:** Check every coffee shop in the entire city
-- **IVF approach:** Divide the city into neighborhoods, identify which neighborhoods you're likely to find coffee shops near your location, then search only those neighborhoods
+- Naive approach: Check every coffee shop in the entire city
+- IVF approach: Divide the city into neighborhoods, identify which neighborhoods you're likely to find coffee shops near your location, then search only those neighborhoods
 
 *Library Science Analogy:*
 
 - **Traditional library:** Books scattered randomly - must check every shelf
-- **Dewey Decimal System (IVF):** Books organized by topic - go directly to relevant sections
+- Dewey Decimal System (IVF): Books organized by topic - go directly to relevant sections
 
-**Mathematical Foundation: The Locality Hypothesis**
+Mathematical Foundation: The Locality Hypothesis
 
 IVF relies on the **locality principle** in high-dimensional spaces:
 
@@ -417,7 +417,7 @@ For vectors v1, v2 in cluster Ci and query q:
 P(NN(q) ∈ Ci | d(q, centroid_i) < d(q, centroid_j) ∀j≠i) > threshold
 ```
 
-This principle holds particularly well in high-dimensional spaces due to the **concentration of measure phenomenon** - in high dimensions, most vectors concentrate in a thin shell around the centroid, making cluster boundaries more meaningful.
+This principle holds particularly well in high-dimensional spaces due to the concentration of measure phenomenon - in high dimensions, most vectors concentrate in a thin shell around the centroid, making cluster boundaries more meaningful.
 
 **Three-Phase IVF Architecture:**
 
@@ -441,7 +441,7 @@ This principle holds particularly well in high-dimensional spaces due to the **c
 - Search within selected clusters using exhaustive comparison
 - Merge results across clusters for final ranking
 
-**Why This Architecture Scales**
+Why This Architecture Scales
 
 *Complexity Reduction:* Instead of O(N) comparisons for brute force search, IVF achieves:
 
@@ -457,19 +457,19 @@ This principle holds particularly well in high-dimensional spaces due to the **c
 
 *Modern IVF implementations incorporate sophisticated optimizations that significantly improve both accuracy and performance beyond the basic algorithm.*
 
-**Multi-Probe LSH (Locality Sensitive Hashing):**
+Multi-Probe LSH (Locality Sensitive Hashing):
 
 Instead of only searching the closest cluster centroids, examine multiple probe sequences that might contain query neighbors. This technique particularly helps when query vectors lie near cluster boundaries.
 
-**Cluster Refinement:**
+Cluster Refinement:
 
 Periodically retrain cluster centroids using updated vector distributions, especially important for dynamic datasets where new vectors might shift optimal partitioning.
 
-**Asymmetric vs Symmetric Distance Computation:**
+Asymmetric vs Symmetric Distance Computation:
 
 - **Asymmetric Distance:** More accurate, computes direct distance between query and clustered vector
-- **Symmetric Distance:** Faster approximation using centroid as intermediate point
-- **Trade-off:** Asymmetric provides better accuracy at higher computational cost
+- Symmetric Distance: Faster approximation using centroid as intermediate point
+- Trade-off: Asymmetric provides better accuracy at higher computational cost
 
 ## Product Quantization
 
@@ -477,7 +477,7 @@ Periodically retrain cluster centroids using updated vector distributions, espec
 
 ### Conceptual Understanding and Mathematical Foundation
 
-**The Dimensional Independence Hypothesis**
+The Dimensional Independence Hypothesis
 
 Product Quantization is based on a key insight about high-dimensional vector spaces: different dimensions often capture orthogonal or semi-orthogonal aspects of the underlying semantic space. This allows us to compress each subspace independently without catastrophic information loss.
 
@@ -485,7 +485,7 @@ Product Quantization is based on a key insight about high-dimensional vector spa
 
 Consider a D-dimensional vector space where each dimension requires 32 bits (float32). The total information content is 32D bits per vector. PQ recognizes that much of this precision is unnecessary for similarity preservation and that dimensions can be grouped and compressed independently.
 
-**The Product Space Decomposition:**
+The Product Space Decomposition:
 
 *Mathematical Formulation:*
 ```
@@ -497,23 +497,23 @@ Where each subspace ℝᴰ/ᵐ is quantized independently
 
 *Key Insight:* If the original vector space has natural clustering structure, then subspaces will also exhibit clustering, making k-means quantization effective in each subspace.
 
-**Advanced Analogies:**
+Advanced Analogies:
 
 *Digital Image Compression:*
 
-- **JPEG approach:** Transform to frequency domain, quantize coefficients
-- **PQ approach:** Spatial decomposition into blocks, quantize each block independently
-- **Key difference:** PQ learns optimal quantization codebooks from data rather than using predetermined schemes
+- JPEG approach: Transform to frequency domain, quantize coefficients
+- PQ approach: Spatial decomposition into blocks, quantize each block independently
+- Key difference: PQ learns optimal quantization codebooks from data rather than using predetermined schemes
 
 *Dictionary Compression:*
 
-- **Traditional:** Build one dictionary for entire document
-- **PQ approach:** Build specialized dictionaries for different parts of speech/topics
-- **Advantage:** Each dictionary captures local patterns more effectively
+- Traditional: Build one dictionary for entire document
+- PQ approach: Build specialized dictionaries for different parts of speech/topics
+- Advantage: Each dictionary captures local patterns more effectively
 
-**Why Dimensional Independence Works in High Dimensions:**
+Why Dimensional Independence Works in High Dimensions:
 
-1. **Curse of Dimensionality Benefits:** In high-dimensional spaces, vectors become increasingly orthogonal, making dimensional correlations weaker
+1. Curse of Dimensionality Benefits: In high-dimensional spaces, vectors become increasingly orthogonal, making dimensional correlations weaker
 2. **Embedding Structure:** Modern embedding models often encode different semantic aspects in distinct dimensional ranges
 3. **Local Similarity Preservation:** PQ preserves local neighborhood structure even with quantization errors
 
@@ -536,13 +536,13 @@ Choosing the optimal vector search algorithm requires understanding your specifi
 
 ### Algorithm-Specific Optimization Guidelines
 
-**HNSW Parameter Optimization Guidelines:**
+HNSW Parameter Optimization Guidelines:
 
 *Base Parameter Selection by Latency Requirements:*
 
 - **Ultra-low latency (<1ms):** M=16, ef_construction=128
 - **Low latency (<5ms):** M=24, ef_construction=256
-- **Standard latency:** M=32, ef_construction=512
+- Standard latency: M=32, ef_construction=512
 
 *Memory-Constrained Adjustments:*
 
@@ -556,45 +556,45 @@ Choosing the optimal vector search algorithm requires understanding your specifi
 
 *Runtime ef_search Selection by Use Case:*
 
-- **Autocomplete:** 20 (speed priority)
-- **Main search:** 100 (balanced)
-- **Research:** 300 (accuracy priority)
-- **Recommendations:** 150 (moderate accuracy)
-- **Premium users:** 2x base values (up to 500 max)
+- Autocomplete: 20 (speed priority)
+- Main search: 100 (balanced)
+- Research: 300 (accuracy priority)
+- Recommendations: 150 (moderate accuracy)
+- Premium users: 2x base values (up to 500 max)
 
-**IVF Parameter Optimization Framework:**
+IVF Parameter Optimization Framework:
 
 *Cluster Count (nlist) Calculation:*
 
-- **Base formula:** √dataset_size × dimension_factor
-- **Dimension factor:** max(1.0, dimensions/512)
-- **Constraints:** min=32, max=dataset_size/39
+- Base formula: √dataset_size × dimension_factor
+- Dimension factor: max(1.0, dimensions/512)
+- Constraints: min=32, max=dataset_size/39
 
 *Search Width (nprobes) by Target Recall:*
 
-- **95%+ recall:** 15% of clusters (min 100)
-- **90%+ recall:** 10% of clusters (min 50)
-- **<90% recall:** 5% of clusters (min 20)
+- 95%+ recall: 15% of clusters (min 100)
+- 90%+ recall: 10% of clusters (min 50)
+- <90% recall: 5% of clusters (min 20)
 
 *Example Configurations:*
 
 - 1M vectors, 384 dims, 95% recall → nlist=1,260, nprobes=189
 - 10M vectors, 768 dims, 90% recall → nlist=4,800, nprobes=480
 
-**Product Quantization Parameter Selection:**
+Product Quantization Parameter Selection:
 
 *Subquantizer Count (m) by Memory Budget:*
 
 - **<10% memory budget:** m = dimensions/4 (aggressive compression)
 - **<20% memory budget:** m = dimensions/8 (balanced compression)
 - **>20% memory budget:** m = dimensions/16 (conservative compression)
-- **Constraint:** m must divide dimensions evenly
+- Constraint: m must divide dimensions evenly
 
 *Centroids per Codebook (k) by Accuracy Requirements:*
 
-- **>90% accuracy:** k=256 (8-bit indices)
-- **>85% accuracy:** k=128 (7-bit indices)
-- **<85% accuracy:** k=64 (6-bit indices)
+- >90% accuracy: k=256 (8-bit indices)
+- >85% accuracy: k=128 (7-bit indices)
+- <85% accuracy: k=64 (6-bit indices)
 
 *Example Configurations:*
 
@@ -609,8 +609,8 @@ Use fast approximate algorithms to filter candidates, then refine with more accu
 
 *Two-Stage Process:*
 
-1. **Stage 1:** Fast filtering with PQ (retrieve k×10 candidates)
-2. **Stage 2:** Rerank with full precision using exact distance calculations
+1. Stage 1: Fast filtering with PQ (retrieve k×10 candidates)
+2. Stage 2: Rerank with full precision using exact distance calculations
 
 *Benefits:*
 
@@ -625,8 +625,8 @@ Choose algorithms based on query and dataset characteristics:
 *Selection Criteria:*
 
 - **High-magnitude queries:** Use exact search (<50K vectors) or HNSW (larger datasets)
-- **Sparse queries:** Prefer IVF clustering approach
-- **Standard queries:** HNSW for <5M vectors, IVF for larger datasets
+- Sparse queries: Prefer IVF clustering approach
+- Standard queries: HNSW for <5M vectors, IVF for larger datasets
 
 *Benefits:*
 

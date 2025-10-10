@@ -31,8 +31,8 @@ This 99.99% accuracy sounds impressive but tells us almost nothing useful. Even 
 
 The practical reality of vector search is that we care deeply about two things:
 
-1. **Of the documents we retrieve, how many are actually relevant?** (Precision)
-2. **Of all the relevant documents that exist, how many did we find?** (Recall)
+1. Of the documents we retrieve, how many are actually relevant? (Precision)
+2. Of all the relevant documents that exist, how many did we find? (Recall)
 
 These metrics directly address the core user experience questions: "Is what I'm seeing useful?" and "Am I missing important information?" The extreme class imbalance in information retrieval makes accuracy and specificity mathematically uninteresting, while sensitivity is simply recall by another name.
 
@@ -133,8 +133,8 @@ If you measure Recall@200 = 0.9 but Precision@10 = 0.2, your candidate stage is 
 
 For tasks like "find the exact policy clause," you need different strategies at each stage:
 
-- **Candidate stage**: Prioritize high recall—you absolutely cannot miss the target clause
-- **Reranking stage**: Emphasize precision using a cross-encoder on the top 200 candidates
+- Candidate stage: Prioritize high recall—you absolutely cannot miss the target clause
+- Reranking stage: Emphasize precision using a cross-encoder on the top 200 candidates
 
 ## Production Best Practices
 

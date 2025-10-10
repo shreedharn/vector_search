@@ -5,7 +5,7 @@
 
 This guide provides a comprehensive comparison between AWS Kendra and AWS OpenSearch to help you choose the right search solution for your needs. Both services offer powerful search capabilities but serve different use cases and technical requirements.
 
-**📘 For details on OpenSearch:** See the dedicated [OpenSearch Introduction](opensearch.md)
+📘 For details on OpenSearch: See the dedicated [OpenSearch Introduction](opensearch.md)
 
 ## Service Philosophy and Approach
 
@@ -15,20 +15,20 @@ AWS Kendra is a fully managed enterprise search service that uses machine learni
 
 **Key characteristics:**
 
-- **Managed AI/ML**: Pre-trained models handle query understanding and relevance
-- **Natural language interface**: Users can ask questions as they would to a person
-- **Enterprise-focused**: Built specifically for organizational knowledge management
-- **Minimal configuration**: Works out-of-the-box with many data sources
+- Managed AI/ML: Pre-trained models handle query understanding and relevance
+- Natural language interface: Users can ask questions as they would to a person
+- Enterprise-focused: Built specifically for organizational knowledge management
+- Minimal configuration: Works out-of-the-box with many data sources
 
 ### AWS OpenSearch - Flexible Search and Analytics Platform
 AWS OpenSearch is a distributed search and analytics suite based on Elasticsearch and Kibana. It provides full control over search implementation and supports both traditional text search and modern vector search capabilities.
 
 **Key characteristics:**
 
-- **Full control**: Configure every aspect of search behavior and relevance
-- **Multi-purpose**: Supports search, analytics, logging, and monitoring use cases
-- **Extensible architecture**: Build custom search experiences and applications
-- **Vector search capable**: Modern semantic search with [embedding](glossary.md#embedding) models
+- Full control: Configure every aspect of search behavior and relevance
+- Multi-purpose: Supports search, analytics, logging, and monitoring use cases
+- Extensible architecture: Build custom search experiences and applications
+- Vector search capable: Modern semantic search with [embedding](glossary.md#embedding) models
 
 For detailed technical information about OpenSearch's search approaches, algorithms, and implementation patterns, see the [OpenSearch Introduction](opensearch.md).
 
@@ -109,10 +109,10 @@ For detailed technical information about OpenSearch's search approaches, algorit
 *Current pricing information: [AWS Kendra Pricing](https://aws.amazon.com/kendra/pricing/)*
 
 
-- **Index-based pricing**: Monthly fee per search index
-- **Query-based charges**: Per query pricing model
-- **Developer Edition**: Lower-cost tier with reduced capacity
-- **Enterprise Edition**: Full features and higher capacity
+- Index-based pricing: Monthly fee per search index
+- Query-based charges: Per query pricing model
+- Developer Edition: Lower-cost tier with reduced capacity
+- Enterprise Edition: Full features and higher capacity
 
 **Typical cost factors:**
 
@@ -127,10 +127,10 @@ For detailed technical information about OpenSearch's search approaches, algorit
 *Current pricing information: [AWS OpenSearch Pricing](https://aws.amazon.com/opensearch-service/pricing/)*
 
 
-- **Instance-based pricing**: Hourly rates for compute instances
-- **Storage charges**: Separate EBS storage costs
-- **Data transfer**: Standard AWS data transfer rates
-- **Reserved instances**: Available for cost optimization
+- Instance-based pricing: Hourly rates for compute instances
+- Storage charges: Separate EBS storage costs
+- Data transfer: Standard AWS data transfer rates
+- Reserved instances: Available for cost optimization
 
 **Typical cost factors:**
 
@@ -162,54 +162,54 @@ For detailed technical information about OpenSearch's search approaches, algorit
 
 **Enterprise Knowledge Base**
 
-- **Scenario**: Company with 50,000 employees needs to search across HR policies, procedures, and documentation
-- **Why Kendra**: Employees can ask natural questions like "What's the remote work policy?" without training
-- **Benefits**: Quick deployment, built-in connectors to existing systems, automatic relevance tuning
+- Scenario: Company with 50,000 employees needs to search across HR policies, procedures, and documentation
+- Why Kendra: Employees can ask natural questions like "What's the remote work policy?" without training
+- Benefits: Quick deployment, built-in connectors to existing systems, automatic relevance tuning
 
 **Customer Support FAQ**
 
-- **Scenario**: Customer service needs intelligent search across support documents
-- **Why Kendra**: Natural language understanding improves answer accuracy
-- **Benefits**: Reduced support ticket volume, faster resolution times
+- Scenario: Customer service needs intelligent search across support documents
+- Why Kendra: Natural language understanding improves answer accuracy
+- Benefits: Reduced support ticket volume, faster resolution times
 
-**Legal and Compliance Search**
+Legal and Compliance Search
 
-- **Scenario**: Law firm needs to search across case documents and legal precedents
-- **Why Kendra**: Understanding of legal terminology and document context
-- **Benefits**: Faster case research, improved document discovery
+- Scenario: Law firm needs to search across case documents and legal precedents
+- Why Kendra: Understanding of legal terminology and document context
+- Benefits: Faster case research, improved document discovery
 
 ### When AWS OpenSearch Excels
 
 **RAG-Powered AI Applications**
 
-- **Scenario**: Company building an AI assistant that needs to answer questions using company knowledge base
-- **Why OpenSearch**: Full RAG implementation with vector search, hybrid retrieval, and custom reranking
-- **Benefits**: Accurate AI responses with source attribution, scalable knowledge integration
-- **Implementation**: See [OpenSearch RAG Guide](opensearch_rag.md) for detailed patterns
+- Scenario: Company building an AI assistant that needs to answer questions using company knowledge base
+- Why OpenSearch: Full RAG implementation with vector search, hybrid retrieval, and custom reranking
+- Benefits: Accurate AI responses with source attribution, scalable knowledge integration
+- Implementation: See [OpenSearch RAG Guide](opensearch_rag.md) for detailed patterns
 
 **E-commerce Product Search**
 
-- **Scenario**: Online retailer with millions of products needs advanced search with filters, facets, and recommendations
-- **Why OpenSearch**: Full control over ranking, faceting, and custom scoring
-- **Benefits**: Optimized conversion rates, personalized search experiences
+- Scenario: Online retailer with millions of products needs advanced search with filters, facets, and recommendations
+- Why OpenSearch: Full control over ranking, faceting, and custom scoring
+- Benefits: Optimized conversion rates, personalized search experiences
 
-**Application Monitoring and Logging**
+Application Monitoring and Logging
 
-- **Scenario**: Technology company needs to search and analyze application logs
-- **Why OpenSearch**: Real-time ingestion, powerful analytics, custom dashboards
-- **Benefits**: Faster incident resolution, proactive monitoring
+- Scenario: Technology company needs to search and analyze application logs
+- Why OpenSearch: Real-time ingestion, powerful analytics, custom dashboards
+- Benefits: Faster incident resolution, proactive monitoring
 
 **Content Discovery Platform**
 
-- **Scenario**: Media company needs semantic search across articles, videos, and podcasts
-- **Why OpenSearch**: Vector search enables content similarity and recommendation
-- **Benefits**: Improved content discovery, user engagement
+- Scenario: Media company needs semantic search across articles, videos, and podcasts
+- Why OpenSearch: Vector search enables content similarity and recommendation
+- Benefits: Improved content discovery, user engagement
 
 **Multi-tenant SaaS Application**
 
-- **Scenario**: Software platform needs to provide search functionality to multiple clients
-- **Why OpenSearch**: Flexible architecture supports multi-tenancy and customization
-- **Benefits**: Scalable solution, client-specific search experiences
+- Scenario: Software platform needs to provide search functionality to multiple clients
+- Why OpenSearch: Flexible architecture supports multi-tenancy and customization
+- Benefits: Scalable solution, client-specific search experiences
 
 ## Decision Framework
 

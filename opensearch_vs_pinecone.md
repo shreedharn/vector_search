@@ -31,8 +31,8 @@ Vector search works similarly - it converts text, images, or other data into mat
 
 ### The Key Difference
 
-- **OpenSearch**: "I can do vector search plus many other search tasks"
-- **Pinecone**: "I do vector search better than anyone, and that's all I focus on"
+- OpenSearch: "I can do vector search plus many other search tasks"
+- Pinecone: "I do vector search better than anyone, and that's all I focus on"
 
 ## Core Vector Search Capabilities: Head-to-Head Comparison
 
@@ -40,13 +40,13 @@ Vector search works similarly - it converts text, images, or other data into mat
 
 Before we dive in, let's decode some key concepts:
 
-**Vector Dimensions**: Think of this like describing a person - you might use height, weight, age, income, etc. More dimensions = more detailed description. In vector search, more dimensions usually mean better accuracy but require more computing power.
+Vector Dimensions: Think of this like describing a person - you might use height, weight, age, income, etc. More dimensions = more detailed description. In vector search, more dimensions usually mean better accuracy but require more computing power.
 
-**Similarity Metrics**: Different ways to measure "how similar" two things are:
+Similarity Metrics: Different ways to measure "how similar" two things are:
 
-- **Cosine**: Like measuring the angle between two arrows (good for text)
-- **Euclidean**: Like measuring straight-line distance on a map (good for images)
-- **Dot Product**: Like measuring both direction and magnitude (good for recommendations)
+- Cosine: Like measuring the angle between two arrows (good for text)
+- Euclidean: Like measuring straight-line distance on a map (good for images)
+- Dot Product: Like measuring both direction and magnitude (good for recommendations)
 
 | Feature | AWS OpenSearch | Pinecone | 🤔 What This Means |
 |---------|----------------|----------|-------------------|
@@ -63,7 +63,7 @@ Before we dive in, let's decode some key concepts:
 
 Let's say you're building a movie recommendation system:
 
-**With OpenSearch:**
+With OpenSearch:
 
 - Store movie data: title, plot summary, genre, cast, user reviews
 - Create vectors from plot summaries and reviews (captures movie "meaning")
@@ -73,7 +73,7 @@ Let's say you're building a movie recommendation system:
   - Vector search: finds movies semantically similar
   - Result: Both keyword matches and movies with similar themes but different words
 
-**With Pinecone:**
+With Pinecone:
 
 - Store movie vectors (mathematical representations of movie characteristics)
 - User's viewing history becomes a user vector
@@ -172,8 +172,8 @@ pinecone.init(
 
 **🤓 What's Happening:**
 
-- **api_key**: Your unique identifier and password combined
-- **environment**: Physical location of servers (affects speed for users in different regions)
+- api_key: Your unique identifier and password combined
+- environment: Physical location of servers (affects speed for users in different regions)
 
 ### Step 2: Creating an Index (Setting Up Your Search Database)
 
@@ -192,12 +192,12 @@ pinecone.create_index(
 index = pinecone.Index("vector-search-index")
 ```
 
-**🤓 What's Really Happening:**
+🤓 What's Really Happening:
 
-- **dimension=768**: This matches the output of popular AI models like sentence-transformers
-- **metric="cosine"**: Measures similarity by angle, not distance (perfect for text meaning)
-- **pods**: Think of these like individual search engines working together
-- **replicas**: Backup copies in case one fails (1 = no backups, 2 = one backup, etc.)
+- dimension=768: This matches the output of popular AI models like sentence-transformers
+- metric="cosine": Measures similarity by angle, not distance (perfect for text meaning)
+- pods: Think of these like individual search engines working together
+- replicas: Backup copies in case one fails (1 = no backups, 2 = one backup, etc.)
 
 ### Step 3: Adding Documents (Uploading Your Data)
 
@@ -227,14 +227,14 @@ index.upsert(vectors=[
 ])
 ```
 
-**🤓 What's Really Happening:**
+🤓 What's Really Happening:
 
-1. **id**: Like a library catalog number - unique for each document
-2. **values**: The mathematical representation of the document's meaning (768 decimal numbers)
-3. **metadata**: Human-readable information you can filter and display
-4. **upsert**: If "doc1" already exists, it updates it; if not, it creates it
+1. id: Like a library catalog number - unique for each document
+2. values: The mathematical representation of the document's meaning (768 decimal numbers)
+3. metadata: Human-readable information you can filter and display
+4. upsert: If "doc1" already exists, it updates it; if not, it creates it
 
-**Real Example:**
+Real Example:
 
 If your document says "The quick brown fox jumps over the lazy dog," the AI model converts this to a vector like [0.15, -0.23, 0.87, 0.12, ..., 0.45] that mathematically represents its meaning.
 
@@ -257,14 +257,14 @@ for match in results.matches:
     print("---")
 ```
 
-**🤓 What's Really Happening:**
+🤓 What's Really Happening:
 
 1. Convert your search question to a vector (same 768 numbers format)
 2. Pinecone compares your search vector to all document vectors
 3. Returns the most mathematically similar documents
-4. **filter**: Only looks at documents matching your criteria
+4. filter: Only looks at documents matching your criteria
 
-**Real Example:**
+Real Example:
 
 - You search: "artificial intelligence tutorials"
 - Gets converted to: [0.22, -0.15, 0.78, ...]
@@ -300,9 +300,9 @@ for i, query_vector in enumerate(query_vectors):
 
 **🤓 Advanced Concepts:**
 
-- **namespace**: Like having separate folders - "production" vs "test" vs "development"
-- **include_values=False**: Saves network bandwidth by not returning the actual vectors
-- **Batch processing**: More efficient than individual queries for multiple searches
+- namespace: Like having separate folders - "production" vs "test" vs "development"
+- include_values=False: Saves network bandwidth by not returning the actual vectors
+- Batch processing: More efficient than individual queries for multiple searches
 
 ### Real-World Production Example: E-learning Platform
 
@@ -420,13 +420,13 @@ beginner_python_courses = search_courses("learn programming basics", difficulty_
 advanced_ai_courses = search_courses("machine learning neural networks", min_rating=4.5)
 ```
 
-**🤓 What This Production Example Shows:**
+🤓 What This Production Example Shows:
 
-1. **Real embedding model**: Uses sentence-transformers to convert text to vectors
-2. **Batch operations**: Efficiently handles multiple courses at once
-3. **Complex filtering**: Combines similarity search with difficulty and rating filters
-4. **Production considerations**: Higher pod count and replicas for reliability
-5. **Structured approach**: Separate functions for adding content and searching
+1. Real embedding model: Uses sentence-transformers to convert text to vectors
+2. Batch operations: Efficiently handles multiple courses at once
+3. Complex filtering: Combines similarity search with difficulty and rating filters
+4. Production considerations: Higher pod count and replicas for reliability
+5. Structured approach: Separate functions for adding content and searching
 
 This is how you'd actually implement vector search in a real application!
 
@@ -471,14 +471,14 @@ pinecone.create_index(
 OpenSearch provides full control over embedding generation pipelines with support for multiple embedding versions and custom preprocessing. For detailed embedding management strategies and implementation examples, see the [OpenSearch Technical Guide](opensearch.md#opensearch-vector-architecture).
 
 ### Pinecone Embedding Management
-**Advantages:**
+Advantages:
 
 - Simplified integration with popular embedding models
 - Built-in support for sparse-dense hybrid vectors
 - Automatic handling of embedding updates
 - Integrated with popular ML frameworks
 
-**Considerations:**
+Considerations:
 
 - Less flexibility in embedding pipeline customization
 - Vendor dependence for certain optimizations
@@ -492,9 +492,9 @@ OpenSearch supports multiple vector search algorithms including HNSW, IVF, and f
 ### Pinecone Algorithms
 Pinecone uses proprietary algorithms optimized for different scenarios:
 
-- **Standard**: Balanced performance for most use cases
-- **High Performance**: Optimized for low latency
-- **High Memory**: Better recall for complex similarity patterns
+- Standard: Balanced performance for most use cases
+- High Performance: Optimized for low latency
+- High Memory: Better recall for complex similarity patterns
 
 ## Similarity Metrics Comparison
 
@@ -629,33 +629,33 @@ def import_to_opensearch(es_client, index_name, vectors):
 
 ### OpenSearch Monitoring
 
-- **Metrics**: Cluster health, indexing rate, query latency
-- **Tools**: CloudWatch, Kibana dashboards, custom monitoring
-- **Alerting**: Based on performance thresholds, error rates
-- **Debugging**: Detailed query profiling, slow query logs
+- Metrics: Cluster health, indexing rate, query latency
+- Tools: CloudWatch, Kibana dashboards, custom monitoring
+- Alerting: Based on performance thresholds, error rates
+- Debugging: Detailed query profiling, slow query logs
 
 ### Pinecone Monitoring
 
-- **Metrics**: Query count, latency, index utilization
-- **Tools**: Built-in dashboard, API metrics
-- **Alerting**: Usage limits, performance degradation
-- **Debugging**: Limited query profiling capabilities
+- Metrics: Query count, latency, index utilization
+- Tools: Built-in dashboard, API metrics
+- Alerting: Usage limits, performance degradation
+- Debugging: Limited query profiling capabilities
 
 ## RAG Implementation Comparison
 
 ### OpenSearch for RAG
 
-**Advantages:**
-- **Complete RAG ecosystem**: Full-text search, vector search, hybrid retrieval, and reranking in one platform
-- **Flexible architecture**: Support for basic RAG, advanced multi-step retrieval, conversational RAG, and agentic patterns
-- **Multi-modal capabilities**: Handle text, images, and multimedia content in unified RAG systems
-- **Production features**: Built-in security, monitoring, scaling, and operational tools
-- **Custom workflows**: Full control over retrieval strategies, filtering, and generation pipelines
+Advantages:
+- Complete RAG ecosystem: Full-text search, vector search, hybrid retrieval, and reranking in one platform
+- Flexible architecture: Support for basic RAG, advanced multi-step retrieval, conversational RAG, and agentic patterns
+- Multi-modal capabilities: Handle text, images, and multimedia content in unified RAG systems
+- Production features: Built-in security, monitoring, scaling, and operational tools
+- Custom workflows: Full control over retrieval strategies, filtering, and generation pipelines
 
 **Implementation Examples:**
 For comprehensive RAG implementation patterns, architectures, and production examples, see the [OpenSearch RAG Guide](opensearch_rag.md).
 
-**Best for RAG when:**
+Best for RAG when:
 - Building enterprise RAG systems requiring security and compliance
 - Need hybrid retrieval combining keyword and semantic search
 - Implementing complex multi-step or conversational RAG patterns
@@ -664,14 +664,14 @@ For comprehensive RAG implementation patterns, architectures, and production exa
 
 ### Pinecone for RAG
 
-**Advantages:**
-- **Specialized vector retrieval**: Optimized specifically for high-performance vector similarity search
-- **Simple integration**: Easy to incorporate into existing RAG frameworks and ML pipelines
-- **Zero maintenance**: Managed service handles all infrastructure and optimization
-- **High performance**: Consistent low-latency vector retrieval at scale
-- **ML ecosystem integration**: Native support for popular RAG frameworks
+Advantages:
+- Specialized vector retrieval: Optimized specifically for high-performance vector similarity search
+- Simple integration: Easy to incorporate into existing RAG frameworks and ML pipelines
+- Zero maintenance: Managed service handles all infrastructure and optimization
+- High performance: Consistent low-latency vector retrieval at scale
+- ML ecosystem integration: Native support for popular RAG frameworks
 
-**Best for RAG when:**
+Best for RAG when:
 - Vector similarity is the primary retrieval mechanism
 - Building RAG systems with external orchestration (LangChain, LlamaIndex)
 - Need rapid prototyping and deployment

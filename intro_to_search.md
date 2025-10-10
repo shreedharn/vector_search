@@ -10,7 +10,7 @@ Text-based search has been the cornerstone of information retrieval for decades.
 
 ### The Evolution of Keyword Search
 
-**Early Days: Simple Keyword Matching**
+Early Days: Simple Keyword Matching
 
 The earliest search systems operated on exact keyword matching - a document was relevant if it contained the search terms. This binary approach worked for small collections but failed to capture semantic meaning or handle variations in language.
 
@@ -19,11 +19,11 @@ The earliest search systems operated on exact keyword matching - a document was 
 Term Frequency-Inverse Document Frequency ([TF-IDF](glossary.md#tf-idf-term-frequency-inverse-document-frequency)) introduced statistical sophistication to search by considering two key factors:
 
 - **Term Frequency (TF):** How often a term appears in a document
-- **Inverse Document Frequency (IDF):** How rare or common a term is across the entire collection
+- Inverse Document Frequency (IDF): How rare or common a term is across the entire collection
 
 The intuition is powerful: terms that appear frequently in a specific document but rarely across the collection are likely more significant for that document's meaning.
 
-**Mathematical Foundation of TF-IDF:**
+Mathematical Foundation of TF-IDF:
 
 ```
 TF-IDF(term, document) = TF(term, document) × IDF(term)
@@ -33,7 +33,7 @@ TF(term, document) = (Number of times term appears in document) / (Total terms i
 IDF(term) = log(Total documents / Documents containing term)
 ```
 
-**Example:**
+Example:
 
 Consider searching for "machine learning" in a collection of 10,000 documents:
 
@@ -47,7 +47,7 @@ The term "learning" scores higher despite lower frequency because it's rarer acr
 
 ### [BM25](glossary.md#bm25-best-matching-25): The Modern Standard
 
-**Best Matching 25 (BM25)** represents the current gold standard for text relevance scoring, addressing TF-IDF's limitations through sophisticated normalization and parameter tuning.
+Best Matching 25 (BM25) represents the current gold standard for text relevance scoring, addressing TF-IDF's limitations through sophisticated normalization and parameter tuning.
 
 
 ```
@@ -61,15 +61,15 @@ Where:
 - b = document length normalization parameter (typically 0.75)
 ```
 
-**Key Improvements Over TF-IDF:**
+Key Improvements Over TF-IDF:
 
 1. **Term Frequency Saturation:** As term frequency increases, the contribution grows logarithmically rather than linearly, preventing keyword stuffing from dominating scores.
 
 2. **Document Length Normalization:** Longer documents don't automatically score higher simply due to containing more words. The parameter `b` controls how much document length affects scoring.
 
-3. **Tunable Parameters:** `k1` and `b` can be adjusted based on collection characteristics and user preferences.
+3. Tunable Parameters: `k1` and `b` can be adjusted based on collection characteristics and user preferences.
 
-**Real-World Example:**
+Real-World Example:
 
 Consider searching for "sustainable energy solutions" across technical papers:
 
@@ -84,7 +84,7 @@ Traditional TF would favor Document B due to higher absolute term frequencies. B
 
 - **Legal Document Retrieval:** Finding contracts containing specific clauses like "force majeure" or "intellectual property"
 - **Technical Documentation:** Locating API references with exact method names like "getUserById()"
-- **Product Catalogs:** Matching precise specifications like "iPhone 15 Pro Max 256GB Blue"
+- Product Catalogs: Matching precise specifications like "iPhone 15 Pro Max 256GB Blue"
 
 **Transparent Relevance:**
 
@@ -97,16 +97,16 @@ Text search operations are computationally lightweight:
 - Query processing: O(log N) for term lookups plus scoring
 - Memory requirements: Modest inverted index storage
 
-**Query Flexibility:**
+Query Flexibility:
 
-- **Boolean Operators:** "machine learning" AND "Python" NOT "R"
-- **Phrase Matching:** "artificial intelligence" (exact phrase)
-- **Wildcards:** "comput*" (matches compute, computer, computing)
-- **Field-Specific:** title:"AI" OR content:"machine learning"
+- Boolean Operators: "machine learning" AND "Python" NOT "R"
+- Phrase Matching: "artificial intelligence" (exact phrase)
+- Wildcards: "comput*" (matches compute, computer, computing)
+- Field-Specific: title:"AI" OR content:"machine learning"
 
 ### Limitations of Text-Based Search
 
-**The Vocabulary Mismatch Problem:**
+The Vocabulary Mismatch Problem:
 
 Text search fails when users and documents employ different terminology for the same concepts:
 
@@ -126,22 +126,22 @@ The word "bank" could refer to:
 
 Text search cannot distinguish between these contexts without additional semantic understanding.
 
-**Language Barriers:**
+Language Barriers:
 
 Text search struggles with:
 
-- **Synonyms:** "happy" vs "joyful" vs "cheerful"
+- Synonyms: "happy" vs "joyful" vs "cheerful"
 - **Multilingual Content:** English query missing Spanish documents with same meaning
 - **Acronyms and Abbreviations:** "AI" vs "Artificial Intelligence"
-- **Misspellings:** "recieve" vs "receive"
+- Misspellings: "recieve" vs "receive"
 
 **Query Formulation Challenges:**
 
 Users often struggle to formulate effective keyword queries:
 
-- **Conceptual Queries:** "companies similar to Netflix" (user wants concept similarity, not exact matches)
-- **Natural Language:** "best laptop for college students under $800" (contains intent and constraints)
-- **Exploratory Search:** "new developments in renewable energy" (seeking discovery, not specific documents)
+- Conceptual Queries: "companies similar to Netflix" (user wants concept similarity, not exact matches)
+- Natural Language: "best laptop for college students under $800" (contains intent and constraints)
+- Exploratory Search: "new developments in renewable energy" (seeking discovery, not specific documents)
 
 ## Vector Search Evolution
 
@@ -149,7 +149,7 @@ Vector search emerged to address the fundamental limitations of text-based searc
 
 ### The Semantic Understanding Breakthrough
 
-**From Keywords to Meaning:**
+From Keywords to Meaning:
 
 Vector search transforms the paradigm from "what words are present?" to "what does this mean?" By converting text into dense numerical vectors, semantically similar content produces geometrically similar vectors, regardless of exact wording.
 
@@ -204,7 +204,7 @@ Multilingual embedding models create shared semantic spaces across languages:
 
 All three phrases map to similar regions in vector space, enabling cross-language search without translation.
 
-**Natural Language Query Handling:**
+Natural Language Query Handling:
 
 Vector search excels with conversational, intent-driven queries:
 
@@ -222,11 +222,11 @@ Embedding models typically generate vectors with 384 to 1,536 dimensions. Each d
 - Dimension 445: Might capture "positive sentiment"
 - Dimension 892: Might represent "temporal aspects"
 
-**Similarity Metrics:**
+Similarity Metrics:
 
 The choice of similarity metric affects search behavior:
 
-**[Cosine Similarity](glossary.md#cosine-similarity) (Most Common):**
+[Cosine Similarity](glossary.md#cosine-similarity) (Most Common):
 
 ```
 cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
@@ -236,7 +236,7 @@ cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
 - Range: -1 (opposite) to 1 (identical)
 - Best for text where length doesn't indicate semantic importance
 
-**Example:** Two product reviews might have different lengths but similar sentiment and topics. Cosine similarity focuses on the semantic direction rather than the "intensity" of the review.
+Example: Two product reviews might have different lengths but similar sentiment and topics. Cosine similarity focuses on the semantic direction rather than the "intensity" of the review.
 
 ## Search Approach Comparison
 
@@ -244,7 +244,7 @@ Understanding when to use text search versus vector search—and how to combine 
 
 ### Detailed Comparison Framework
 
-**[Precision](glossary.md#precision) vs [Recall](glossary.md#recall) Trade-offs:**
+[Precision](glossary.md#precision) vs [Recall](glossary.md#recall) Trade-offs:
 
 Understanding how precision (purity of results) and recall (completeness of results) interact is crucial for optimizing search systems. For a detailed exploration of these metrics and optimization strategies in vector search, see [Precision and Recall in Vector Search](precision_vs_recall.md).
 
@@ -269,35 +269,35 @@ Understanding how precision (purity of results) and recall (completeness of resu
 
 *Understanding when to employ text search versus vector search requires analyzing multiple dimensions of your search requirements. The following framework provides detailed guidance for making informed architectural decisions.*
 
-**Use Text Search When:**
+Use Text Search When:
 
-**Exact Matching is Critical**
+Exact Matching is Critical
 
    - Legal document retrieval: "habeas corpus," "force majeure"
    - Medical codes: "ICD-10 J44.0" (COPD diagnosis)
    - Product catalogs: "SKU-12345-RED-L"
 
-**Users Provide Specific Keywords**
+Users Provide Specific Keywords
 
    - Technical documentation: "numpy.array.reshape()"
    - Database queries: "SELECT statement syntax"
    - API references: "REST POST /users endpoint"
 
-**Computational Resources are Limited**
+Computational Resources are Limited
 
    - Mobile applications with limited processing power
    - Real-time systems requiring sub-millisecond responses
    - High-volume systems needing minimal infrastructure
 
-**Transparency and Explainability Required**
+Transparency and Explainability Required
 
    - Regulatory compliance scenarios where relevance must be explained
    - User interfaces showing why results matched
    - A/B testing where ranking factors need clear attribution
 
-**Use Vector Search When:**
+Use Vector Search When:
 
-**Semantic Understanding is Essential**
+Semantic Understanding is Essential
 
    - Customer support: "my order hasn't arrived" → find shipping delay content
    - Research: "climate change impacts" → find global warming, environmental effects
@@ -309,13 +309,13 @@ Understanding how precision (purity of results) and recall (completeness of resu
    - International e-commerce with product descriptions in multiple languages
    - Academic research across different language publications
 
-**Natural Language Queries Expected**
+Natural Language Queries Expected
 
    - Voice search: "What's a good Italian restaurant nearby?"
    - Conversational AI: "Show me articles about renewable energy policies"
    - Mobile search: "cheap flights to Europe next month"
 
-**Content Discovery and Exploration**
+Content Discovery and Exploration
 
    - Media recommendations: "movies like Inception"
    - News discovery: "stories related to artificial intelligence ethics"
@@ -348,29 +348,29 @@ Modern search systems increasingly adopt hybrid approaches that combine the prec
 
 ### Real-World Hybrid Examples
 
-**E-commerce Search:**
+E-commerce Search:
 
 *Query:* "wireless bluetooth headphones under $100"
 
-- **Text Component:** Finds products with exact specifications and price range
-- **Vector Component:** Discovers products described as "cord-free audio devices," "wireless earbuds," "Bluetooth speakers"
-- **Combined Result:** Comprehensive coverage including exact matches and semantically related products
+- Text Component: Finds products with exact specifications and price range
+- Vector Component: Discovers products described as "cord-free audio devices," "wireless earbuds," "Bluetooth speakers"
+- Combined Result: Comprehensive coverage including exact matches and semantically related products
 
-**Customer Support:**
+Customer Support:
 
 *Query:* "How do I reset my password?"
 
-- **Text Component:** Finds FAQ entries with exact phrase "reset password"
-- **Vector Component:** Discovers related articles about "account recovery," "login issues," "forgotten credentials"
-- **Combined Result:** Complete support coverage from exact matches to related topics
+- Text Component: Finds FAQ entries with exact phrase "reset password"
+- Vector Component: Discovers related articles about "account recovery," "login issues," "forgotten credentials"
+- Combined Result: Complete support coverage from exact matches to related topics
 
-**Academic Research:**
+Academic Research:
 
 *Query:* "deep learning applications in medical imaging"
 
-- **Text Component:** Papers explicitly mentioning these exact terms
-- **Vector Component:** Research on "neural networks in radiology," "AI for diagnostic imaging," "machine learning in healthcare"
-- **Combined Result:** Broader research landscape while maintaining precise topic focus
+- Text Component: Papers explicitly mentioning these exact terms
+- Vector Component: Research on "neural networks in radiology," "AI for diagnostic imaging," "machine learning in healthcare"
+- Combined Result: Broader research landscape while maintaining precise topic focus
 
 ### Implementation Strategy
 
@@ -381,15 +381,15 @@ Intelligent systems can dynamically adjust the balance between text and vector s
 - **Exact identifiers** (SKUs, codes, names): 80% text, 20% vector weight
 - **Conceptual queries** ("similar to," "like," "about"): 30% text, 70% vector weight
 - **Factual queries** ("how to," "what is"): 60% text, 40% vector weight
-- **Default queries**: 50% text, 50% vector weight (balanced approach)
+- Default queries: 50% text, 50% vector weight (balanced approach)
 
 **User Interface Adaptation:**
 
 Search interfaces can provide different experiences based on the search approach:
 
-- **Text-heavy results:** Show keyword highlighting, exact matches, filters
+- Text-heavy results: Show keyword highlighting, exact matches, filters
 - **Vector-heavy results:** Display "because you searched for," related concepts, exploration suggestions
-- **Hybrid results:** Combine both approaches with clear result categorization
+- Hybrid results: Combine both approaches with clear result categorization
 
 ## Reranking: Refining Search Results
 
@@ -397,14 +397,14 @@ While initial retrieval systems (text search, vector search, or hybrid approache
 
 ### The Two-Stage Search Architecture
 
-**Stage 1: Fast Retrieval (Recall-Focused)**
+Stage 1: Fast Retrieval (Recall-Focused)
 
 - Primary goal: Cast a wide net to capture potentially relevant content
 - Algorithms: BM25, HNSW, IVF, or hybrid combinations
 - Speed: Optimized for millisecond response times
 - Scope: Search entire corpus (millions to billions of documents)
 
-**Stage 2: Precise Reranking (Precision-Focused)**
+Stage 2: Precise Reranking (Precision-Focused)
 
 - Primary goal: Apply sophisticated relevance modeling to refine rankings
 - Algorithms: Cross-encoders, learning-to-rank, neural rerankers
@@ -415,21 +415,21 @@ This two-stage architecture embodies the classic precision-recall tradeoff: Stag
 
 ### Why Reranking is Essential
 
-**Computational Trade-offs in Search:**
+Computational Trade-offs in Search:
 
 Initial retrieval systems face a fundamental constraint: they must balance speed with accuracy across massive datasets. A brute-force approach applying sophisticated relevance modeling to every document would be computationally prohibitive.
 
 *Example: E-commerce Search*
 
-- **Without Reranking:** Fast keyword/vector search returns "wireless headphones" but may rank by basic relevance signals
-- **With Reranking:** Additional factors like user preferences, product ratings, price sensitivity, and seasonal trends refine the ranking
+- Without Reranking: Fast keyword/vector search returns "wireless headphones" but may rank by basic relevance signals
+- With Reranking: Additional factors like user preferences, product ratings, price sensitivity, and seasonal trends refine the ranking
 
 **Quality Improvements:**
 
 Reranking typically improves key search metrics:
-- **NDCG@10:** 15-30% improvement in ranking quality
-- **Click-through Rate:** 10-25% increase in user engagement
-- **Conversion Rate:** 5-15% improvement in e-commerce scenarios
+- NDCG@10: 15-30% improvement in ranking quality
+- Click-through Rate: 10-25% increase in user engagement
+- Conversion Rate: 5-15% improvement in e-commerce scenarios
 
 ### Types of Reranking Approaches
 
@@ -462,13 +462,13 @@ Advanced transformer-based models that can capture complex semantic relationship
 
 ### Performance Considerations
 
-**Latency Impact:**
+Latency Impact:
 
 - Initial retrieval: 5-20ms
 - Reranking overhead: 10-50ms additional
 - Total query time: 15-70ms (still well within acceptable limits)
 
-**Resource Usage:**
+Resource Usage:
 
 - Reranking models require additional compute resources
 - GPU acceleration recommended for neural rerankers
@@ -476,9 +476,9 @@ Advanced transformer-based models that can capture complex semantic relationship
 
 **Scalability Strategies:**
 
-- **Async Reranking:** Return initial results immediately, update with reranked results
-- **Cached Reranking:** Cache reranked results for popular queries
-- **Tiered Reranking:** Apply different reranking intensity based on query importance
+- Async Reranking: Return initial results immediately, update with reranked results
+- Cached Reranking: Cache reranked results for popular queries
+- Tiered Reranking: Apply different reranking intensity based on query importance
 
 ## Summary
 

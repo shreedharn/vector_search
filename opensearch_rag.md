@@ -12,13 +12,13 @@ This guide explores RAG fundamentals and demonstrates how OpenSearch serves as a
 
 Large language models like GPT-4 and Claude possess remarkable reasoning abilities, but they face fundamental limitations when it comes to knowledge:
 
-**Knowledge Cutoff**: Training data has a specific cutoff date, making models unaware of recent events or updates. A model trained on data through 2023 cannot answer questions about 2024 developments.
+Knowledge Cutoff: Training data has a specific cutoff date, making models unaware of recent events or updates. A model trained on data through 2023 cannot answer questions about 2024 developments.
 
-**Hallucination**: When models lack specific information, they may generate plausible-sounding but factually incorrect responses. This occurs because models are trained to produce coherent text rather than to explicitly acknowledge knowledge gaps.
+Hallucination: When models lack specific information, they may generate plausible-sounding but factually incorrect responses. This occurs because models are trained to produce coherent text rather than to explicitly acknowledge knowledge gaps.
 
-**Static Knowledge**: Information learned during training cannot be updated without retraining the entire model, making it impractical to incorporate new company policies, product updates, or domain-specific knowledge.
+Static Knowledge: Information learned during training cannot be updated without retraining the entire model, making it impractical to incorporate new company policies, product updates, or domain-specific knowledge.
 
-**Source Attribution**: Traditional language models cannot cite specific sources for their responses, making it difficult to verify accuracy or provide transparency in critical applications.
+Source Attribution: Traditional language models cannot cite specific sources for their responses, making it difficult to verify accuracy or provide transparency in critical applications.
 
 ### How RAG Solves These Problems
 
@@ -26,11 +26,11 @@ RAG addresses these limitations by introducing a two-step process that separates
 
 **Step 1: Retrieval** - Given a user question, search through a knowledge base to find relevant documents or passages that contain pertinent information.
 
-**Step 2: Augmented Generation** - Provide both the user question and retrieved context to the language model, instructing it to generate a response based on the specific retrieved information.
+Step 2: Augmented Generation - Provide both the user question and retrieved context to the language model, instructing it to generate a response based on the specific retrieved information.
 
 This approach transforms the language model from a knowledge repository into a reasoning engine that works with provided evidence, similar to how a skilled researcher synthesizes information from multiple sources to answer complex questions.
 
-**Real-World Example:**
+Real-World Example:
 
 *Traditional Approach:*
 - User: "What's our company's remote work policy?"
@@ -46,17 +46,17 @@ This approach transforms the language model from a knowledge repository into a r
 
 A complete RAG system consists of several interconnected components that work together to provide accurate, relevant responses:
 
-**Knowledge Base**: The searchable repository of information, typically consisting of documents, web pages, databases, or other structured data sources. This serves as the system's external memory.
+Knowledge Base: The searchable repository of information, typically consisting of documents, web pages, databases, or other structured data sources. This serves as the system's external memory.
 
-**Embedding Model**: Converts text into vector representations that capture semantic meaning. This enables the system to find relevant information even when exact keywords don't match.
+Embedding Model: Converts text into vector representations that capture semantic meaning. This enables the system to find relevant information even when exact keywords don't match.
 
-**Vector Database**: Stores and indexes the embedded documents to enable fast similarity search. OpenSearch excels in this role with its advanced vector search capabilities.
+Vector Database: Stores and indexes the embedded documents to enable fast similarity search. OpenSearch excels in this role with its advanced vector search capabilities.
 
-**Retrieval System**: Identifies and ranks the most relevant documents or passages for a given query. This often combines multiple search strategies for optimal results.
+Retrieval System: Identifies and ranks the most relevant documents or passages for a given query. This often combines multiple search strategies for optimal results.
 
-**Generation Model**: The large language model that synthesizes retrieved information into coherent, helpful responses while maintaining accuracy and proper attribution.
+Generation Model: The large language model that synthesizes retrieved information into coherent, helpful responses while maintaining accuracy and proper attribution.
 
-**Orchestration Layer**: Coordinates the flow between retrieval and generation, handles error cases, and manages the overall user experience.
+Orchestration Layer: Coordinates the flow between retrieval and generation, handles error cases, and manages the overall user experience.
 
 ## RAG Implementation Patterns
 
@@ -64,7 +64,7 @@ A complete RAG system consists of several interconnected components that work to
 
 The fundamental RAG pattern retrieves relevant documents and includes them as context for the language model. This approach works well for knowledge bases with clear, self-contained documents.
 
-**Architecture Flow:**
+Architecture Flow:
 1. User submits a question
 2. Convert question to embedding vector
 3. Search knowledge base for similar documents
@@ -88,7 +88,7 @@ The fundamental RAG pattern retrieves relevant documents and includes them as co
 }
 ```
 
-**When to Use Basic RAG:**
+When to Use Basic RAG:
 - Knowledge base consists of well-structured documents
 - Questions typically map to single documents or clear topics
 - Information doesn't require complex reasoning across multiple sources
@@ -98,13 +98,13 @@ The fundamental RAG pattern retrieves relevant documents and includes them as co
 
 Advanced RAG implementations incorporate sophisticated retrieval strategies and reasoning patterns to handle complex queries that require information synthesis from multiple sources.
 
-**Hierarchical Retrieval**: First identifies relevant document categories or sections, then performs detailed search within those areas. This prevents the system from getting overwhelmed by irrelevant but superficially similar content.
+Hierarchical Retrieval: First identifies relevant document categories or sections, then performs detailed search within those areas. This prevents the system from getting overwhelmed by irrelevant but superficially similar content.
 
-**Query Expansion**: Generates multiple versions of the user's question to capture different ways the same information might be expressed in the knowledge base.
+Query Expansion: Generates multiple versions of the user's question to capture different ways the same information might be expressed in the knowledge base.
 
-**Iterative Retrieval**: Performs multiple rounds of retrieval based on partial answers, allowing the system to gather comprehensive information for complex questions.
+Iterative Retrieval: Performs multiple rounds of retrieval based on partial answers, allowing the system to gather comprehensive information for complex questions.
 
-**Context Filtering**: Applies relevance scoring and filtering to ensure only the most pertinent information reaches the language model, preventing confusion from marginally relevant content.
+Context Filtering: Applies relevance scoring and filtering to ensure only the most pertinent information reaches the language model, preventing confusion from marginally relevant content.
 
 **Example Multi-Step Query:**
 ```
@@ -121,11 +121,11 @@ Step 5: Generate comprehensive response with trade-off analysis
 
 Conversational RAG extends the basic pattern to support multi-turn conversations, maintaining context and allowing for follow-up questions that build on previous interactions.
 
-**Context Preservation**: Maintains conversation history to understand references like "that approach" or "the previous solution" in follow-up questions.
+Context Preservation: Maintains conversation history to understand references like "that approach" or "the previous solution" in follow-up questions.
 
-**Query Contextualization**: Combines current question with conversation history to create more specific search queries.
+Query Contextualization: Combines current question with conversation history to create more specific search queries.
 
-**Response Continuity**: Ensures responses build logically on previous answers while incorporating new retrieved information.
+Response Continuity: Ensures responses build logically on previous answers while incorporating new retrieved information.
 
 **Example Conversation Flow:**
 ```
@@ -144,19 +144,19 @@ System: [Understands "alerting thresholds" in context of database monitoring] "F
 
 OpenSearch provides enterprise-grade vector search functionality that forms the backbone of effective RAG systems. Its integration of traditional text search with modern vector search creates powerful hybrid retrieval capabilities.
 
-**Semantic Understanding**: OpenSearch's vector search capabilities enable RAG systems to find relevant information even when the query uses different terminology than the source documents. For example, searching for "automobile maintenance" can retrieve documents about "car repair" through semantic similarity.
+Semantic Understanding: OpenSearch's vector search capabilities enable RAG systems to find relevant information even when the query uses different terminology than the source documents. For example, searching for "automobile maintenance" can retrieve documents about "car repair" through semantic similarity.
 
-**Hybrid Search Excellence**: OpenSearch uniquely combines keyword-based text search with vector-based semantic search, providing both precision and recall. This combination ensures that exact matches are prioritized while also capturing semantically related content.
+Hybrid Search Excellence: OpenSearch uniquely combines keyword-based text search with vector-based semantic search, providing both precision and recall. This combination ensures that exact matches are prioritized while also capturing semantically related content.
 
-**Algorithm Flexibility**: Support for multiple vector search algorithms (HNSW, IVF) allows optimization for different RAG scenarios. HNSW excels for real-time retrieval needs, while IVF provides memory-efficient search for large knowledge bases.
+Algorithm Flexibility: Support for multiple vector search algorithms (HNSW, IVF) allows optimization for different RAG scenarios. HNSW excels for real-time retrieval needs, while IVF provides memory-efficient search for large knowledge bases.
 
-**Advanced Filtering**: OpenSearch enables complex filtering during vector search, allowing RAG systems to constrain retrieval by document type, date ranges, user permissions, or other metadata. This ensures retrieved information is both relevant and appropriate for the user.
+Advanced Filtering: OpenSearch enables complex filtering during vector search, allowing RAG systems to constrain retrieval by document type, date ranges, user permissions, or other metadata. This ensures retrieved information is both relevant and appropriate for the user.
 
 ### Document Storage and Management
 
 OpenSearch's document-centric architecture aligns perfectly with RAG requirements, providing flexible storage and rich metadata capabilities.
 
-**Flexible Schema Design**: Store documents with arbitrary metadata fields, enabling sophisticated filtering and routing in RAG applications. Documents can include content embeddings, source information, classification labels, and custom attributes.
+Flexible Schema Design: Store documents with arbitrary metadata fields, enabling sophisticated filtering and routing in RAG applications. Documents can include content embeddings, source information, classification labels, and custom attributes.
 
 ```json
 {
@@ -175,19 +175,19 @@ OpenSearch's document-centric architecture aligns perfectly with RAG requirement
 }
 ```
 
-**Version Management**: Track document versions and updates, enabling RAG systems to work with the most current information while maintaining historical context when needed.
+Version Management: Track document versions and updates, enabling RAG systems to work with the most current information while maintaining historical context when needed.
 
-**Access Control Integration**: Leverage OpenSearch's security features to ensure RAG systems only retrieve information the user is authorized to access, maintaining data governance in enterprise environments.
+Access Control Integration: Leverage OpenSearch's security features to ensure RAG systems only retrieve information the user is authorized to access, maintaining data governance in enterprise environments.
 
 ### Real-Time Updates and Indexing
 
 OpenSearch's near real-time indexing capabilities ensure RAG systems work with current information, critical for dynamic environments where knowledge bases frequently change.
 
-**Incremental Updates**: Add new documents or update existing ones without full re-indexing, keeping RAG systems current as knowledge bases evolve.
+Incremental Updates: Add new documents or update existing ones without full re-indexing, keeping RAG systems current as knowledge bases evolve.
 
-**Change Detection**: Monitor document changes and automatically update embeddings when content is modified, ensuring vector representations remain accurate.
+Change Detection: Monitor document changes and automatically update embeddings when content is modified, ensuring vector representations remain accurate.
 
-**Bulk Operations**: Efficiently process large batches of documents during initial setup or major updates, with built-in error handling and progress tracking.
+Bulk Operations: Efficiently process large batches of documents during initial setup or major updates, with built-in error handling and progress tracking.
 
 ## Implementing RAG with OpenSearch
 
@@ -195,7 +195,7 @@ OpenSearch's near real-time indexing capabilities ensure RAG systems work with c
 
 Here's a practical implementation of a basic RAG system using OpenSearch, demonstrating the core patterns that can be extended for more complex use cases.
 
-**Index Configuration for RAG:**
+Index Configuration for RAG:
 
 ```json
 {
@@ -321,7 +321,7 @@ def advanced_rag_retrieval(query, opensearch_client):
     return deduplicate_and_rank(initial_results, focused_results)
 ```
 
-**Contextual Retrieval with User Personalization:**
+Contextual Retrieval with User Personalization:
 
 ```json
 {
@@ -416,7 +416,7 @@ Reranking plays a crucial role in RAG systems by refining initial retrieval resu
 }
 ```
 
-**Multi-Signal Reranking for RAG:**
+Multi-Signal Reranking for RAG:
 
 ```json
 {
@@ -591,7 +591,7 @@ Stage 2: Document-Level Retrieval Within Sections
 
 Agentic RAG systems use language models not just for generation but also for query planning, retrieval strategy selection, and result evaluation. This creates more sophisticated systems that can adapt their approach based on query complexity.
 
-**Query Planning with OpenSearch:**
+Query Planning with OpenSearch:
 
 ```python
 def agentic_rag_pipeline(user_query, opensearch_client):
@@ -659,13 +659,13 @@ Measuring and optimizing RAG system performance requires comprehensive evaluatio
 
 **Retrieval Evaluation Metrics:**
 
-**Recall@K**: Measures what percentage of relevant documents appear in the top-k retrieved results. Critical for ensuring the RAG system has access to necessary information.
+Recall@K: Measures what percentage of relevant documents appear in the top-k retrieved results. Critical for ensuring the RAG system has access to necessary information.
 
-**Precision@K**: Evaluates how many of the top-k retrieved documents are actually relevant. Important for minimizing noise in the generation context.
+Precision@K: Evaluates how many of the top-k retrieved documents are actually relevant. Important for minimizing noise in the generation context.
 
-**Mean Reciprocal Rank (MRR)**: Assesses how quickly users find relevant information, focusing on the rank position of the first relevant result.
+Mean Reciprocal Rank (MRR): Assesses how quickly users find relevant information, focusing on the rank position of the first relevant result.
 
-**NDCG (Normalized Discounted Cumulative Gain)**: Provides a more nuanced evaluation that considers both relevance and ranking quality.
+NDCG (Normalized Discounted Cumulative Gain): Provides a more nuanced evaluation that considers both relevance and ranking quality.
 
 **Implementation Example:**
 
@@ -752,7 +752,7 @@ def evaluate_rag_responses(test_cases, rag_system):
 
 ### Performance Optimization Strategies
 
-**Index Optimization for RAG:**
+Index Optimization for RAG:
 
 ```json
 {
@@ -848,7 +848,7 @@ Production RAG systems must handle varying loads while maintaining response qual
 }
 ```
 
-**Load Balancing for RAG Queries:**
+Load Balancing for RAG Queries:
 
 ```python
 class RAGLoadBalancer:
@@ -876,7 +876,7 @@ class RAGLoadBalancer:
 
 RAG systems often work with sensitive information, requiring robust security measures and privacy protections throughout the retrieval and generation pipeline.
 
-**Access Control in RAG:**
+Access Control in RAG:
 
 ```json
 {
@@ -1001,7 +1001,7 @@ def create_rag_monitoring_dashboard(opensearch_client):
     return dashboard_config
 ```
 
-**Alerting for RAG Systems:**
+Alerting for RAG Systems:
 
 ```json
 {

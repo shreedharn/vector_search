@@ -6,7 +6,7 @@ A comprehensive guide to implementing vector search in OpenSearch, from understa
 
 OpenSearch extends Apache Lucene's robust document storage and search capabilities with specialized vector search functionality, creating a unified platform for both traditional text search and modern vector-based semantic search. This guide covers the architectural foundations, implementation patterns, and advanced applications for building production vector search systems.
 
-**Prerequisites:** This guide assumes familiarity with search concepts and vector algorithms. For background, see:
+Prerequisites: This guide assumes familiarity with search concepts and vector algorithms. For background, see:
 - [Introduction to Search Systems](intro_to_search.md) - Text search, vector search, and hybrid approaches
 - [Vector Search Algorithms Deep Dive](index_deep_dive.md) - HNSW, IVF, and optimization strategies
 
@@ -18,19 +18,19 @@ Before diving into OpenSearch implementation, it's essential to understand Apach
 
 Apache Lucene is a high-performance, full-featured text search engine library written in Java. Originally created by Doug Cutting in 1999, Lucene has evolved into the de facto standard for building search applications and powers numerous search platforms including OpenSearch, Elasticsearch, and Apache Solr.
 
-**Core Capabilities:**
+Core Capabilities:
 
-- **Inverted Index:** Efficient data structure for full-text search
-- **Query Parsing:** Rich query syntax for complex search expressions
-- **Scoring Models:** Pluggable relevance scoring (BM25, TF-IDF, custom)
-- **Document Storage:** Compressed field storage and retrieval
-- **Scalability:** Designed for indexing and searching large document collections
+- Inverted Index: Efficient data structure for full-text search
+- Query Parsing: Rich query syntax for complex search expressions
+- Scoring Models: Pluggable relevance scoring (BM25, TF-IDF, custom)
+- Document Storage: Compressed field storage and retrieval
+- Scalability: Designed for indexing and searching large document collections
 
 ### Lucene's Segment Architecture
 
 Understanding Lucene's segment-based architecture is crucial for optimizing OpenSearch vector search performance.
 
-**Segments: Immutable Building Blocks**
+Segments: Immutable Building Blocks
 
 Lucene organizes indexed data into segments—immutable, self-contained indexes that can be searched independently:
 
@@ -50,17 +50,17 @@ my_index/
 
 **Key Characteristics:**
 
-1. **Immutability:** Once written, segments never change—this enables efficient caching and concurrent access
+1. Immutability: Once written, segments never change—this enables efficient caching and concurrent access
 2. **Incremental Indexing:** New documents create new segments rather than modifying existing ones
-3. **Parallel Search:** Multiple segments can be searched concurrently across threads
-4. **Merge Policy:** Background process merges smaller segments into larger ones for optimization
+3. Parallel Search: Multiple segments can be searched concurrently across threads
+4. Merge Policy: Background process merges smaller segments into larger ones for optimization
 
-**Why Segments Matter for Vector Search:**
+Why Segments Matter for Vector Search:
 
-- **Memory Mapping:** Immutable segments allow efficient memory-mapped file access for large vector datasets
-- **Cache Efficiency:** Vectors in segments can be cached effectively without invalidation concerns
+- Memory Mapping: Immutable segments allow efficient memory-mapped file access for large vector datasets
+- Cache Efficiency: Vectors in segments can be cached effectively without invalidation concerns
 - **Parallel Processing:** Vector search across segments can leverage multi-core processors
-- **Index Growth:** New vectors added as new segments without disrupting existing searches
+- Index Growth: New vectors added as new segments without disrupting existing searches
 
 ### Lucene's Inverted Index
 
@@ -80,14 +80,14 @@ Where:
 - Positions: Where in each document the term appears
 ```
 
-**Query Processing:**
+Query Processing:
 
-1. **Term Lookup:** Find documents containing query terms in the inverted index (O(log N) with binary search)
-2. **Intersection/Union:** Combine document lists based on boolean operators (AND, OR, NOT)
-3. **Scoring:** Calculate relevance scores using BM25 or other algorithms
-4. **Ranking:** Return top-k results sorted by score
+1. Term Lookup: Find documents containing query terms in the inverted index (O(log N) with binary search)
+2. Intersection/Union: Combine document lists based on boolean operators (AND, OR, NOT)
+3. Scoring: Calculate relevance scores using BM25 or other algorithms
+4. Ranking: Return top-k results sorted by score
 
-**Integration with Vector Search:**
+Integration with Vector Search:
 
 OpenSearch stores vector indexes alongside inverted indexes within the same segments:
 
@@ -108,18 +108,18 @@ Lucene provides a flexible query model that OpenSearch extends for vector search
 
 **Traditional Query Types:**
 
-- **TermQuery:** Exact term matching
-- **BooleanQuery:** Combine queries with AND, OR, NOT
-- **PhraseQuery:** Match exact phrases
-- **RangeQuery:** Numeric or date range filtering
-- **FuzzyQuery:** Approximate string matching
+- TermQuery: Exact term matching
+- BooleanQuery: Combine queries with AND, OR, NOT
+- PhraseQuery: Match exact phrases
+- RangeQuery: Numeric or date range filtering
+- FuzzyQuery: Approximate string matching
 
 **Vector Query Integration:**
 
 OpenSearch adds vector query types that integrate seamlessly with Lucene's query model:
 
-- **KnnVectorQuery:** Find k-nearest neighbors in vector space
-- **Hybrid Queries:** Combine vector similarity with text/filter constraints
+- KnnVectorQuery: Find k-nearest neighbors in vector space
+- Hybrid Queries: Combine vector similarity with text/filter constraints
 
 **Example Query Flow:**
 
@@ -138,7 +138,7 @@ Lucene Processing:
 
 OpenSearch's decision to build on Lucene provides several strategic advantages:
 
-**Proven Foundation:**
+Proven Foundation:
 
 - 20+ years of development and optimization
 - Battle-tested at massive scale (Wikipedia, Twitter, LinkedIn)
@@ -156,7 +156,7 @@ OpenSearch's decision to build on Lucene provides several strategic advantages:
 - Advanced compression algorithms
 - Efficient query execution engine
 
-**Extensibility:**
+Extensibility:
 
 - Plugin architecture for custom functionality
 - Codec system for custom index formats
@@ -197,12 +197,12 @@ Document Structure:
 
 OpenSearch leverages Lucene's segment architecture for vector storage, providing several key benefits:
 
-1. **Immutable Segments:** Once written, segments don't change, enabling efficient memory mapping and caching
+1. Immutable Segments: Once written, segments don't change, enabling efficient memory mapping and caching
 2. **Parallel Processing:** Multiple segments can be searched concurrently
 3. **Incremental Updates:** New data creates new segments rather than modifying existing ones
-4. **Memory Management:** Vectors stored in off-heap memory-mapped files
+4. Memory Management: Vectors stored in off-heap memory-mapped files
 
-**Vector Index Files per Segment:**
+Vector Index Files per Segment:
 
 ```
 Segment Directory:
@@ -236,15 +236,15 @@ Temporary structures for query processing use on-heap memory:
 - Similarity score calculations
 - Result ranking and aggregation
 
-**Caching Strategy:**
+Caching Strategy:
 
-- **Vector cache:** Recently accessed vectors cached in direct memory
-- **Graph cache:** Frequently traversed graph regions kept in memory
-- **Query cache:** Common query patterns cached for repeated execution
+- Vector cache: Recently accessed vectors cached in direct memory
+- Graph cache: Frequently traversed graph regions kept in memory
+- Query cache: Common query patterns cached for repeated execution
 
 ### Engine Architecture
 
-**Lucene Integration:**
+Lucene Integration:
 
 OpenSearch vector search builds on Lucene's KnnVectorField implementation while adding:
 
@@ -292,10 +292,10 @@ Proper index configuration is crucial for optimal vector search performance. Ope
 
 **Space Type Options:**
 
-- **"cosinesimil":** Cosine similarity (recommended for text embeddings)
-- **"l2":** Euclidean distance (good for normalized embeddings)
-- **"l1":** Manhattan distance (robust for sparse vectors)
-- **"linf":** Maximum distance (specialized use cases)
+- "cosinesimil": Cosine similarity (recommended for text embeddings)
+- "l2": Euclidean distance (good for normalized embeddings)
+- "l1": Manhattan distance (robust for sparse vectors)
+- "linf": Maximum distance (specialized use cases)
 
 ### HNSW Configuration
 
@@ -367,7 +367,7 @@ Proper index configuration is crucial for optimal vector search performance. Ope
 }
 ```
 
-**IVF Parameter Calculation Framework:**
+IVF Parameter Calculation Framework:
 
 *Cluster Count Formula:*
 
@@ -390,7 +390,7 @@ Proper index configuration is crucial for optimal vector search performance. Ope
 
 ### Multi-Vector Field Configuration
 
-**Multiple Vector Fields for Different Purposes:**
+Multiple Vector Fields for Different Purposes:
 
 ```json
 {
@@ -484,7 +484,7 @@ OpenSearch provides flexible query patterns for vector search, from simple k-nea
 
 ### Hybrid Search Queries
 
-**Combining Text and Vector Search:**
+Combining Text and Vector Search:
 
 ```json
 {
@@ -534,7 +534,7 @@ OpenSearch provides flexible query patterns for vector search, from simple k-nea
 
 OpenSearch provides several built-in mechanisms for implementing reranking, from simple rescoring queries to integration with external machine learning models. Understanding these capabilities enables you to improve search relevance significantly.
 
-**Basic Rescore Query Structure:**
+Basic Rescore Query Structure:
 
 OpenSearch's `rescore` query allows you to apply a secondary query to refine the top results from your initial search:
 
@@ -582,10 +582,10 @@ OpenSearch's `rescore` query allows you to apply a secondary query to refine the
 }
 ```
 
-**Key Parameters:**
+Key Parameters:
 
-- **window_size:** Number of top documents to rescore (typically 50-200)
-- **query_weight:** Weight given to original query score (0.0-1.0)
+- window_size: Number of top documents to rescore (typically 50-200)
+- query_weight: Weight given to original query score (0.0-1.0)
 - **rescore_query_weight:** Weight given to rescore query score (0.0-1.0)
 
 ### Advanced Function Scoring
@@ -656,16 +656,16 @@ Combine multiple relevance signals for sophisticated ranking:
 }
 ```
 
-**Function Types:**
+Function Types:
 
-- **field_value_factor:** Use document field values as scoring factors
-- **gauss/linear/exp:** Distance-based decay functions for date, location, numerical ranges
-- **script_score:** Custom scoring logic using Painless scripts
-- **random_score:** Add controlled randomization to prevent result staleness
+- field_value_factor: Use document field values as scoring factors
+- gauss/linear/exp: Distance-based decay functions for date, location, numerical ranges
+- script_score: Custom scoring logic using Painless scripts
+- random_score: Add controlled randomization to prevent result staleness
 
 ### Hybrid Search with Reranking
 
-**Combining Text and Vector Search with Reranking:**
+Combining Text and Vector Search with Reranking:
 
 ```json
 {
@@ -723,11 +723,11 @@ Combine multiple relevance signals for sophisticated ranking:
 
 ### External Neural Reranking Integration
 
-**Pipeline Architecture for Neural Reranking:**
+Pipeline Architecture for Neural Reranking:
 
 Modern OpenSearch deployments often integrate with external reranking services for advanced neural reranking:
 
-**Step 1: Initial Retrieval**
+Step 1: Initial Retrieval
 ```bash
 # OpenSearch returns top 100-200 candidates
 curl -X POST "localhost:9200/documents/_search" \
@@ -745,7 +745,7 @@ curl -X POST "localhost:9200/documents/_search" \
   }'
 ```
 
-**Step 2: Feature Extraction**
+Step 2: Feature Extraction
 ```python
 # Extract additional signals for reranking
 features = {
@@ -756,7 +756,7 @@ features = {
 }
 ```
 
-**Step 3: Neural Reranking**
+Step 3: Neural Reranking
 ```python
 # Apply transformer-based reranking model
 reranked_scores = neural_reranker.predict(
@@ -766,7 +766,7 @@ reranked_scores = neural_reranker.predict(
 )
 ```
 
-**Step 4: Result Integration**
+Step 4: Result Integration
 ```python
 # Return reranked results to user
 final_results = sorted(
@@ -781,9 +781,9 @@ final_results = sorted(
 **Reranking Performance Tuning:**
 
 - **Window Size Optimization:** Start with 50, increase to 100-200 for better quality
-- **Weight Balancing:** Use 70-80% original query weight, 20-30% rescore weight
-- **Caching Strategies:** Cache rescore results for popular queries
-- **Async Processing:** Implement asynchronous reranking for real-time applications
+- Weight Balancing: Use 70-80% original query weight, 20-30% rescore weight
+- Caching Strategies: Cache rescore results for popular queries
+- Async Processing: Implement asynchronous reranking for real-time applications
 
 **Resource Management:**
 
@@ -815,12 +815,12 @@ Multi-modal search enables searching across different content types (text, image
 
 Multi-modal search transcends traditional single-content-type search by enabling queries across heterogeneous data types. This capability allows users to search for images using text descriptions, find videos using audio queries, or discover text documents using image inputs.
 
-**Key Advantages:**
+Key Advantages:
 
 - **Natural Query Expression:** Users can express intent using the most convenient modality
-- **Content Discovery:** Find related content across different media types
-- **Accessibility:** Enable alternative access methods for users with different needs
-- **Rich Results:** Provide diverse result sets combining multiple content types
+- Content Discovery: Find related content across different media types
+- Accessibility: Enable alternative access methods for users with different needs
+- Rich Results: Provide diverse result sets combining multiple content types
 
 **Technical Foundation:**
 
@@ -828,10 +828,10 @@ Multi-modal search relies on embedding models trained on paired data across moda
 
 **Common Use Cases:**
 
-- **E-commerce:** Search for products using text descriptions to find matching images
-- **Media Libraries:** Find videos or images using natural language descriptions
+- E-commerce: Search for products using text descriptions to find matching images
+- Media Libraries: Find videos or images using natural language descriptions
 - **Educational Content:** Discover learning materials across text, video, and image formats
-- **Research Databases:** Cross-reference findings across papers, diagrams, and datasets
+- Research Databases: Cross-reference findings across papers, diagrams, and datasets
 
 #### Cross-Modal Search Architecture
 
@@ -839,7 +839,7 @@ Multi-modal search relies on embedding models trained on paired data across moda
 
 Multi-modal search relies on embedding models that map different content types into a shared semantic space where similar concepts cluster together regardless of modality.
 
-**Shared Vector Space Design:**
+Shared Vector Space Design:
 
 The core innovation of multi-modal search lies in creating a unified vector space where different content types can be meaningfully compared. This requires specialized embedding models that understand semantic relationships across modalities.
 
@@ -934,16 +934,16 @@ The core innovation of multi-modal search lies in creating a unified vector spac
 
 **Multi-Modal Embedding Models:**
 
-- **CLIP (OpenAI):** Text-image understanding with 512-dimensional embeddings
-- **ALIGN (Google):** Large-scale text-image alignment with 640-dimensional vectors
-- **AudioCLIP:** Extension to audio-text-image modalities
-- **VideoCLIP:** Video-text understanding for temporal content
+- CLIP (OpenAI): Text-image understanding with 512-dimensional embeddings
+- ALIGN (Google): Large-scale text-image alignment with 640-dimensional vectors
+- AudioCLIP: Extension to audio-text-image modalities
+- VideoCLIP: Video-text understanding for temporal content
 
 **Practical Implementation Considerations:**
 
 - **Dimension Alignment:** Ensure all modalities use the same vector dimensions
-- **Normalization:** Apply consistent normalization across different embedding models
-- **Quality Control:** Validate cross-modal similarity using human evaluation
+- Normalization: Apply consistent normalization across different embedding models
+- Quality Control: Validate cross-modal similarity using human evaluation
 - **Performance Optimization:** Use separate indexes per modality for complex queries
 
 ## Production Best Practices
@@ -965,21 +965,21 @@ The core innovation of multi-modal search lies in creating a unified vector spac
 }
 ```
 
-**Recommendations:**
+Recommendations:
 
-- **Shard count:** 1-3 shards per 50GB of data
-- **Replica count:** At least 1 for production
-- **Refresh interval:** 30s-60s for vector-heavy workloads
+- Shard count: 1-3 shards per 50GB of data
+- Replica count: At least 1 for production
+- Refresh interval: 30s-60s for vector-heavy workloads
 
 ### Monitoring and Observability
 
-**Key Metrics to Monitor:**
+Key Metrics to Monitor:
 
-- **Query latency:** P50, P95, P99 percentiles
-- **Index size:** Track growth over time
-- **Memory usage:** JVM heap and off-heap memory
+- Query latency: P50, P95, P99 percentiles
+- Index size: Track growth over time
+- Memory usage: JVM heap and off-heap memory
 - **Cache hit rates:** Query cache, request cache
-- **Merge statistics:** Segment count and merge times
+- Merge statistics: Segment count and merge times
 
 **Example Monitoring Query:**
 
@@ -993,13 +993,13 @@ curl -X GET "localhost:9200/_nodes/stats/indices,jvm?pretty"
 
 ### Scaling Strategies
 
-**Horizontal Scaling:**
+Horizontal Scaling:
 
 - Add more nodes to distribute vector search load
 - Increase shard count for large datasets (>500GB)
 - Use dedicated master nodes for cluster stability
 
-**Vertical Scaling:**
+Vertical Scaling:
 
 - Increase memory for better vector caching
 - Use faster storage (NVMe SSDs) for vector data
@@ -1009,11 +1009,11 @@ curl -X GET "localhost:9200/_nodes/stats/indices,jvm?pretty"
 
 OpenSearch provides a powerful, production-ready platform for vector search built on the solid foundation of Apache Lucene. Key takeaways:
 
-1. **Lucene Integration:** Understanding Lucene's segment architecture and inverted index model is crucial for optimizing vector search performance
+1. Lucene Integration: Understanding Lucene's segment architecture and inverted index model is crucial for optimizing vector search performance
 2. **Flexible Configuration:** OpenSearch supports multiple algorithms (HNSW, IVF) with extensive tuning options
 3. **Hybrid Capabilities:** Seamlessly combine text search, filters, and vector similarity in unified queries
-4. **Advanced Features:** Multi-modal search, reranking, and function scoring enable sophisticated applications
-5. **Production Ready:** Built-in monitoring, scaling, and optimization features for enterprise deployments
+4. Advanced Features: Multi-modal search, reranking, and function scoring enable sophisticated applications
+5. Production Ready: Built-in monitoring, scaling, and optimization features for enterprise deployments
 
 For related topics, see:
 - [Introduction to Search Systems](intro_to_search.md) - Fundamentals of text and vector search
@@ -1024,11 +1024,11 @@ For related topics, see:
 
 ## ⚠️ Performance Metrics Disclaimer
 
-**Important Notice about Performance Data:**
+Important Notice about Performance Data:
 
 All performance metrics, benchmarks, latency figures, memory usage statistics, and cost examples presented in this document are **illustrative examples** designed to help with understanding and planning. These numbers are based on theoretical models, synthetic tests, or specific hardware configurations and should not be considered as guaranteed performance metrics for your specific use case.
 
-**Actual performance will vary significantly based on:**
+Actual performance will vary significantly based on:
 
 - Hardware specifications and configurations
 - Data characteristics (vector dimensions, dataset size, distribution)
@@ -1037,7 +1037,7 @@ All performance metrics, benchmarks, latency figures, memory usage statistics, a
 - OpenSearch version and configuration settings
 - Operating system and environment factors
 
-**Before making production decisions:**
+Before making production decisions:
 
 - Conduct benchmarks with your actual data and infrastructure
 - Test with realistic query patterns and load
