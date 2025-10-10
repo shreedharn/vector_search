@@ -53,12 +53,20 @@ extra_css:
   - styles/overrides.css
 docs_dir: docs
 nav:
-  - OpenSearch Introduction: opensearch.md
-  - Deployment Options: opensearch_productionize.md
-  - OpenSearch vs Kendra: kendra_vs_opensearch.md
-  - OpenSearch vs PineCone: opensearch_vs_pinecone.md
-  - Examples: search_examples.md 
-  - Glossary: glossary.md
-  - README: README.md
-  - LICENSE: LICENSE.md
+  - Home: README.md
+  - Search Fundamentals:
+      - Introduction to Search: intro_to_search.md
+      - Vector Search Algorithms: index_deep_dive.md
+      - Precision & Recall: precision_vs_recall.md
+  - OpenSearch Implementation:
+      - OpenSearch Guide: opensearch.md
+      - RAG with OpenSearch: opensearch_rag.md
+      - Production Deployment: opensearch_productionize.md
+      - Code Examples: search_examples.md
+  - Technology Comparisons:
+      - OpenSearch vs Kendra: kendra_vs_opensearch.md
+      - OpenSearch vs Pinecone: opensearch_vs_pinecone.md
+  - Reference:
+      - Glossary: glossary.md
+      - License: LICENSE.md
 

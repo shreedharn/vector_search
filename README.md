@@ -8,15 +8,35 @@ Th content of the repository is hosted as a website in GitHub at this [link](htt
 
 This repository provides a comprehensive exploration of vector search and information retrieval through multiple interconnected documents, each serving a specific purpose in understanding and implementing modern search systems:
 
-### 🎯 Core Documents  
+### 🎯 Core Documents
+
+#### Search Fundamentals
 
 | Document | Purpose | Key Focus |
 |----------|---------|-----------|
-| **[opensearch](./opensearch.md)** | OpenSearch technical deep dive | Theory to implementation, algorithms, performance |
-| **[opensearch_vs_pinecone](./opensearch_vs_pinecone.md)** | Technology comparison guide | AWS OpenSearch vs Pinecone decision framework |
-| **[kendra_vs_opensearch](./kendra_vs_opensearch.md)** | AWS service comparison | Kendra vs OpenSearch for enterprise search |
+| **[intro_to_search](./intro_to_search.md)** | Introduction to search systems | Text search, vector search, hybrid approaches, reranking |
+| **[index_deep_dive](./index_deep_dive.md)** | Vector search algorithms | HNSW, IVF, Product Quantization, mathematical foundations |
+| **[precision_vs_recall](./precision_vs_recall.md)** | Search quality metrics | Precision, recall, optimization strategies |
+
+#### OpenSearch Implementation
+
+| Document | Purpose | Key Focus |
+|----------|---------|-----------|
+| **[opensearch](./opensearch.md)** | OpenSearch implementation guide | Lucene foundations, configuration, production deployment |
 | **[opensearch_productionize](./opensearch_productionize.md)** | Production deployment guide | Scaling, monitoring, cost optimization |
 | **[search_examples](./search_examples.md)** | Python implementation examples | Practical code patterns and best practices |
+
+#### Technology Comparisons & Decision Guides
+
+| Document | Purpose | Key Focus |
+|----------|---------|-----------|
+| **[opensearch_vs_pinecone](./opensearch_vs_pinecone.md)** | Technology comparison guide | AWS OpenSearch vs Pinecone decision framework |
+| **[kendra_vs_opensearch](./kendra_vs_opensearch.md)** | AWS service comparison | Kendra vs OpenSearch for enterprise search |
+
+#### Reference
+
+| Document | Purpose | Key Focus |
+|----------|---------|-----------|
 | **[glossary.md](./glossary.md)** | Comprehensive glossary | Technical terms, metrics, and algorithms |
 
 ## 🚀 Getting Started  
