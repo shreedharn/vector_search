@@ -79,7 +79,7 @@ When to Use Euclidean:
 
 - Image embeddings: Where color intensity, brightness, and other magnitude-based features matter
 - Sensor data: Where absolute values carry meaning (temperature, pressure readings)
-- **Normalized embeddings:** When all vectors are pre-normalized to unit length
+- Normalized embeddings: When all vectors are pre-normalized to unit length
 
 Example: Comparing product images where a bright red dress should be more similar to a bright red shirt than to a dark red dress, Euclidean distance preserves these intensity relationships.
 
@@ -114,7 +114,7 @@ The mathematical challenge of high-dimensional search drives the need for approx
 
 Quality Metrics:
 
-- **[Recall@K](glossary.md#recallk):** Percentage of true top-k neighbors found by the algorithm
+- [Recall@K](glossary.md#recallk): Percentage of true top-k neighbors found by the algorithm
 - Query time: Milliseconds per search operation
 - Index size: Memory required to store the search structure
 
@@ -141,8 +141,8 @@ Consider how you might navigate from New York to a specific address in Tokyo:
 HNSW mirrors this hierarchical approach in vector space:
 
 - Top Layers (2, 3, 4...): Sparse networks with long-distance "highways" connecting distant regions of vector space
-- **Middle Layers (1):** Regional connections that bridge local neighborhoods
-- **Bottom Layer (0):** Dense local neighborhoods where every point connects to its immediate neighbors
+- Middle Layers (1): Regional connections that bridge local neighborhoods
+- Bottom Layer (0): Dense local neighborhoods where every point connects to its immediate neighbors
 
 **Graph Construction Philosophy:**
 
@@ -302,16 +302,16 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 
 **Application-Specific Tuning:**
 
-- **Real-time autocomplete:** ef_search = 15-25 (ultra-low latency, 85-90% recall acceptable)
-- **Main search results:** ef_search = 80-120 (balanced latency/accuracy for user-facing results)
-- **Recommendation systems:** ef_search = 150-250 (higher accuracy for better user experience)
+- Real-time autocomplete: ef_search = 15-25 (ultra-low latency, 85-90% recall acceptable)
+- Main search results: ef_search = 80-120 (balanced latency/accuracy for user-facing results)
+- Recommendation systems: ef_search = 150-250 (higher accuracy for better user experience)
 - Research/analytics: ef_search = 300-500 (maximum accuracy, latency less critical)
 - Batch processing: ef_search = 200-400 (optimize for throughput over individual query speed)
 
 **System Load Adaptation:**
 
-- **High load periods:** Reduce ef_search to maintain response times
-- **Low load periods:** Increase ef_search to improve result quality
+- High load periods: Reduce ef_search to maintain response times
+- Low load periods: Increase ef_search to improve result quality
 - SLA-based scaling: Automatically adjust based on current system latency percentiles
 
 **Query Complexity Estimation:**
@@ -320,7 +320,7 @@ Some queries inherently require more exploration:
 
 - Outlier queries: Vectors far from typical data distribution need higher ef_search
 - Ambiguous queries: Queries near decision boundaries between clusters benefit from broader search
-- **High-precision requirements:** Critical applications (medical, financial) should use conservative (high) ef_search values
+- High-precision requirements: Critical applications (medical, financial) should use conservative (high) ef_search values
 
 ### Real-World Performance Characteristics
 
@@ -402,7 +402,7 @@ IVF embodies a classic divide-and-conquer strategy adapted for high-dimensional 
 
 *Library Science Analogy:*
 
-- **Traditional library:** Books scattered randomly - must check every shelf
+- Traditional library: Books scattered randomly - must check every shelf
 - Dewey Decimal System (IVF): Books organized by topic - go directly to relevant sections
 
 Mathematical Foundation: The Locality Hypothesis
@@ -467,7 +467,7 @@ Periodically retrain cluster centroids using updated vector distributions, espec
 
 Asymmetric vs Symmetric Distance Computation:
 
-- **Asymmetric Distance:** More accurate, computes direct distance between query and clustered vector
+- Asymmetric Distance: More accurate, computes direct distance between query and clustered vector
 - Symmetric Distance: Faster approximation using centroid as intermediate point
 - Trade-off: Asymmetric provides better accuracy at higher computational cost
 
@@ -525,14 +525,14 @@ Choosing the optimal vector search algorithm requires understanding your specifi
 
 | Dataset Size | Memory Budget | Latency Requirement | Accuracy Need | Best Algorithm | Reasoning |
 |-------------|---------------|---------------------|---------------|----------------|-----------|
-| **< 100K** | Any | Any | 100% | **Brute Force** | Small enough for exact search |
-| **100K - 1M** | High (4GB+) | Ultra-low (<1ms) | 95%+ | **HNSW** | Best speed-accuracy balance |
-| **100K - 1M** | Medium (2-4GB) | Low (<10ms) | 90%+ | **IVF** | Good efficiency, proven |
-| **1M - 10M** | High (8GB+) | Low (<5ms) | 95%+ | **HNSW** | Scales well, excellent recall |
-| **1M - 10M** | Medium (3-8GB) | Medium (<20ms) | 90%+ | **IVF** | Balanced approach |
-| **10M+** | High (16GB+) | Medium (<50ms) | 90%+ | **IVF** | Proven at massive scale |
-| **10M+** | Low (<2GB) | High (<100ms) | 80%+ | **IVF + PQ** | Maximum compression |
-| **Any** | Very Low (<1GB) | Any | 75%+ | **PQ Only** | Extreme memory constraints |
+| < 100K | Any | Any | 100% | Brute Force | Small enough for exact search |
+| 100K - 1M | High (4GB+) | Ultra-low (<1ms) | 95%+ | HNSW | Best speed-accuracy balance |
+| 100K - 1M | Medium (2-4GB) | Low (<10ms) | 90%+ | IVF | Good efficiency, proven |
+| 1M - 10M | High (8GB+) | Low (<5ms) | 95%+ | HNSW | Scales well, excellent recall |
+| 1M - 10M | Medium (3-8GB) | Medium (<20ms) | 90%+ | IVF | Balanced approach |
+| 10M+ | High (16GB+) | Medium (<50ms) | 90%+ | IVF | Proven at massive scale |
+| 10M+ | Low (<2GB) | High (<100ms) | 80%+ | IVF + PQ | Maximum compression |
+| Any | Very Low (<1GB) | Any | 75%+ | PQ Only | Extreme memory constraints |
 
 ### Algorithm-Specific Optimization Guidelines
 
@@ -540,8 +540,8 @@ HNSW Parameter Optimization Guidelines:
 
 *Base Parameter Selection by Latency Requirements:*
 
-- **Ultra-low latency (<1ms):** M=16, ef_construction=128
-- **Low latency (<5ms):** M=24, ef_construction=256
+- Ultra-low latency (<1ms): M=16, ef_construction=128
+- Low latency (<5ms): M=24, ef_construction=256
 - Standard latency: M=32, ef_construction=512
 
 *Memory-Constrained Adjustments:*
@@ -585,9 +585,9 @@ Product Quantization Parameter Selection:
 
 *Subquantizer Count (m) by Memory Budget:*
 
-- **<10% memory budget:** m = dimensions/4 (aggressive compression)
-- **<20% memory budget:** m = dimensions/8 (balanced compression)
-- **>20% memory budget:** m = dimensions/16 (conservative compression)
+- <10% memory budget: m = dimensions/4 (aggressive compression)
+- <20% memory budget: m = dimensions/8 (balanced compression)
+- >20% memory budget: m = dimensions/16 (conservative compression)
 - Constraint: m must divide dimensions evenly
 
 *Centroids per Codebook (k) by Accuracy Requirements:*
@@ -624,7 +624,7 @@ Choose algorithms based on query and dataset characteristics:
 
 *Selection Criteria:*
 
-- **High-magnitude queries:** Use exact search (<50K vectors) or HNSW (larger datasets)
+- High-magnitude queries: Use exact search (<50K vectors) or HNSW (larger datasets)
 - Sparse queries: Prefer IVF clustering approach
 - Standard queries: HNSW for <5M vectors, IVF for larger datasets
 

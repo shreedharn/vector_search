@@ -6,9 +6,9 @@ This guide compares two powerful vector search technologies that help computers 
 
 **📖 Reading Guide:**
 
-- **Basic sections** - Perfect for beginners and understanding core concepts
-- **Intermediate sections** - For developers and technical decision-makers  
-- **Advanced sections** - Deep technical details for specialists and architects
+- Basic sections - Perfect for beginners and understanding core concepts
+- Intermediate sections - For developers and technical decision-makers  
+- Advanced sections - Deep technical details for specialists and architects
 
 Skip the technical sections if they're too complex - you'll still understand which tool fits your needs!
 
@@ -50,14 +50,14 @@ Similarity Metrics: Different ways to measure "how similar" two things are:
 
 | Feature | AWS OpenSearch | Pinecone | 🤔 What This Means |
 |---------|----------------|----------|-------------------|
-| **Vector Search** | k-NN with [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world), [IVF](glossary.md#ivf-inverted-file-index) algorithms | Proprietary optimized algorithms | OpenSearch: Uses standard, proven methods ([details](opensearch.md#hnsw-hierarchical-navigable-small-world)). Pinecone: Uses custom-built, specialized methods |
-| **Vector Dimensions** | Up to 16,000 dimensions | Up to 20,000 dimensions | Both handle very detailed data representations. Pinecone handles slightly more complex data |
-| **Similarity Metrics** | Cosine, Euclidean, Inner Product | Cosine, Euclidean, Dot Product | Both offer the main similarity measurement methods you'd need |
-| **Hybrid Search** | Vector + full-text search | Vector + metadata filtering | OpenSearch: Can combine meaning-based and keyword search ([details](opensearch.md#the-progression-text-vector-hybrid_1)). Pinecone: Combines meaning-based search with data filters |
-| **RAG Support** | Full RAG implementation capabilities | Vector retrieval for RAG pipelines | OpenSearch: Complete RAG ecosystem ([guide](opensearch_rag.md)). Pinecone: Specialized vector retrieval component |
-| **Real-time Updates** | Supported with small delay | Real-time with immediate consistency | OpenSearch: Few seconds delay after updates. Pinecone: Instant availability after updates |
-| **Approximate Search** | [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world), [IVF](glossary.md#ivf-inverted-file-index) approximate algorithms | Proprietary approximate algorithms | Both use "good enough" fast search instead of perfect but slow search |
-| **Exact Search** | Brute force option available | Not optimized for exact search | OpenSearch: Can do perfect matching (slow). Pinecone: Focuses on fast approximate matching |
+| Vector Search | k-NN with [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world), [IVF](glossary.md#ivf-inverted-file-index) algorithms | Proprietary optimized algorithms | OpenSearch: Uses standard, proven methods ([details](opensearch.md#hnsw-configuration)). Pinecone: Uses custom-built, specialized methods |
+| Vector Dimensions | Up to 16,000 dimensions | Up to 20,000 dimensions | Both handle very detailed data representations. Pinecone handles slightly more complex data |
+| Similarity Metrics | Cosine, Euclidean, Inner Product | Cosine, Euclidean, Dot Product | Both offer the main similarity measurement methods you'd need |
+| Hybrid Search | Vector + full-text search | Vector + metadata filtering | OpenSearch: Can combine meaning-based and keyword search ([details](opensearch.md#hybrid-search-queries)). Pinecone: Combines meaning-based search with data filters |
+| RAG Support | Full RAG implementation capabilities | Vector retrieval for RAG pipelines | OpenSearch: Complete RAG ecosystem ([guide](opensearch_rag.md)). Pinecone: Specialized vector retrieval component |
+| Real-time Updates | Supported with small delay | Real-time with immediate consistency | OpenSearch: Few seconds delay after updates. Pinecone: Instant availability after updates |
+| Approximate Search | [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world), [IVF](glossary.md#ivf-inverted-file-index) approximate algorithms | Proprietary approximate algorithms | Both use "good enough" fast search instead of perfect but slow search |
+| Exact Search | Brute force option available | Not optimized for exact search | OpenSearch: Can do perfect matching (slow). Pinecone: Focuses on fast approximate matching |
 
 ### Real-World Example: Netflix-Style Recommendation System
 
@@ -84,67 +84,67 @@ With Pinecone:
 
 | Feature | AWS OpenSearch | Pinecone |
 |---------|----------------|----------|
-| **Deployment Model** | Self-managed or AWS managed | Fully managed SaaS |
-| **Infrastructure** | EC2 instances, customizable | Serverless, auto-scaling |
-| **Multi-region** | Manual setup required | Built-in multi-region support |
-| **High Availability** | Master/data node configuration | Built-in with automatic failover |
-| **Backup/Recovery** | Manual snapshots required | Automatic backups included |
-| **Maintenance** | OS patches, updates required | Zero maintenance required |
+| Deployment Model | Self-managed or AWS managed | Fully managed SaaS |
+| Infrastructure | EC2 instances, customizable | Serverless, auto-scaling |
+| Multi-region | Manual setup required | Built-in multi-region support |
+| High Availability | Master/data node configuration | Built-in with automatic failover |
+| Backup/Recovery | Manual snapshots required | Automatic backups included |
+| Maintenance | OS patches, updates required | Zero maintenance required |
 
 ## Scalability and Performance
 
 | Feature | AWS OpenSearch | Pinecone |
 |---------|----------------|----------|
-| **Horizontal Scaling** | Manual node addition | Automatic scaling |
-| **Index Size** | Limited by cluster resources | Up to billions of vectors |
-| **Query [Latency](glossary.md#latency)** | 10-100ms (varies by config) | Sub-10ms typical |
-| **[Throughput (QPS)](glossary.md#throughput-qps)** | Thousands of QPS | Thousands to millions of QPS |
-| **Storage Type** | EBS, instance storage | Proprietary storage system |
-| **Memory Requirements** | High for vector operations | Optimized memory usage |
+| Horizontal Scaling | Manual node addition | Automatic scaling |
+| Index Size | Limited by cluster resources | Up to billions of vectors |
+| Query [Latency](glossary.md#latency) | 10-100ms (varies by config) | Sub-10ms typical |
+| [Throughput (QPS)](glossary.md#throughput-qps) | Thousands of QPS | Thousands to millions of QPS |
+| Storage Type | EBS, instance storage | Proprietary storage system |
+| Memory Requirements | High for vector operations | Optimized memory usage |
 
 ## Data Management
 
 | Feature | AWS OpenSearch | Pinecone |
 |---------|----------------|----------|
-| **Data Ingestion** | Bulk API, streaming | REST API, batch upserts |
-| **Update Operations** | Update, upsert, delete | Upsert, delete, partial updates |
-| **Data Format** | JSON documents with vectors | Vectors with metadata |
-| **Schema Flexibility** | Dynamic mapping | Metadata-only schema |
-| **Indexing Speed** | Moderate (configurable) | Optimized for fast indexing |
-| **Data Durability** | Replica configuration | Built-in durability |
+| Data Ingestion | Bulk API, streaming | REST API, batch upserts |
+| Update Operations | Update, upsert, delete | Upsert, delete, partial updates |
+| Data Format | JSON documents with vectors | Vectors with metadata |
+| Schema Flexibility | Dynamic mapping | Metadata-only schema |
+| Indexing Speed | Moderate (configurable) | Optimized for fast indexing |
+| Data Durability | Replica configuration | Built-in durability |
 
 ## Query Capabilities
 
 | Feature | AWS OpenSearch | Pinecone |
 |---------|----------------|----------|
-| **Vector Queries** | k-NN, approximate search | Similarity search, filtering |
-| **Text Search** | Full-text search capabilities | No native text search |
-| **Complex Filtering** | Advanced query DSL | Metadata filtering |
-| **Aggregations** | Full aggregation support | Limited aggregation |
-| **Geospatial** | Geo-point, geo-shape queries | No native geo support |
-| **Time Series** | Time-based queries, rollups | Basic timestamp filtering |
+| Vector Queries | k-NN, approximate search | Similarity search, filtering |
+| Text Search | Full-text search capabilities | No native text search |
+| Complex Filtering | Advanced query DSL | Metadata filtering |
+| Aggregations | Full aggregation support | Limited aggregation |
+| Geospatial | Geo-point, geo-shape queries | No native geo support |
+| Time Series | Time-based queries, rollups | Basic timestamp filtering |
 
 ## Integration and Ecosystem
 
 | Feature | AWS OpenSearch | Pinecone |
 |---------|----------------|----------|
-| **ML Frameworks** | Manual integration required | Native integrations (LangChain, etc.) |
-| **APIs** | REST, various client libraries | REST API, Python/Node.js SDKs |
-| **Authentication** | IAM, SAML, basic auth | API keys, SAML SSO |
-| **Monitoring** | CloudWatch, custom dashboards | Built-in monitoring dashboard |
-| **Alerting** | Custom alerting rules | Usage alerts and notifications |
-| **Data Connectors** | Custom development required | Pre-built integrations available |
+| ML Frameworks | Manual integration required | Native integrations (LangChain, etc.) |
+| APIs | REST, various client libraries | REST API, Python/Node.js SDKs |
+| Authentication | IAM, SAML, basic auth | API keys, SAML SSO |
+| Monitoring | CloudWatch, custom dashboards | Built-in monitoring dashboard |
+| Alerting | Custom alerting rules | Usage alerts and notifications |
+| Data Connectors | Custom development required | Pre-built integrations available |
 
 ## Cost Analysis
 
 | Factor | AWS OpenSearch | Pinecone |
 |---------|----------------|----------|
-| **Pricing Model** | Instance hours + storage | Vector storage + operations |
-| **Base Cost** | $15-100+/month (varies by instance) | $70/month (starter tier) |
-| **Storage Cost** | EBS storage rates | Included in tier pricing |
-| **Query Cost** | No per-query charges | Included in tier pricing |
-| **Data Transfer** | AWS standard rates | Included within limits |
-| **Hidden Costs** | Management overhead | None (fully managed) |
+| Pricing Model | Instance hours + storage | Vector storage + operations |
+| Base Cost | $15-100+/month (varies by instance) | $70/month (starter tier) |
+| Storage Cost | EBS storage rates | Included in tier pricing |
+| Query Cost | No per-query charges | Included in tier pricing |
+| Data Transfer | AWS standard rates | Included within limits |
+| Hidden Costs | Management overhead | None (fully managed) |
 
 ## Vector Search Examples {#real-world-use-case-examples}
 
@@ -487,7 +487,7 @@ Considerations:
 ## Advanced Vector Search Algorithms
 
 ### OpenSearch Algorithms
-OpenSearch supports multiple vector search algorithms including HNSW, IVF, and flat search. For detailed algorithm comparisons, parameter tuning, and selection guidance, see the [OpenSearch Technical Guide](opensearch.md#algorithm-selection-guide).
+OpenSearch supports multiple vector search algorithms including HNSW, IVF, and flat search. For detailed algorithm comparisons, parameter tuning, and selection guidance, see the [Index Deep Dive](index_deep_dive.md#algorithm-selection-guide).
 
 ### Pinecone Algorithms
 Pinecone uses proprietary algorithms optimized for different scenarios:
@@ -500,11 +500,11 @@ Pinecone uses proprietary algorithms optimized for different scenarios:
 
 | Metric | OpenSearch | Pinecone | Best Use Case |
 |---------|------------|----------|---------------|
-| **[Cosine Similarity](glossary.md#cosine-similarity)** | ✅ Default | ✅ Recommended | Normalized vectors, text embeddings |
-| **[Euclidean Distance (L2)](glossary.md#euclidean-distance-l2)** | ✅ L2 space | ✅ Available | Computer vision, spatial data |
-| **Inner Product** | ✅ Available | ✅ Dot product | Recommendation systems |
-| **Hamming Distance** | ❌ Not supported | ❌ Not supported | Binary vectors |
-| **Manhattan Distance** | ❌ Not supported | ❌ Not supported | Sparse vectors |
+| [Cosine Similarity](glossary.md#cosine-similarity) | ✅ Default | ✅ Recommended | Normalized vectors, text embeddings |
+| [Euclidean Distance (L2)](glossary.md#euclidean-distance-l2) | ✅ L2 space | ✅ Available | Computer vision, spatial data |
+| Inner Product | ✅ Available | ✅ Dot product | Recommendation systems |
+| Hamming Distance | ❌ Not supported | ❌ Not supported | Binary vectors |
+| Manhattan Distance | ❌ Not supported | ❌ Not supported | Sparse vectors |
 
 ## Multi-tenancy and Isolation
 
@@ -556,12 +556,12 @@ results = index.query(
 
 | Feature | AWS OpenSearch | Pinecone |
 |---------|----------------|----------|
-| **Data Encryption** | At rest and in transit | At rest and in transit |
-| **Network Security** | VPC, security groups | TLS, private endpoints |
-| **Access Control** | Fine-grained IAM roles | API keys, SAML SSO |
-| **Audit Logging** | CloudTrail integration | Built-in audit logs |
-| **Compliance** | SOC, HIPAA, PCI DSS | SOC 2 Type 2, GDPR |
-| **Data Residency** | AWS region control | Limited region options |
+| Data Encryption | At rest and in transit | At rest and in transit |
+| Network Security | VPC, security groups | TLS, private endpoints |
+| Access Control | Fine-grained IAM roles | API keys, SAML SSO |
+| Audit Logging | CloudTrail integration | Built-in audit logs |
+| Compliance | SOC, HIPAA, PCI DSS | SOC 2 Type 2, GDPR |
+| Data Residency | AWS region control | Limited region options |
 
 ## Migration and Data Portability
 
@@ -696,12 +696,12 @@ Context Assembly → LLM Generation → Response + Sources
 
 | RAG Aspect | OpenSearch | Pinecone |
 |------------|------------|----------|
-| **Retrieval Latency** | 10-100ms (configurable) | Sub-10ms typical |
-| **Hybrid Search** | Native support | Requires external text search |
-| **Reranking** | Built-in rescoring | External implementation |
-| **Context Assembly** | Flexible document handling | Vector + metadata only |
-| **Scalability** | Manual scaling required | Automatic scaling |
-| **Operational Complexity** | High (full search platform) | Low (managed vector service) |
+| Retrieval Latency | 10-100ms (configurable) | Sub-10ms typical |
+| Hybrid Search | Native support | Requires external text search |
+| Reranking | Built-in rescoring | External implementation |
+| Context Assembly | Flexible document handling | Vector + metadata only |
+| Scalability | Manual scaling required | Automatic scaling |
+| Operational Complexity | High (full search platform) | Low (managed vector service) |
 
 ## Use Case Recommendations {#decision-framework}
 

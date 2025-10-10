@@ -36,11 +36,11 @@ For detailed technical information about OpenSearch's search approaches, algorit
 
 | Aspect | AWS Kendra | AWS OpenSearch |
 |--------|------------|----------------|
-| **Primary Focus** | Enterprise document search | General-purpose search & analytics |
-| **User Experience** | Natural language queries | Structured queries with full customization |
-| **Setup Complexity** | Low (managed service) | High (requires configuration and tuning) |
-| **Customization** | Limited | Extensive |
-| **Use Cases** | Knowledge bases, FAQ, document search | E-commerce, logging, custom search apps, vector search |
+| Primary Focus | Enterprise document search | General-purpose search & analytics |
+| User Experience | Natural language queries | Structured queries with full customization |
+| Setup Complexity | Low (managed service) | High (requires configuration and tuning) |
+| Customization | Limited | Extensive |
+| Use Cases | Knowledge bases, FAQ, document search | E-commerce, logging, custom search apps, vector search |
 
 ## Detailed Feature Comparison
 
@@ -48,15 +48,15 @@ For detailed technical information about OpenSearch's search approaches, algorit
 
 | Capability | AWS Kendra | AWS OpenSearch |
 |------------|------------|----------------|
-| **Query Type** | Natural language questions | Structured queries, full-text search |
-| **Semantic Understanding** | Built-in ML models | Custom implementation required |
-| **Relevance Tuning** | Automatic ML-based | Manual configuration required |
-| **Faceting/Filtering** | Basic metadata filtering | Advanced filtering and aggregations |
-| **Auto-suggestions** | Built-in query suggestions | Custom implementation required |
-| **Synonyms** | Automatic detection | Manual configuration |
-| **Multi-language** | Limited built-in support | Full multilingual support |
-| **Vector Search** | Not supported | Full vector search capabilities |
-| **RAG Support** | Limited to Q&A format | Full RAG implementation capabilities |
+| Query Type | Natural language questions | Structured queries, full-text search |
+| Semantic Understanding | Built-in ML models | Custom implementation required |
+| Relevance Tuning | Automatic ML-based | Manual configuration required |
+| Faceting/Filtering | Basic metadata filtering | Advanced filtering and aggregations |
+| Auto-suggestions | Built-in query suggestions | Custom implementation required |
+| Synonyms | Automatic detection | Manual configuration |
+| Multi-language | Limited built-in support | Full multilingual support |
+| Vector Search | Not supported | Full vector search capabilities |
+| RAG Support | Limited to Q&A format | Full RAG implementation capabilities |
 
 *For detailed AWS Kendra features, see: [AWS Kendra Features](https://aws.amazon.com/kendra/features/) (please verify current capabilities)*
 
@@ -68,12 +68,12 @@ For detailed technical information about OpenSearch's search approaches, algorit
 
 | Feature | AWS Kendra | AWS OpenSearch |
 |---------|------------|----------------|
-| **Supported Formats** | 50+ document formats (PDF, Word, HTML, etc.) | Primarily JSON (custom preprocessing required) |
-| **Data Connectors** | 40+ native connectors (SharePoint, S3, Salesforce, etc.) | Custom connectors required |
-| **Real-time Updates** | Near real-time (minutes) | Real-time (seconds) |
-| **Document Size Limit** | Up to 50MB per document | Up to 100MB per document (configurable) |
-| **Incremental Sync** | Built-in via connectors | Custom implementation |
-| **API Integration** | REST API, SDKs | REST API, multiple client libraries |
+| Supported Formats | 50+ document formats (PDF, Word, HTML, etc.) | Primarily JSON (custom preprocessing required) |
+| Data Connectors | 40+ native connectors (SharePoint, S3, Salesforce, etc.) | Custom connectors required |
+| Real-time Updates | Near real-time (minutes) | Real-time (seconds) |
+| Document Size Limit | Up to 50MB per document | Up to 100MB per document (configurable) |
+| Incremental Sync | Built-in via connectors | Custom implementation |
+| API Integration | REST API, SDKs | REST API, multiple client libraries |
 
 *For current Kendra connectors, see: [AWS Kendra Data Connectors](https://docs.aws.amazon.com/kendra/latest/dg/data-source-connectors.html)*
 
@@ -83,21 +83,21 @@ For detailed technical information about OpenSearch's search approaches, algorit
 
 | Aspect | AWS Kendra | AWS OpenSearch |
 |--------|------------|----------------|
-| **Maximum Documents** | Up to 5M documents per index | Virtually unlimited with proper architecture |
-| **Query [Throughput (QPS)](glossary.md#throughput-qps)** | Up to 8,000 queries/day (base tier) | Thousands of queries per second |
-| **Scaling** | Automatic | Manual or automatic cluster scaling |
-| **Multi-region** | Single region per index | Multi-region deployment supported |
-| **High Availability** | Built-in | Configurable with replicas |
+| Maximum Documents | Up to 5M documents per index | Virtually unlimited with proper architecture |
+| Query [Throughput (QPS)](glossary.md#throughput-qps) | Up to 8,000 queries/day (base tier) | Thousands of queries per second |
+| Scaling | Automatic | Manual or automatic cluster scaling |
+| Multi-region | Single region per index | Multi-region deployment supported |
+| High Availability | Built-in | Configurable with replicas |
 
 ### Security and Compliance
 
 | Security Feature | AWS Kendra | AWS OpenSearch |
 |------------------|------------|----------------|
-| **Data Encryption** | At rest and in transit | At rest and in transit |
-| **Access Control** | IAM, Active Directory | IAM, fine-grained access control |
-| **VPC Support** | Yes | Yes |
-| **Compliance** | SOC, HIPAA eligible | SOC, HIPAA, FedRAMP |
-| **Audit Logging** | CloudTrail integration | CloudTrail + detailed query logs |
+| Data Encryption | At rest and in transit | At rest and in transit |
+| Access Control | IAM, Active Directory | IAM, fine-grained access control |
+| VPC Support | Yes | Yes |
+| Compliance | SOC, HIPAA eligible | SOC, HIPAA, FedRAMP |
+| Audit Logging | CloudTrail integration | CloudTrail + detailed query logs |
 
 *For current compliance status, see: [AWS Compliance Programs](https://aws.amazon.com/compliance/programs/)*
 
@@ -238,8 +238,8 @@ Application Monitoring and Logging
 
 Some organizations use both services:
 
-- **Kendra** for internal enterprise search and simple Q&A systems
-- **OpenSearch** for customer-facing applications, analytics, and advanced RAG implementations
+- Kendra for internal enterprise search and simple Q&A systems
+- OpenSearch for customer-facing applications, analytics, and advanced RAG implementations
 
 This approach maximizes the strengths of each service while serving different organizational needs.
 
@@ -247,14 +247,14 @@ This approach maximizes the strengths of each service while serving different or
 
 | RAG Capability | AWS Kendra | AWS OpenSearch |
 |----------------|------------|----------------|
-| **Setup Complexity** | Low - built-in Q&A format | High - requires custom implementation |
-| **Customization** | Limited to predefined patterns | Full control over retrieval and generation |
-| **Vector Search** | Not available | Advanced HNSW and IVF algorithms |
-| **Hybrid Retrieval** | Basic metadata filtering | Sophisticated text + vector combination |
-| **Reranking** | Built-in ML models | Custom reranking pipelines |
-| **Multi-modal RAG** | Text documents only | Text, images, and multimedia content |
-| **Production Scale** | Managed scaling | Requires infrastructure management |
-| **Cost for RAG** | Higher per-query costs | More cost-effective at scale |
+| Setup Complexity | Low - built-in Q&A format | High - requires custom implementation |
+| Customization | Limited to predefined patterns | Full control over retrieval and generation |
+| Vector Search | Not available | Advanced HNSW and IVF algorithms |
+| Hybrid Retrieval | Basic metadata filtering | Sophisticated text + vector combination |
+| Reranking | Built-in ML models | Custom reranking pipelines |
+| Multi-modal RAG | Text documents only | Text, images, and multimedia content |
+| Production Scale | Managed scaling | Requires infrastructure management |
+| Cost for RAG | Higher per-query costs | More cost-effective at scale |
 
 *For comprehensive RAG implementation guidance with OpenSearch, see: [OpenSearch RAG Guide](opensearch_rag.md)*
 

@@ -49,14 +49,14 @@ Serverless architecture with auto-scaling:
 
 | Feature | Managed Service | Serverless | Best Choice |
 |---------|-----------------|------------|-------------|
-| **Vector Algorithm Support** | ✅ All ([HNSW](glossary.md#hnsw-hierarchical-navigable-small-world), [IVF](glossary.md#ivf-inverted-file-index), [PQ](glossary.md#product-quantization-pq)) | ⚠️ [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world) only | Managed for algorithm flexibility |
-| **Parameter Tuning** | ✅ Full control | ⚠️ Limited | Managed for fine-tuning |
-| **[Cold Start Problem](glossary.md#cold-start-problem)** | ✅ 0ms (always warm) | ❌ 1-5 seconds | Managed for real-time apps |
-| **Scaling Speed** | ⚠️ Minutes | ✅ Seconds | Serverless for variable loads |
-| **Cost Predictability** | ✅ Fixed hourly cost | ❌ Variable usage-based | Managed for budget planning |
-| **Operational Overhead** | ❌ High maintenance | ✅ Zero maintenance | Serverless for simplicity |
-| **Memory Control** | ✅ Direct control | ❌ Abstracted | Managed for optimization |
-| **Multi-AZ** | ⚠️ Manual configuration | ✅ Built-in | Serverless for HA |
+| Vector Algorithm Support | ✅ All ([HNSW](glossary.md#hnsw-hierarchical-navigable-small-world), [IVF](glossary.md#ivf-inverted-file-index), [PQ](glossary.md#product-quantization-pq)) | ⚠️ [HNSW](glossary.md#hnsw-hierarchical-navigable-small-world) only | Managed for algorithm flexibility |
+| Parameter Tuning | ✅ Full control | ⚠️ Limited | Managed for fine-tuning |
+| [Cold Start Problem](glossary.md#cold-start-problem) | ✅ 0ms (always warm) | ❌ 1-5 seconds | Managed for real-time apps |
+| Scaling Speed | ⚠️ Minutes | ✅ Seconds | Serverless for variable loads |
+| Cost Predictability | ✅ Fixed hourly cost | ❌ Variable usage-based | Managed for budget planning |
+| Operational Overhead | ❌ High maintenance | ✅ Zero maintenance | Serverless for simplicity |
+| Memory Control | ✅ Direct control | ❌ Abstracted | Managed for optimization |
+| Multi-AZ | ⚠️ Manual configuration | ✅ Built-in | Serverless for HA |
 
 ### AWS OpenSearch Service (Managed)
 

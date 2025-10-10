@@ -6,8 +6,8 @@ Understanding how precision and recall work in vector search systems is fundamen
 
 Let's start with a concrete example to build intuition. Imagine you've retrieved 120 documents from your vector database, and upon inspection, 36 of them are truly relevant to your query. If your entire corpus contains 60 relevant documents total, your metrics would look like this:
 
-- **Precision** = 36/120 = 0.30 (30% of retrieved documents are relevant)
-- **Recall** = 36/60 = 0.60 (you found 60% of all relevant documents)
+- Precision = 36/120 = 0.30 (30% of retrieved documents are relevant)
+- Recall = 36/60 = 0.60 (you found 60% of all relevant documents)
 
 This fundamental relationship reveals the classic tradeoff: precision measures the purity of your results, while recall measures their completeness.
 

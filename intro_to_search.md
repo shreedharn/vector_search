@@ -18,7 +18,7 @@ The earliest search systems operated on exact keyword matching - a document was 
 
 Term Frequency-Inverse Document Frequency ([TF-IDF](glossary.md#tf-idf-term-frequency-inverse-document-frequency)) introduced statistical sophistication to search by considering two key factors:
 
-- **Term Frequency (TF):** How often a term appears in a document
+- Term Frequency (TF): How often a term appears in a document
 - Inverse Document Frequency (IDF): How rare or common a term is across the entire collection
 
 The intuition is powerful: terms that appear frequently in a specific document but rarely across the collection are likely more significant for that document's meaning.
@@ -82,8 +82,8 @@ Traditional TF would favor Document B due to higher absolute term frequencies. B
 
 **Precision-Critical Scenarios:**
 
-- **Legal Document Retrieval:** Finding contracts containing specific clauses like "force majeure" or "intellectual property"
-- **Technical Documentation:** Locating API references with exact method names like "getUserById()"
+- Legal Document Retrieval: Finding contracts containing specific clauses like "force majeure" or "intellectual property"
+- Technical Documentation: Locating API references with exact method names like "getUserById()"
 - Product Catalogs: Matching precise specifications like "iPhone 15 Pro Max 256GB Blue"
 
 **Transparent Relevance:**
@@ -131,8 +131,8 @@ Language Barriers:
 Text search struggles with:
 
 - Synonyms: "happy" vs "joyful" vs "cheerful"
-- **Multilingual Content:** English query missing Spanish documents with same meaning
-- **Acronyms and Abbreviations:** "AI" vs "Artificial Intelligence"
+- Multilingual Content: English query missing Spanish documents with same meaning
+- Acronyms and Abbreviations: "AI" vs "Artificial Intelligence"
 - Misspellings: "recieve" vs "receive"
 
 **Query Formulation Challenges:**
@@ -250,20 +250,20 @@ Understanding how precision (purity of results) and recall (completeness of resu
 
 | Scenario | Text Search | Vector Search | Winner |
 |----------|-------------|---------------|---------|
-| **Exact product lookup** | "MacBook Pro M3 16GB" → Perfect match | May find similar products | **Text Search** |
-| **Concept exploration** | "sustainable energy" → Only exact phrase | Finds renewable, green, clean energy | **Vector Search** |
-| **Technical specifications** | "RAM >= 16GB AND SSD" → Precise filtering | Cannot handle logical constraints | **Text Search** |
-| **Intent-based queries** | "best laptop for programming" → Keyword luck | Understands programming needs | **Vector Search** |
+| Exact product lookup | "MacBook Pro M3 16GB" → Perfect match | May find similar products | Text Search |
+| Concept exploration | "sustainable energy" → Only exact phrase | Finds renewable, green, clean energy | Vector Search |
+| Technical specifications | "RAM >= 16GB AND SSD" → Precise filtering | Cannot handle logical constraints | Text Search |
+| Intent-based queries | "best laptop for programming" → Keyword luck | Understands programming needs | Vector Search |
 
 **Performance Characteristics:**
 
 | Metric | Text Search | Vector Search |
 |--------|-------------|---------------|
-| **Index Build Time** | Minutes | Hours (embedding generation) |
-| **Query [Latency](glossary.md#latency)** | <1ms | 1-100ms (depending on algorithm) |
-| **[Memory Usage](glossary.md#memory-usage)** | Low (inverted index) | High (vector storage) |
-| **Accuracy** | Perfect for keywords | 85-99% approximate |
-| **Scalability** | Excellent | Good (with proper algorithms) |
+| Index Build Time | Minutes | Hours (embedding generation) |
+| Query [Latency](glossary.md#latency) | <1ms | 1-100ms (depending on algorithm) |
+| [Memory Usage](glossary.md#memory-usage) | Low (inverted index) | High (vector storage) |
+| Accuracy | Perfect for keywords | 85-99% approximate |
+| Scalability | Excellent | Good (with proper algorithms) |
 
 ### Comprehensive Decision Framework
 
@@ -378,9 +378,9 @@ Academic Research:
 
 Intelligent systems can dynamically adjust the balance between text and vector search based on query characteristics:
 
-- **Exact identifiers** (SKUs, codes, names): 80% text, 20% vector weight
-- **Conceptual queries** ("similar to," "like," "about"): 30% text, 70% vector weight
-- **Factual queries** ("how to," "what is"): 60% text, 40% vector weight
+- Exact identifiers (SKUs, codes, names): 80% text, 20% vector weight
+- Conceptual queries ("similar to," "like," "about"): 30% text, 70% vector weight
+- Factual queries ("how to," "what is"): 60% text, 40% vector weight
 - Default queries: 50% text, 50% vector weight (balanced approach)
 
 **User Interface Adaptation:**
@@ -388,7 +388,7 @@ Intelligent systems can dynamically adjust the balance between text and vector s
 Search interfaces can provide different experiences based on the search approach:
 
 - Text-heavy results: Show keyword highlighting, exact matches, filters
-- **Vector-heavy results:** Display "because you searched for," related concepts, exploration suggestions
+- Vector-heavy results: Display "because you searched for," related concepts, exploration suggestions
 - Hybrid results: Combine both approaches with clear result categorization
 
 ## Reranking: Refining Search Results

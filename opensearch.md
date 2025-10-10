@@ -59,7 +59,7 @@ Why Segments Matter for Vector Search:
 
 - Memory Mapping: Immutable segments allow efficient memory-mapped file access for large vector datasets
 - Cache Efficiency: Vectors in segments can be cached effectively without invalidation concerns
-- **Parallel Processing:** Vector search across segments can leverage multi-core processors
+- Parallel Processing: Vector search across segments can leverage multi-core processors
 - Index Growth: New vectors added as new segments without disrupting existing searches
 
 ### Lucene's Inverted Index
@@ -335,11 +335,11 @@ Proper index configuration is crucial for optimal vector search performance. Ope
 
 | Use Case | ef_construction | M | Reasoning |
 |----------|----------------|---|-----------|
-| **Development/Testing** | 128 | 16 | Fast iteration, adequate quality |
-| **Production (Balanced)** | 256 | 24 | Good performance, manageable resources |
-| **High Accuracy** | 512 | 32 | Maximum quality, higher resource usage |
-| **Memory Constrained** | 128 | 12 | Reduced memory footprint |
-| **Large Scale (10M+)** | 256 | 24 | Balanced for large datasets |
+| Development/Testing | 128 | 16 | Fast iteration, adequate quality |
+| Production (Balanced) | 256 | 24 | Good performance, manageable resources |
+| High Accuracy | 512 | 32 | Maximum quality, higher resource usage |
+| Memory Constrained | 128 | 12 | Reduced memory footprint |
+| Large Scale (10M+) | 256 | 24 | Balanced for large datasets |
 
 ### IVF Configuration
 
@@ -586,7 +586,7 @@ Key Parameters:
 
 - window_size: Number of top documents to rescore (typically 50-200)
 - query_weight: Weight given to original query score (0.0-1.0)
-- **rescore_query_weight:** Weight given to rescore query score (0.0-1.0)
+- rescore_query_weight: Weight given to rescore query score (0.0-1.0)
 
 ### Advanced Function Scoring
 
@@ -780,7 +780,7 @@ final_results = sorted(
 
 **Reranking Performance Tuning:**
 
-- **Window Size Optimization:** Start with 50, increase to 100-200 for better quality
+- Window Size Optimization: Start with 50, increase to 100-200 for better quality
 - Weight Balancing: Use 70-80% original query weight, 20-30% rescore weight
 - Caching Strategies: Cache rescore results for popular queries
 - Async Processing: Implement asynchronous reranking for real-time applications
@@ -817,7 +817,7 @@ Multi-modal search transcends traditional single-content-type search by enabling
 
 Key Advantages:
 
-- **Natural Query Expression:** Users can express intent using the most convenient modality
+- Natural Query Expression: Users can express intent using the most convenient modality
 - Content Discovery: Find related content across different media types
 - Accessibility: Enable alternative access methods for users with different needs
 - Rich Results: Provide diverse result sets combining multiple content types
@@ -830,7 +830,7 @@ Multi-modal search relies on embedding models trained on paired data across moda
 
 - E-commerce: Search for products using text descriptions to find matching images
 - Media Libraries: Find videos or images using natural language descriptions
-- **Educational Content:** Discover learning materials across text, video, and image formats
+- Educational Content: Discover learning materials across text, video, and image formats
 - Research Databases: Cross-reference findings across papers, diagrams, and datasets
 
 #### Cross-Modal Search Architecture
@@ -941,10 +941,10 @@ The core innovation of multi-modal search lies in creating a unified vector spac
 
 **Practical Implementation Considerations:**
 
-- **Dimension Alignment:** Ensure all modalities use the same vector dimensions
+- Dimension Alignment: Ensure all modalities use the same vector dimensions
 - Normalization: Apply consistent normalization across different embedding models
 - Quality Control: Validate cross-modal similarity using human evaluation
-- **Performance Optimization:** Use separate indexes per modality for complex queries
+- Performance Optimization: Use separate indexes per modality for complex queries
 
 ## Production Best Practices
 
@@ -978,7 +978,7 @@ Key Metrics to Monitor:
 - Query latency: P50, P95, P99 percentiles
 - Index size: Track growth over time
 - Memory usage: JVM heap and off-heap memory
-- **Cache hit rates:** Query cache, request cache
+- Cache hit rates: Query cache, request cache
 - Merge statistics: Segment count and merge times
 
 **Example Monitoring Query:**
