@@ -4,47 +4,9 @@ A complete educational resource covering vector search technologies from foundat
 
 Th content of the repository is hosted as a website in GitHub at this [link](https://shreedharn.github.io/vector_search/)
 
-## 📚 Repository Overview  
-
-This repository provides a comprehensive exploration of vector search and information retrieval through multiple interconnected documents, each serving a specific purpose in understanding and implementing modern search systems:
-
-### 🎯 Core Documents
-
-#### Search Fundamentals
-
-| Document | Purpose | Key Focus |
-|----------|---------|-----------|
-| **[intro_to_search](./intro_to_search.md)** | Introduction to search systems | Text search, vector search, hybrid approaches, reranking |
-| **[index_deep_dive](./index_deep_dive.md)** | Vector search algorithms | HNSW, IVF, Product Quantization, mathematical foundations |
-| **[precision_vs_recall](./precision_vs_recall.md)** | Search quality metrics | Precision, recall, optimization strategies |
-
-#### OpenSearch Implementation
-
-| Document | Purpose | Key Focus |
-|----------|---------|-----------|
-| **[opensearch](./opensearch.md)** | OpenSearch implementation guide | Lucene foundations, configuration, production deployment |
-| **[opensearch_productionize](./opensearch_productionize.md)** | Production deployment guide | Scaling, monitoring, cost optimization |
-| **[search_examples](./search_examples.md)** | Python implementation examples | Practical code patterns and best practices |
-
-#### Technology Comparisons & Decision Guides
-
-| Document | Purpose | Key Focus |
-|----------|---------|-----------|
-| **[opensearch_vs_pinecone](./opensearch_vs_pinecone.md)** | Technology comparison guide | AWS OpenSearch vs Pinecone decision framework |
-| **[kendra_vs_opensearch](./kendra_vs_opensearch.md)** | AWS service comparison | Kendra vs OpenSearch for enterprise search |
-
-#### Reference
-
-| Document | Purpose | Key Focus |
-|----------|---------|-----------|
-| **[glossary.md](./glossary.md)** | Comprehensive glossary | Technical terms, metrics, and algorithms |
-
-## 🚀 Getting Started  
-
-
 ---
 
-## 🔧 Technical Specifications  
+## Technical Specifications  
 
 ### Covered Technologies
 
@@ -67,16 +29,7 @@ This repository provides a comprehensive exploration of vector search and inform
 - **Enterprise Search**: Internal knowledge management
 
 
-## 🎯 Learning Objectives  
-
-After completing this repository, you will understand:
-
-1. **Vector Search Fundamentals**: How semantic search works and why it's powerful
-2. **Technology Landscape**: When to use OpenSearch vs Pinecone vs Kendra
-3. **Implementation Skills**: Production-ready deployment and optimization
-4. **Algorithm Mastery**: HNSW, IVF, and Product Quantization trade-offs
-5. **Production Excellence**: Monitoring, scaling, and cost optimization
-6. **Future-Ready Skills**: Foundation for emerging vector search technologies
+---
 
 ## 📚 Further Reading  
 
@@ -98,28 +51,22 @@ After completing this repository, you will understand:
 - **[OpenSearch Documentation](https://opensearch.org/docs/latest/)**: Open source project docs
 - **[Pinecone Documentation](https://docs.pinecone.io/)**: Pinecone vector database docs
 
-## 🤝 Contributing
-
-This repository serves as an educational resource for vector search technologies. For improvements or corrections:
-
-1. Identify specific technical inaccuracies or outdated information
-2. Suggest improvements that maintain educational clarity
-3. Ensure additions align with production best practices
-4. Verify all external links and references
-
 ---
 
-**Navigation Tips:**
+## ℹ️ About
 
-- Use cross-references for deep dives into specific algorithms or concepts
-- Start with technology comparison if evaluating platforms
-- Follow the learning paths for systematic understanding
-- Reference glossary when encountering unfamiliar terms
-- Check performance disclaimers before making production decisions
+Content in this repository is created for educational and informational purposes. Articles are researched and curated with the assistance of LLMs.
+
+## 🤝 Contributing
+
+If you find errors or have suggestions for improvements, please open an issue at:
+**[https://github.com/shreedharn/vector_search](https://github.com/shreedharn/vector_search)**
 
 ---
 
 ## ⚠️ Important Disclaimers  
+
+This material does not constitute financial, legal, or security advice. 
 **Pricing:** 
 AWS services and pricing evolve rapidly. Always consult the official AWS documentation and pricing pages for the most current information before making decisions.
 
@@ -129,10 +76,9 @@ Vector search and cloud services evolve rapidly. While we strive to keep informa
 **Performance and Cost Information:** 
 All performance metrics, benchmarks, and cost estimates in this repository are illustrative examples for educational purposes. Actual performance and costs will vary significantly based on your specific use case, data characteristics, and infrastructure configuration. Always conduct your own benchmarking and consult current AWS pricing before making production decisions.
 
+
 ---
 
-## License  
+## 📄 License
 This project is licensed under the [MIT License](./LICENSE.md).
 
-> ℹ️ **Note:** This Vector Search guide is created with the help of LLMs.
-> Please refer to the license file for full terms of use.

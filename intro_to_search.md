@@ -1,6 +1,4 @@
-# Fundamentals of Search
-
-A comprehensive guide to understanding modern search systems, from traditional text-based approaches to advanced vector search and hybrid architectures.
+# Introduction to Search 
 
 ## Overview
 

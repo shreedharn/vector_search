@@ -13,7 +13,7 @@ theme:
       primary: indigo
       accent: indigo
   font:
-    text: Inter
+    text: Roboto
     code: JetBrains Mono
 plugins:
   - search
@@ -50,7 +50,7 @@ extra:
     inlineWrap: ["\\(", "\\)"]
     generic: true
 extra_css:
-  - styles/overrides.css
+  - styles.css
 docs_dir: docs
 nav:
   - Home: README.md
