@@ -1,0 +1,1362 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../index_deep_dive/">
+      
+      
+        <link rel="next" href="../opensearch/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Precision & Recall - OpenSearch for Vector and Hybrid Search</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../styles/overrides.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#precision-and-recall-in-vector-search" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OpenSearch for Vector and Hybrid Search" class="md-header__button md-logo" aria-label="OpenSearch for Vector and Hybrid Search" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenSearch for Vector and Hybrid Search
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Precision & Recall
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OpenSearch for Vector and Hybrid Search" class="md-nav__button md-logo" aria-label="OpenSearch for Vector and Hybrid Search" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenSearch for Vector and Hybrid Search
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Search Fundamentals
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Search Fundamentals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro_to_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to Search
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index_deep_dive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vector Search Algorithms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Precision & Recall
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precision & Recall
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding the Basics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-not-accuracy-specificity-or-sensitivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Not Accuracy, Specificity, or Sensitivity?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-two-stage-retrieval-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Two-Stage Retrieval Pipeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Two-Stage Retrieval Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-recall-problems-occur-at-the-candidate-stage" class="md-nav__link">
+    <span class="md-ellipsis">
+      When Recall Problems Occur at the Candidate Stage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-wide-then-wise-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      The "Wide Then Wise" Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-approximate-nearest-neighbor-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding Approximate Nearest Neighbor Search
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-specific-tuning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index-Specific Tuning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Index-Specific Tuning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hnsw-indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      HNSW Indexes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ivf-pq-indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      IVF-PQ Indexes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hybrid-search-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Search Strategies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-diagnostic-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Diagnostic Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Diagnostic Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-threshold-dilemma" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Threshold Dilemma
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filter Impact
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redundancy-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redundancy Problems
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#latency-budget-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Latency Budget Decisions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-behavior-as-a-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Behavior as a Signal
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#embedding-and-model-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Embedding and Model Considerations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#targeted-optimization-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Targeted Optimization Scenarios
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Targeted Optimization Scenarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-recall-low-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      High Recall, Low Precision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exact-match-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exact Match Tasks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Best Practices
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch Implementation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            OpenSearch Implementation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_rag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RAG with OpenSearch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_productionize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Production Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search_examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Technology Comparisons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Technology Comparisons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kendra_vs_opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch vs Kendra
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_vs_pinecone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch vs Pinecone
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LICENSE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    License
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding the Basics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-not-accuracy-specificity-or-sensitivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Not Accuracy, Specificity, or Sensitivity?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-two-stage-retrieval-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Two-Stage Retrieval Pipeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Two-Stage Retrieval Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-recall-problems-occur-at-the-candidate-stage" class="md-nav__link">
+    <span class="md-ellipsis">
+      When Recall Problems Occur at the Candidate Stage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-wide-then-wise-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      The "Wide Then Wise" Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-approximate-nearest-neighbor-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding Approximate Nearest Neighbor Search
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-specific-tuning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index-Specific Tuning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Index-Specific Tuning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hnsw-indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      HNSW Indexes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ivf-pq-indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      IVF-PQ Indexes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hybrid-search-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Search Strategies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-diagnostic-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Diagnostic Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Diagnostic Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-threshold-dilemma" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Threshold Dilemma
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filter Impact
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redundancy-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redundancy Problems
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#latency-budget-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Latency Budget Decisions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-behavior-as-a-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Behavior as a Signal
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#embedding-and-model-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Embedding and Model Considerations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#targeted-optimization-scenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Targeted Optimization Scenarios
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Targeted Optimization Scenarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-recall-low-precision" class="md-nav__link">
+    <span class="md-ellipsis">
+      High Recall, Low Precision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exact-match-tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exact Match Tasks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Best Practices
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="precision-and-recall-in-vector-search">Precision and Recall in Vector Search<a class="headerlink" href="#precision-and-recall-in-vector-search" title="Permanent link">&para;</a></h1>
+<p>Understanding how precision and recall work in vector search systems is fundamental to building effective retrieval pipelines. These two metrics form the foundation for diagnosing performance issues and making informed optimization decisions in RAG (Retrieval-Augmented Generation) systems.</p>
+<h2 id="understanding-the-basics">Understanding the Basics<a class="headerlink" href="#understanding-the-basics" title="Permanent link">&para;</a></h2>
+<p>Let's start with a concrete example to build intuition. Imagine you've retrieved 120 documents from your vector database, and upon inspection, 36 of them are truly relevant to your query. If your entire corpus contains 60 relevant documents total, your metrics would look like this:</p>
+<ul>
+<li><strong>Precision</strong> = 36/120 = 0.30 (30% of retrieved documents are relevant)</li>
+<li><strong>Recall</strong> = 36/60 = 0.60 (you found 60% of all relevant documents)</li>
+</ul>
+<p>This fundamental relationship reveals the classic tradeoff: precision measures the purity of your results, while recall measures their completeness.</p>
+<h2 id="why-not-accuracy-specificity-or-sensitivity">Why Not Accuracy, Specificity, or Sensitivity?<a class="headerlink" href="#why-not-accuracy-specificity-or-sensitivity" title="Permanent link">&para;</a></h2>
+<p>You might wonder why we focus on precision and recall rather than other classification metrics like accuracy, specificity, or sensitivity. The answer lies in the unique characteristics of information retrieval tasks.</p>
+<p><strong>Accuracy</strong> measures the proportion of all predictions (both positive and negative) that are correct. In typical classification problems with balanced classes, this works well. However, in vector search, the number of documents you <em>don't</em> retrieve (true negatives) completely dominates the calculation. Imagine a corpus with 1 million documents where only 60 are relevant to a query. If you retrieve 120 documents with 36 relevant ones, your accuracy would be:</p>
+<ul>
+<li>True Positives (TP) = 36 (relevant docs retrieved)</li>
+<li>False Positives (FP) = 84 (irrelevant docs retrieved)</li>
+<li>True Negatives (TN) = 999,916 (irrelevant docs correctly not retrieved)</li>
+<li>False Negatives (FN) = 24 (relevant docs missed)</li>
+<li>Accuracy = (36 + 999,916) / 1,000,000 = 0.999952</li>
+</ul>
+<p>This 99.99% accuracy sounds impressive but tells us almost nothing useful. Even a terrible search system that returns random results would have extremely high accuracy simply because most documents are irrelevant. The metric is essentially measuring our ability to <em>not</em> retrieve irrelevant documents from a vast pool, which isn't particularly informative.</p>
+<p><strong>Specificity</strong> (also called true negative rate) measures what proportion of truly irrelevant documents we correctly avoided retrieving. Like accuracy, this metric suffers from the class imbalance problem. In our example above, specificity = 999,916 / (999,916 + 84) = 0.999916. Again, this looks great but provides little actionable insight because we're dealing with such a massive pool of irrelevant documents.</p>
+<p><strong>Sensitivity</strong> is actually identical to recall—it's the same metric with a different name commonly used in medical diagnostics and other fields. Sensitivity measures the proportion of relevant items successfully retrieved, which is exactly what recall does. In the medical context, you might talk about a test's sensitivity to detecting a disease, while in information retrieval, we talk about a system's recall of relevant documents. The mathematics are identical: TP / (TP + FN).</p>
+<p>The practical reality of vector search is that we care deeply about two things:</p>
+<ol>
+<li><strong>Of the documents we retrieve, how many are actually relevant?</strong> (Precision)</li>
+<li><strong>Of all the relevant documents that exist, how many did we find?</strong> (Recall)</li>
+</ol>
+<p>These metrics directly address the core user experience questions: "Is what I'm seeing useful?" and "Am I missing important information?" The extreme class imbalance in information retrieval makes accuracy and specificity mathematically uninteresting, while sensitivity is simply recall by another name.</p>
+<h2 id="the-two-stage-retrieval-pipeline">The Two-Stage Retrieval Pipeline<a class="headerlink" href="#the-two-stage-retrieval-pipeline" title="Permanent link">&para;</a></h2>
+<p>Modern vector search systems typically operate in two stages: candidate generation and reranking. Understanding where precision and recall matter in each stage is crucial for effective optimization.</p>
+<h3 id="when-recall-problems-occur-at-the-candidate-stage">When Recall Problems Occur at the Candidate Stage<a class="headerlink" href="#when-recall-problems-occur-at-the-candidate-stage" title="Permanent link">&para;</a></h3>
+<p>If your recall@200 is low but precision@10 looks fine, your first adjustment should be to increase candidate breadth. This means raising parameters like k (number of results), HNSW's efSearch, or IVF's nprobe settings. The strategy here is to fetch wider before reranking—you can't rank what you haven't retrieved.</p>
+<p>Consider this scenario: the perfect answer exists in your database, your reranker is strong, but that perfect answer never appears in the candidate set. This indicates a candidate stage recall miss. Your ANN (Approximate Nearest Neighbor) search is too tight, or your quantization is too coarse. The solution is to widen your search probes or reduce compression.</p>
+<p>Here's an interesting pattern that often emerges: after raising k from 50 to 300, recall@300 improves (as expected), but precision@10 actually gets worse. Why? The wider fetch brought in more near-duplicates and off-topic items. Your reranker or filters now need to work harder to clean up the top results.</p>
+<h3 id="the-wide-then-wise-strategy">The "Wide Then Wise" Strategy<a class="headerlink" href="#the-wide-then-wise-strategy" title="Permanent link">&para;</a></h3>
+<p>When working with RAG systems, you might wonder whether to increase k or invest more in reranking budget for better answers. The recommended approach follows a "wide then wise" philosophy: start by increasing k to improve recall, then apply more sophisticated reranking (for example, cross-encode the top 200 candidates and return the top 5-10).</p>
+<h2 id="understanding-approximate-nearest-neighbor-search">Understanding Approximate Nearest Neighbor Search<a class="headerlink" href="#understanding-approximate-nearest-neighbor-search" title="Permanent link">&para;</a></h2>
+<p>Before diving into specific optimization techniques, it's important to understand the fundamental tradeoff at the heart of modern vector search: the choice between exact and approximate nearest neighbor search.</p>
+<p>In theory, finding the most similar vectors to a query would involve comparing your query against every single vector in your database—a brute-force approach that guarantees you'll find the true nearest neighbors. For a database with 1 million vectors of 1,536 dimensions each, this means performing 1 million distance calculations per query. While this exhaustive search is feasible for small datasets, it quickly becomes impractical as your corpus grows into the millions or billions of vectors.</p>
+<p>This is where Approximate Nearest Neighbor (ANN) algorithms come into play. ANN methods make a calculated tradeoff: they sacrifice some accuracy in exchange for dramatically faster search speeds. Instead of checking every vector, they use clever data structures and algorithms to quickly narrow down the search space to a smaller set of promising candidates.</p>
+<p>The "approximate" nature of ANN means you might not always find the absolute nearest neighbors—but in practice, you usually find neighbors that are close enough. The key insight is that for most applications, getting 95% of the true nearest neighbors in milliseconds is far more valuable than getting 100% in several seconds.</p>
+<p>This approximation directly impacts recall. When your ANN algorithm is configured too aggressively (favoring speed over accuracy), it might miss some of the truly relevant documents—they exist in your database, but the algorithm's shortcuts cause it to overlook them. This is what we mean by "candidate stage recall miss" mentioned earlier. The perfect answer exists, but your ANN search is too tight, skipping over parts of the vector space where that answer resides.</p>
+<p>Different ANN algorithms use different strategies to achieve this speedup, and each comes with its own set of parameters that control the precision-speed tradeoff. For a comprehensive exploration of ANN algorithms including their mathematical foundations and implementation details, see <a href="../index_deep_dive/">Vector Search Algorithms Deep Dive</a>.</p>
+<h2 id="index-specific-tuning">Index-Specific Tuning<a class="headerlink" href="#index-specific-tuning" title="Permanent link">&para;</a></h2>
+<p>Different index types require different approaches to optimize recall, and understanding their internal mechanics helps you make informed tuning decisions.</p>
+<h3 id="hnsw-indexes">HNSW Indexes<a class="headerlink" href="#hnsw-indexes" title="Permanent link">&para;</a></h3>
+<p>Raising efSearch in HNSW indexes increases recall by searching more neighbors, though this comes at the cost of higher latency and CPU usage. This parameter directly controls the breadth of your search graph traversal.</p>
+<p>For a detailed understanding of HNSW's hierarchical navigation, graph construction, and advanced parameter optimization strategies, see the <a href="../index_deep_dive/#hnsw-hierarchical-navigable-small-world">HNSW section in Vector Search Algorithms</a>.</p>
+<h3 id="ivf-pq-indexes">IVF-PQ Indexes<a class="headerlink" href="#ivf-pq-indexes" title="Permanent link">&para;</a></h3>
+<p>With IVF-PQ indexes, if your nlist is too small and nprobe is low, you'll observe a characteristic symptom: true neighbors get stuck in other partitions, leading to recall loss. The fix is to raise nlist (creating more partitions) and increase nprobe (probing more of those partitions during search).</p>
+<p>For in-depth coverage of IVF's clustering approach, mathematical foundations, and Product Quantization compression techniques, see the <a href="../index_deep_dive/#ivf-inverted-file-index">IVF section in Vector Search Algorithms</a>.</p>
+<h2 id="hybrid-search-strategies">Hybrid Search Strategies<a class="headerlink" href="#hybrid-search-strategies" title="Permanent link">&para;</a></h2>
+<p>Blending BM25 with vector search becomes valuable for specific query patterns. This hybrid approach particularly helps with queries containing rare tokens, names, IDs, or exact-phrase requirements. The blending boosts both precision and recall for lexically-heavy search intents.</p>
+<h2 id="common-diagnostic-patterns">Common Diagnostic Patterns<a class="headerlink" href="#common-diagnostic-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="the-threshold-dilemma">The Threshold Dilemma<a class="headerlink" href="#the-threshold-dilemma" title="Permanent link">&para;</a></h3>
+<p>When you lower the vector score threshold, you might see more relevant items appear in your results—but also more junk at the top. This is a classic precision-recall tradeoff in action: recall increases, precision decreases. The solution is to keep the threshold lower for recall gains, but add reranking or filters to restore purity at the top of your results.</p>
+<h3 id="filter-impact">Filter Impact<a class="headerlink" href="#filter-impact" title="Permanent link">&para;</a></h3>
+<p>Adding hard filters (like language=en) typically increases precision by removing wrong-language results, but can decrease recall if some relevant results get filtered out. Understanding this tradeoff helps you make informed decisions about when and where to apply filters.</p>
+<p>A critical consideration: when ACL (Access Control List) or tenant filters are applied after candidate fetch, you risk fetching relevant documents only to discard them post-filter, leaving you with a low-recall final set. The best practice is to apply filters as early as possible in your pipeline, or expand k before filtering to compensate.</p>
+<h3 id="redundancy-problems">Redundancy Problems<a class="headerlink" href="#redundancy-problems" title="Permanent link">&para;</a></h3>
+<p>If your top-10 results feel redundant with near-duplicates, your perceived precision@10 drops even if the results are technically relevant. The fix involves deduplication combined with diversity sampling—cluster similar results and pick representatives before final display.</p>
+<h2 id="latency-budget-decisions">Latency Budget Decisions<a class="headerlink" href="#latency-budget-decisions" title="Permanent link">&para;</a></h2>
+<p>Suppose you have 80ms of extra latency budget to spend. Should you invest it in higher efSearch or cross-encoder reranking? The decision depends on your diagnostic findings:</p>
+<ul>
+<li>If target documents don't appear in candidates at all, spend the budget on efSearch to improve recall</li>
+<li>If candidates contain the right documents but rank them poorly, invest in reranking to improve precision</li>
+</ul>
+<h2 id="user-behavior-as-a-signal">User Behavior as a Signal<a class="headerlink" href="#user-behavior-as-a-signal" title="Permanent link">&para;</a></h2>
+<p>Real-world usage patterns often reveal hidden issues that metrics might miss.</p>
+<p>When evaluation shows good precision@10 but user satisfaction remains low, the likely cause is recall holes—users can't find what they're looking for—or intent mismatch. This suggests checking recall@k metrics and running query diagnostics.</p>
+<p>If logging reveals frequent query reformulations, where users add more words and then get good results, this signals a recall miss on the first attempt. The solution is to widen search effort or implement BM25+vector hybridization.</p>
+<h2 id="embedding-and-model-considerations">Embedding and Model Considerations<a class="headerlink" href="#embedding-and-model-considerations" title="Permanent link">&para;</a></h2>
+<p>Switching to smaller embeddings to cut costs often causes recall@200 to drop. This happens because less expressive vectors create weaker neighborhood geometry, resulting in lower recall. You can compensate by using higher k values, increasing probe counts, or implementing smarter hybrid approaches.</p>
+<p>When rerankers are trained only on common (head) queries, performance on rare (tail) queries typically suffers. The fix involves retraining with tail data, adding lexical features, and using calibration techniques like score blending to stabilize precision across the query distribution.</p>
+<h2 id="targeted-optimization-scenarios">Targeted Optimization Scenarios<a class="headerlink" href="#targeted-optimization-scenarios" title="Permanent link">&para;</a></h2>
+<h3 id="high-recall-low-precision">High Recall, Low Precision<a class="headerlink" href="#high-recall-low-precision" title="Permanent link">&para;</a></h3>
+<p>If you measure Recall@200 = 0.9 but Precision@10 = 0.2, your candidate stage is performing well—the issue is in ranking. The targeted fix involves improving reranking and feature engineering: use cross-encoders, blend with BM25, adjust field weights, implement deduplication, and apply business rules.</p>
+<h3 id="exact-match-tasks">Exact Match Tasks<a class="headerlink" href="#exact-match-tasks" title="Permanent link">&para;</a></h3>
+<p>For tasks like "find the exact policy clause," you need different strategies at each stage:</p>
+<ul>
+<li><strong>Candidate stage</strong>: Prioritize high recall—you absolutely cannot miss the target clause</li>
+<li><strong>Reranking stage</strong>: Emphasize precision using a cross-encoder on the top 200 candidates</li>
+</ul>
+<h2 id="production-best-practices">Production Best Practices<a class="headerlink" href="#production-best-practices" title="Permanent link">&para;</a></h2>
+<p>For a factual RAG system, a sensible starting configuration looks like this:</p>
+<ul>
+<li>Set k=200–500 for candidate generation</li>
+<li>Use high efSearch/nprobe values to ensure good recall</li>
+<li>Implement BM25+vector hybrid search</li>
+<li>Cross-encode the top ~200 candidates</li>
+<li>Return the top 5–10 final results</li>
+<li>Continuously log misses and tune from there</li>
+</ul>
+<p>This "wide then wise" approach captures most relevant information in the candidate stage, then applies sophisticated ranking to surface the best results to users. The key is to instrument your system well, monitor real-world performance, and iterate based on actual usage patterns rather than intuition alone.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "content.code.copy", "content.tabs.link", "toc.follow"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+    
+  </body>
+</html>

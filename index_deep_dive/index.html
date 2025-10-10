@@ -1,0 +1,1863 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../intro_to_search/">
+      
+      
+        <link rel="next" href="../precision_vs_recall/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Vector Search Algorithms - OpenSearch for Vector and Hybrid Search</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../styles/overrides.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vector-search-algorithms-a-deep-dive" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OpenSearch for Vector and Hybrid Search" class="md-header__button md-logo" aria-label="OpenSearch for Vector and Hybrid Search" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenSearch for Vector and Hybrid Search
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Vector Search Algorithms
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OpenSearch for Vector and Hybrid Search" class="md-nav__button md-logo" aria-label="OpenSearch for Vector and Hybrid Search" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenSearch for Vector and Hybrid Search
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Search Fundamentals
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Search Fundamentals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro_to_search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to Search
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Vector Search Algorithms
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vector Search Algorithms
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematical-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical Foundations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mathematical Foundations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-dimensional-geometry-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      High-Dimensional Geometry Challenges
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#similarity-metrics-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      Similarity Metrics Deep Dive
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approximate-nearest-neighbor-ann-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Approximate Nearest Neighbor (ANN) Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hnsw-hierarchical-navigable-small-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      HNSW: Hierarchical Navigable Small World
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HNSW: Hierarchical Navigable Small World">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceptual-understanding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceptual Understanding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical Foundation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-parameter-analysis-and-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Parameter Analysis and Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-world-performance-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-World Performance Characteristics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ivf-inverted-file-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      IVF: Inverted File Index
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IVF: Inverted File Index">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceptual-foundation-and-mathematical-intuition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceptual Foundation and Mathematical Intuition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-ivf-techniques-and-optimizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced IVF Techniques and Optimizations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Product Quantization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Product Quantization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceptual-understanding-and-mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceptual Understanding and Mathematical Foundation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithm-selection-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm Selection Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithm Selection Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comprehensive-decision-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprehensive Decision Matrix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algorithm-specific-optimization-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm-Specific Optimization Guidelines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hybrid-algorithm-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Algorithm Strategies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../precision_vs_recall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precision & Recall
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch Implementation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            OpenSearch Implementation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_rag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RAG with OpenSearch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_productionize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Production Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search_examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Technology Comparisons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Technology Comparisons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kendra_vs_opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch vs Kendra
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_vs_pinecone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch vs Pinecone
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LICENSE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    License
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematical-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical Foundations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mathematical Foundations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-dimensional-geometry-challenges" class="md-nav__link">
+    <span class="md-ellipsis">
+      High-Dimensional Geometry Challenges
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#similarity-metrics-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      Similarity Metrics Deep Dive
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approximate-nearest-neighbor-ann-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      Approximate Nearest Neighbor (ANN) Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hnsw-hierarchical-navigable-small-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      HNSW: Hierarchical Navigable Small World
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HNSW: Hierarchical Navigable Small World">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceptual-understanding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceptual Understanding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical Foundation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-parameter-analysis-and-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Parameter Analysis and Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-world-performance-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-World Performance Characteristics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ivf-inverted-file-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      IVF: Inverted File Index
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IVF: Inverted File Index">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceptual-foundation-and-mathematical-intuition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceptual Foundation and Mathematical Intuition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-ivf-techniques-and-optimizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced IVF Techniques and Optimizations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Product Quantization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Product Quantization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conceptual-understanding-and-mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conceptual Understanding and Mathematical Foundation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algorithm-selection-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm Selection Guide
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Algorithm Selection Guide">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comprehensive-decision-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprehensive Decision Matrix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algorithm-specific-optimization-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algorithm-Specific Optimization Guidelines
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hybrid-algorithm-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Algorithm Strategies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="vector-search-algorithms-a-deep-dive">Vector Search Algorithms: A Deep Dive<a class="headerlink" href="#vector-search-algorithms-a-deep-dive" title="Permanent link">&para;</a></h1>
+<p>An advanced exploration of the mathematical foundations, algorithmic approaches, and optimization strategies that power modern vector search systems.</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Vector search algorithms operate in high-dimensional spaces where traditional intuitions about distance and similarity often break down. This guide provides a comprehensive understanding of the mathematical foundations, core algorithms (HNSW, IVF, Product Quantization), and practical optimization strategies essential for building high-performance vector search systems.</p>
+<p>For an introduction to search concepts and when to use vector search, see <a href="../intro_to_search/">Introduction to Search Systems</a>.</p>
+<h2 id="mathematical-foundations">Mathematical Foundations<a class="headerlink" href="#mathematical-foundations" title="Permanent link">&para;</a></h2>
+<p>Vector search algorithms operate in high-dimensional spaces where traditional intuitions about distance and similarity often break down. Understanding these mathematical foundations is essential for selecting appropriate algorithms and tuning their parameters effectively.</p>
+<h3 id="high-dimensional-geometry-challenges">High-Dimensional Geometry Challenges<a class="headerlink" href="#high-dimensional-geometry-challenges" title="Permanent link">&para;</a></h3>
+<p><strong>The <a href="../glossary/#curse-of-dimensionality">Curse of Dimensionality</a>:</strong></p>
+<p>As vector dimensions increase beyond ~100, several mathematical phenomena fundamentally change how search algorithms must operate:</p>
+<p><strong>1. Distance Concentration</strong></p>
+<p>In high-dimensional spaces, the difference between the nearest and farthest points becomes negligible relative to the absolute distances. This means naive distance calculations become less discriminative.</p>
+<p><em>Mathematical Intuition:</em> Consider random points in a hypersphere. As dimensions increase:</p>
+<ul>
+<li>All points concentrate near the surface</li>
+<li>Distances between any two points become approximately equal</li>
+<li>Traditional distance-based nearest neighbor search loses effectiveness</li>
+</ul>
+<p><strong>Example:</strong> In 1000-dimensional space, if the closest point is distance 10.0 and the farthest is distance 12.0, the difference (2.0) becomes insignificant for practical ranking purposes.</p>
+<p><strong>2. Volume Distribution</strong></p>
+<p>Most of a high-dimensional hypersphere's volume exists in a thin shell near its surface, making uniform sampling and clustering challenging.</p>
+<p><strong>3. Computational Complexity</strong></p>
+<p>Brute-force search complexity grows as O(N × D) where N = number of vectors, D = dimensions:</p>
+<ul>
+<li>1M vectors × 768 dimensions = 768M calculations per query</li>
+<li>At 1B operations/second: 0.768 seconds per query</li>
+<li>For 100 QPS: requires 76.8 seconds of CPU time per second (impossible!)</li>
+</ul>
+<h3 id="similarity-metrics-deep-dive">Similarity Metrics Deep Dive<a class="headerlink" href="#similarity-metrics-deep-dive" title="Permanent link">&para;</a></h3>
+<p><strong>Cosine Similarity: The Text Search Standard</strong></p>
+<p>Cosine similarity measures the angle between vectors, making it ideal for text embeddings where magnitude often relates to document length rather than semantic importance.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Geometric Interpretation:
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>- cos(0°) = 1.0    (identical direction)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>- cos(45°) = 0.707 (moderate similarity)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>- cos(90°) = 0.0   (orthogonal, unrelated)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>- cos(180°) = -1.0 (opposite meaning)
+</code></pre></div>
+<p><strong>Why Cosine Works for Text:</strong></p>
+<p>Consider two movie reviews:</p>
+<ul>
+<li>Review A (short): "Great movie, excellent acting" → Vector magnitude: 5.2</li>
+<li>Review B (long): "This film represents an outstanding achievement in cinematic excellence with superb performances..." → Vector magnitude: 12.8</li>
+</ul>
+<p>Both reviews express positive sentiment about acting quality. Cosine similarity focuses on the semantic direction (positive sentiment + acting praise) while ignoring the length difference.</p>
+<p><strong><a href="../glossary/#euclidean-distance-l2">Euclidean Distance (L2)</a>: When Magnitude Matters</strong></p>
+<p>Euclidean distance measures straight-line distance in vector space, treating all dimensions equally:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>euclidean_distance(A, B) = √(Σ(Aᵢ - Bᵢ)²)
+</code></pre></div>
+<p><strong>When to Use Euclidean:</strong></p>
+<ul>
+<li><strong>Image embeddings:</strong> Where color intensity, brightness, and other magnitude-based features matter</li>
+<li><strong>Sensor data:</strong> Where absolute values carry meaning (temperature, pressure readings)</li>
+<li><strong>Normalized embeddings:</strong> When all vectors are pre-normalized to unit length</li>
+</ul>
+<p><strong>Example:</strong> Comparing product images where a bright red dress should be more similar to a bright red shirt than to a dark red dress, Euclidean distance preserves these intensity relationships.</p>
+<p><strong><a href="../glossary/#manhattan-distance-l1">Manhattan Distance (L1)</a>: Robustness in High Dimensions</strong></p>
+<p>Manhattan distance sums absolute differences along each dimension:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>manhattan_distance(A, B) = Σ|Aᵢ - Bᵢ|
+</code></pre></div>
+<p><strong>Advantages in High Dimensions:</strong></p>
+<ul>
+<li>Less sensitive to outliers in individual dimensions</li>
+<li>More stable in sparse vector spaces</li>
+<li>Computationally efficient (no squaring operations)</li>
+</ul>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Sparse embeddings where many dimensions are zero</li>
+<li>Categorical data encoded as vectors</li>
+<li>Situations where dimension independence is important</li>
+</ul>
+<h3 id="approximate-nearest-neighbor-ann-algorithms">Approximate Nearest Neighbor (ANN) Algorithms<a class="headerlink" href="#approximate-nearest-neighbor-ann-algorithms" title="Permanent link">&para;</a></h3>
+<p>The mathematical challenge of high-dimensional search drives the need for approximate algorithms that trade small accuracy losses for massive speed improvements.</p>
+<p><strong>The Approximation Trade-off:</strong></p>
+<ul>
+<li><strong>Exact search:</strong> Guarantees finding the true nearest neighbors but computationally expensive</li>
+<li><strong>Approximate search:</strong> Finds "good enough" neighbors (95-99% accuracy) at 10-1000× speed improvement</li>
+</ul>
+<p><strong>Quality Metrics:</strong></p>
+<ul>
+<li><strong><a href="../glossary/#recallk">Recall@K</a>:</strong> Percentage of true top-k neighbors found by the algorithm</li>
+<li><strong>Query time:</strong> Milliseconds per search operation</li>
+<li><strong>Index size:</strong> Memory required to store the search structure</li>
+</ul>
+<p>The goal is maximizing recall while minimizing query time and memory usage.</p>
+<h2 id="hnsw-hierarchical-navigable-small-world">HNSW: Hierarchical Navigable Small World<a class="headerlink" href="#hnsw-hierarchical-navigable-small-world" title="Permanent link">&para;</a></h2>
+<p><a href="../glossary/#hnsw-hierarchical-navigable-small-world">HNSW (Hierarchical Navigable Small World)</a> represents one of the most sophisticated and widely-adopted algorithms for approximate nearest neighbor search. It constructs a multi-layer graph structure that elegantly balances search speed and accuracy by exploiting the hierarchical navigation principles found in both social networks and geographical systems.</p>
+<h3 id="conceptual-understanding">Conceptual Understanding<a class="headerlink" href="#conceptual-understanding" title="Permanent link">&para;</a></h3>
+<p><strong>The Small World Phenomenon in Vector Space</strong></p>
+<p>The algorithm draws inspiration from Stanley Milgram's famous "six degrees of separation" experiment, which demonstrated that any two people in the world are connected through an average of six social connections. HNSW applies this principle to high-dimensional vector search by creating multiple layers of connectivity that enable efficient navigation.</p>
+<p><strong>Multi-Scale Navigation Analogy:</strong></p>
+<p>Consider how you might navigate from New York to a specific address in Tokyo:</p>
+<ol>
+<li><strong>Global Scale (Layer 2):</strong> Use intercontinental connections - direct flight from JFK to Narita Airport</li>
+<li><strong>Regional Scale (Layer 1):</strong> Use regional transportation - train from Narita to Tokyo city center</li>
+<li><strong>Local Scale (Layer 0):</strong> Use local navigation - walking directions to the specific building</li>
+</ol>
+<p>HNSW mirrors this hierarchical approach in vector space:</p>
+<ul>
+<li><strong>Top Layers (2, 3, 4...):</strong> Sparse networks with long-distance "highways" connecting distant regions of vector space</li>
+<li><strong>Middle Layers (1):</strong> Regional connections that bridge local neighborhoods</li>
+<li><strong>Bottom Layer (0):</strong> Dense local neighborhoods where every point connects to its immediate neighbors</li>
+</ul>
+<p><strong>Graph Construction Philosophy:</strong></p>
+<p><em>Probabilistic Hierarchy:</em> Rather than deterministically assigning nodes to layers, HNSW uses probabilistic assignment where each node has a decreasing probability of existing in higher layers. This creates a natural hierarchy where:</p>
+<ul>
+<li><strong>Layer 0:</strong> Contains all vectors (100% density)</li>
+<li><strong>Layer 1:</strong> Contains ~50% of vectors</li>
+<li><strong>Layer 2:</strong> Contains ~25% of vectors</li>
+<li><strong>Layer L:</strong> Contains ~(1/2)^L percentage of vectors</li>
+</ul>
+<p><em>Connectivity Strategy:</em> Each node connects to its M nearest neighbors within each layer it participates in. This ensures that:
+- Higher layers provide "express routes" across large distances
+- Lower layers provide detailed local connectivity
+- Navigation remains efficient at every scale</p>
+<p><strong>Why This Architecture Works:</strong></p>
+<ol>
+<li>
+<p><strong>Logarithmic Scaling:</strong> Search complexity scales as O(log N) rather than O(N), making it practical for massive datasets</p>
+</li>
+<li>
+<p><strong>Greedy Search Efficiency:</strong> At each layer, greedy local search quickly moves toward the target region, with higher layers providing faster convergence</p>
+</li>
+<li>
+<p><strong>Fault Tolerance:</strong> Multiple paths exist between any two points, making the structure robust against locally poor connections</p>
+</li>
+<li>
+<p><strong>Memory Locality:</strong> Dense connections in lower layers ensure good cache performance during the final precise search phase</p>
+</li>
+</ol>
+<h3 id="mathematical-foundation">Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Permanent link">&para;</a></h3>
+<p><strong>Layer Assignment Probability:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>P(node reaches layer l) = (1/2)^l
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Expected maximum layer: floor(-ln(uniform(0,1)) × mL)
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>where mL = 1/ln(2) ≈ 1.44
+</code></pre></div>
+<p>This probability distribution creates the hierarchical structure automatically:</p>
+<ul>
+<li>~50% of nodes only in layer 0</li>
+<li>~25% reach layer 1</li>
+<li>~12.5% reach layer 2</li>
+<li>And so on...</li>
+</ul>
+<p><strong>Detailed Search Algorithm Mechanics:</strong></p>
+<p><em>Phase 1: Global Navigation (Top Layers)</em></p>
+<ol>
+<li><strong>Entry Point Selection:</strong> Begin at the designated entry point in the highest layer</li>
+<li><strong>Greedy Descent:</strong> At each layer, perform greedy search to find the local minimum</li>
+<li>Calculate distances from current position to all connected neighbors</li>
+<li>Move to the neighbor with smallest distance to query vector</li>
+<li>Repeat until no neighbor is closer than current position</li>
+<li><strong>Layer Transition:</strong> Use the final position as the starting point for the next layer down</li>
+</ol>
+<p><em>Phase 2: Precision Navigation (Bottom Layer)</em></p>
+<ol>
+<li><strong>Beam Search Expansion:</strong> Instead of simple greedy search, maintain a candidate set of size ef_search</li>
+<li><strong>Dynamic Candidate Management:</strong></li>
+<li>Track the ef_search closest points found so far</li>
+<li>Explore neighbors of all candidates in the current beam</li>
+<li>Update beam with newly discovered closer points</li>
+<li><strong>Termination:</strong> Stop when no new candidates improve the current best set</li>
+</ol>
+<p><strong>Mathematical Intuition Behind Effectiveness:</strong></p>
+<p><em>Logarithmic Layer Reduction:</em> With each layer containing approximately half the nodes of the layer below, the search space reduces exponentially. For a dataset of N points:
+- Layer L contains ~N/(2^L) points
+- Maximum layer height ≈ log₂(N)
+- Each layer reduces search complexity by ~50%</p>
+<p><em>Greedy Search Optimality:</em> In well-connected graphs, greedy local search approaches global optimality because:
+- High-dimensional spaces often exhibit convex-like properties in neighborhood structures
+- Dense connectivity ensures multiple paths to any target region
+- The hierarchical structure provides "shortcuts" that prevent local minima traps</p>
+<p><em>Distance Concentration Benefits:</em> HNSW actually leverages the curse of dimensionality:
+- In high dimensions, most points are roughly equidistant from any query
+- This makes the hierarchical approach more effective because "long jumps" in upper layers reliably move toward the target region
+- Local refinement in lower layers exploits the small differences that matter for final ranking</p>
+<h3 id="advanced-parameter-analysis-and-optimization">Advanced Parameter Analysis and Optimization<a class="headerlink" href="#advanced-parameter-analysis-and-optimization" title="Permanent link">&para;</a></h3>
+<p><em>HNSW's performance characteristics are highly dependent on proper parameter selection. Understanding the mathematical relationships between parameters enables optimal configuration for specific use cases.</em></p>
+<p><strong>M (Maximum Connections per Node)</strong></p>
+<p>The M parameter fundamentally affects the graph's connectivity and search performance:</p>
+<p><strong>Low M (8-16):</strong></p>
+<ul>
+<li><strong>Advantages:</strong> Lower memory usage, faster construction</li>
+<li><strong>Disadvantages:</strong> Potential for disconnected regions, lower recall</li>
+<li><strong>Use case:</strong> Memory-constrained environments, simple similarity patterns</li>
+</ul>
+<p><strong>Medium M (16-32):</strong></p>
+<ul>
+<li><strong>Advantages:</strong> Good balance of performance and memory</li>
+<li><strong>Disadvantages:</strong> None significant for most applications</li>
+<li><strong>Use case:</strong> General-purpose text search, balanced performance requirements</li>
+</ul>
+<p><strong>High M (32-64):</strong></p>
+<ul>
+<li><strong>Advantages:</strong> Excellent recall, robust against difficult data distributions</li>
+<li><strong>Disadvantages:</strong> High memory usage, slower construction</li>
+<li><strong>Use case:</strong> High-precision applications, complex high-dimensional data</li>
+</ul>
+<p><strong>Memory Calculation:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Memory per node = M × 4 bytes (connection pointers) + vector storage
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>For 1M nodes, 384-dim vectors, M=24:
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>- Vector storage: 1M × 384 × 4 bytes = 1.54GB
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>- Graph connections: 1M × 24 × 4 bytes = 96MB
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>- System overhead: ~3-4GB total
+</code></pre></div>
+<p><strong>ef_construction (Construction Beam Width)</strong></p>
+<p>Controls the trade-off between index quality and construction time:</p>
+<p><strong>Low ef_construction (64-128):</strong></p>
+<ul>
+<li>Fast construction but potentially lower-quality graph</li>
+<li>Risk of poor connections that hurt search recall</li>
+<li>Suitable for development, rapid prototyping</li>
+</ul>
+<p><strong>Medium ef_construction (128-256):</strong></p>
+<ul>
+<li>Balanced approach for production systems</li>
+<li>Good graph quality without excessive construction time</li>
+<li>Recommended for most applications</li>
+</ul>
+<p><strong>High ef_construction (256-512+):</strong></p>
+<ul>
+<li>Highest quality graph structure</li>
+<li>Slow construction but maximum search performance</li>
+<li>Use when construction time is less critical than search quality</li>
+</ul>
+<p><strong>ef_search (Query-Time Beam Width)</strong></p>
+<p>The only parameter tunable at query time, allowing dynamic performance adjustment:</p>
+<p><strong>Performance Scaling:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ef_search=10:  Ultra-fast, ~85% recall
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>ef_search=50:  Fast, ~95% recall
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>ef_search=100: Balanced, ~97% recall
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>ef_search=200: High accuracy, ~99% recall
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>ef_search=500: Near-perfect, ~99.5% recall
+</code></pre></div>
+<p><strong>Advanced Parameter Selection Strategies:</strong></p>
+<p><em>Query-Adaptive ef_search:</em>
+The ef_search parameter can be dynamically adjusted based on query characteristics and system load:</p>
+<p><strong>Application-Specific Tuning:</strong></p>
+<ul>
+<li><strong>Real-time autocomplete:</strong> ef_search = 15-25 (ultra-low latency, 85-90% recall acceptable)</li>
+<li><strong>Main search results:</strong> ef_search = 80-120 (balanced latency/accuracy for user-facing results)</li>
+<li><strong>Recommendation systems:</strong> ef_search = 150-250 (higher accuracy for better user experience)</li>
+<li><strong>Research/analytics:</strong> ef_search = 300-500 (maximum accuracy, latency less critical)</li>
+<li><strong>Batch processing:</strong> ef_search = 200-400 (optimize for throughput over individual query speed)</li>
+</ul>
+<p><strong>System Load Adaptation:</strong></p>
+<ul>
+<li><strong>High load periods:</strong> Reduce ef_search to maintain response times</li>
+<li><strong>Low load periods:</strong> Increase ef_search to improve result quality</li>
+<li><strong>SLA-based scaling:</strong> Automatically adjust based on current system latency percentiles</li>
+</ul>
+<p><strong>Query Complexity Estimation:</strong></p>
+<p>Some queries inherently require more exploration:</p>
+<ul>
+<li><strong>Outlier queries:</strong> Vectors far from typical data distribution need higher ef_search</li>
+<li><strong>Ambiguous queries:</strong> Queries near decision boundaries between clusters benefit from broader search</li>
+<li><strong>High-precision requirements:</strong> Critical applications (medical, financial) should use conservative (high) ef_search values</li>
+</ul>
+<h3 id="real-world-performance-characteristics">Real-World Performance Characteristics<a class="headerlink" href="#real-world-performance-characteristics" title="Permanent link">&para;</a></h3>
+<p><strong>Scaling Behavior:</strong></p>
+<p>HNSW performance scales favorably with dataset size:
+- <strong>Construction time:</strong> O(N × log(N) × M × ef_construction)
+- <strong>Search time:</strong> O(log(N) × ef_search)
+- <strong>Memory usage:</strong> Linear with dataset size</p>
+<p><strong>Construction Optimizations:</strong></p>
+<p><strong>Parallel Construction:</strong> Distribute index building across multiple threads</p>
+<ul>
+<li>Partition vectors into chunks for concurrent processing</li>
+<li>Use lock-free data structures for thread-safe updates</li>
+<li>Typical speedup: 4-8x on modern multi-core systems</li>
+</ul>
+<p><strong>Progressive Construction:</strong> Build index incrementally for dynamic datasets</p>
+<ul>
+<li>Add new vectors without full reconstruction</li>
+<li>Periodically rebalance for optimal performance</li>
+<li>Essential for real-time applications</li>
+</ul>
+<p><strong>Memory-Mapped Storage:</strong> Handle datasets larger than RAM</p>
+<ul>
+<li>Store vectors in memory-mapped files</li>
+<li>Let OS manage virtual memory and caching</li>
+<li>Enables searching billion-scale datasets on modest hardware</li>
+</ul>
+<p><strong>Query-Time Optimizations:</strong></p>
+<p><strong><a href="../glossary/#simd-single-instruction-multiple-data">SIMD</a> Vectorization:</strong> Accelerate distance calculations</p>
+<ul>
+<li>Use AVX2/AVX-512 instructions for parallel arithmetic</li>
+<li>Achieve 4-16x speedup in distance computations</li>
+<li>Critical for high-dimensional vectors (768, 1536 dimensions)</li>
+</ul>
+<p><strong>Batch Query Processing:</strong> Amortize overhead across multiple queries</p>
+<ul>
+<li>Process 10-100 queries simultaneously</li>
+<li>Better CPU cache utilization</li>
+<li>Improved memory bandwidth efficiency</li>
+</ul>
+<p><strong>Warm-up Strategies:</strong> Preload critical index regions</p>
+<ul>
+<li>Touch frequently accessed memory pages</li>
+<li>Pre-compute entry points for different query types</li>
+<li>Reduce cold-start latency in production systems</li>
+</ul>
+<p><strong>Memory Layout Optimizations:</strong></p>
+<p><strong>Data Structure Packing:</strong> Minimize memory overhead</p>
+<ul>
+<li>Pack connection lists efficiently</li>
+<li>Use compact representations for small M values</li>
+<li>Typical overhead reduction: 20-40%</li>
+</ul>
+<p><strong>Cache-Friendly Traversal:</strong> Optimize memory access patterns</p>
+<ul>
+<li>Layout connected nodes spatially close in memory</li>
+<li>Prefetch neighbor data during graph traversal</li>
+<li>Significant impact on large-scale deployments</li>
+</ul>
+<h2 id="ivf-inverted-file-index">IVF: Inverted File Index<a class="headerlink" href="#ivf-inverted-file-index" title="Permanent link">&para;</a></h2>
+<p><a href="../glossary/#ivf-inverted-file-index">Inverted File Index (IVF)</a> represents a fundamentally different approach to vector search compared to graph-based methods like HNSW. By partitioning the vector space into distinct regions through clustering, IVF transforms the nearest neighbor problem from "search everywhere" to "search only where it matters." This approach excels particularly well for large-scale deployments where memory constraints and predictable performance characteristics are paramount.</p>
+<h3 id="conceptual-foundation-and-mathematical-intuition">Conceptual Foundation and Mathematical Intuition<a class="headerlink" href="#conceptual-foundation-and-mathematical-intuition" title="Permanent link">&para;</a></h3>
+<p><strong>The Divide-and-Conquer Philosophy</strong></p>
+<p>IVF embodies a classic divide-and-conquer strategy adapted for high-dimensional spaces:</p>
+<p><em>Geographic Analogy:</em> Consider finding the nearest coffee shop in a large city:</p>
+<ul>
+<li><strong>Naive approach:</strong> Check every coffee shop in the entire city</li>
+<li><strong>IVF approach:</strong> Divide the city into neighborhoods, identify which neighborhoods you're likely to find coffee shops near your location, then search only those neighborhoods</li>
+</ul>
+<p><em>Library Science Analogy:</em></p>
+<ul>
+<li><strong>Traditional library:</strong> Books scattered randomly - must check every shelf</li>
+<li><strong>Dewey Decimal System (IVF):</strong> Books organized by topic - go directly to relevant sections</li>
+</ul>
+<p><strong>Mathematical Foundation: The Locality Hypothesis</strong></p>
+<p>IVF relies on the <strong>locality principle</strong> in high-dimensional spaces:</p>
+<p><em>Formal Statement:</em> If vectors v1 and v2 are close in the original space, and if vector q is close to v1, then q is likely closer to vectors in the same cluster as v1 than to vectors in distant clusters.</p>
+<p><em>Mathematical Expression:</em>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>For vectors v1, v2 in cluster Ci and query q:
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>P(NN(q) ∈ Ci | d(q, centroid_i) &lt; d(q, centroid_j) ∀j≠i) &gt; threshold
+</code></pre></div></p>
+<p>This principle holds particularly well in high-dimensional spaces due to the <strong>concentration of measure phenomenon</strong> - in high dimensions, most vectors concentrate in a thin shell around the centroid, making cluster boundaries more meaningful.</p>
+<p><strong>Three-Phase IVF Architecture:</strong></p>
+<p><em>Phase 1: Offline Clustering (Training)</em></p>
+<ul>
+<li>Analyze the entire vector dataset to identify natural groupings</li>
+<li>Use k-means or more sophisticated clustering algorithms</li>
+<li>Create centroids that represent cluster "centers of mass"</li>
+<li>Build inverted lists mapping centroids to their member vectors</li>
+</ul>
+<p><em>Phase 2: Vector Assignment (Indexing)</em></p>
+<ul>
+<li>For each new vector, determine its nearest cluster centroid</li>
+<li>Add the vector to that cluster's inverted list</li>
+<li>Update cluster statistics for future optimization</li>
+</ul>
+<p><em>Phase 3: Query Processing (Search)</em></p>
+<ul>
+<li>Calculate distances from query to all cluster centroids</li>
+<li>Select the k most promising clusters (nprobes parameter)</li>
+<li>Search within selected clusters using exhaustive comparison</li>
+<li>Merge results across clusters for final ranking</li>
+</ul>
+<p><strong>Why This Architecture Scales</strong></p>
+<p><em>Complexity Reduction:</em> Instead of O(N) comparisons for brute force search, IVF achieves:</p>
+<ul>
+<li>O(√N) centroid comparisons (for optimal nlist ≈ √N)</li>
+<li>O(N/nlist × nprobes) vector comparisons within selected clusters</li>
+<li>Total: O(√N + (N×nprobes)/nlist)</li>
+</ul>
+<p><em>Memory Efficiency:</em> Cluster centroids (typically 1000-10000) fit easily in cache, while member vectors can be stored in compressed formats or on disk.</p>
+<p><em>Parallelization:</em> Different clusters can be searched independently, enabling efficient distributed processing.</p>
+<h3 id="advanced-ivf-techniques-and-optimizations">Advanced IVF Techniques and Optimizations<a class="headerlink" href="#advanced-ivf-techniques-and-optimizations" title="Permanent link">&para;</a></h3>
+<p><em>Modern IVF implementations incorporate sophisticated optimizations that significantly improve both accuracy and performance beyond the basic algorithm.</em></p>
+<p><strong>Multi-Probe LSH (Locality Sensitive Hashing):</strong></p>
+<p>Instead of only searching the closest cluster centroids, examine multiple probe sequences that might contain query neighbors. This technique particularly helps when query vectors lie near cluster boundaries.</p>
+<p><strong>Cluster Refinement:</strong></p>
+<p>Periodically retrain cluster centroids using updated vector distributions, especially important for dynamic datasets where new vectors might shift optimal partitioning.</p>
+<p><strong>Asymmetric vs Symmetric Distance Computation:</strong></p>
+<ul>
+<li><strong>Asymmetric Distance:</strong> More accurate, computes direct distance between query and clustered vector</li>
+<li><strong>Symmetric Distance:</strong> Faster approximation using centroid as intermediate point</li>
+<li><strong>Trade-off:</strong> Asymmetric provides better accuracy at higher computational cost</li>
+</ul>
+<h2 id="product-quantization">Product Quantization<a class="headerlink" href="#product-quantization" title="Permanent link">&para;</a></h2>
+<p><a href="../glossary/#product-quantization-pq">Product Quantization (PQ)</a> represents one of the most mathematically elegant solutions to the vector compression problem. By exploiting the principle of dimensional independence in high-dimensional spaces, PQ achieves dramatic memory compression while preserving essential similarity relationships through learned subspace quantization.</p>
+<h3 id="conceptual-understanding-and-mathematical-foundation">Conceptual Understanding and Mathematical Foundation<a class="headerlink" href="#conceptual-understanding-and-mathematical-foundation" title="Permanent link">&para;</a></h3>
+<p><strong>The Dimensional Independence Hypothesis</strong></p>
+<p>Product Quantization is based on a key insight about high-dimensional vector spaces: different dimensions often capture orthogonal or semi-orthogonal aspects of the underlying semantic space. This allows us to compress each subspace independently without catastrophic information loss.</p>
+<p><strong>Information-Theoretic Perspective:</strong></p>
+<p>Consider a D-dimensional vector space where each dimension requires 32 bits (float32). The total information content is 32D bits per vector. PQ recognizes that much of this precision is unnecessary for similarity preservation and that dimensions can be grouped and compressed independently.</p>
+<p><strong>The Product Space Decomposition:</strong></p>
+<p><em>Mathematical Formulation:</em>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Original space: ℝᴰ
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Product decomposition: ℝᴰ ≅ ℝᴰ/ᵐ × ℝᴰ/ᵐ × ... × ℝᴰ/ᵐ (m times)
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>Where each subspace ℝᴰ/ᵐ is quantized independently
+</code></pre></div></p>
+<p><em>Key Insight:</em> If the original vector space has natural clustering structure, then subspaces will also exhibit clustering, making k-means quantization effective in each subspace.</p>
+<p><strong>Advanced Analogies:</strong></p>
+<p><em>Digital Image Compression:</em></p>
+<ul>
+<li><strong>JPEG approach:</strong> Transform to frequency domain, quantize coefficients</li>
+<li><strong>PQ approach:</strong> Spatial decomposition into blocks, quantize each block independently</li>
+<li><strong>Key difference:</strong> PQ learns optimal quantization codebooks from data rather than using predetermined schemes</li>
+</ul>
+<p><em>Dictionary Compression:</em></p>
+<ul>
+<li><strong>Traditional:</strong> Build one dictionary for entire document</li>
+<li><strong>PQ approach:</strong> Build specialized dictionaries for different parts of speech/topics</li>
+<li><strong>Advantage:</strong> Each dictionary captures local patterns more effectively</li>
+</ul>
+<p><strong>Why Dimensional Independence Works in High Dimensions:</strong></p>
+<ol>
+<li><strong>Curse of Dimensionality Benefits:</strong> In high-dimensional spaces, vectors become increasingly orthogonal, making dimensional correlations weaker</li>
+<li><strong>Embedding Structure:</strong> Modern embedding models often encode different semantic aspects in distinct dimensional ranges</li>
+<li><strong>Local Similarity Preservation:</strong> PQ preserves local neighborhood structure even with quantization errors</li>
+</ol>
+<h2 id="algorithm-selection-guide">Algorithm Selection Guide<a class="headerlink" href="#algorithm-selection-guide" title="Permanent link">&para;</a></h2>
+<p>Choosing the optimal vector search algorithm requires understanding your specific requirements for accuracy, speed, memory usage, and dataset characteristics.</p>
+<h3 id="comprehensive-decision-matrix">Comprehensive Decision Matrix<a class="headerlink" href="#comprehensive-decision-matrix" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Dataset Size</th>
+<th>Memory Budget</th>
+<th>Latency Requirement</th>
+<th>Accuracy Need</th>
+<th>Best Algorithm</th>
+<th>Reasoning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>&lt; 100K</strong></td>
+<td>Any</td>
+<td>Any</td>
+<td>100%</td>
+<td><strong>Brute Force</strong></td>
+<td>Small enough for exact search</td>
+</tr>
+<tr>
+<td><strong>100K - 1M</strong></td>
+<td>High (4GB+)</td>
+<td>Ultra-low (&lt;1ms)</td>
+<td>95%+</td>
+<td><strong>HNSW</strong></td>
+<td>Best speed-accuracy balance</td>
+</tr>
+<tr>
+<td><strong>100K - 1M</strong></td>
+<td>Medium (2-4GB)</td>
+<td>Low (&lt;10ms)</td>
+<td>90%+</td>
+<td><strong>IVF</strong></td>
+<td>Good efficiency, proven</td>
+</tr>
+<tr>
+<td><strong>1M - 10M</strong></td>
+<td>High (8GB+)</td>
+<td>Low (&lt;5ms)</td>
+<td>95%+</td>
+<td><strong>HNSW</strong></td>
+<td>Scales well, excellent recall</td>
+</tr>
+<tr>
+<td><strong>1M - 10M</strong></td>
+<td>Medium (3-8GB)</td>
+<td>Medium (&lt;20ms)</td>
+<td>90%+</td>
+<td><strong>IVF</strong></td>
+<td>Balanced approach</td>
+</tr>
+<tr>
+<td><strong>10M+</strong></td>
+<td>High (16GB+)</td>
+<td>Medium (&lt;50ms)</td>
+<td>90%+</td>
+<td><strong>IVF</strong></td>
+<td>Proven at massive scale</td>
+</tr>
+<tr>
+<td><strong>10M+</strong></td>
+<td>Low (&lt;2GB)</td>
+<td>High (&lt;100ms)</td>
+<td>80%+</td>
+<td><strong>IVF + PQ</strong></td>
+<td>Maximum compression</td>
+</tr>
+<tr>
+<td><strong>Any</strong></td>
+<td>Very Low (&lt;1GB)</td>
+<td>Any</td>
+<td>75%+</td>
+<td><strong>PQ Only</strong></td>
+<td>Extreme memory constraints</td>
+</tr>
+</tbody>
+</table>
+<h3 id="algorithm-specific-optimization-guidelines">Algorithm-Specific Optimization Guidelines<a class="headerlink" href="#algorithm-specific-optimization-guidelines" title="Permanent link">&para;</a></h3>
+<p><strong>HNSW Parameter Optimization Guidelines:</strong></p>
+<p><em>Base Parameter Selection by Latency Requirements:</em></p>
+<ul>
+<li><strong>Ultra-low latency (&lt;1ms):</strong> M=16, ef_construction=128</li>
+<li><strong>Low latency (&lt;5ms):</strong> M=24, ef_construction=256</li>
+<li><strong>Standard latency:</strong> M=32, ef_construction=512</li>
+</ul>
+<p><em>Memory-Constrained Adjustments:</em></p>
+<ul>
+<li>Reduce M by half if memory budget exceeded</li>
+<li>Maintain minimum M=8 for connectivity</li>
+</ul>
+<p><em>Large Dataset Scaling:</em></p>
+<ul>
+<li>Limit ef_construction=256 for datasets &gt;5M vectors</li>
+<li>Balance construction time vs quality</li>
+</ul>
+<p><em>Runtime ef_search Selection by Use Case:</em></p>
+<ul>
+<li><strong>Autocomplete:</strong> 20 (speed priority)</li>
+<li><strong>Main search:</strong> 100 (balanced)</li>
+<li><strong>Research:</strong> 300 (accuracy priority)</li>
+<li><strong>Recommendations:</strong> 150 (moderate accuracy)</li>
+<li><strong>Premium users:</strong> 2x base values (up to 500 max)</li>
+</ul>
+<p><strong>IVF Parameter Optimization Framework:</strong></p>
+<p><em>Cluster Count (nlist) Calculation:</em></p>
+<ul>
+<li><strong>Base formula:</strong> √dataset_size × dimension_factor</li>
+<li><strong>Dimension factor:</strong> max(1.0, dimensions/512)</li>
+<li><strong>Constraints:</strong> min=32, max=dataset_size/39</li>
+</ul>
+<p><em>Search Width (nprobes) by Target Recall:</em></p>
+<ul>
+<li><strong>95%+ recall:</strong> 15% of clusters (min 100)</li>
+<li><strong>90%+ recall:</strong> 10% of clusters (min 50)</li>
+<li><strong>&lt;90% recall:</strong> 5% of clusters (min 20)</li>
+</ul>
+<p><em>Example Configurations:</em></p>
+<ul>
+<li>1M vectors, 384 dims, 95% recall → nlist=1,260, nprobes=189</li>
+<li>10M vectors, 768 dims, 90% recall → nlist=4,800, nprobes=480</li>
+</ul>
+<p><strong>Product Quantization Parameter Selection:</strong></p>
+<p><em>Subquantizer Count (m) by Memory Budget:</em></p>
+<ul>
+<li><strong>&lt;10% memory budget:</strong> m = dimensions/4 (aggressive compression)</li>
+<li><strong>&lt;20% memory budget:</strong> m = dimensions/8 (balanced compression)</li>
+<li><strong>&gt;20% memory budget:</strong> m = dimensions/16 (conservative compression)</li>
+<li><strong>Constraint:</strong> m must divide dimensions evenly</li>
+</ul>
+<p><em>Centroids per Codebook (k) by Accuracy Requirements:</em></p>
+<ul>
+<li><strong>&gt;90% accuracy:</strong> k=256 (8-bit indices)</li>
+<li><strong>&gt;85% accuracy:</strong> k=128 (7-bit indices)</li>
+<li><strong>&lt;85% accuracy:</strong> k=64 (6-bit indices)</li>
+</ul>
+<p><em>Example Configurations:</em></p>
+<ul>
+<li>768 dims, 15% memory, 90% accuracy → m=96, k=256 (32:1 compression)</li>
+<li>1536 dims, 8% memory, 85% accuracy → m=192, k=128 (85:1 compression)</li>
+</ul>
+<h3 id="hybrid-algorithm-strategies">Hybrid Algorithm Strategies<a class="headerlink" href="#hybrid-algorithm-strategies" title="Permanent link">&para;</a></h3>
+<p><strong>Cascading Search Strategy:</strong></p>
+<p>Use fast approximate algorithms to filter candidates, then refine with more accurate methods:</p>
+<p><em>Two-Stage Process:</em></p>
+<ol>
+<li><strong>Stage 1:</strong> Fast filtering with PQ (retrieve k×10 candidates)</li>
+<li><strong>Stage 2:</strong> Rerank with full precision using exact distance calculations</li>
+</ol>
+<p><em>Benefits:</em></p>
+<ul>
+<li>Combines speed of approximate search with accuracy of exact ranking</li>
+<li>Reduces computational cost while maintaining high precision</li>
+<li>Particularly effective for large-scale deployments</li>
+</ul>
+<p><strong>Dynamic Algorithm Selection:</strong></p>
+<p>Choose algorithms based on query and dataset characteristics:</p>
+<p><em>Selection Criteria:</em></p>
+<ul>
+<li><strong>High-magnitude queries:</strong> Use exact search (&lt;50K vectors) or HNSW (larger datasets)</li>
+<li><strong>Sparse queries:</strong> Prefer IVF clustering approach</li>
+<li><strong>Standard queries:</strong> HNSW for &lt;5M vectors, IVF for larger datasets</li>
+</ul>
+<p><em>Benefits:</em></p>
+<ul>
+<li>Optimizes performance for different query types</li>
+<li>Adapts to dataset characteristics automatically</li>
+<li>Balances accuracy and computational efficiency</li>
+</ul>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>Vector search algorithms represent a sophisticated balance of mathematical theory and practical engineering. The key takeaways:</p>
+<ol>
+<li><strong>HNSW</strong> excels for high-accuracy requirements with sufficient memory, offering excellent recall and predictable performance</li>
+<li><strong>IVF</strong> provides scalable solutions for massive datasets with memory constraints and parallelization needs</li>
+<li><strong>Product Quantization</strong> enables extreme compression when memory is the primary constraint</li>
+<li><strong>Hybrid approaches</strong> combine strengths of multiple algorithms for optimal performance</li>
+</ol>
+<p>Understanding these algorithms' mathematical foundations, performance characteristics, and parameter tuning strategies enables you to build vector search systems that meet your specific requirements.</p>
+<p>For implementation details, see:
+- <a href="../opensearch/">OpenSearch Implementation Guide</a>
+- <a href="../intro_to_search/">Introduction to Search Systems</a>
+- <a href="../precision_vs_recall/">Precision and Recall in Vector Search</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "content.code.copy", "content.tabs.link", "toc.follow"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1771 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../index_deep_dive/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Introduction to Search - OpenSearch for Vector and Hybrid Search</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../styles/overrides.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fundamentals-of-search" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OpenSearch for Vector and Hybrid Search" class="md-header__button md-logo" aria-label="OpenSearch for Vector and Hybrid Search" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenSearch for Vector and Hybrid Search
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction to Search
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OpenSearch for Vector and Hybrid Search" class="md-nav__button md-logo" aria-label="OpenSearch for Vector and Hybrid Search" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OpenSearch for Vector and Hybrid Search
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Search Fundamentals
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Search Fundamentals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Introduction to Search
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to Search
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traditional-text-based-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Traditional Text-Based Search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Traditional Text-Based Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-evolution-of-keyword-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Evolution of Keyword Search
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bm25-the-modern-standard" class="md-nav__link">
+    <span class="md-ellipsis">
+      BM25: The Modern Standard
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-text-search-excels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where Text Search Excels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations-of-text-based-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations of Text-Based Search
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vector-search-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector Search Evolution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vector Search Evolution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-semantic-understanding-breakthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Semantic Understanding Breakthrough
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-vector-search-addresses-text-search-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Vector Search Addresses Text Search Limitations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-mathematics-of-semantic-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Mathematics of Semantic Similarity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-approach-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Approach Comparison
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Search Approach Comparison">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detailed-comparison-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detailed Comparison Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehensive-decision-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprehensive Decision Framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hybrid-search-combining-the-best-of-both-worlds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Search: Combining the Best of Both Worlds
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hybrid Search: Combining the Best of Both Worlds">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hybrid-search-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Search Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-world-hybrid-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-World Hybrid Examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reranking-refining-search-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reranking: Refining Search Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reranking: Refining Search Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-two-stage-search-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Two-Stage Search Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-reranking-is-essential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Reranking is Essential
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#types-of-reranking-approaches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types of Reranking Approaches
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Considerations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index_deep_dive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vector Search Algorithms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../precision_vs_recall/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Precision & Recall
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch Implementation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            OpenSearch Implementation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_rag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RAG with OpenSearch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_productionize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Production Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search_examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Technology Comparisons
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Technology Comparisons
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kendra_vs_opensearch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch vs Kendra
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../opensearch_vs_pinecone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenSearch vs Pinecone
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../LICENSE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    License
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traditional-text-based-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Traditional Text-Based Search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Traditional Text-Based Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-evolution-of-keyword-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Evolution of Keyword Search
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bm25-the-modern-standard" class="md-nav__link">
+    <span class="md-ellipsis">
+      BM25: The Modern Standard
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-text-search-excels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where Text Search Excels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitations-of-text-based-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations of Text-Based Search
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vector-search-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vector Search Evolution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vector Search Evolution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-semantic-understanding-breakthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Semantic Understanding Breakthrough
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-vector-search-addresses-text-search-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Vector Search Addresses Text Search Limitations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-mathematics-of-semantic-similarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Mathematics of Semantic Similarity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-approach-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Search Approach Comparison
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Search Approach Comparison">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detailed-comparison-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detailed Comparison Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprehensive-decision-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprehensive Decision Framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hybrid-search-combining-the-best-of-both-worlds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Search: Combining the Best of Both Worlds
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hybrid Search: Combining the Best of Both Worlds">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hybrid-search-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hybrid Search Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-world-hybrid-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-World Hybrid Examples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reranking-refining-search-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reranking: Refining Search Results
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reranking: Refining Search Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-two-stage-search-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Two-Stage Search Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-reranking-is-essential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Reranking is Essential
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#types-of-reranking-approaches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types of Reranking Approaches
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Considerations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fundamentals-of-search">Fundamentals of Search<a class="headerlink" href="#fundamentals-of-search" title="Permanent link">&para;</a></h1>
+<p>A comprehensive guide to understanding modern search systems, from traditional text-based approaches to advanced vector search and hybrid architectures.</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Search systems have evolved dramatically over the past decades, from simple keyword matching to sophisticated semantic understanding. This evolution reflects our growing need to find relevant information in increasingly large and diverse datasets. Understanding different search approaches—their strengths, limitations, and ideal use cases—is essential for building effective search systems.</p>
+<h2 id="traditional-text-based-search">Traditional Text-Based Search<a class="headerlink" href="#traditional-text-based-search" title="Permanent link">&para;</a></h2>
+<p>Text-based search has been the cornerstone of information retrieval for decades. Understanding its mechanisms, strengths, and limitations provides crucial context for why vector search emerged and when each approach excels.</p>
+<h3 id="the-evolution-of-keyword-search">The Evolution of Keyword Search<a class="headerlink" href="#the-evolution-of-keyword-search" title="Permanent link">&para;</a></h3>
+<p><strong>Early Days: Simple Keyword Matching</strong></p>
+<p>The earliest search systems operated on exact keyword matching - a document was relevant if it contained the search terms. This binary approach worked for small collections but failed to capture semantic meaning or handle variations in language.</p>
+<p><strong>Statistical Revolution: TF-IDF</strong></p>
+<p>Term Frequency-Inverse Document Frequency (<a href="../glossary/#tf-idf-term-frequency-inverse-document-frequency">TF-IDF</a>) introduced statistical sophistication to search by considering two key factors:</p>
+<ul>
+<li><strong>Term Frequency (TF):</strong> How often a term appears in a document</li>
+<li><strong>Inverse Document Frequency (IDF):</strong> How rare or common a term is across the entire collection</li>
+</ul>
+<p>The intuition is powerful: terms that appear frequently in a specific document but rarely across the collection are likely more significant for that document's meaning.</p>
+<p><strong>Mathematical Foundation of TF-IDF:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>TF-IDF(term, document) = TF(term, document) × IDF(term)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Where:
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>TF(term, document) = (Number of times term appears in document) / (Total terms in document)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>IDF(term) = log(Total documents / Documents containing term)
+</code></pre></div>
+<p><strong>Example:</strong></p>
+<p>Consider searching for "machine learning" in a collection of 10,000 documents:</p>
+<p>Document A: Contains "machine" 10 times out of 1,000 words, "learning" 8 times
+"machine" appears in 3,000 documents, "learning" appears in 2,000 documents</p>
+<ul>
+<li>For "machine": TF = 10/1,000 = 0.01, IDF = log(10,000/3,000) = 0.52, TF-IDF = 0.0052</li>
+<li>For "learning": TF = 8/1,000 = 0.008, IDF = log(10,000/2,000) = 0.70, TF-IDF = 0.0056</li>
+</ul>
+<p>The term "learning" scores higher despite lower frequency because it's rarer across the collection.</p>
+<h3 id="bm25-the-modern-standard"><a href="../glossary/#bm25-best-matching-25">BM25</a>: The Modern Standard<a class="headerlink" href="#bm25-the-modern-standard" title="Permanent link">&para;</a></h3>
+<p><strong>Best Matching 25 (BM25)</strong> represents the current gold standard for text relevance scoring, addressing TF-IDF's limitations through sophisticated normalization and parameter tuning.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>BM25(query, document) = Σ IDF(term) × (tf × (k1 + 1)) / (tf + k1 × (1 - b + b × |d|/avgdl))
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Where:
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>- tf = term frequency in document
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>- |d| = document length in words
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>- avgdl = average document length in collection
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>- k1 = term frequency saturation parameter (typically 1.2-2.0)
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>- b = document length normalization parameter (typically 0.75)
+</code></pre></div>
+<p><strong>Key Improvements Over TF-IDF:</strong></p>
+<ol>
+<li>
+<p><strong>Term Frequency Saturation:</strong> As term frequency increases, the contribution grows logarithmically rather than linearly, preventing keyword stuffing from dominating scores.</p>
+</li>
+<li>
+<p><strong>Document Length Normalization:</strong> Longer documents don't automatically score higher simply due to containing more words. The parameter <code>b</code> controls how much document length affects scoring.</p>
+</li>
+<li>
+<p><strong>Tunable Parameters:</strong> <code>k1</code> and <code>b</code> can be adjusted based on collection characteristics and user preferences.</p>
+</li>
+</ol>
+<p><strong>Real-World Example:</strong></p>
+<p>Consider searching for "sustainable energy solutions" across technical papers:</p>
+<ul>
+<li><em>Document A (500 words):</em> Contains "sustainable" 3 times, "energy" 5 times, "solutions" 2 times</li>
+<li><em>Document B (2,000 words):</em> Contains "sustainable" 8 times, "energy" 12 times, "solutions" 6 times</li>
+</ul>
+<p>Traditional TF would favor Document B due to higher absolute term frequencies. BM25's length normalization ensures Document A isn't penalized for being concise, while term frequency saturation prevents Document B from dominating solely due to repetition.</p>
+<h3 id="where-text-search-excels">Where Text Search Excels<a class="headerlink" href="#where-text-search-excels" title="Permanent link">&para;</a></h3>
+<p><strong>Precision-Critical Scenarios:</strong></p>
+<ul>
+<li><strong>Legal Document Retrieval:</strong> Finding contracts containing specific clauses like "force majeure" or "intellectual property"</li>
+<li><strong>Technical Documentation:</strong> Locating API references with exact method names like "getUserById()"</li>
+<li><strong>Product Catalogs:</strong> Matching precise specifications like "iPhone 15 Pro Max 256GB Blue"</li>
+</ul>
+<p><strong>Transparent Relevance:</strong></p>
+<p>Users can easily understand why results matched their query. When searching for "Python pandas DataFrame," it's clear that documents containing these exact terms are relevant. This transparency builds user trust and enables query refinement.</p>
+<p><strong>Computational Efficiency:</strong></p>
+<p>Text search operations are computationally lightweight:
+- Index creation: O(N × M) where N = documents, M = average document length
+- Query processing: O(log N) for term lookups plus scoring
+- Memory requirements: Modest inverted index storage</p>
+<p><strong>Query Flexibility:</strong></p>
+<ul>
+<li><strong>Boolean Operators:</strong> "machine learning" AND "Python" NOT "R"</li>
+<li><strong>Phrase Matching:</strong> "artificial intelligence" (exact phrase)</li>
+<li><strong>Wildcards:</strong> "comput*" (matches compute, computer, computing)</li>
+<li><strong>Field-Specific:</strong> title:"AI" OR content:"machine learning"</li>
+</ul>
+<h3 id="limitations-of-text-based-search">Limitations of Text-Based Search<a class="headerlink" href="#limitations-of-text-based-search" title="Permanent link">&para;</a></h3>
+<p><strong>The Vocabulary Mismatch Problem:</strong></p>
+<p>Text search fails when users and documents employ different terminology for the same concepts:</p>
+<p><em>Query:</em> "car repair"
+<em>Missed Documents:</em> "automobile maintenance," "vehicle servicing," "auto mechanic"</p>
+<p>This fundamental limitation occurs because text search operates on exact string matching without understanding that "car," "automobile," and "vehicle" refer to the same concept.</p>
+<p><strong>Context Insensitivity:</strong></p>
+<p>The word "bank" could refer to:</p>
+<ul>
+<li>Financial institution</li>
+<li>River bank</li>
+<li>Memory bank (computing)</li>
+<li>Blood bank</li>
+</ul>
+<p>Text search cannot distinguish between these contexts without additional semantic understanding.</p>
+<p><strong>Language Barriers:</strong></p>
+<p>Text search struggles with:</p>
+<ul>
+<li><strong>Synonyms:</strong> "happy" vs "joyful" vs "cheerful"</li>
+<li><strong>Multilingual Content:</strong> English query missing Spanish documents with same meaning</li>
+<li><strong>Acronyms and Abbreviations:</strong> "AI" vs "Artificial Intelligence"</li>
+<li><strong>Misspellings:</strong> "recieve" vs "receive"</li>
+</ul>
+<p><strong>Query Formulation Challenges:</strong></p>
+<p>Users often struggle to formulate effective keyword queries:</p>
+<ul>
+<li><strong>Conceptual Queries:</strong> "companies similar to Netflix" (user wants concept similarity, not exact matches)</li>
+<li><strong>Natural Language:</strong> "best laptop for college students under $800" (contains intent and constraints)</li>
+<li><strong>Exploratory Search:</strong> "new developments in renewable energy" (seeking discovery, not specific documents)</li>
+</ul>
+<h2 id="vector-search-evolution">Vector Search Evolution<a class="headerlink" href="#vector-search-evolution" title="Permanent link">&para;</a></h2>
+<p>Vector search emerged to address the fundamental limitations of text-based search by representing content and queries as mathematical vectors in high-dimensional semantic space.</p>
+<h3 id="the-semantic-understanding-breakthrough">The Semantic Understanding Breakthrough<a class="headerlink" href="#the-semantic-understanding-breakthrough" title="Permanent link">&para;</a></h3>
+<p><strong>From Keywords to Meaning:</strong></p>
+<p>Vector search transforms the paradigm from "what words are present?" to "what does this mean?" By converting text into dense numerical vectors, semantically similar content produces geometrically similar vectors, regardless of exact wording.</p>
+<p><strong>The Embedding Revolution:</strong></p>
+<p>Modern <a href="../glossary/#embedding">embedding</a> models, trained on vast text corpora, learn to represent concepts in continuous vector spaces where:
+- Similar meanings cluster together
+- Relationships become mathematical operations
+- Context determines representation</p>
+<p><strong>Example Transformation:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Traditional Keyword Index:
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&quot;dog&quot; → Document IDs: [1, 5, 23, 67]
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>&quot;puppy&quot; → Document IDs: [12, 45, 89]
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>&quot;canine&quot; → Document IDs: [3, 34, 78]
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Vector Representation:
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>&quot;dog&quot; → [0.2, -0.1, 0.8, 0.3, ..., 0.5]
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>&quot;puppy&quot; → [0.3, -0.2, 0.7, 0.4, ..., 0.6] (geometrically close to &quot;dog&quot;)
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>&quot;canine&quot; → [0.1, -0.3, 0.9, 0.2, ..., 0.4] (also close to &quot;dog&quot;)
+</code></pre></div>
+<h3 id="how-vector-search-addresses-text-search-limitations">How Vector Search Addresses Text Search Limitations<a class="headerlink" href="#how-vector-search-addresses-text-search-limitations" title="Permanent link">&para;</a></h3>
+<p><strong>Solving Vocabulary Mismatch:</strong></p>
+<p>Vector search naturally handles synonyms and related concepts because embedding models learn that different words with similar meanings should have similar representations.</p>
+<p><em>Query Vector:</em> "automobile maintenance"
+<em>Matches:</em> Documents about "car repair," "vehicle servicing," "auto mechanic"</p>
+<p>The system finds these matches not through keyword overlap but through semantic similarity in vector space.</p>
+<p><strong>Context-Aware Understanding:</strong></p>
+<p>Advanced embedding models like <a href="../glossary/#bert-bidirectional-encoder-representations-from-transformers">BERT</a> and <a href="../glossary/#transformer">transformer</a>-based architectures consider context when generating vectors:</p>
+<ul>
+<li>"The bank approved my loan" → Vector emphasizing financial context</li>
+<li>"I sat by the river bank" → Vector emphasizing geographical/nature context</li>
+</ul>
+<p>These contextual embeddings enable more precise semantic matching.</p>
+<p><strong>Cross-Language Capabilities:</strong></p>
+<p>Multilingual embedding models create shared semantic spaces across languages:</p>
+<ul>
+<li><em>English Query:</em> "machine learning algorithms"</li>
+<li><em>Spanish Match:</em> "algoritmos de aprendizaje automático"</li>
+<li><em>French Match:</em> "algorithmes d'apprentissage automatique"</li>
+</ul>
+<p>All three phrases map to similar regions in vector space, enabling cross-language search without translation.</p>
+<p><strong>Natural Language Query Handling:</strong></p>
+<p>Vector search excels with conversational, intent-driven queries:</p>
+<ul>
+<li><em>Query:</em> "best affordable laptops for college students"</li>
+<li><em>Understanding:</em> The vector captures concepts of "budget-friendly," "portable computers," "educational use," "student needs"</li>
+<li><em>Matches:</em> Reviews, comparisons, and recommendations that discuss these concepts even without exact keywords</li>
+</ul>
+<h3 id="the-mathematics-of-semantic-similarity">The Mathematics of Semantic Similarity<a class="headerlink" href="#the-mathematics-of-semantic-similarity" title="Permanent link">&para;</a></h3>
+<p><strong>High-Dimensional Semantic Space:</strong></p>
+<p>Embedding models typically generate vectors with 384 to 1,536 dimensions. Each dimension captures different aspects of meaning:</p>
+<ul>
+<li>Dimension 127: Might encode "technology-related" concepts</li>
+<li>Dimension 445: Might capture "positive sentiment"</li>
+<li>Dimension 892: Might represent "temporal aspects"</li>
+</ul>
+<p><strong>Similarity Metrics:</strong></p>
+<p>The choice of similarity metric affects search behavior:</p>
+<p><strong><a href="../glossary/#cosine-similarity">Cosine Similarity</a> (Most Common):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
+</code></pre></div>
+<ul>
+<li>Measures angle between vectors, ignoring magnitude</li>
+<li>Range: -1 (opposite) to 1 (identical)</li>
+<li>Best for text where length doesn't indicate semantic importance</li>
+</ul>
+<p><strong>Example:</strong> Two product reviews might have different lengths but similar sentiment and topics. Cosine similarity focuses on the semantic direction rather than the "intensity" of the review.</p>
+<h2 id="search-approach-comparison">Search Approach Comparison<a class="headerlink" href="#search-approach-comparison" title="Permanent link">&para;</a></h2>
+<p>Understanding when to use text search versus vector search—and how to combine them effectively—is crucial for building optimal search systems.</p>
+<h3 id="detailed-comparison-framework">Detailed Comparison Framework<a class="headerlink" href="#detailed-comparison-framework" title="Permanent link">&para;</a></h3>
+<p><strong><a href="../glossary/#precision">Precision</a> vs <a href="../glossary/#recall">Recall</a> Trade-offs:</strong></p>
+<p>Understanding how precision (purity of results) and recall (completeness of results) interact is crucial for optimizing search systems. For a detailed exploration of these metrics and optimization strategies in vector search, see <a href="../precision_vs_recall/">Precision and Recall in Vector Search</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Text Search</th>
+<th>Vector Search</th>
+<th>Winner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Exact product lookup</strong></td>
+<td>"MacBook Pro M3 16GB" → Perfect match</td>
+<td>May find similar products</td>
+<td><strong>Text Search</strong></td>
+</tr>
+<tr>
+<td><strong>Concept exploration</strong></td>
+<td>"sustainable energy" → Only exact phrase</td>
+<td>Finds renewable, green, clean energy</td>
+<td><strong>Vector Search</strong></td>
+</tr>
+<tr>
+<td><strong>Technical specifications</strong></td>
+<td>"RAM &gt;= 16GB AND SSD" → Precise filtering</td>
+<td>Cannot handle logical constraints</td>
+<td><strong>Text Search</strong></td>
+</tr>
+<tr>
+<td><strong>Intent-based queries</strong></td>
+<td>"best laptop for programming" → Keyword luck</td>
+<td>Understands programming needs</td>
+<td><strong>Vector Search</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Performance Characteristics:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Text Search</th>
+<th>Vector Search</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Index Build Time</strong></td>
+<td>Minutes</td>
+<td>Hours (embedding generation)</td>
+</tr>
+<tr>
+<td><strong>Query <a href="../glossary/#latency">Latency</a></strong></td>
+<td>&lt;1ms</td>
+<td>1-100ms (depending on algorithm)</td>
+</tr>
+<tr>
+<td><strong><a href="../glossary/#memory-usage">Memory Usage</a></strong></td>
+<td>Low (inverted index)</td>
+<td>High (vector storage)</td>
+</tr>
+<tr>
+<td><strong>Accuracy</strong></td>
+<td>Perfect for keywords</td>
+<td>85-99% approximate</td>
+</tr>
+<tr>
+<td><strong>Scalability</strong></td>
+<td>Excellent</td>
+<td>Good (with proper algorithms)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comprehensive-decision-framework">Comprehensive Decision Framework<a class="headerlink" href="#comprehensive-decision-framework" title="Permanent link">&para;</a></h3>
+<p><em>Understanding when to employ text search versus vector search requires analyzing multiple dimensions of your search requirements. The following framework provides detailed guidance for making informed architectural decisions.</em></p>
+<p><strong>Use Text Search When:</strong></p>
+<p><strong>Exact Matching is Critical</strong></p>
+<ul>
+<li>Legal document retrieval: "habeas corpus," "force majeure"</li>
+<li>Medical codes: "ICD-10 J44.0" (COPD diagnosis)</li>
+<li>Product catalogs: "SKU-12345-RED-L"</li>
+</ul>
+<p><strong>Users Provide Specific Keywords</strong></p>
+<ul>
+<li>Technical documentation: "numpy.array.reshape()"</li>
+<li>Database queries: "SELECT statement syntax"</li>
+<li>API references: "REST POST /users endpoint"</li>
+</ul>
+<p><strong>Computational Resources are Limited</strong></p>
+<ul>
+<li>Mobile applications with limited processing power</li>
+<li>Real-time systems requiring sub-millisecond responses</li>
+<li>High-volume systems needing minimal infrastructure</li>
+</ul>
+<p><strong>Transparency and Explainability Required</strong></p>
+<ul>
+<li>Regulatory compliance scenarios where relevance must be explained</li>
+<li>User interfaces showing why results matched</li>
+<li>A/B testing where ranking factors need clear attribution</li>
+</ul>
+<p><strong>Use Vector Search When:</strong></p>
+<p><strong>Semantic Understanding is Essential</strong></p>
+<ul>
+<li>Customer support: "my order hasn't arrived" → find shipping delay content</li>
+<li>Research: "climate change impacts" → find global warming, environmental effects</li>
+<li>Content discovery: "similar to The Matrix" → find sci-fi, cyberpunk themes</li>
+</ul>
+<p><strong>Cross-Language Search Needed</strong></p>
+<ul>
+<li>Global content platforms with multilingual documents</li>
+<li>International e-commerce with product descriptions in multiple languages</li>
+<li>Academic research across different language publications</li>
+</ul>
+<p><strong>Natural Language Queries Expected</strong></p>
+<ul>
+<li>Voice search: "What's a good Italian restaurant nearby?"</li>
+<li>Conversational AI: "Show me articles about renewable energy policies"</li>
+<li>Mobile search: "cheap flights to Europe next month"</li>
+</ul>
+<p><strong>Content Discovery and Exploration</strong></p>
+<ul>
+<li>Media recommendations: "movies like Inception"</li>
+<li>News discovery: "stories related to artificial intelligence ethics"</li>
+<li>Research paper suggestions: "papers citing similar methodologies"</li>
+</ul>
+<h2 id="hybrid-search-combining-the-best-of-both-worlds">Hybrid Search: Combining the Best of Both Worlds<a class="headerlink" href="#hybrid-search-combining-the-best-of-both-worlds" title="Permanent link">&para;</a></h2>
+<p>Modern search systems increasingly adopt hybrid approaches that combine the precision of text search with the semantic understanding of vector search.</p>
+<h3 id="hybrid-search-architecture">Hybrid Search Architecture<a class="headerlink" href="#hybrid-search-architecture" title="Permanent link">&para;</a></h3>
+<p><strong>Score Combination Strategies:</strong></p>
+<ol>
+<li>
+<p><strong>Linear Combination</strong>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>final_score = α × text_score + β × vector_score
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Where α + β = 1, and weights can be tuned based on query type
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Rank Fusion</strong>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>RRF_score = Σ(1 / (k + rank_in_list))
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Combines rankings from different search methods
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Learning-to-Rank</strong>
+   Machine learning models that learn optimal score combination from user behavior data.</p>
+</li>
+</ol>
+<h3 id="real-world-hybrid-examples">Real-World Hybrid Examples<a class="headerlink" href="#real-world-hybrid-examples" title="Permanent link">&para;</a></h3>
+<p><strong>E-commerce Search:</strong></p>
+<p><em>Query:</em> "wireless bluetooth headphones under $100"</p>
+<ul>
+<li><strong>Text Component:</strong> Finds products with exact specifications and price range</li>
+<li><strong>Vector Component:</strong> Discovers products described as "cord-free audio devices," "wireless earbuds," "Bluetooth speakers"</li>
+<li><strong>Combined Result:</strong> Comprehensive coverage including exact matches and semantically related products</li>
+</ul>
+<p><strong>Customer Support:</strong></p>
+<p><em>Query:</em> "How do I reset my password?"</p>
+<ul>
+<li><strong>Text Component:</strong> Finds FAQ entries with exact phrase "reset password"</li>
+<li><strong>Vector Component:</strong> Discovers related articles about "account recovery," "login issues," "forgotten credentials"</li>
+<li><strong>Combined Result:</strong> Complete support coverage from exact matches to related topics</li>
+</ul>
+<p><strong>Academic Research:</strong></p>
+<p><em>Query:</em> "deep learning applications in medical imaging"</p>
+<ul>
+<li><strong>Text Component:</strong> Papers explicitly mentioning these exact terms</li>
+<li><strong>Vector Component:</strong> Research on "neural networks in radiology," "AI for diagnostic imaging," "machine learning in healthcare"</li>
+<li><strong>Combined Result:</strong> Broader research landscape while maintaining precise topic focus</li>
+</ul>
+<h3 id="implementation-strategy">Implementation Strategy<a class="headerlink" href="#implementation-strategy" title="Permanent link">&para;</a></h3>
+<p><strong>Query Classification:</strong></p>
+<p>Intelligent systems can dynamically adjust the balance between text and vector search based on query characteristics:</p>
+<ul>
+<li><strong>Exact identifiers</strong> (SKUs, codes, names): 80% text, 20% vector weight</li>
+<li><strong>Conceptual queries</strong> ("similar to," "like," "about"): 30% text, 70% vector weight</li>
+<li><strong>Factual queries</strong> ("how to," "what is"): 60% text, 40% vector weight</li>
+<li><strong>Default queries</strong>: 50% text, 50% vector weight (balanced approach)</li>
+</ul>
+<p><strong>User Interface Adaptation:</strong></p>
+<p>Search interfaces can provide different experiences based on the search approach:</p>
+<ul>
+<li><strong>Text-heavy results:</strong> Show keyword highlighting, exact matches, filters</li>
+<li><strong>Vector-heavy results:</strong> Display "because you searched for," related concepts, exploration suggestions</li>
+<li><strong>Hybrid results:</strong> Combine both approaches with clear result categorization</li>
+</ul>
+<h2 id="reranking-refining-search-results">Reranking: Refining Search Results<a class="headerlink" href="#reranking-refining-search-results" title="Permanent link">&para;</a></h2>
+<p>While initial retrieval systems (text search, vector search, or hybrid approaches) excel at quickly identifying potentially relevant candidates from large datasets, they often lack the computational resources to perform deep analysis of each result. <strong>Reranking</strong> addresses this limitation by applying sophisticated scoring models to a smaller set of initial results, dramatically improving relevance and user satisfaction.</p>
+<h3 id="the-two-stage-search-architecture">The Two-Stage Search Architecture<a class="headerlink" href="#the-two-stage-search-architecture" title="Permanent link">&para;</a></h3>
+<p><strong>Stage 1: Fast Retrieval (Recall-Focused)</strong></p>
+<ul>
+<li>Primary goal: Cast a wide net to capture potentially relevant content</li>
+<li>Algorithms: BM25, HNSW, IVF, or hybrid combinations</li>
+<li>Speed: Optimized for millisecond response times</li>
+<li>Scope: Search entire corpus (millions to billions of documents)</li>
+</ul>
+<p><strong>Stage 2: Precise Reranking (Precision-Focused)</strong></p>
+<ul>
+<li>Primary goal: Apply sophisticated relevance modeling to refine rankings</li>
+<li>Algorithms: Cross-encoders, learning-to-rank, neural rerankers</li>
+<li>Speed: More computationally intensive but applied to fewer candidates</li>
+<li>Scope: Rerank top 100-1000 candidates from Stage 1</li>
+</ul>
+<p>This two-stage architecture embodies the classic precision-recall tradeoff: Stage 1 prioritizes recall (finding all potentially relevant documents), while Stage 2 prioritizes precision (ranking the best documents at the top). For practical strategies on optimizing these metrics, see <a href="../precision_vs_recall/">Precision and Recall in Vector Search</a>.</p>
+<h3 id="why-reranking-is-essential">Why Reranking is Essential<a class="headerlink" href="#why-reranking-is-essential" title="Permanent link">&para;</a></h3>
+<p><strong>Computational Trade-offs in Search:</strong></p>
+<p>Initial retrieval systems face a fundamental constraint: they must balance speed with accuracy across massive datasets. A brute-force approach applying sophisticated relevance modeling to every document would be computationally prohibitive.</p>
+<p><em>Example: E-commerce Search</em></p>
+<ul>
+<li><strong>Without Reranking:</strong> Fast keyword/vector search returns "wireless headphones" but may rank by basic relevance signals</li>
+<li><strong>With Reranking:</strong> Additional factors like user preferences, product ratings, price sensitivity, and seasonal trends refine the ranking</li>
+</ul>
+<p><strong>Quality Improvements:</strong></p>
+<p>Reranking typically improves key search metrics:
+- <strong>NDCG@10:</strong> 15-30% improvement in ranking quality
+- <strong>Click-through Rate:</strong> 10-25% increase in user engagement
+- <strong>Conversion Rate:</strong> 5-15% improvement in e-commerce scenarios</p>
+<h3 id="types-of-reranking-approaches">Types of Reranking Approaches<a class="headerlink" href="#types-of-reranking-approaches" title="Permanent link">&para;</a></h3>
+<p><strong>Cross-Encoder Reranking:</strong></p>
+<p>Cross-encoders jointly encode the query and each candidate document, enabling rich interaction modeling that captures nuanced relevance signals impossible in the initial retrieval stage.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Architecture:
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Query: &quot;best wireless headphones for running&quot;
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Candidate: &quot;Sony WH-1000XM5 Noise Canceling Headphones&quot;
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>Cross-Encoder Input: [CLS] best wireless headphones for running [SEP] Sony WH-1000XM5 Noise Canceling Headphones - Premium noise canceling... [SEP]
+</code></pre></div>
+<p><strong>Learning-to-Rank (LTR):</strong></p>
+<p>Machine learning models trained on historical user interactions, combining multiple relevance features to optimize ranking metrics directly.</p>
+<p><em>Feature Categories:</em></p>
+<ul>
+<li>Query-document similarity scores</li>
+<li>User interaction signals (clicks, dwell time)</li>
+<li>Document quality indicators (freshness, authority)</li>
+<li>Contextual factors (time, location, device)</li>
+</ul>
+<p><strong>Neural Reranking Models:</strong></p>
+<p>Advanced transformer-based models that can capture complex semantic relationships and user intent patterns beyond traditional relevance matching.</p>
+<h3 id="performance-considerations">Performance Considerations<a class="headerlink" href="#performance-considerations" title="Permanent link">&para;</a></h3>
+<p><strong>Latency Impact:</strong></p>
+<ul>
+<li>Initial retrieval: 5-20ms</li>
+<li>Reranking overhead: 10-50ms additional</li>
+<li>Total query time: 15-70ms (still well within acceptable limits)</li>
+</ul>
+<p><strong>Resource Usage:</strong></p>
+<ul>
+<li>Reranking models require additional compute resources</li>
+<li>GPU acceleration recommended for neural rerankers</li>
+<li>Memory usage scales with reranking window size</li>
+</ul>
+<p><strong>Scalability Strategies:</strong></p>
+<ul>
+<li><strong>Async Reranking:</strong> Return initial results immediately, update with reranked results</li>
+<li><strong>Cached Reranking:</strong> Cache reranked results for popular queries</li>
+<li><strong>Tiered Reranking:</strong> Apply different reranking intensity based on query importance</li>
+</ul>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<p>Modern search systems represent a sophisticated evolution from simple keyword matching to semantic understanding. The most effective implementations combine:</p>
+<ol>
+<li><strong>Text Search</strong> for precision and exact matching</li>
+<li><strong>Vector Search</strong> for semantic understanding and discovery</li>
+<li><strong>Hybrid Approaches</strong> that leverage strengths of both methods</li>
+<li><strong>Reranking</strong> to refine results with sophisticated relevance modeling</li>
+</ol>
+<p>Understanding these components and their trade-offs enables you to build search systems that truly understand user intent and deliver relevant results efficiently.</p>
+<p>For implementation details using specific technologies, see:
+- <a href="../opensearch/">OpenSearch Implementation Guide</a>
+- <a href="../index_deep_dive/">Vector Search Algorithms Deep Dive</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "content.code.copy", "content.tabs.link", "toc.follow"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+    
+  </body>
+</html>
