@@ -41,12 +41,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
       
     
     
-      <link rel="stylesheet" href="../styles/overrides.css">
+      <link rel="stylesheet" href="../styles.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1222,8 +1222,8 @@
 <p><strong>Sensitivity</strong> is actually identical to recall—it's the same metric with a different name commonly used in medical diagnostics and other fields. Sensitivity measures the proportion of relevant items successfully retrieved, which is exactly what recall does. In the medical context, you might talk about a test's sensitivity to detecting a disease, while in information retrieval, we talk about a system's recall of relevant documents. The mathematics are identical: TP / (TP + FN).</p>
 <p>The practical reality of vector search is that we care deeply about two things:</p>
 <ol>
-<li><strong>Of the documents we retrieve, how many are actually relevant?</strong> (Precision)</li>
-<li><strong>Of all the relevant documents that exist, how many did we find?</strong> (Recall)</li>
+<li>Of the documents we retrieve, how many are actually relevant? (Precision)</li>
+<li>Of all the relevant documents that exist, how many did we find? (Recall)</li>
 </ol>
 <p>These metrics directly address the core user experience questions: "Is what I'm seeing useful?" and "Am I missing important information?" The extreme class imbalance in information retrieval makes accuracy and specificity mathematically uninteresting, while sensitivity is simply recall by another name.</p>
 <h2 id="the-two-stage-retrieval-pipeline">The Two-Stage Retrieval Pipeline<a class="headerlink" href="#the-two-stage-retrieval-pipeline" title="Permanent link">&para;</a></h2>
@@ -1278,8 +1278,8 @@
 <h3 id="exact-match-tasks">Exact Match Tasks<a class="headerlink" href="#exact-match-tasks" title="Permanent link">&para;</a></h3>
 <p>For tasks like "find the exact policy clause," you need different strategies at each stage:</p>
 <ul>
-<li><strong>Candidate stage</strong>: Prioritize high recall—you absolutely cannot miss the target clause</li>
-<li><strong>Reranking stage</strong>: Emphasize precision using a cross-encoder on the top 200 candidates</li>
+<li>Candidate stage: Prioritize high recall—you absolutely cannot miss the target clause</li>
+<li>Reranking stage: Emphasize precision using a cross-encoder on the top 200 candidates</li>
 </ul>
 <h2 id="production-best-practices">Production Best Practices<a class="headerlink" href="#production-best-practices" title="Permanent link">&para;</a></h2>
 <p>For a factual RAG system, a sensible starting configuration looks like this:</p>

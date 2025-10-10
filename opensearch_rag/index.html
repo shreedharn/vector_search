@@ -41,12 +41,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
       
     
     
-      <link rel="stylesheet" href="../styles/overrides.css">
+      <link rel="stylesheet" href="../styles.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1385,16 +1385,16 @@
 <h2 id="understanding-rag-the-knowledge-problem">Understanding RAG: The Knowledge Problem<a class="headerlink" href="#understanding-rag-the-knowledge-problem" title="Permanent link">&para;</a></h2>
 <h3 id="the-challenge-with-traditional-language-models">The Challenge with Traditional Language Models<a class="headerlink" href="#the-challenge-with-traditional-language-models" title="Permanent link">&para;</a></h3>
 <p>Large language models like GPT-4 and Claude possess remarkable reasoning abilities, but they face fundamental limitations when it comes to knowledge:</p>
-<p><strong>Knowledge Cutoff</strong>: Training data has a specific cutoff date, making models unaware of recent events or updates. A model trained on data through 2023 cannot answer questions about 2024 developments.</p>
-<p><strong>Hallucination</strong>: When models lack specific information, they may generate plausible-sounding but factually incorrect responses. This occurs because models are trained to produce coherent text rather than to explicitly acknowledge knowledge gaps.</p>
-<p><strong>Static Knowledge</strong>: Information learned during training cannot be updated without retraining the entire model, making it impractical to incorporate new company policies, product updates, or domain-specific knowledge.</p>
-<p><strong>Source Attribution</strong>: Traditional language models cannot cite specific sources for their responses, making it difficult to verify accuracy or provide transparency in critical applications.</p>
+<p>Knowledge Cutoff: Training data has a specific cutoff date, making models unaware of recent events or updates. A model trained on data through 2023 cannot answer questions about 2024 developments.</p>
+<p>Hallucination: When models lack specific information, they may generate plausible-sounding but factually incorrect responses. This occurs because models are trained to produce coherent text rather than to explicitly acknowledge knowledge gaps.</p>
+<p>Static Knowledge: Information learned during training cannot be updated without retraining the entire model, making it impractical to incorporate new company policies, product updates, or domain-specific knowledge.</p>
+<p>Source Attribution: Traditional language models cannot cite specific sources for their responses, making it difficult to verify accuracy or provide transparency in critical applications.</p>
 <h3 id="how-rag-solves-these-problems">How RAG Solves These Problems<a class="headerlink" href="#how-rag-solves-these-problems" title="Permanent link">&para;</a></h3>
 <p>RAG addresses these limitations by introducing a two-step process that separates knowledge retrieval from response generation:</p>
 <p><strong>Step 1: Retrieval</strong> - Given a user question, search through a knowledge base to find relevant documents or passages that contain pertinent information.</p>
-<p><strong>Step 2: Augmented Generation</strong> - Provide both the user question and retrieved context to the language model, instructing it to generate a response based on the specific retrieved information.</p>
+<p>Step 2: Augmented Generation - Provide both the user question and retrieved context to the language model, instructing it to generate a response based on the specific retrieved information.</p>
 <p>This approach transforms the language model from a knowledge repository into a reasoning engine that works with provided evidence, similar to how a skilled researcher synthesizes information from multiple sources to answer complex questions.</p>
-<p><strong>Real-World Example:</strong></p>
+<p>Real-World Example:</p>
 <p><em>Traditional Approach:</em>
 - User: "What's our company's remote work policy?"
 - Model: Generates a generic response about remote work policies, potentially inaccurate for the specific company</p>
@@ -1405,16 +1405,16 @@
 - Model responds: "According to the company handbook, employees can work remotely up to 3 days per week with manager approval..."</p>
 <h3 id="rag-architecture-components">RAG Architecture Components<a class="headerlink" href="#rag-architecture-components" title="Permanent link">&para;</a></h3>
 <p>A complete RAG system consists of several interconnected components that work together to provide accurate, relevant responses:</p>
-<p><strong>Knowledge Base</strong>: The searchable repository of information, typically consisting of documents, web pages, databases, or other structured data sources. This serves as the system's external memory.</p>
-<p><strong>Embedding Model</strong>: Converts text into vector representations that capture semantic meaning. This enables the system to find relevant information even when exact keywords don't match.</p>
-<p><strong>Vector Database</strong>: Stores and indexes the embedded documents to enable fast similarity search. OpenSearch excels in this role with its advanced vector search capabilities.</p>
-<p><strong>Retrieval System</strong>: Identifies and ranks the most relevant documents or passages for a given query. This often combines multiple search strategies for optimal results.</p>
-<p><strong>Generation Model</strong>: The large language model that synthesizes retrieved information into coherent, helpful responses while maintaining accuracy and proper attribution.</p>
-<p><strong>Orchestration Layer</strong>: Coordinates the flow between retrieval and generation, handles error cases, and manages the overall user experience.</p>
+<p>Knowledge Base: The searchable repository of information, typically consisting of documents, web pages, databases, or other structured data sources. This serves as the system's external memory.</p>
+<p>Embedding Model: Converts text into vector representations that capture semantic meaning. This enables the system to find relevant information even when exact keywords don't match.</p>
+<p>Vector Database: Stores and indexes the embedded documents to enable fast similarity search. OpenSearch excels in this role with its advanced vector search capabilities.</p>
+<p>Retrieval System: Identifies and ranks the most relevant documents or passages for a given query. This often combines multiple search strategies for optimal results.</p>
+<p>Generation Model: The large language model that synthesizes retrieved information into coherent, helpful responses while maintaining accuracy and proper attribution.</p>
+<p>Orchestration Layer: Coordinates the flow between retrieval and generation, handles error cases, and manages the overall user experience.</p>
 <h2 id="rag-implementation-patterns">RAG Implementation Patterns<a class="headerlink" href="#rag-implementation-patterns" title="Permanent link">&para;</a></h2>
 <h3 id="basic-rag-straightforward-document-retrieval">Basic RAG: Straightforward Document Retrieval<a class="headerlink" href="#basic-rag-straightforward-document-retrieval" title="Permanent link">&para;</a></h3>
 <p>The fundamental RAG pattern retrieves relevant documents and includes them as context for the language model. This approach works well for knowledge bases with clear, self-contained documents.</p>
-<p><strong>Architecture Flow:</strong>
+<p>Architecture Flow:
 1. User submits a question
 2. Convert question to embedding vector
 3. Search knowledge base for similar documents
@@ -1435,17 +1435,17 @@
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">  </span><span class="nt">&quot;prompt_template&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Based on the following documentation, answer the user&#39;s question.\n\nQuestion: {user_query}\n\nRelevant Documentation:\n{retrieved_content}\n\nPlease provide a comprehensive answer based on the documentation above.&quot;</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="p">}</span>
 </code></pre></div></p>
-<p><strong>When to Use Basic RAG:</strong>
+<p>When to Use Basic RAG:
 - Knowledge base consists of well-structured documents
 - Questions typically map to single documents or clear topics
 - Information doesn't require complex reasoning across multiple sources
 - Getting started with RAG implementation</p>
 <h3 id="advanced-rag-multi-step-reasoning-and-filtering">Advanced RAG: Multi-Step Reasoning and Filtering<a class="headerlink" href="#advanced-rag-multi-step-reasoning-and-filtering" title="Permanent link">&para;</a></h3>
 <p>Advanced RAG implementations incorporate sophisticated retrieval strategies and reasoning patterns to handle complex queries that require information synthesis from multiple sources.</p>
-<p><strong>Hierarchical Retrieval</strong>: First identifies relevant document categories or sections, then performs detailed search within those areas. This prevents the system from getting overwhelmed by irrelevant but superficially similar content.</p>
-<p><strong>Query Expansion</strong>: Generates multiple versions of the user's question to capture different ways the same information might be expressed in the knowledge base.</p>
-<p><strong>Iterative Retrieval</strong>: Performs multiple rounds of retrieval based on partial answers, allowing the system to gather comprehensive information for complex questions.</p>
-<p><strong>Context Filtering</strong>: Applies relevance scoring and filtering to ensure only the most pertinent information reaches the language model, preventing confusion from marginally relevant content.</p>
+<p>Hierarchical Retrieval: First identifies relevant document categories or sections, then performs detailed search within those areas. This prevents the system from getting overwhelmed by irrelevant but superficially similar content.</p>
+<p>Query Expansion: Generates multiple versions of the user's question to capture different ways the same information might be expressed in the knowledge base.</p>
+<p>Iterative Retrieval: Performs multiple rounds of retrieval based on partial answers, allowing the system to gather comprehensive information for complex questions.</p>
+<p>Context Filtering: Applies relevance scoring and filtering to ensure only the most pertinent information reaches the language model, preventing confusion from marginally relevant content.</p>
 <p><strong>Example Multi-Step Query:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>User Question: &quot;What are the performance implications of different caching strategies for our e-commerce platform?&quot;
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
@@ -1457,9 +1457,9 @@
 </code></pre></div></p>
 <h3 id="conversational-rag-maintaining-context-across-interactions">Conversational RAG: Maintaining Context Across Interactions<a class="headerlink" href="#conversational-rag-maintaining-context-across-interactions" title="Permanent link">&para;</a></h3>
 <p>Conversational RAG extends the basic pattern to support multi-turn conversations, maintaining context and allowing for follow-up questions that build on previous interactions.</p>
-<p><strong>Context Preservation</strong>: Maintains conversation history to understand references like "that approach" or "the previous solution" in follow-up questions.</p>
-<p><strong>Query Contextualization</strong>: Combines current question with conversation history to create more specific search queries.</p>
-<p><strong>Response Continuity</strong>: Ensures responses build logically on previous answers while incorporating new retrieved information.</p>
+<p>Context Preservation: Maintains conversation history to understand references like "that approach" or "the previous solution" in follow-up questions.</p>
+<p>Query Contextualization: Combines current question with conversation history to create more specific search queries.</p>
+<p>Response Continuity: Ensures responses build logically on previous answers while incorporating new retrieved information.</p>
 <p><strong>Example Conversation Flow:</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Turn 1:
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>User: &quot;How do I set up monitoring for our database?&quot;
@@ -1472,13 +1472,13 @@
 <h2 id="opensearch-as-a-rag-foundation">OpenSearch as a RAG Foundation<a class="headerlink" href="#opensearch-as-a-rag-foundation" title="Permanent link">&para;</a></h2>
 <h3 id="vector-search-capabilities">Vector Search Capabilities<a class="headerlink" href="#vector-search-capabilities" title="Permanent link">&para;</a></h3>
 <p>OpenSearch provides enterprise-grade vector search functionality that forms the backbone of effective RAG systems. Its integration of traditional text search with modern vector search creates powerful hybrid retrieval capabilities.</p>
-<p><strong>Semantic Understanding</strong>: OpenSearch's vector search capabilities enable RAG systems to find relevant information even when the query uses different terminology than the source documents. For example, searching for "automobile maintenance" can retrieve documents about "car repair" through semantic similarity.</p>
-<p><strong>Hybrid Search Excellence</strong>: OpenSearch uniquely combines keyword-based text search with vector-based semantic search, providing both precision and recall. This combination ensures that exact matches are prioritized while also capturing semantically related content.</p>
-<p><strong>Algorithm Flexibility</strong>: Support for multiple vector search algorithms (HNSW, IVF) allows optimization for different RAG scenarios. HNSW excels for real-time retrieval needs, while IVF provides memory-efficient search for large knowledge bases.</p>
-<p><strong>Advanced Filtering</strong>: OpenSearch enables complex filtering during vector search, allowing RAG systems to constrain retrieval by document type, date ranges, user permissions, or other metadata. This ensures retrieved information is both relevant and appropriate for the user.</p>
+<p>Semantic Understanding: OpenSearch's vector search capabilities enable RAG systems to find relevant information even when the query uses different terminology than the source documents. For example, searching for "automobile maintenance" can retrieve documents about "car repair" through semantic similarity.</p>
+<p>Hybrid Search Excellence: OpenSearch uniquely combines keyword-based text search with vector-based semantic search, providing both precision and recall. This combination ensures that exact matches are prioritized while also capturing semantically related content.</p>
+<p>Algorithm Flexibility: Support for multiple vector search algorithms (HNSW, IVF) allows optimization for different RAG scenarios. HNSW excels for real-time retrieval needs, while IVF provides memory-efficient search for large knowledge bases.</p>
+<p>Advanced Filtering: OpenSearch enables complex filtering during vector search, allowing RAG systems to constrain retrieval by document type, date ranges, user permissions, or other metadata. This ensures retrieved information is both relevant and appropriate for the user.</p>
 <h3 id="document-storage-and-management">Document Storage and Management<a class="headerlink" href="#document-storage-and-management" title="Permanent link">&para;</a></h3>
 <p>OpenSearch's document-centric architecture aligns perfectly with RAG requirements, providing flexible storage and rich metadata capabilities.</p>
-<p><strong>Flexible Schema Design</strong>: Store documents with arbitrary metadata fields, enabling sophisticated filtering and routing in RAG applications. Documents can include content embeddings, source information, classification labels, and custom attributes.</p>
+<p>Flexible Schema Design: Store documents with arbitrary metadata fields, enabling sophisticated filtering and routing in RAG applications. Documents can include content embeddings, source information, classification labels, and custom attributes.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;document_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tech_guide_ssl_001&quot;</span><span class="p">,</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SSL Certificate Configuration&quot;</span><span class="p">,</span>
@@ -1494,17 +1494,17 @@
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="p">}</span>
 </code></pre></div>
-<p><strong>Version Management</strong>: Track document versions and updates, enabling RAG systems to work with the most current information while maintaining historical context when needed.</p>
-<p><strong>Access Control Integration</strong>: Leverage OpenSearch's security features to ensure RAG systems only retrieve information the user is authorized to access, maintaining data governance in enterprise environments.</p>
+<p>Version Management: Track document versions and updates, enabling RAG systems to work with the most current information while maintaining historical context when needed.</p>
+<p>Access Control Integration: Leverage OpenSearch's security features to ensure RAG systems only retrieve information the user is authorized to access, maintaining data governance in enterprise environments.</p>
 <h3 id="real-time-updates-and-indexing">Real-Time Updates and Indexing<a class="headerlink" href="#real-time-updates-and-indexing" title="Permanent link">&para;</a></h3>
 <p>OpenSearch's near real-time indexing capabilities ensure RAG systems work with current information, critical for dynamic environments where knowledge bases frequently change.</p>
-<p><strong>Incremental Updates</strong>: Add new documents or update existing ones without full re-indexing, keeping RAG systems current as knowledge bases evolve.</p>
-<p><strong>Change Detection</strong>: Monitor document changes and automatically update embeddings when content is modified, ensuring vector representations remain accurate.</p>
-<p><strong>Bulk Operations</strong>: Efficiently process large batches of documents during initial setup or major updates, with built-in error handling and progress tracking.</p>
+<p>Incremental Updates: Add new documents or update existing ones without full re-indexing, keeping RAG systems current as knowledge bases evolve.</p>
+<p>Change Detection: Monitor document changes and automatically update embeddings when content is modified, ensuring vector representations remain accurate.</p>
+<p>Bulk Operations: Efficiently process large batches of documents during initial setup or major updates, with built-in error handling and progress tracking.</p>
 <h2 id="implementing-rag-with-opensearch">Implementing RAG with OpenSearch<a class="headerlink" href="#implementing-rag-with-opensearch" title="Permanent link">&para;</a></h2>
 <h3 id="basic-rag-implementation">Basic RAG Implementation<a class="headerlink" href="#basic-rag-implementation" title="Permanent link">&para;</a></h3>
 <p>Here's a practical implementation of a basic RAG system using OpenSearch, demonstrating the core patterns that can be extended for more complex use cases.</p>
-<p><strong>Index Configuration for RAG:</strong></p>
+<p>Index Configuration for RAG:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1619,7 +1619,7 @@
 <a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a>    <span class="c1"># Step 4: Deduplicate and rank final results</span>
 <a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a>    <span class="k">return</span> <span class="n">deduplicate_and_rank</span><span class="p">(</span><span class="n">initial_results</span><span class="p">,</span> <span class="n">focused_results</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Contextual Retrieval with User Personalization:</strong></p>
+<p>Contextual Retrieval with User Personalization:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">&quot;bool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1706,7 +1706,7 @@
 <a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="p">}</span>
 </code></pre></div>
-<p><strong>Multi-Signal Reranking for RAG:</strong></p>
+<p>Multi-Signal Reranking for RAG:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">&quot;rescore&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">&quot;window_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
@@ -1860,7 +1860,7 @@
 </code></pre></div></p>
 <h3 id="agentic-rag">Agentic RAG<a class="headerlink" href="#agentic-rag" title="Permanent link">&para;</a></h3>
 <p>Agentic RAG systems use language models not just for generation but also for query planning, retrieval strategy selection, and result evaluation. This creates more sophisticated systems that can adapt their approach based on query complexity.</p>
-<p><strong>Query Planning with OpenSearch:</strong></p>
+<p>Query Planning with OpenSearch:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">agentic_rag_pipeline</span><span class="p">(</span><span class="n">user_query</span><span class="p">,</span> <span class="n">opensearch_client</span><span class="p">):</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="c1"># Step 1: Query analysis and planning</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="n">query_plan</span> <span class="o">=</span> <span class="n">analyze_query_complexity</span><span class="p">(</span><span class="n">user_query</span><span class="p">)</span>
@@ -1921,10 +1921,10 @@
 <h3 id="retrieval-quality-metrics">Retrieval Quality Metrics<a class="headerlink" href="#retrieval-quality-metrics" title="Permanent link">&para;</a></h3>
 <p>Measuring and optimizing RAG system performance requires comprehensive evaluation of both retrieval and generation components. OpenSearch provides tools and patterns to support effective RAG evaluation.</p>
 <p><strong>Retrieval Evaluation Metrics:</strong></p>
-<p><strong>Recall@K</strong>: Measures what percentage of relevant documents appear in the top-k retrieved results. Critical for ensuring the RAG system has access to necessary information.</p>
-<p><strong>Precision@K</strong>: Evaluates how many of the top-k retrieved documents are actually relevant. Important for minimizing noise in the generation context.</p>
-<p><strong>Mean Reciprocal Rank (MRR)</strong>: Assesses how quickly users find relevant information, focusing on the rank position of the first relevant result.</p>
-<p><strong>NDCG (Normalized Discounted Cumulative Gain)</strong>: Provides a more nuanced evaluation that considers both relevance and ranking quality.</p>
+<p>Recall@K: Measures what percentage of relevant documents appear in the top-k retrieved results. Critical for ensuring the RAG system has access to necessary information.</p>
+<p>Precision@K: Evaluates how many of the top-k retrieved documents are actually relevant. Important for minimizing noise in the generation context.</p>
+<p>Mean Reciprocal Rank (MRR): Assesses how quickly users find relevant information, focusing on the rank position of the first relevant result.</p>
+<p>NDCG (Normalized Discounted Cumulative Gain): Provides a more nuanced evaluation that considers both relevance and ranking quality.</p>
 <p><strong>Implementation Example:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">evaluate_retrieval_quality</span><span class="p">(</span><span class="n">test_queries</span><span class="p">,</span> <span class="n">opensearch_client</span><span class="p">):</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="n">metrics</span> <span class="o">=</span> <span class="p">[]</span>
@@ -2001,7 +2001,7 @@
 <a id="__codelineno-16-39" name="__codelineno-16-39" href="#__codelineno-16-39"></a>    <span class="k">return</span> <span class="n">evaluation_results</span>
 </code></pre></div>
 <h3 id="performance-optimization-strategies">Performance Optimization Strategies<a class="headerlink" href="#performance-optimization-strategies" title="Permanent link">&para;</a></h3>
-<p><strong>Index Optimization for RAG:</strong></p>
+<p>Index Optimization for RAG:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">{</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2085,7 +2085,7 @@
 <a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="p">}</span>
 </code></pre></div>
-<p><strong>Load Balancing for RAG Queries:</strong></p>
+<p>Load Balancing for RAG Queries:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">RAGLoadBalancer</span><span class="p">:</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opensearch_clusters</span><span class="p">):</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">clusters</span> <span class="o">=</span> <span class="n">opensearch_clusters</span>
@@ -2108,7 +2108,7 @@
 </code></pre></div>
 <h3 id="security-and-privacy">Security and Privacy<a class="headerlink" href="#security-and-privacy" title="Permanent link">&para;</a></h3>
 <p>RAG systems often work with sensitive information, requiring robust security measures and privacy protections throughout the retrieval and generation pipeline.</p>
-<p><strong>Access Control in RAG:</strong></p>
+<p>Access Control in RAG:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="p">{</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">    </span><span class="nt">&quot;bool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2222,7 +2222,7 @@
 <a id="__codelineno-23-48" name="__codelineno-23-48" href="#__codelineno-23-48"></a>
 <a id="__codelineno-23-49" name="__codelineno-23-49" href="#__codelineno-23-49"></a>    <span class="k">return</span> <span class="n">dashboard_config</span>
 </code></pre></div>
-<p><strong>Alerting for RAG Systems:</strong></p>
+<p>Alerting for RAG Systems:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="p">{</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="nt">&quot;trigger&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="nt">&quot;schedule&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;interval&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;period&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MINUTES&quot;</span><span class="p">}},</span>

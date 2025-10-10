@@ -41,12 +41,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
       
     
     
-      <link rel="stylesheet" href="../styles/overrides.css">
+      <link rel="stylesheet" href="../styles.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#fundamentals-of-search" class="md-skip">
+        <a href="#introduction-to-search" class="md-skip">
           Skip to content
         </a>
       
@@ -1246,30 +1246,29 @@
 
 
 
-<h1 id="fundamentals-of-search">Fundamentals of Search<a class="headerlink" href="#fundamentals-of-search" title="Permanent link">&para;</a></h1>
-<p>A comprehensive guide to understanding modern search systems, from traditional text-based approaches to advanced vector search and hybrid architectures.</p>
+<h1 id="introduction-to-search">Introduction to Search<a class="headerlink" href="#introduction-to-search" title="Permanent link">&para;</a></h1>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Search systems have evolved dramatically over the past decades, from simple keyword matching to sophisticated semantic understanding. This evolution reflects our growing need to find relevant information in increasingly large and diverse datasets. Understanding different search approaches—their strengths, limitations, and ideal use cases—is essential for building effective search systems.</p>
 <h2 id="traditional-text-based-search">Traditional Text-Based Search<a class="headerlink" href="#traditional-text-based-search" title="Permanent link">&para;</a></h2>
 <p>Text-based search has been the cornerstone of information retrieval for decades. Understanding its mechanisms, strengths, and limitations provides crucial context for why vector search emerged and when each approach excels.</p>
 <h3 id="the-evolution-of-keyword-search">The Evolution of Keyword Search<a class="headerlink" href="#the-evolution-of-keyword-search" title="Permanent link">&para;</a></h3>
-<p><strong>Early Days: Simple Keyword Matching</strong></p>
+<p>Early Days: Simple Keyword Matching</p>
 <p>The earliest search systems operated on exact keyword matching - a document was relevant if it contained the search terms. This binary approach worked for small collections but failed to capture semantic meaning or handle variations in language.</p>
 <p><strong>Statistical Revolution: TF-IDF</strong></p>
 <p>Term Frequency-Inverse Document Frequency (<a href="../glossary/#tf-idf-term-frequency-inverse-document-frequency">TF-IDF</a>) introduced statistical sophistication to search by considering two key factors:</p>
 <ul>
 <li><strong>Term Frequency (TF):</strong> How often a term appears in a document</li>
-<li><strong>Inverse Document Frequency (IDF):</strong> How rare or common a term is across the entire collection</li>
+<li>Inverse Document Frequency (IDF): How rare or common a term is across the entire collection</li>
 </ul>
 <p>The intuition is powerful: terms that appear frequently in a specific document but rarely across the collection are likely more significant for that document's meaning.</p>
-<p><strong>Mathematical Foundation of TF-IDF:</strong></p>
+<p>Mathematical Foundation of TF-IDF:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>TF-IDF(term, document) = TF(term, document) × IDF(term)
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Where:
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>TF(term, document) = (Number of times term appears in document) / (Total terms in document)
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>IDF(term) = log(Total documents / Documents containing term)
 </code></pre></div>
-<p><strong>Example:</strong></p>
+<p>Example:</p>
 <p>Consider searching for "machine learning" in a collection of 10,000 documents:</p>
 <p>Document A: Contains "machine" 10 times out of 1,000 words, "learning" 8 times
 "machine" appears in 3,000 documents, "learning" appears in 2,000 documents</p>
@@ -1279,7 +1278,7 @@
 </ul>
 <p>The term "learning" scores higher despite lower frequency because it's rarer across the collection.</p>
 <h3 id="bm25-the-modern-standard"><a href="../glossary/#bm25-best-matching-25">BM25</a>: The Modern Standard<a class="headerlink" href="#bm25-the-modern-standard" title="Permanent link">&para;</a></h3>
-<p><strong>Best Matching 25 (BM25)</strong> represents the current gold standard for text relevance scoring, addressing TF-IDF's limitations through sophisticated normalization and parameter tuning.</p>
+<p>Best Matching 25 (BM25) represents the current gold standard for text relevance scoring, addressing TF-IDF's limitations through sophisticated normalization and parameter tuning.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>BM25(query, document) = Σ IDF(term) × (tf × (k1 + 1)) / (tf + k1 × (1 - b + b × |d|/avgdl))
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Where:
@@ -1289,7 +1288,7 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>- k1 = term frequency saturation parameter (typically 1.2-2.0)
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>- b = document length normalization parameter (typically 0.75)
 </code></pre></div>
-<p><strong>Key Improvements Over TF-IDF:</strong></p>
+<p>Key Improvements Over TF-IDF:</p>
 <ol>
 <li>
 <p><strong>Term Frequency Saturation:</strong> As term frequency increases, the contribution grows logarithmically rather than linearly, preventing keyword stuffing from dominating scores.</p>
@@ -1298,10 +1297,10 @@
 <p><strong>Document Length Normalization:</strong> Longer documents don't automatically score higher simply due to containing more words. The parameter <code>b</code> controls how much document length affects scoring.</p>
 </li>
 <li>
-<p><strong>Tunable Parameters:</strong> <code>k1</code> and <code>b</code> can be adjusted based on collection characteristics and user preferences.</p>
+<p>Tunable Parameters: <code>k1</code> and <code>b</code> can be adjusted based on collection characteristics and user preferences.</p>
 </li>
 </ol>
-<p><strong>Real-World Example:</strong></p>
+<p>Real-World Example:</p>
 <p>Consider searching for "sustainable energy solutions" across technical papers:</p>
 <ul>
 <li><em>Document A (500 words):</em> Contains "sustainable" 3 times, "energy" 5 times, "solutions" 2 times</li>
@@ -1313,7 +1312,7 @@
 <ul>
 <li><strong>Legal Document Retrieval:</strong> Finding contracts containing specific clauses like "force majeure" or "intellectual property"</li>
 <li><strong>Technical Documentation:</strong> Locating API references with exact method names like "getUserById()"</li>
-<li><strong>Product Catalogs:</strong> Matching precise specifications like "iPhone 15 Pro Max 256GB Blue"</li>
+<li>Product Catalogs: Matching precise specifications like "iPhone 15 Pro Max 256GB Blue"</li>
 </ul>
 <p><strong>Transparent Relevance:</strong></p>
 <p>Users can easily understand why results matched their query. When searching for "Python pandas DataFrame," it's clear that documents containing these exact terms are relevant. This transparency builds user trust and enables query refinement.</p>
@@ -1322,15 +1321,15 @@
 - Index creation: O(N × M) where N = documents, M = average document length
 - Query processing: O(log N) for term lookups plus scoring
 - Memory requirements: Modest inverted index storage</p>
-<p><strong>Query Flexibility:</strong></p>
+<p>Query Flexibility:</p>
 <ul>
-<li><strong>Boolean Operators:</strong> "machine learning" AND "Python" NOT "R"</li>
-<li><strong>Phrase Matching:</strong> "artificial intelligence" (exact phrase)</li>
-<li><strong>Wildcards:</strong> "comput*" (matches compute, computer, computing)</li>
-<li><strong>Field-Specific:</strong> title:"AI" OR content:"machine learning"</li>
+<li>Boolean Operators: "machine learning" AND "Python" NOT "R"</li>
+<li>Phrase Matching: "artificial intelligence" (exact phrase)</li>
+<li>Wildcards: "comput*" (matches compute, computer, computing)</li>
+<li>Field-Specific: title:"AI" OR content:"machine learning"</li>
 </ul>
 <h3 id="limitations-of-text-based-search">Limitations of Text-Based Search<a class="headerlink" href="#limitations-of-text-based-search" title="Permanent link">&para;</a></h3>
-<p><strong>The Vocabulary Mismatch Problem:</strong></p>
+<p>The Vocabulary Mismatch Problem:</p>
 <p>Text search fails when users and documents employ different terminology for the same concepts:</p>
 <p><em>Query:</em> "car repair"
 <em>Missed Documents:</em> "automobile maintenance," "vehicle servicing," "auto mechanic"</p>
@@ -1344,25 +1343,25 @@
 <li>Blood bank</li>
 </ul>
 <p>Text search cannot distinguish between these contexts without additional semantic understanding.</p>
-<p><strong>Language Barriers:</strong></p>
+<p>Language Barriers:</p>
 <p>Text search struggles with:</p>
 <ul>
-<li><strong>Synonyms:</strong> "happy" vs "joyful" vs "cheerful"</li>
+<li>Synonyms: "happy" vs "joyful" vs "cheerful"</li>
 <li><strong>Multilingual Content:</strong> English query missing Spanish documents with same meaning</li>
 <li><strong>Acronyms and Abbreviations:</strong> "AI" vs "Artificial Intelligence"</li>
-<li><strong>Misspellings:</strong> "recieve" vs "receive"</li>
+<li>Misspellings: "recieve" vs "receive"</li>
 </ul>
 <p><strong>Query Formulation Challenges:</strong></p>
 <p>Users often struggle to formulate effective keyword queries:</p>
 <ul>
-<li><strong>Conceptual Queries:</strong> "companies similar to Netflix" (user wants concept similarity, not exact matches)</li>
-<li><strong>Natural Language:</strong> "best laptop for college students under $800" (contains intent and constraints)</li>
-<li><strong>Exploratory Search:</strong> "new developments in renewable energy" (seeking discovery, not specific documents)</li>
+<li>Conceptual Queries: "companies similar to Netflix" (user wants concept similarity, not exact matches)</li>
+<li>Natural Language: "best laptop for college students under $800" (contains intent and constraints)</li>
+<li>Exploratory Search: "new developments in renewable energy" (seeking discovery, not specific documents)</li>
 </ul>
 <h2 id="vector-search-evolution">Vector Search Evolution<a class="headerlink" href="#vector-search-evolution" title="Permanent link">&para;</a></h2>
 <p>Vector search emerged to address the fundamental limitations of text-based search by representing content and queries as mathematical vectors in high-dimensional semantic space.</p>
 <h3 id="the-semantic-understanding-breakthrough">The Semantic Understanding Breakthrough<a class="headerlink" href="#the-semantic-understanding-breakthrough" title="Permanent link">&para;</a></h3>
-<p><strong>From Keywords to Meaning:</strong></p>
+<p>From Keywords to Meaning:</p>
 <p>Vector search transforms the paradigm from "what words are present?" to "what does this mean?" By converting text into dense numerical vectors, semantically similar content produces geometrically similar vectors, regardless of exact wording.</p>
 <p><strong>The Embedding Revolution:</strong></p>
 <p>Modern <a href="../glossary/#embedding">embedding</a> models, trained on vast text corpora, learn to represent concepts in continuous vector spaces where:
@@ -1401,7 +1400,7 @@
 <li><em>French Match:</em> "algorithmes d'apprentissage automatique"</li>
 </ul>
 <p>All three phrases map to similar regions in vector space, enabling cross-language search without translation.</p>
-<p><strong>Natural Language Query Handling:</strong></p>
+<p>Natural Language Query Handling:</p>
 <p>Vector search excels with conversational, intent-driven queries:</p>
 <ul>
 <li><em>Query:</em> "best affordable laptops for college students"</li>
@@ -1416,9 +1415,9 @@
 <li>Dimension 445: Might capture "positive sentiment"</li>
 <li>Dimension 892: Might represent "temporal aspects"</li>
 </ul>
-<p><strong>Similarity Metrics:</strong></p>
+<p>Similarity Metrics:</p>
 <p>The choice of similarity metric affects search behavior:</p>
-<p><strong><a href="../glossary/#cosine-similarity">Cosine Similarity</a> (Most Common):</strong></p>
+<p><a href="../glossary/#cosine-similarity">Cosine Similarity</a> (Most Common):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cosine_similarity(A, B) = (A · B) / (||A|| × ||B||)
 </code></pre></div>
 <ul>
@@ -1426,11 +1425,11 @@
 <li>Range: -1 (opposite) to 1 (identical)</li>
 <li>Best for text where length doesn't indicate semantic importance</li>
 </ul>
-<p><strong>Example:</strong> Two product reviews might have different lengths but similar sentiment and topics. Cosine similarity focuses on the semantic direction rather than the "intensity" of the review.</p>
+<p>Example: Two product reviews might have different lengths but similar sentiment and topics. Cosine similarity focuses on the semantic direction rather than the "intensity" of the review.</p>
 <h2 id="search-approach-comparison">Search Approach Comparison<a class="headerlink" href="#search-approach-comparison" title="Permanent link">&para;</a></h2>
 <p>Understanding when to use text search versus vector search—and how to combine them effectively—is crucial for building optimal search systems.</p>
 <h3 id="detailed-comparison-framework">Detailed Comparison Framework<a class="headerlink" href="#detailed-comparison-framework" title="Permanent link">&para;</a></h3>
-<p><strong><a href="../glossary/#precision">Precision</a> vs <a href="../glossary/#recall">Recall</a> Trade-offs:</strong></p>
+<p><a href="../glossary/#precision">Precision</a> vs <a href="../glossary/#recall">Recall</a> Trade-offs:</p>
 <p>Understanding how precision (purity of results) and recall (completeness of results) interact is crucial for optimizing search systems. For a detailed exploration of these metrics and optimization strategies in vector search, see <a href="../precision_vs_recall/">Precision and Recall in Vector Search</a>.</p>
 <table>
 <thead>
@@ -1507,33 +1506,33 @@
 </table>
 <h3 id="comprehensive-decision-framework">Comprehensive Decision Framework<a class="headerlink" href="#comprehensive-decision-framework" title="Permanent link">&para;</a></h3>
 <p><em>Understanding when to employ text search versus vector search requires analyzing multiple dimensions of your search requirements. The following framework provides detailed guidance for making informed architectural decisions.</em></p>
-<p><strong>Use Text Search When:</strong></p>
-<p><strong>Exact Matching is Critical</strong></p>
+<p>Use Text Search When:</p>
+<p>Exact Matching is Critical</p>
 <ul>
 <li>Legal document retrieval: "habeas corpus," "force majeure"</li>
 <li>Medical codes: "ICD-10 J44.0" (COPD diagnosis)</li>
 <li>Product catalogs: "SKU-12345-RED-L"</li>
 </ul>
-<p><strong>Users Provide Specific Keywords</strong></p>
+<p>Users Provide Specific Keywords</p>
 <ul>
 <li>Technical documentation: "numpy.array.reshape()"</li>
 <li>Database queries: "SELECT statement syntax"</li>
 <li>API references: "REST POST /users endpoint"</li>
 </ul>
-<p><strong>Computational Resources are Limited</strong></p>
+<p>Computational Resources are Limited</p>
 <ul>
 <li>Mobile applications with limited processing power</li>
 <li>Real-time systems requiring sub-millisecond responses</li>
 <li>High-volume systems needing minimal infrastructure</li>
 </ul>
-<p><strong>Transparency and Explainability Required</strong></p>
+<p>Transparency and Explainability Required</p>
 <ul>
 <li>Regulatory compliance scenarios where relevance must be explained</li>
 <li>User interfaces showing why results matched</li>
 <li>A/B testing where ranking factors need clear attribution</li>
 </ul>
-<p><strong>Use Vector Search When:</strong></p>
-<p><strong>Semantic Understanding is Essential</strong></p>
+<p>Use Vector Search When:</p>
+<p>Semantic Understanding is Essential</p>
 <ul>
 <li>Customer support: "my order hasn't arrived" → find shipping delay content</li>
 <li>Research: "climate change impacts" → find global warming, environmental effects</li>
@@ -1545,13 +1544,13 @@
 <li>International e-commerce with product descriptions in multiple languages</li>
 <li>Academic research across different language publications</li>
 </ul>
-<p><strong>Natural Language Queries Expected</strong></p>
+<p>Natural Language Queries Expected</p>
 <ul>
 <li>Voice search: "What's a good Italian restaurant nearby?"</li>
 <li>Conversational AI: "Show me articles about renewable energy policies"</li>
 <li>Mobile search: "cheap flights to Europe next month"</li>
 </ul>
-<p><strong>Content Discovery and Exploration</strong></p>
+<p>Content Discovery and Exploration</p>
 <ul>
 <li>Media recommendations: "movies like Inception"</li>
 <li>News discovery: "stories related to artificial intelligence ethics"</li>
@@ -1582,26 +1581,26 @@
 </li>
 </ol>
 <h3 id="real-world-hybrid-examples">Real-World Hybrid Examples<a class="headerlink" href="#real-world-hybrid-examples" title="Permanent link">&para;</a></h3>
-<p><strong>E-commerce Search:</strong></p>
+<p>E-commerce Search:</p>
 <p><em>Query:</em> "wireless bluetooth headphones under $100"</p>
 <ul>
-<li><strong>Text Component:</strong> Finds products with exact specifications and price range</li>
-<li><strong>Vector Component:</strong> Discovers products described as "cord-free audio devices," "wireless earbuds," "Bluetooth speakers"</li>
-<li><strong>Combined Result:</strong> Comprehensive coverage including exact matches and semantically related products</li>
+<li>Text Component: Finds products with exact specifications and price range</li>
+<li>Vector Component: Discovers products described as "cord-free audio devices," "wireless earbuds," "Bluetooth speakers"</li>
+<li>Combined Result: Comprehensive coverage including exact matches and semantically related products</li>
 </ul>
-<p><strong>Customer Support:</strong></p>
+<p>Customer Support:</p>
 <p><em>Query:</em> "How do I reset my password?"</p>
 <ul>
-<li><strong>Text Component:</strong> Finds FAQ entries with exact phrase "reset password"</li>
-<li><strong>Vector Component:</strong> Discovers related articles about "account recovery," "login issues," "forgotten credentials"</li>
-<li><strong>Combined Result:</strong> Complete support coverage from exact matches to related topics</li>
+<li>Text Component: Finds FAQ entries with exact phrase "reset password"</li>
+<li>Vector Component: Discovers related articles about "account recovery," "login issues," "forgotten credentials"</li>
+<li>Combined Result: Complete support coverage from exact matches to related topics</li>
 </ul>
-<p><strong>Academic Research:</strong></p>
+<p>Academic Research:</p>
 <p><em>Query:</em> "deep learning applications in medical imaging"</p>
 <ul>
-<li><strong>Text Component:</strong> Papers explicitly mentioning these exact terms</li>
-<li><strong>Vector Component:</strong> Research on "neural networks in radiology," "AI for diagnostic imaging," "machine learning in healthcare"</li>
-<li><strong>Combined Result:</strong> Broader research landscape while maintaining precise topic focus</li>
+<li>Text Component: Papers explicitly mentioning these exact terms</li>
+<li>Vector Component: Research on "neural networks in radiology," "AI for diagnostic imaging," "machine learning in healthcare"</li>
+<li>Combined Result: Broader research landscape while maintaining precise topic focus</li>
 </ul>
 <h3 id="implementation-strategy">Implementation Strategy<a class="headerlink" href="#implementation-strategy" title="Permanent link">&para;</a></h3>
 <p><strong>Query Classification:</strong></p>
@@ -1610,26 +1609,26 @@
 <li><strong>Exact identifiers</strong> (SKUs, codes, names): 80% text, 20% vector weight</li>
 <li><strong>Conceptual queries</strong> ("similar to," "like," "about"): 30% text, 70% vector weight</li>
 <li><strong>Factual queries</strong> ("how to," "what is"): 60% text, 40% vector weight</li>
-<li><strong>Default queries</strong>: 50% text, 50% vector weight (balanced approach)</li>
+<li>Default queries: 50% text, 50% vector weight (balanced approach)</li>
 </ul>
 <p><strong>User Interface Adaptation:</strong></p>
 <p>Search interfaces can provide different experiences based on the search approach:</p>
 <ul>
-<li><strong>Text-heavy results:</strong> Show keyword highlighting, exact matches, filters</li>
+<li>Text-heavy results: Show keyword highlighting, exact matches, filters</li>
 <li><strong>Vector-heavy results:</strong> Display "because you searched for," related concepts, exploration suggestions</li>
-<li><strong>Hybrid results:</strong> Combine both approaches with clear result categorization</li>
+<li>Hybrid results: Combine both approaches with clear result categorization</li>
 </ul>
 <h2 id="reranking-refining-search-results">Reranking: Refining Search Results<a class="headerlink" href="#reranking-refining-search-results" title="Permanent link">&para;</a></h2>
 <p>While initial retrieval systems (text search, vector search, or hybrid approaches) excel at quickly identifying potentially relevant candidates from large datasets, they often lack the computational resources to perform deep analysis of each result. <strong>Reranking</strong> addresses this limitation by applying sophisticated scoring models to a smaller set of initial results, dramatically improving relevance and user satisfaction.</p>
 <h3 id="the-two-stage-search-architecture">The Two-Stage Search Architecture<a class="headerlink" href="#the-two-stage-search-architecture" title="Permanent link">&para;</a></h3>
-<p><strong>Stage 1: Fast Retrieval (Recall-Focused)</strong></p>
+<p>Stage 1: Fast Retrieval (Recall-Focused)</p>
 <ul>
 <li>Primary goal: Cast a wide net to capture potentially relevant content</li>
 <li>Algorithms: BM25, HNSW, IVF, or hybrid combinations</li>
 <li>Speed: Optimized for millisecond response times</li>
 <li>Scope: Search entire corpus (millions to billions of documents)</li>
 </ul>
-<p><strong>Stage 2: Precise Reranking (Precision-Focused)</strong></p>
+<p>Stage 2: Precise Reranking (Precision-Focused)</p>
 <ul>
 <li>Primary goal: Apply sophisticated relevance modeling to refine rankings</li>
 <li>Algorithms: Cross-encoders, learning-to-rank, neural rerankers</li>
@@ -1638,18 +1637,18 @@
 </ul>
 <p>This two-stage architecture embodies the classic precision-recall tradeoff: Stage 1 prioritizes recall (finding all potentially relevant documents), while Stage 2 prioritizes precision (ranking the best documents at the top). For practical strategies on optimizing these metrics, see <a href="../precision_vs_recall/">Precision and Recall in Vector Search</a>.</p>
 <h3 id="why-reranking-is-essential">Why Reranking is Essential<a class="headerlink" href="#why-reranking-is-essential" title="Permanent link">&para;</a></h3>
-<p><strong>Computational Trade-offs in Search:</strong></p>
+<p>Computational Trade-offs in Search:</p>
 <p>Initial retrieval systems face a fundamental constraint: they must balance speed with accuracy across massive datasets. A brute-force approach applying sophisticated relevance modeling to every document would be computationally prohibitive.</p>
 <p><em>Example: E-commerce Search</em></p>
 <ul>
-<li><strong>Without Reranking:</strong> Fast keyword/vector search returns "wireless headphones" but may rank by basic relevance signals</li>
-<li><strong>With Reranking:</strong> Additional factors like user preferences, product ratings, price sensitivity, and seasonal trends refine the ranking</li>
+<li>Without Reranking: Fast keyword/vector search returns "wireless headphones" but may rank by basic relevance signals</li>
+<li>With Reranking: Additional factors like user preferences, product ratings, price sensitivity, and seasonal trends refine the ranking</li>
 </ul>
 <p><strong>Quality Improvements:</strong></p>
 <p>Reranking typically improves key search metrics:
-- <strong>NDCG@10:</strong> 15-30% improvement in ranking quality
-- <strong>Click-through Rate:</strong> 10-25% increase in user engagement
-- <strong>Conversion Rate:</strong> 5-15% improvement in e-commerce scenarios</p>
+- NDCG@10: 15-30% improvement in ranking quality
+- Click-through Rate: 10-25% increase in user engagement
+- Conversion Rate: 5-15% improvement in e-commerce scenarios</p>
 <h3 id="types-of-reranking-approaches">Types of Reranking Approaches<a class="headerlink" href="#types-of-reranking-approaches" title="Permanent link">&para;</a></h3>
 <p><strong>Cross-Encoder Reranking:</strong></p>
 <p>Cross-encoders jointly encode the query and each candidate document, enabling rich interaction modeling that captures nuanced relevance signals impossible in the initial retrieval stage.</p>
@@ -1671,13 +1670,13 @@
 <p><strong>Neural Reranking Models:</strong></p>
 <p>Advanced transformer-based models that can capture complex semantic relationships and user intent patterns beyond traditional relevance matching.</p>
 <h3 id="performance-considerations">Performance Considerations<a class="headerlink" href="#performance-considerations" title="Permanent link">&para;</a></h3>
-<p><strong>Latency Impact:</strong></p>
+<p>Latency Impact:</p>
 <ul>
 <li>Initial retrieval: 5-20ms</li>
 <li>Reranking overhead: 10-50ms additional</li>
 <li>Total query time: 15-70ms (still well within acceptable limits)</li>
 </ul>
-<p><strong>Resource Usage:</strong></p>
+<p>Resource Usage:</p>
 <ul>
 <li>Reranking models require additional compute resources</li>
 <li>GPU acceleration recommended for neural rerankers</li>
@@ -1685,9 +1684,9 @@
 </ul>
 <p><strong>Scalability Strategies:</strong></p>
 <ul>
-<li><strong>Async Reranking:</strong> Return initial results immediately, update with reranked results</li>
-<li><strong>Cached Reranking:</strong> Cache reranked results for popular queries</li>
-<li><strong>Tiered Reranking:</strong> Apply different reranking intensity based on query importance</li>
+<li>Async Reranking: Return initial results immediately, update with reranked results</li>
+<li>Cached Reranking: Cache reranked results for popular queries</li>
+<li>Tiered Reranking: Apply different reranking intensity based on query importance</li>
 </ul>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>Modern search systems represent a sophisticated evolution from simple keyword matching to semantic understanding. The most effective implementations combine:</p>

@@ -41,12 +41,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
       
     
     
-      <link rel="stylesheet" href="../styles/overrides.css">
+      <link rel="stylesheet" href="../styles.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1472,24 +1472,24 @@
 <p>A comprehensive guide to implementing vector search in OpenSearch, from understanding Lucene fundamentals to building production-ready multi-modal search systems.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>OpenSearch extends Apache Lucene's robust document storage and search capabilities with specialized vector search functionality, creating a unified platform for both traditional text search and modern vector-based semantic search. This guide covers the architectural foundations, implementation patterns, and advanced applications for building production vector search systems.</p>
-<p><strong>Prerequisites:</strong> This guide assumes familiarity with search concepts and vector algorithms. For background, see:
+<p>Prerequisites: This guide assumes familiarity with search concepts and vector algorithms. For background, see:
 - <a href="../intro_to_search/">Introduction to Search Systems</a> - Text search, vector search, and hybrid approaches
 - <a href="../index_deep_dive/">Vector Search Algorithms Deep Dive</a> - HNSW, IVF, and optimization strategies</p>
 <h2 id="understanding-apache-lucene">Understanding Apache Lucene<a class="headerlink" href="#understanding-apache-lucene" title="Permanent link">&para;</a></h2>
 <p>Before diving into OpenSearch implementation, it's essential to understand Apache Lucene—the powerful search library that forms OpenSearch's foundation. Lucene provides the core indexing and search capabilities that OpenSearch builds upon.</p>
 <h3 id="what-is-lucene">What is Lucene?<a class="headerlink" href="#what-is-lucene" title="Permanent link">&para;</a></h3>
 <p>Apache Lucene is a high-performance, full-featured text search engine library written in Java. Originally created by Doug Cutting in 1999, Lucene has evolved into the de facto standard for building search applications and powers numerous search platforms including OpenSearch, Elasticsearch, and Apache Solr.</p>
-<p><strong>Core Capabilities:</strong></p>
+<p>Core Capabilities:</p>
 <ul>
-<li><strong>Inverted Index:</strong> Efficient data structure for full-text search</li>
-<li><strong>Query Parsing:</strong> Rich query syntax for complex search expressions</li>
-<li><strong>Scoring Models:</strong> Pluggable relevance scoring (BM25, TF-IDF, custom)</li>
-<li><strong>Document Storage:</strong> Compressed field storage and retrieval</li>
-<li><strong>Scalability:</strong> Designed for indexing and searching large document collections</li>
+<li>Inverted Index: Efficient data structure for full-text search</li>
+<li>Query Parsing: Rich query syntax for complex search expressions</li>
+<li>Scoring Models: Pluggable relevance scoring (BM25, TF-IDF, custom)</li>
+<li>Document Storage: Compressed field storage and retrieval</li>
+<li>Scalability: Designed for indexing and searching large document collections</li>
 </ul>
 <h3 id="lucenes-segment-architecture">Lucene's Segment Architecture<a class="headerlink" href="#lucenes-segment-architecture" title="Permanent link">&para;</a></h3>
 <p>Understanding Lucene's segment-based architecture is crucial for optimizing OpenSearch vector search performance.</p>
-<p><strong>Segments: Immutable Building Blocks</strong></p>
+<p>Segments: Immutable Building Blocks</p>
 <p>Lucene organizes indexed data into segments—immutable, self-contained indexes that can be searched independently:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Index Structure:
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>my_index/
@@ -1505,17 +1505,17 @@
 </code></pre></div>
 <p><strong>Key Characteristics:</strong></p>
 <ol>
-<li><strong>Immutability:</strong> Once written, segments never change—this enables efficient caching and concurrent access</li>
+<li>Immutability: Once written, segments never change—this enables efficient caching and concurrent access</li>
 <li><strong>Incremental Indexing:</strong> New documents create new segments rather than modifying existing ones</li>
-<li><strong>Parallel Search:</strong> Multiple segments can be searched concurrently across threads</li>
-<li><strong>Merge Policy:</strong> Background process merges smaller segments into larger ones for optimization</li>
+<li>Parallel Search: Multiple segments can be searched concurrently across threads</li>
+<li>Merge Policy: Background process merges smaller segments into larger ones for optimization</li>
 </ol>
-<p><strong>Why Segments Matter for Vector Search:</strong></p>
+<p>Why Segments Matter for Vector Search:</p>
 <ul>
-<li><strong>Memory Mapping:</strong> Immutable segments allow efficient memory-mapped file access for large vector datasets</li>
-<li><strong>Cache Efficiency:</strong> Vectors in segments can be cached effectively without invalidation concerns</li>
+<li>Memory Mapping: Immutable segments allow efficient memory-mapped file access for large vector datasets</li>
+<li>Cache Efficiency: Vectors in segments can be cached effectively without invalidation concerns</li>
 <li><strong>Parallel Processing:</strong> Vector search across segments can leverage multi-core processors</li>
-<li><strong>Index Growth:</strong> New vectors added as new segments without disrupting existing searches</li>
+<li>Index Growth: New vectors added as new segments without disrupting existing searches</li>
 </ul>
 <h3 id="lucenes-inverted-index">Lucene's Inverted Index<a class="headerlink" href="#lucenes-inverted-index" title="Permanent link">&para;</a></h3>
 <p>The inverted index is Lucene's core data structure for text search, and understanding it helps contextualize how vector indexes integrate.</p>
@@ -1530,14 +1530,14 @@
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>- Document ID: Which documents contain this term
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>- Positions: Where in each document the term appears
 </code></pre></div>
-<p><strong>Query Processing:</strong></p>
+<p>Query Processing:</p>
 <ol>
-<li><strong>Term Lookup:</strong> Find documents containing query terms in the inverted index (O(log N) with binary search)</li>
-<li><strong>Intersection/Union:</strong> Combine document lists based on boolean operators (AND, OR, NOT)</li>
-<li><strong>Scoring:</strong> Calculate relevance scores using BM25 or other algorithms</li>
-<li><strong>Ranking:</strong> Return top-k results sorted by score</li>
+<li>Term Lookup: Find documents containing query terms in the inverted index (O(log N) with binary search)</li>
+<li>Intersection/Union: Combine document lists based on boolean operators (AND, OR, NOT)</li>
+<li>Scoring: Calculate relevance scores using BM25 or other algorithms</li>
+<li>Ranking: Return top-k results sorted by score</li>
 </ol>
-<p><strong>Integration with Vector Search:</strong></p>
+<p>Integration with Vector Search:</p>
 <p>OpenSearch stores vector indexes alongside inverted indexes within the same segments:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Segment Contents:
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── inverted_index/     (Traditional term dictionary and postings)
@@ -1551,17 +1551,17 @@
 <p>Lucene provides a flexible query model that OpenSearch extends for vector search:</p>
 <p><strong>Traditional Query Types:</strong></p>
 <ul>
-<li><strong>TermQuery:</strong> Exact term matching</li>
-<li><strong>BooleanQuery:</strong> Combine queries with AND, OR, NOT</li>
-<li><strong>PhraseQuery:</strong> Match exact phrases</li>
-<li><strong>RangeQuery:</strong> Numeric or date range filtering</li>
-<li><strong>FuzzyQuery:</strong> Approximate string matching</li>
+<li>TermQuery: Exact term matching</li>
+<li>BooleanQuery: Combine queries with AND, OR, NOT</li>
+<li>PhraseQuery: Match exact phrases</li>
+<li>RangeQuery: Numeric or date range filtering</li>
+<li>FuzzyQuery: Approximate string matching</li>
 </ul>
 <p><strong>Vector Query Integration:</strong></p>
 <p>OpenSearch adds vector query types that integrate seamlessly with Lucene's query model:</p>
 <ul>
-<li><strong>KnnVectorQuery:</strong> Find k-nearest neighbors in vector space</li>
-<li><strong>Hybrid Queries:</strong> Combine vector similarity with text/filter constraints</li>
+<li>KnnVectorQuery: Find k-nearest neighbors in vector space</li>
+<li>Hybrid Queries: Combine vector similarity with text/filter constraints</li>
 </ul>
 <p><strong>Example Query Flow:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>User Query: &quot;machine learning&quot; + vector similarity + category=&quot;AI&quot;
@@ -1575,7 +1575,7 @@
 </code></pre></div>
 <h3 id="why-opensearch-chose-lucene">Why OpenSearch Chose Lucene<a class="headerlink" href="#why-opensearch-chose-lucene" title="Permanent link">&para;</a></h3>
 <p>OpenSearch's decision to build on Lucene provides several strategic advantages:</p>
-<p><strong>Proven Foundation:</strong></p>
+<p>Proven Foundation:</p>
 <ul>
 <li>20+ years of development and optimization</li>
 <li>Battle-tested at massive scale (Wikipedia, Twitter, LinkedIn)</li>
@@ -1593,7 +1593,7 @@
 <li>Advanced compression algorithms</li>
 <li>Efficient query execution engine</li>
 </ul>
-<p><strong>Extensibility:</strong></p>
+<p>Extensibility:</p>
 <ul>
 <li>Plugin architecture for custom functionality</li>
 <li>Codec system for custom index formats</li>
@@ -1625,12 +1625,12 @@
 <p><strong>Segment-Based Vector Storage:</strong></p>
 <p>OpenSearch leverages Lucene's segment architecture for vector storage, providing several key benefits:</p>
 <ol>
-<li><strong>Immutable Segments:</strong> Once written, segments don't change, enabling efficient memory mapping and caching</li>
+<li>Immutable Segments: Once written, segments don't change, enabling efficient memory mapping and caching</li>
 <li><strong>Parallel Processing:</strong> Multiple segments can be searched concurrently</li>
 <li><strong>Incremental Updates:</strong> New data creates new segments rather than modifying existing ones</li>
-<li><strong>Memory Management:</strong> Vectors stored in off-heap memory-mapped files</li>
+<li>Memory Management: Vectors stored in off-heap memory-mapped files</li>
 </ol>
-<p><strong>Vector Index Files per Segment:</strong></p>
+<p>Vector Index Files per Segment:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Segment Directory:
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>├── vectors.vec      # Raw vector data (memory-mapped)
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>├── vector_meta.vem  # Vector metadata and mappings
@@ -1654,14 +1654,14 @@
 - Query vector parsing and normalization
 - Similarity score calculations
 - Result ranking and aggregation</p>
-<p><strong>Caching Strategy:</strong></p>
+<p>Caching Strategy:</p>
 <ul>
-<li><strong>Vector cache:</strong> Recently accessed vectors cached in direct memory</li>
-<li><strong>Graph cache:</strong> Frequently traversed graph regions kept in memory</li>
-<li><strong>Query cache:</strong> Common query patterns cached for repeated execution</li>
+<li>Vector cache: Recently accessed vectors cached in direct memory</li>
+<li>Graph cache: Frequently traversed graph regions kept in memory</li>
+<li>Query cache: Common query patterns cached for repeated execution</li>
 </ul>
 <h3 id="engine-architecture">Engine Architecture<a class="headerlink" href="#engine-architecture" title="Permanent link">&para;</a></h3>
-<p><strong>Lucene Integration:</strong></p>
+<p>Lucene Integration:</p>
 <p>OpenSearch vector search builds on Lucene's KnnVectorField implementation while adding:</p>
 <ul>
 <li>Multiple algorithm support (HNSW, IVF)</li>
@@ -1699,10 +1699,10 @@
 </code></pre></div>
 <p><strong>Space Type Options:</strong></p>
 <ul>
-<li><strong>"cosinesimil":</strong> Cosine similarity (recommended for text embeddings)</li>
-<li><strong>"l2":</strong> Euclidean distance (good for normalized embeddings)</li>
-<li><strong>"l1":</strong> Manhattan distance (robust for sparse vectors)</li>
-<li><strong>"linf":</strong> Maximum distance (specialized use cases)</li>
+<li>"cosinesimil": Cosine similarity (recommended for text embeddings)</li>
+<li>"l2": Euclidean distance (good for normalized embeddings)</li>
+<li>"l1": Manhattan distance (robust for sparse vectors)</li>
+<li>"linf": Maximum distance (specialized use cases)</li>
 </ul>
 <h3 id="hnsw-configuration">HNSW Configuration<a class="headerlink" href="#hnsw-configuration" title="Permanent link">&para;</a></h3>
 <p><strong>Production HNSW Setup:</strong></p>
@@ -1799,7 +1799,7 @@
 <a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="p">}</span>
 </code></pre></div>
-<p><strong>IVF Parameter Calculation Framework:</strong></p>
+<p>IVF Parameter Calculation Framework:</p>
 <p><em>Cluster Count Formula:</em></p>
 <ul>
 <li>Base: √expected_vector_count</li>
@@ -1820,7 +1820,7 @@
 <li>5M vectors, 768 dims → nlist=3,464, nprobes=346, ~14.4GB</li>
 </ul>
 <h3 id="multi-vector-field-configuration">Multi-Vector Field Configuration<a class="headerlink" href="#multi-vector-field-configuration" title="Permanent link">&para;</a></h3>
-<p><strong>Multiple Vector Fields for Different Purposes:</strong></p>
+<p>Multiple Vector Fields for Different Purposes:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1901,7 +1901,7 @@
 <a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="hybrid-search-queries">Hybrid Search Queries<a class="headerlink" href="#hybrid-search-queries" title="Permanent link">&para;</a></h3>
-<p><strong>Combining Text and Vector Search:</strong></p>
+<p>Combining Text and Vector Search:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1943,7 +1943,7 @@
 </code></pre></div>
 <h3 id="reranking-in-opensearch">Reranking in OpenSearch<a class="headerlink" href="#reranking-in-opensearch" title="Permanent link">&para;</a></h3>
 <p>OpenSearch provides several built-in mechanisms for implementing reranking, from simple rescoring queries to integration with external machine learning models. Understanding these capabilities enables you to improve search relevance significantly.</p>
-<p><strong>Basic Rescore Query Structure:</strong></p>
+<p>Basic Rescore Query Structure:</p>
 <p>OpenSearch's <code>rescore</code> query allows you to apply a secondary query to refine the top results from your initial search:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">{</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1987,10 +1987,10 @@
 <a id="__codelineno-16-40" name="__codelineno-16-40" href="#__codelineno-16-40"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-16-41" name="__codelineno-16-41" href="#__codelineno-16-41"></a><span class="p">}</span>
 </code></pre></div>
-<p><strong>Key Parameters:</strong></p>
+<p>Key Parameters:</p>
 <ul>
-<li><strong>window_size:</strong> Number of top documents to rescore (typically 50-200)</li>
-<li><strong>query_weight:</strong> Weight given to original query score (0.0-1.0)</li>
+<li>window_size: Number of top documents to rescore (typically 50-200)</li>
+<li>query_weight: Weight given to original query score (0.0-1.0)</li>
 <li><strong>rescore_query_weight:</strong> Weight given to rescore query score (0.0-1.0)</li>
 </ul>
 <h3 id="advanced-function-scoring">Advanced Function Scoring<a class="headerlink" href="#advanced-function-scoring" title="Permanent link">&para;</a></h3>
@@ -2056,15 +2056,15 @@
 <a id="__codelineno-17-58" name="__codelineno-17-58" href="#__codelineno-17-58"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-17-59" name="__codelineno-17-59" href="#__codelineno-17-59"></a><span class="p">}</span>
 </code></pre></div>
-<p><strong>Function Types:</strong></p>
+<p>Function Types:</p>
 <ul>
-<li><strong>field_value_factor:</strong> Use document field values as scoring factors</li>
-<li><strong>gauss/linear/exp:</strong> Distance-based decay functions for date, location, numerical ranges</li>
-<li><strong>script_score:</strong> Custom scoring logic using Painless scripts</li>
-<li><strong>random_score:</strong> Add controlled randomization to prevent result staleness</li>
+<li>field_value_factor: Use document field values as scoring factors</li>
+<li>gauss/linear/exp: Distance-based decay functions for date, location, numerical ranges</li>
+<li>script_score: Custom scoring logic using Painless scripts</li>
+<li>random_score: Add controlled randomization to prevent result staleness</li>
 </ul>
 <h3 id="hybrid-search-with-reranking">Hybrid Search with Reranking<a class="headerlink" href="#hybrid-search-with-reranking" title="Permanent link">&para;</a></h3>
-<p><strong>Combining Text and Vector Search with Reranking:</strong></p>
+<p>Combining Text and Vector Search with Reranking:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">{</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="nt">&quot;bool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2118,9 +2118,9 @@
 <a id="__codelineno-18-51" name="__codelineno-18-51" href="#__codelineno-18-51"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="external-neural-reranking-integration">External Neural Reranking Integration<a class="headerlink" href="#external-neural-reranking-integration" title="Permanent link">&para;</a></h3>
-<p><strong>Pipeline Architecture for Neural Reranking:</strong></p>
+<p>Pipeline Architecture for Neural Reranking:</p>
 <p>Modern OpenSearch deployments often integrate with external reranking services for advanced neural reranking:</p>
-<p><strong>Step 1: Initial Retrieval</strong>
+<p>Step 1: Initial Retrieval
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># OpenSearch returns top 100-200 candidates</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;localhost:9200/documents/_search&quot;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
@@ -2136,7 +2136,7 @@
 <a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="s1">    }</span>
 <a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="s1">  }&#39;</span>
 </code></pre></div></p>
-<p><strong>Step 2: Feature Extraction</strong>
+<p>Step 2: Feature Extraction
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Extract additional signals for reranking</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">features</span> <span class="o">=</span> <span class="p">{</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="s2">&quot;query_document_similarity&quot;</span><span class="p">:</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">query_vector</span><span class="p">,</span> <span class="n">doc_vector</span><span class="p">),</span>
@@ -2145,7 +2145,7 @@
 <a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>    <span class="s2">&quot;temporal_relevance&quot;</span><span class="p">:</span> <span class="n">calculate_temporal_decay</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">publish_date</span><span class="p">)</span>
 <a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="p">}</span>
 </code></pre></div></p>
-<p><strong>Step 3: Neural Reranking</strong>
+<p>Step 3: Neural Reranking
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># Apply transformer-based reranking model</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">reranked_scores</span> <span class="o">=</span> <span class="n">neural_reranker</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="n">query_text</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
@@ -2153,7 +2153,7 @@
 <a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>    <span class="n">features</span><span class="o">=</span><span class="n">features</span>
 <a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="p">)</span>
 </code></pre></div></p>
-<p><strong>Step 4: Result Integration</strong>
+<p>Step 4: Result Integration
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Return reranked results to user</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">final_results</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="nb">zip</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">reranked_scores</span><span class="p">),</span>
@@ -2165,9 +2165,9 @@
 <p><strong>Reranking Performance Tuning:</strong></p>
 <ul>
 <li><strong>Window Size Optimization:</strong> Start with 50, increase to 100-200 for better quality</li>
-<li><strong>Weight Balancing:</strong> Use 70-80% original query weight, 20-30% rescore weight</li>
-<li><strong>Caching Strategies:</strong> Cache rescore results for popular queries</li>
-<li><strong>Async Processing:</strong> Implement asynchronous reranking for real-time applications</li>
+<li>Weight Balancing: Use 70-80% original query weight, 20-30% rescore weight</li>
+<li>Caching Strategies: Cache rescore results for popular queries</li>
+<li>Async Processing: Implement asynchronous reranking for real-time applications</li>
 </ul>
 <p><strong>Resource Management:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="p">{</span>
@@ -2190,26 +2190,26 @@
 <h4 id="understanding-multi-modal-vector-search">Understanding Multi-Modal Vector Search<a class="headerlink" href="#understanding-multi-modal-vector-search" title="Permanent link">&para;</a></h4>
 <p><strong>Cross-Modal Understanding:</strong></p>
 <p>Multi-modal search transcends traditional single-content-type search by enabling queries across heterogeneous data types. This capability allows users to search for images using text descriptions, find videos using audio queries, or discover text documents using image inputs.</p>
-<p><strong>Key Advantages:</strong></p>
+<p>Key Advantages:</p>
 <ul>
 <li><strong>Natural Query Expression:</strong> Users can express intent using the most convenient modality</li>
-<li><strong>Content Discovery:</strong> Find related content across different media types</li>
-<li><strong>Accessibility:</strong> Enable alternative access methods for users with different needs</li>
-<li><strong>Rich Results:</strong> Provide diverse result sets combining multiple content types</li>
+<li>Content Discovery: Find related content across different media types</li>
+<li>Accessibility: Enable alternative access methods for users with different needs</li>
+<li>Rich Results: Provide diverse result sets combining multiple content types</li>
 </ul>
 <p><strong>Technical Foundation:</strong></p>
 <p>Multi-modal search relies on embedding models trained on paired data across modalities, such as CLIP (Contrastive Language-Image Pre-training) for text-image pairs, or specialized audio-text models. These models learn shared representations where semantically similar content clusters together regardless of its original format.</p>
 <p><strong>Common Use Cases:</strong></p>
 <ul>
-<li><strong>E-commerce:</strong> Search for products using text descriptions to find matching images</li>
-<li><strong>Media Libraries:</strong> Find videos or images using natural language descriptions</li>
+<li>E-commerce: Search for products using text descriptions to find matching images</li>
+<li>Media Libraries: Find videos or images using natural language descriptions</li>
 <li><strong>Educational Content:</strong> Discover learning materials across text, video, and image formats</li>
-<li><strong>Research Databases:</strong> Cross-reference findings across papers, diagrams, and datasets</li>
+<li>Research Databases: Cross-reference findings across papers, diagrams, and datasets</li>
 </ul>
 <h4 id="cross-modal-search-architecture">Cross-Modal Search Architecture<a class="headerlink" href="#cross-modal-search-architecture" title="Permanent link">&para;</a></h4>
 <p><strong>Unified Embedding Space:</strong></p>
 <p>Multi-modal search relies on embedding models that map different content types into a shared semantic space where similar concepts cluster together regardless of modality.</p>
-<p><strong>Shared Vector Space Design:</strong></p>
+<p>Shared Vector Space Design:</p>
 <p>The core innovation of multi-modal search lies in creating a unified vector space where different content types can be meaningfully compared. This requires specialized embedding models that understand semantic relationships across modalities.</p>
 <p><strong>Implementation Architecture:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="p">{</span>
@@ -2294,16 +2294,16 @@
 </code></pre></div></p>
 <p><strong>Multi-Modal Embedding Models:</strong></p>
 <ul>
-<li><strong>CLIP (OpenAI):</strong> Text-image understanding with 512-dimensional embeddings</li>
-<li><strong>ALIGN (Google):</strong> Large-scale text-image alignment with 640-dimensional vectors</li>
-<li><strong>AudioCLIP:</strong> Extension to audio-text-image modalities</li>
-<li><strong>VideoCLIP:</strong> Video-text understanding for temporal content</li>
+<li>CLIP (OpenAI): Text-image understanding with 512-dimensional embeddings</li>
+<li>ALIGN (Google): Large-scale text-image alignment with 640-dimensional vectors</li>
+<li>AudioCLIP: Extension to audio-text-image modalities</li>
+<li>VideoCLIP: Video-text understanding for temporal content</li>
 </ul>
 <p><strong>Practical Implementation Considerations:</strong></p>
 <ul>
 <li><strong>Dimension Alignment:</strong> Ensure all modalities use the same vector dimensions</li>
-<li><strong>Normalization:</strong> Apply consistent normalization across different embedding models</li>
-<li><strong>Quality Control:</strong> Validate cross-modal similarity using human evaluation</li>
+<li>Normalization: Apply consistent normalization across different embedding models</li>
+<li>Quality Control: Validate cross-modal similarity using human evaluation</li>
 <li><strong>Performance Optimization:</strong> Use separate indexes per modality for complex queries</li>
 </ul>
 <h2 id="production-best-practices">Production Best Practices<a class="headerlink" href="#production-best-practices" title="Permanent link">&para;</a></h2>
@@ -2320,20 +2320,20 @@
 <a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="p">}</span>
 </code></pre></div>
-<p><strong>Recommendations:</strong></p>
+<p>Recommendations:</p>
 <ul>
-<li><strong>Shard count:</strong> 1-3 shards per 50GB of data</li>
-<li><strong>Replica count:</strong> At least 1 for production</li>
-<li><strong>Refresh interval:</strong> 30s-60s for vector-heavy workloads</li>
+<li>Shard count: 1-3 shards per 50GB of data</li>
+<li>Replica count: At least 1 for production</li>
+<li>Refresh interval: 30s-60s for vector-heavy workloads</li>
 </ul>
 <h3 id="monitoring-and-observability">Monitoring and Observability<a class="headerlink" href="#monitoring-and-observability" title="Permanent link">&para;</a></h3>
-<p><strong>Key Metrics to Monitor:</strong></p>
+<p>Key Metrics to Monitor:</p>
 <ul>
-<li><strong>Query latency:</strong> P50, P95, P99 percentiles</li>
-<li><strong>Index size:</strong> Track growth over time</li>
-<li><strong>Memory usage:</strong> JVM heap and off-heap memory</li>
+<li>Query latency: P50, P95, P99 percentiles</li>
+<li>Index size: Track growth over time</li>
+<li>Memory usage: JVM heap and off-heap memory</li>
 <li><strong>Cache hit rates:</strong> Query cache, request cache</li>
-<li><strong>Merge statistics:</strong> Segment count and merge times</li>
+<li>Merge statistics: Segment count and merge times</li>
 </ul>
 <p><strong>Example Monitoring Query:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># Check index statistics</span>
@@ -2343,13 +2343,13 @@
 <a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;localhost:9200/_nodes/stats/indices,jvm?pretty&quot;</span>
 </code></pre></div>
 <h3 id="scaling-strategies">Scaling Strategies<a class="headerlink" href="#scaling-strategies" title="Permanent link">&para;</a></h3>
-<p><strong>Horizontal Scaling:</strong></p>
+<p>Horizontal Scaling:</p>
 <ul>
 <li>Add more nodes to distribute vector search load</li>
 <li>Increase shard count for large datasets (&gt;500GB)</li>
 <li>Use dedicated master nodes for cluster stability</li>
 </ul>
-<p><strong>Vertical Scaling:</strong></p>
+<p>Vertical Scaling:</p>
 <ul>
 <li>Increase memory for better vector caching</li>
 <li>Use faster storage (NVMe SSDs) for vector data</li>
@@ -2358,11 +2358,11 @@
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>OpenSearch provides a powerful, production-ready platform for vector search built on the solid foundation of Apache Lucene. Key takeaways:</p>
 <ol>
-<li><strong>Lucene Integration:</strong> Understanding Lucene's segment architecture and inverted index model is crucial for optimizing vector search performance</li>
+<li>Lucene Integration: Understanding Lucene's segment architecture and inverted index model is crucial for optimizing vector search performance</li>
 <li><strong>Flexible Configuration:</strong> OpenSearch supports multiple algorithms (HNSW, IVF) with extensive tuning options</li>
 <li><strong>Hybrid Capabilities:</strong> Seamlessly combine text search, filters, and vector similarity in unified queries</li>
-<li><strong>Advanced Features:</strong> Multi-modal search, reranking, and function scoring enable sophisticated applications</li>
-<li><strong>Production Ready:</strong> Built-in monitoring, scaling, and optimization features for enterprise deployments</li>
+<li>Advanced Features: Multi-modal search, reranking, and function scoring enable sophisticated applications</li>
+<li>Production Ready: Built-in monitoring, scaling, and optimization features for enterprise deployments</li>
 </ol>
 <p>For related topics, see:
 - <a href="../intro_to_search/">Introduction to Search Systems</a> - Fundamentals of text and vector search
@@ -2370,9 +2370,9 @@
 - <a href="../precision_vs_recall/">Precision and Recall in Vector Search</a> - Understanding and optimizing search quality</p>
 <hr />
 <h2 id="-performance-metrics-disclaimer">⚠️ Performance Metrics Disclaimer<a class="headerlink" href="#-performance-metrics-disclaimer" title="Permanent link">&para;</a></h2>
-<p><strong>Important Notice about Performance Data:</strong></p>
+<p>Important Notice about Performance Data:</p>
 <p>All performance metrics, benchmarks, latency figures, memory usage statistics, and cost examples presented in this document are <strong>illustrative examples</strong> designed to help with understanding and planning. These numbers are based on theoretical models, synthetic tests, or specific hardware configurations and should not be considered as guaranteed performance metrics for your specific use case.</p>
-<p><strong>Actual performance will vary significantly based on:</strong></p>
+<p>Actual performance will vary significantly based on:</p>
 <ul>
 <li>Hardware specifications and configurations</li>
 <li>Data characteristics (vector dimensions, dataset size, distribution)</li>
@@ -2381,7 +2381,7 @@
 <li>OpenSearch version and configuration settings</li>
 <li>Operating system and environment factors</li>
 </ul>
-<p><strong>Before making production decisions:</strong></p>
+<p>Before making production decisions:</p>
 <ul>
 <li>Conduct benchmarks with your actual data and infrastructure</li>
 <li>Test with realistic query patterns and load</li>

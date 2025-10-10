@@ -41,12 +41,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
       
     
     
-      <link rel="stylesheet" href="../styles/overrides.css">
+      <link rel="stylesheet" href="../styles.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1279,25 +1279,25 @@
 <h1 id="aws-kendra-vs-aws-opensearch-service-comparison-guide">AWS Kendra vs AWS OpenSearch: Service Comparison Guide<a class="headerlink" href="#aws-kendra-vs-aws-opensearch-service-comparison-guide" title="Permanent link">&para;</a></h1>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This guide provides a comprehensive comparison between AWS Kendra and AWS OpenSearch to help you choose the right search solution for your needs. Both services offer powerful search capabilities but serve different use cases and technical requirements.</p>
-<p><strong>📘 For details on OpenSearch:</strong> See the dedicated <a href="../opensearch/">OpenSearch Introduction</a></p>
+<p>📘 For details on OpenSearch: See the dedicated <a href="../opensearch/">OpenSearch Introduction</a></p>
 <h2 id="service-philosophy-and-approach">Service Philosophy and Approach<a class="headerlink" href="#service-philosophy-and-approach" title="Permanent link">&para;</a></h2>
 <h3 id="aws-kendra---intelligent-enterprise-search">AWS Kendra - Intelligent Enterprise Search<a class="headerlink" href="#aws-kendra---intelligent-enterprise-search" title="Permanent link">&para;</a></h3>
 <p>AWS Kendra is a fully managed enterprise search service that uses machine learning to deliver intelligent search capabilities. It's designed for organizations that want to provide natural language search across their enterprise content without extensive technical configuration.</p>
 <p><strong>Key characteristics:</strong></p>
 <ul>
-<li><strong>Managed AI/ML</strong>: Pre-trained models handle query understanding and relevance</li>
-<li><strong>Natural language interface</strong>: Users can ask questions as they would to a person</li>
-<li><strong>Enterprise-focused</strong>: Built specifically for organizational knowledge management</li>
-<li><strong>Minimal configuration</strong>: Works out-of-the-box with many data sources</li>
+<li>Managed AI/ML: Pre-trained models handle query understanding and relevance</li>
+<li>Natural language interface: Users can ask questions as they would to a person</li>
+<li>Enterprise-focused: Built specifically for organizational knowledge management</li>
+<li>Minimal configuration: Works out-of-the-box with many data sources</li>
 </ul>
 <h3 id="aws-opensearch---flexible-search-and-analytics-platform">AWS OpenSearch - Flexible Search and Analytics Platform<a class="headerlink" href="#aws-opensearch---flexible-search-and-analytics-platform" title="Permanent link">&para;</a></h3>
 <p>AWS OpenSearch is a distributed search and analytics suite based on Elasticsearch and Kibana. It provides full control over search implementation and supports both traditional text search and modern vector search capabilities.</p>
 <p><strong>Key characteristics:</strong></p>
 <ul>
-<li><strong>Full control</strong>: Configure every aspect of search behavior and relevance</li>
-<li><strong>Multi-purpose</strong>: Supports search, analytics, logging, and monitoring use cases</li>
-<li><strong>Extensible architecture</strong>: Build custom search experiences and applications</li>
-<li><strong>Vector search capable</strong>: Modern semantic search with <a href="../glossary/#embedding">embedding</a> models</li>
+<li>Full control: Configure every aspect of search behavior and relevance</li>
+<li>Multi-purpose: Supports search, analytics, logging, and monitoring use cases</li>
+<li>Extensible architecture: Build custom search experiences and applications</li>
+<li>Vector search capable: Modern semantic search with <a href="../glossary/#embedding">embedding</a> models</li>
 </ul>
 <p>For detailed technical information about OpenSearch's search approaches, algorithms, and implementation patterns, see the <a href="../opensearch/">OpenSearch Introduction</a>.</p>
 <h2 id="core-differences-summary">Core Differences Summary<a class="headerlink" href="#core-differences-summary" title="Permanent link">&para;</a></h2>
@@ -1524,10 +1524,10 @@
 <h3 id="aws-kendra-pricing-structure">AWS Kendra Pricing Structure<a class="headerlink" href="#aws-kendra-pricing-structure" title="Permanent link">&para;</a></h3>
 <p><em>Current pricing information: <a href="https://aws.amazon.com/kendra/pricing/">AWS Kendra Pricing</a></em></p>
 <ul>
-<li><strong>Index-based pricing</strong>: Monthly fee per search index</li>
-<li><strong>Query-based charges</strong>: Per query pricing model</li>
-<li><strong>Developer Edition</strong>: Lower-cost tier with reduced capacity</li>
-<li><strong>Enterprise Edition</strong>: Full features and higher capacity</li>
+<li>Index-based pricing: Monthly fee per search index</li>
+<li>Query-based charges: Per query pricing model</li>
+<li>Developer Edition: Lower-cost tier with reduced capacity</li>
+<li>Enterprise Edition: Full features and higher capacity</li>
 </ul>
 <p><strong>Typical cost factors:</strong></p>
 <ul>
@@ -1539,10 +1539,10 @@
 <h3 id="aws-opensearch-pricing-structure">AWS OpenSearch Pricing Structure<a class="headerlink" href="#aws-opensearch-pricing-structure" title="Permanent link">&para;</a></h3>
 <p><em>Current pricing information: <a href="https://aws.amazon.com/opensearch-service/pricing/">AWS OpenSearch Pricing</a></em></p>
 <ul>
-<li><strong>Instance-based pricing</strong>: Hourly rates for compute instances</li>
-<li><strong>Storage charges</strong>: Separate EBS storage costs</li>
-<li><strong>Data transfer</strong>: Standard AWS data transfer rates</li>
-<li><strong>Reserved instances</strong>: Available for cost optimization</li>
+<li>Instance-based pricing: Hourly rates for compute instances</li>
+<li>Storage charges: Separate EBS storage costs</li>
+<li>Data transfer: Standard AWS data transfer rates</li>
+<li>Reserved instances: Available for cost optimization</li>
 </ul>
 <p><strong>Typical cost factors:</strong></p>
 <ul>
@@ -1571,53 +1571,53 @@
 <h3 id="when-aws-kendra-excels">When AWS Kendra Excels<a class="headerlink" href="#when-aws-kendra-excels" title="Permanent link">&para;</a></h3>
 <p><strong>Enterprise Knowledge Base</strong></p>
 <ul>
-<li><strong>Scenario</strong>: Company with 50,000 employees needs to search across HR policies, procedures, and documentation</li>
-<li><strong>Why Kendra</strong>: Employees can ask natural questions like "What's the remote work policy?" without training</li>
-<li><strong>Benefits</strong>: Quick deployment, built-in connectors to existing systems, automatic relevance tuning</li>
+<li>Scenario: Company with 50,000 employees needs to search across HR policies, procedures, and documentation</li>
+<li>Why Kendra: Employees can ask natural questions like "What's the remote work policy?" without training</li>
+<li>Benefits: Quick deployment, built-in connectors to existing systems, automatic relevance tuning</li>
 </ul>
 <p><strong>Customer Support FAQ</strong></p>
 <ul>
-<li><strong>Scenario</strong>: Customer service needs intelligent search across support documents</li>
-<li><strong>Why Kendra</strong>: Natural language understanding improves answer accuracy</li>
-<li><strong>Benefits</strong>: Reduced support ticket volume, faster resolution times</li>
+<li>Scenario: Customer service needs intelligent search across support documents</li>
+<li>Why Kendra: Natural language understanding improves answer accuracy</li>
+<li>Benefits: Reduced support ticket volume, faster resolution times</li>
 </ul>
-<p><strong>Legal and Compliance Search</strong></p>
+<p>Legal and Compliance Search</p>
 <ul>
-<li><strong>Scenario</strong>: Law firm needs to search across case documents and legal precedents</li>
-<li><strong>Why Kendra</strong>: Understanding of legal terminology and document context</li>
-<li><strong>Benefits</strong>: Faster case research, improved document discovery</li>
+<li>Scenario: Law firm needs to search across case documents and legal precedents</li>
+<li>Why Kendra: Understanding of legal terminology and document context</li>
+<li>Benefits: Faster case research, improved document discovery</li>
 </ul>
 <h3 id="when-aws-opensearch-excels">When AWS OpenSearch Excels<a class="headerlink" href="#when-aws-opensearch-excels" title="Permanent link">&para;</a></h3>
 <p><strong>RAG-Powered AI Applications</strong></p>
 <ul>
-<li><strong>Scenario</strong>: Company building an AI assistant that needs to answer questions using company knowledge base</li>
-<li><strong>Why OpenSearch</strong>: Full RAG implementation with vector search, hybrid retrieval, and custom reranking</li>
-<li><strong>Benefits</strong>: Accurate AI responses with source attribution, scalable knowledge integration</li>
-<li><strong>Implementation</strong>: See <a href="../opensearch_rag/">OpenSearch RAG Guide</a> for detailed patterns</li>
+<li>Scenario: Company building an AI assistant that needs to answer questions using company knowledge base</li>
+<li>Why OpenSearch: Full RAG implementation with vector search, hybrid retrieval, and custom reranking</li>
+<li>Benefits: Accurate AI responses with source attribution, scalable knowledge integration</li>
+<li>Implementation: See <a href="../opensearch_rag/">OpenSearch RAG Guide</a> for detailed patterns</li>
 </ul>
 <p><strong>E-commerce Product Search</strong></p>
 <ul>
-<li><strong>Scenario</strong>: Online retailer with millions of products needs advanced search with filters, facets, and recommendations</li>
-<li><strong>Why OpenSearch</strong>: Full control over ranking, faceting, and custom scoring</li>
-<li><strong>Benefits</strong>: Optimized conversion rates, personalized search experiences</li>
+<li>Scenario: Online retailer with millions of products needs advanced search with filters, facets, and recommendations</li>
+<li>Why OpenSearch: Full control over ranking, faceting, and custom scoring</li>
+<li>Benefits: Optimized conversion rates, personalized search experiences</li>
 </ul>
-<p><strong>Application Monitoring and Logging</strong></p>
+<p>Application Monitoring and Logging</p>
 <ul>
-<li><strong>Scenario</strong>: Technology company needs to search and analyze application logs</li>
-<li><strong>Why OpenSearch</strong>: Real-time ingestion, powerful analytics, custom dashboards</li>
-<li><strong>Benefits</strong>: Faster incident resolution, proactive monitoring</li>
+<li>Scenario: Technology company needs to search and analyze application logs</li>
+<li>Why OpenSearch: Real-time ingestion, powerful analytics, custom dashboards</li>
+<li>Benefits: Faster incident resolution, proactive monitoring</li>
 </ul>
 <p><strong>Content Discovery Platform</strong></p>
 <ul>
-<li><strong>Scenario</strong>: Media company needs semantic search across articles, videos, and podcasts</li>
-<li><strong>Why OpenSearch</strong>: Vector search enables content similarity and recommendation</li>
-<li><strong>Benefits</strong>: Improved content discovery, user engagement</li>
+<li>Scenario: Media company needs semantic search across articles, videos, and podcasts</li>
+<li>Why OpenSearch: Vector search enables content similarity and recommendation</li>
+<li>Benefits: Improved content discovery, user engagement</li>
 </ul>
 <p><strong>Multi-tenant SaaS Application</strong></p>
 <ul>
-<li><strong>Scenario</strong>: Software platform needs to provide search functionality to multiple clients</li>
-<li><strong>Why OpenSearch</strong>: Flexible architecture supports multi-tenancy and customization</li>
-<li><strong>Benefits</strong>: Scalable solution, client-specific search experiences</li>
+<li>Scenario: Software platform needs to provide search functionality to multiple clients</li>
+<li>Why OpenSearch: Flexible architecture supports multi-tenancy and customization</li>
+<li>Benefits: Scalable solution, client-specific search experiences</li>
 </ul>
 <h2 id="decision-framework">Decision Framework<a class="headerlink" href="#decision-framework" title="Permanent link">&para;</a></h2>
 <h3 id="choose-aws-kendra-when">Choose AWS Kendra When:<a class="headerlink" href="#choose-aws-kendra-when" title="Permanent link">&para;</a></h3>

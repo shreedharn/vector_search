@@ -41,12 +41,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
       
     
     
-      <link rel="stylesheet" href="../styles/overrides.css">
+      <link rel="stylesheet" href="../styles.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -1948,18 +1948,18 @@
 <p><strong>Pinecone</strong> is like a specialized precision instrument - it's built specifically and only for vector search, making it incredibly good at that one thing.</p>
 <h3 id="the-key-difference">The Key Difference<a class="headerlink" href="#the-key-difference" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>OpenSearch</strong>: "I can do vector search plus many other search tasks"</li>
-<li><strong>Pinecone</strong>: "I do vector search better than anyone, and that's all I focus on"</li>
+<li>OpenSearch: "I can do vector search plus many other search tasks"</li>
+<li>Pinecone: "I do vector search better than anyone, and that's all I focus on"</li>
 </ul>
 <h2 id="core-vector-search-capabilities-head-to-head-comparison">Core Vector Search Capabilities: Head-to-Head Comparison<a class="headerlink" href="#core-vector-search-capabilities-head-to-head-comparison" title="Permanent link">&para;</a></h2>
 <h3 id="understanding-the-technical-terms">Understanding the Technical Terms<a class="headerlink" href="#understanding-the-technical-terms" title="Permanent link">&para;</a></h3>
 <p>Before we dive in, let's decode some key concepts:</p>
-<p><strong>Vector Dimensions</strong>: Think of this like describing a person - you might use height, weight, age, income, etc. More dimensions = more detailed description. In vector search, more dimensions usually mean better accuracy but require more computing power.</p>
-<p><strong>Similarity Metrics</strong>: Different ways to measure "how similar" two things are:</p>
+<p>Vector Dimensions: Think of this like describing a person - you might use height, weight, age, income, etc. More dimensions = more detailed description. In vector search, more dimensions usually mean better accuracy but require more computing power.</p>
+<p>Similarity Metrics: Different ways to measure "how similar" two things are:</p>
 <ul>
-<li><strong>Cosine</strong>: Like measuring the angle between two arrows (good for text)</li>
-<li><strong>Euclidean</strong>: Like measuring straight-line distance on a map (good for images)</li>
-<li><strong>Dot Product</strong>: Like measuring both direction and magnitude (good for recommendations)</li>
+<li>Cosine: Like measuring the angle between two arrows (good for text)</li>
+<li>Euclidean: Like measuring straight-line distance on a map (good for images)</li>
+<li>Dot Product: Like measuring both direction and magnitude (good for recommendations)</li>
 </ul>
 <table>
 <thead>
@@ -2023,7 +2023,7 @@
 </table>
 <h3 id="real-world-example-netflix-style-recommendation-system">Real-World Example: Netflix-Style Recommendation System<a class="headerlink" href="#real-world-example-netflix-style-recommendation-system" title="Permanent link">&para;</a></h3>
 <p>Let's say you're building a movie recommendation system:</p>
-<p><strong>With OpenSearch:</strong></p>
+<p>With OpenSearch:</p>
 <ul>
 <li>Store movie data: title, plot summary, genre, cast, user reviews</li>
 <li>Create vectors from plot summaries and reviews (captures movie "meaning")</li>
@@ -2033,7 +2033,7 @@
 <li>Vector search: finds movies semantically similar</li>
 <li>Result: Both keyword matches and movies with similar themes but different words</li>
 </ul>
-<p><strong>With Pinecone:</strong></p>
+<p>With Pinecone:</p>
 <ul>
 <li>Store movie vectors (mathematical representations of movie characteristics)</li>
 <li>User's viewing history becomes a user vector</li>
@@ -2310,8 +2310,8 @@
 </code></pre></div>
 <p><strong>🤓 What's Happening:</strong></p>
 <ul>
-<li><strong>api_key</strong>: Your unique identifier and password combined</li>
-<li><strong>environment</strong>: Physical location of servers (affects speed for users in different regions)</li>
+<li>api_key: Your unique identifier and password combined</li>
+<li>environment: Physical location of servers (affects speed for users in different regions)</li>
 </ul>
 <h3 id="step-2-creating-an-index-setting-up-your-search-database">Step 2: Creating an Index (Setting Up Your Search Database)<a class="headerlink" href="#step-2-creating-an-index-setting-up-your-search-database" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Create index - like creating a specialized database for vectors</span>
@@ -2327,12 +2327,12 @@
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># Connect to the index you just created</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">index</span> <span class="o">=</span> <span class="n">pinecone</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="s2">&quot;vector-search-index&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>🤓 What's Really Happening:</strong></p>
+<p>🤓 What's Really Happening:</p>
 <ul>
-<li><strong>dimension=768</strong>: This matches the output of popular AI models like sentence-transformers</li>
-<li><strong>metric="cosine"</strong>: Measures similarity by angle, not distance (perfect for text meaning)</li>
-<li><strong>pods</strong>: Think of these like individual search engines working together</li>
-<li><strong>replicas</strong>: Backup copies in case one fails (1 = no backups, 2 = one backup, etc.)</li>
+<li>dimension=768: This matches the output of popular AI models like sentence-transformers</li>
+<li>metric="cosine": Measures similarity by angle, not distance (perfect for text meaning)</li>
+<li>pods: Think of these like individual search engines working together</li>
+<li>replicas: Backup copies in case one fails (1 = no backups, 2 = one backup, etc.)</li>
 </ul>
 <h3 id="step-3-adding-documents-uploading-your-data">Step 3: Adding Documents (Uploading Your Data)<a class="headerlink" href="#step-3-adding-documents-uploading-your-data" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Upsert vectors - &quot;upsert&quot; = update if exists, insert if new</span>
@@ -2359,14 +2359,14 @@
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    <span class="p">}</span>
 <a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="p">])</span>
 </code></pre></div>
-<p><strong>🤓 What's Really Happening:</strong></p>
+<p>🤓 What's Really Happening:</p>
 <ol>
-<li><strong>id</strong>: Like a library catalog number - unique for each document</li>
-<li><strong>values</strong>: The mathematical representation of the document's meaning (768 decimal numbers)</li>
-<li><strong>metadata</strong>: Human-readable information you can filter and display</li>
-<li><strong>upsert</strong>: If "doc1" already exists, it updates it; if not, it creates it</li>
+<li>id: Like a library catalog number - unique for each document</li>
+<li>values: The mathematical representation of the document's meaning (768 decimal numbers)</li>
+<li>metadata: Human-readable information you can filter and display</li>
+<li>upsert: If "doc1" already exists, it updates it; if not, it creates it</li>
 </ol>
-<p><strong>Real Example:</strong></p>
+<p>Real Example:</p>
 <p>If your document says "The quick brown fox jumps over the lazy dog," the AI model converts this to a vector like [0.15, -0.23, 0.87, 0.12, ..., 0.45] that mathematically represents its meaning.</p>
 <h3 id="step-4-basic-search-finding-similar-documents">Step 4: Basic Search (Finding Similar Documents)<a class="headerlink" href="#step-4-basic-search-finding-similar-documents" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Vector similarity search - find documents similar to your query</span>
@@ -2384,14 +2384,14 @@
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Title: </span><span class="si">{</span><span class="n">match</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>🤓 What's Really Happening:</strong></p>
+<p>🤓 What's Really Happening:</p>
 <ol>
 <li>Convert your search question to a vector (same 768 numbers format)</li>
 <li>Pinecone compares your search vector to all document vectors</li>
 <li>Returns the most mathematically similar documents</li>
-<li><strong>filter</strong>: Only looks at documents matching your criteria</li>
+<li>filter: Only looks at documents matching your criteria</li>
 </ol>
-<p><strong>Real Example:</strong></p>
+<p>Real Example:</p>
 <ul>
 <li>You search: "artificial intelligence tutorials"</li>
 <li>Gets converted to: [0.22, -0.15, 0.78, ...]</li>
@@ -2424,9 +2424,9 @@
 </code></pre></div>
 <p><strong>🤓 Advanced Concepts:</strong></p>
 <ul>
-<li><strong>namespace</strong>: Like having separate folders - "production" vs "test" vs "development"</li>
-<li><strong>include_values=False</strong>: Saves network bandwidth by not returning the actual vectors</li>
-<li><strong>Batch processing</strong>: More efficient than individual queries for multiple searches</li>
+<li>namespace: Like having separate folders - "production" vs "test" vs "development"</li>
+<li>include_values=False: Saves network bandwidth by not returning the actual vectors</li>
+<li>Batch processing: More efficient than individual queries for multiple searches</li>
 </ul>
 <h3 id="real-world-production-example-e-learning-platform">Real-World Production Example: E-learning Platform<a class="headerlink" href="#real-world-production-example-e-learning-platform" title="Permanent link">&para;</a></h3>
 <p>Here's how you might build search for an online learning platform:</p>
@@ -2540,13 +2540,13 @@
 <a id="__codelineno-5-108" name="__codelineno-5-108" href="#__codelineno-5-108"></a><span class="n">beginner_python_courses</span> <span class="o">=</span> <span class="n">search_courses</span><span class="p">(</span><span class="s2">&quot;learn programming basics&quot;</span><span class="p">,</span> <span class="n">difficulty_level</span><span class="o">=</span><span class="s2">&quot;beginner&quot;</span><span class="p">)</span>
 <a id="__codelineno-5-109" name="__codelineno-5-109" href="#__codelineno-5-109"></a><span class="n">advanced_ai_courses</span> <span class="o">=</span> <span class="n">search_courses</span><span class="p">(</span><span class="s2">&quot;machine learning neural networks&quot;</span><span class="p">,</span> <span class="n">min_rating</span><span class="o">=</span><span class="mf">4.5</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>🤓 What This Production Example Shows:</strong></p>
+<p>🤓 What This Production Example Shows:</p>
 <ol>
-<li><strong>Real embedding model</strong>: Uses sentence-transformers to convert text to vectors</li>
-<li><strong>Batch operations</strong>: Efficiently handles multiple courses at once</li>
-<li><strong>Complex filtering</strong>: Combines similarity search with difficulty and rating filters</li>
-<li><strong>Production considerations</strong>: Higher pod count and replicas for reliability</li>
-<li><strong>Structured approach</strong>: Separate functions for adding content and searching</li>
+<li>Real embedding model: Uses sentence-transformers to convert text to vectors</li>
+<li>Batch operations: Efficiently handles multiple courses at once</li>
+<li>Complex filtering: Combines similarity search with difficulty and rating filters</li>
+<li>Production considerations: Higher pod count and replicas for reliability</li>
+<li>Structured approach: Separate functions for adding content and searching</li>
 </ol>
 <p>This is how you'd actually implement vector search in a real application!</p>
 <h2 id="index-design-and-optimization">Index Design and Optimization<a class="headerlink" href="#index-design-and-optimization" title="Permanent link">&para;</a></h2>
@@ -2584,14 +2584,14 @@
 <h3 id="opensearch-embedding-management">OpenSearch Embedding Management<a class="headerlink" href="#opensearch-embedding-management" title="Permanent link">&para;</a></h3>
 <p>OpenSearch provides full control over embedding generation pipelines with support for multiple embedding versions and custom preprocessing. For detailed embedding management strategies and implementation examples, see the <a href="../opensearch/#opensearch-vector-architecture">OpenSearch Technical Guide</a>.</p>
 <h3 id="pinecone-embedding-management">Pinecone Embedding Management<a class="headerlink" href="#pinecone-embedding-management" title="Permanent link">&para;</a></h3>
-<p><strong>Advantages:</strong></p>
+<p>Advantages:</p>
 <ul>
 <li>Simplified integration with popular embedding models</li>
 <li>Built-in support for sparse-dense hybrid vectors</li>
 <li>Automatic handling of embedding updates</li>
 <li>Integrated with popular ML frameworks</li>
 </ul>
-<p><strong>Considerations:</strong></p>
+<p>Considerations:</p>
 <ul>
 <li>Less flexibility in embedding pipeline customization</li>
 <li>Vendor dependence for certain optimizations</li>
@@ -2603,9 +2603,9 @@
 <h3 id="pinecone-algorithms">Pinecone Algorithms<a class="headerlink" href="#pinecone-algorithms" title="Permanent link">&para;</a></h3>
 <p>Pinecone uses proprietary algorithms optimized for different scenarios:</p>
 <ul>
-<li><strong>Standard</strong>: Balanced performance for most use cases</li>
-<li><strong>High Performance</strong>: Optimized for low latency</li>
-<li><strong>High Memory</strong>: Better recall for complex similarity patterns</li>
+<li>Standard: Balanced performance for most use cases</li>
+<li>High Performance: Optimized for low latency</li>
+<li>High Memory: Better recall for complex similarity patterns</li>
 </ul>
 <h2 id="similarity-metrics-comparison">Similarity Metrics Comparison<a class="headerlink" href="#similarity-metrics-comparison" title="Permanent link">&para;</a></h2>
 <table>
@@ -2793,42 +2793,42 @@
 <h2 id="monitoring-and-observability">Monitoring and Observability<a class="headerlink" href="#monitoring-and-observability" title="Permanent link">&para;</a></h2>
 <h3 id="opensearch-monitoring">OpenSearch Monitoring<a class="headerlink" href="#opensearch-monitoring" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Metrics</strong>: Cluster health, indexing rate, query latency</li>
-<li><strong>Tools</strong>: CloudWatch, Kibana dashboards, custom monitoring</li>
-<li><strong>Alerting</strong>: Based on performance thresholds, error rates</li>
-<li><strong>Debugging</strong>: Detailed query profiling, slow query logs</li>
+<li>Metrics: Cluster health, indexing rate, query latency</li>
+<li>Tools: CloudWatch, Kibana dashboards, custom monitoring</li>
+<li>Alerting: Based on performance thresholds, error rates</li>
+<li>Debugging: Detailed query profiling, slow query logs</li>
 </ul>
 <h3 id="pinecone-monitoring">Pinecone Monitoring<a class="headerlink" href="#pinecone-monitoring" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Metrics</strong>: Query count, latency, index utilization</li>
-<li><strong>Tools</strong>: Built-in dashboard, API metrics</li>
-<li><strong>Alerting</strong>: Usage limits, performance degradation</li>
-<li><strong>Debugging</strong>: Limited query profiling capabilities</li>
+<li>Metrics: Query count, latency, index utilization</li>
+<li>Tools: Built-in dashboard, API metrics</li>
+<li>Alerting: Usage limits, performance degradation</li>
+<li>Debugging: Limited query profiling capabilities</li>
 </ul>
 <h2 id="rag-implementation-comparison">RAG Implementation Comparison<a class="headerlink" href="#rag-implementation-comparison" title="Permanent link">&para;</a></h2>
 <h3 id="opensearch-for-rag">OpenSearch for RAG<a class="headerlink" href="#opensearch-for-rag" title="Permanent link">&para;</a></h3>
-<p><strong>Advantages:</strong>
-- <strong>Complete RAG ecosystem</strong>: Full-text search, vector search, hybrid retrieval, and reranking in one platform
-- <strong>Flexible architecture</strong>: Support for basic RAG, advanced multi-step retrieval, conversational RAG, and agentic patterns
-- <strong>Multi-modal capabilities</strong>: Handle text, images, and multimedia content in unified RAG systems
-- <strong>Production features</strong>: Built-in security, monitoring, scaling, and operational tools
-- <strong>Custom workflows</strong>: Full control over retrieval strategies, filtering, and generation pipelines</p>
+<p>Advantages:
+- Complete RAG ecosystem: Full-text search, vector search, hybrid retrieval, and reranking in one platform
+- Flexible architecture: Support for basic RAG, advanced multi-step retrieval, conversational RAG, and agentic patterns
+- Multi-modal capabilities: Handle text, images, and multimedia content in unified RAG systems
+- Production features: Built-in security, monitoring, scaling, and operational tools
+- Custom workflows: Full control over retrieval strategies, filtering, and generation pipelines</p>
 <p><strong>Implementation Examples:</strong>
 For comprehensive RAG implementation patterns, architectures, and production examples, see the <a href="../opensearch_rag/">OpenSearch RAG Guide</a>.</p>
-<p><strong>Best for RAG when:</strong>
+<p>Best for RAG when:
 - Building enterprise RAG systems requiring security and compliance
 - Need hybrid retrieval combining keyword and semantic search
 - Implementing complex multi-step or conversational RAG patterns
 - Working with diverse content types and metadata
 - Require full control over RAG pipeline optimization</p>
 <h3 id="pinecone-for-rag">Pinecone for RAG<a class="headerlink" href="#pinecone-for-rag" title="Permanent link">&para;</a></h3>
-<p><strong>Advantages:</strong>
-- <strong>Specialized vector retrieval</strong>: Optimized specifically for high-performance vector similarity search
-- <strong>Simple integration</strong>: Easy to incorporate into existing RAG frameworks and ML pipelines
-- <strong>Zero maintenance</strong>: Managed service handles all infrastructure and optimization
-- <strong>High performance</strong>: Consistent low-latency vector retrieval at scale
-- <strong>ML ecosystem integration</strong>: Native support for popular RAG frameworks</p>
-<p><strong>Best for RAG when:</strong>
+<p>Advantages:
+- Specialized vector retrieval: Optimized specifically for high-performance vector similarity search
+- Simple integration: Easy to incorporate into existing RAG frameworks and ML pipelines
+- Zero maintenance: Managed service handles all infrastructure and optimization
+- High performance: Consistent low-latency vector retrieval at scale
+- ML ecosystem integration: Native support for popular RAG frameworks</p>
+<p>Best for RAG when:
 - Vector similarity is the primary retrieval mechanism
 - Building RAG systems with external orchestration (LangChain, LlamaIndex)
 - Need rapid prototyping and deployment
