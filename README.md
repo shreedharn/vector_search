@@ -1,6 +1,6 @@
 # Vector Search and Information Retrieval: A Comprehensive Guide  
 
-A complete educational resource covering vector search technologies from foundational concepts to production deployment, designed for developers, architects, and practitioners building modern search systems with AWS OpenSearch, Pinecone, and related technologies.
+A complete educational resource covering vector search technologies from foundational concepts to production deployment, designed for developers, architects, and practitioners building modern search systems.
 
 Th content of the repository is hosted as a website in GitHub at this [link](https://shreedharn.github.io/vector_search/)
 
