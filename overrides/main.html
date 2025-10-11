@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+    {% set excluded_pages = ["license.html"] %}
+
+  {% if page.url|lower not in excluded_pages %}
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7422173894969399"
+     crossorigin="anonymous"></script>
+
+  {% endif %}
+
+
+{% endblock %}

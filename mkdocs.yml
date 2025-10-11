@@ -1,6 +1,7 @@
 site_name: OpenSearch for Vector and Hybrid Search
 theme:
   name: material
+  custom_dir: overrides
   features:
     - navigation.sections
     - navigation.top
@@ -44,7 +45,6 @@ markdown_extensions:
           separator: "-"
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - javascripts/mathjax.js
 extra:
   arithmatex:
     inlineWrap: ["\\(", "\\)"]
@@ -69,4 +69,4 @@ nav:
   - Reference:
       - Glossary: glossary.md
       - License: LICENSE.md
-
+use_directory_urls: false
