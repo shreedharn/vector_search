@@ -1,4 +1,4 @@
-# AWS OpenSearch vs Pinecone: The Ultimate Vector Search Guide
+# AWS OpenSearch vs Pinecone: Service Comparison Guide
 
 ## Overview
 
