@@ -158,7 +158,7 @@ OpenSearch provides comprehensive vector search capabilities with support for mu
 ### What Are We Building?
 We're creating a smart document search system that finds documents based on meaning rather than exact word matches. Think of it as building the search engine that powers modern AI assistants.
 
-### 🔵 Step 1: Setting Up Pinecone (Getting Started)
+### Step 1: Setting Up Pinecone (Getting Started)
 
 ```python
 import pinecone
