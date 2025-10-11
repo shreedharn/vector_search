@@ -263,7 +263,7 @@
   
   
   <span class="md-ellipsis">
-    Search Fundamentals
+    Fundamentals
     
   </span>
   
@@ -274,7 +274,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Search Fundamentals
+            Fundamentals
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -634,7 +634,7 @@
   
   
   <span class="md-ellipsis">
-    OpenSearch Implementation
+    OpenSearch
     
   </span>
   
@@ -645,7 +645,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            OpenSearch Implementation
+            OpenSearch
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -661,7 +661,7 @@
   
   
   <span class="md-ellipsis">
-    OpenSearch Guide
+    Introduction to OpenSearch
     
   </span>
   
@@ -776,7 +776,7 @@
   
   
   <span class="md-ellipsis">
-    Technology Comparisons
+    Service Comparisons
     
   </span>
   
@@ -787,7 +787,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            Technology Comparisons
+            Service Comparisons
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -798,7 +798,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kendra_vs_opensearch/" class="md-nav__link">
+      <a href="../opensearch_vs_kendra/" class="md-nav__link">
         
   
   
@@ -1202,7 +1202,9 @@
 <h3 id="high-dimensional-geometry-challenges">High-Dimensional Geometry Challenges<a class="headerlink" href="#high-dimensional-geometry-challenges" title="Permanent link">&para;</a></h3>
 <p>The <a href="../glossary/#curse-of-dimensionality">Curse of Dimensionality</a>:</p>
 <p>As vector dimensions increase beyond ~100, several mathematical phenomena fundamentally change how search algorithms must operate:</p>
-<p><strong>1. Distance Concentration</strong></p>
+<ol>
+<li>Distance Concentration</li>
+</ol>
 <p>In high-dimensional spaces, the difference between the nearest and farthest points becomes negligible relative to the absolute distances. This means naive distance calculations become less discriminative.</p>
 <p><em>Mathematical Intuition:</em> Consider random points in a hypersphere. As dimensions increase:</p>
 <ul>
@@ -1211,9 +1213,13 @@
 <li>Traditional distance-based nearest neighbor search loses effectiveness</li>
 </ul>
 <p>Example: In 1000-dimensional space, if the closest point is distance 10.0 and the farthest is distance 12.0, the difference (2.0) becomes insignificant for practical ranking purposes.</p>
-<p><strong>2. Volume Distribution</strong></p>
+<ol>
+<li>Volume Distribution</li>
+</ol>
 <p>Most of a high-dimensional hypersphere's volume exists in a thin shell near its surface, making uniform sampling and clustering challenging.</p>
-<p><strong>3. Computational Complexity</strong></p>
+<ol>
+<li>Computational Complexity</li>
+</ol>
 <p>Brute-force search complexity grows as O(N × D) where N = number of vectors, D = dimensions:</p>
 <ul>
 <li>1M vectors × 768 dimensions = 768M calculations per query</li>
@@ -1267,7 +1273,7 @@
 </ul>
 <h3 id="approximate-nearest-neighbor-ann-algorithms">Approximate Nearest Neighbor (ANN) Algorithms<a class="headerlink" href="#approximate-nearest-neighbor-ann-algorithms" title="Permanent link">&para;</a></h3>
 <p>The mathematical challenge of high-dimensional search drives the need for approximate algorithms that trade small accuracy losses for massive speed improvements.</p>
-<p><strong>The Approximation Trade-off:</strong></p>
+<p>The Approximation Trade-off:</p>
 <ul>
 <li>Exact search: Guarantees finding the true nearest neighbors but computationally expensive</li>
 <li>Approximate search: Finds "good enough" neighbors (95-99% accuracy) at 10-1000× speed improvement</li>
@@ -1284,7 +1290,7 @@
 <h3 id="conceptual-understanding">Conceptual Understanding<a class="headerlink" href="#conceptual-understanding" title="Permanent link">&para;</a></h3>
 <p>The Small World Phenomenon in Vector Space</p>
 <p>The algorithm draws inspiration from Stanley Milgram's famous "six degrees of separation" experiment, which demonstrated that any two people in the world are connected through an average of six social connections. HNSW applies this principle to high-dimensional vector search by creating multiple layers of connectivity that enable efficient navigation.</p>
-<p><strong>Multi-Scale Navigation Analogy:</strong></p>
+<p>Multi-Scale Navigation Analogy:</p>
 <p>Consider how you might navigate from New York to a specific address in Tokyo:</p>
 <ol>
 <li>Global Scale (Layer 2): Use intercontinental connections - direct flight from JFK to Narita Airport</li>
@@ -1297,7 +1303,7 @@
 <li>Middle Layers (1): Regional connections that bridge local neighborhoods</li>
 <li>Bottom Layer (0): Dense local neighborhoods where every point connects to its immediate neighbors</li>
 </ul>
-<p><strong>Graph Construction Philosophy:</strong></p>
+<p>Graph Construction Philosophy:</p>
 <p><em>Probabilistic Hierarchy:</em> Rather than deterministically assigning nodes to layers, HNSW uses probabilistic assignment where each node has a decreasing probability of existing in higher layers. This creates a natural hierarchy where:</p>
 <ul>
 <li>Layer 0: Contains all vectors (100% density)</li>
@@ -1312,10 +1318,10 @@
 <p>Why This Architecture Works:</p>
 <ol>
 <li>
-<p><strong>Logarithmic Scaling:</strong> Search complexity scales as O(log N) rather than O(N), making it practical for massive datasets</p>
+<p>Logarithmic Scaling: Search complexity scales as O(log N) rather than O(N), making it practical for massive datasets</p>
 </li>
 <li>
-<p><strong>Greedy Search Efficiency:</strong> At each layer, greedy local search quickly moves toward the target region, with higher layers providing faster convergence</p>
+<p>Greedy Search Efficiency: At each layer, greedy local search quickly moves toward the target region, with higher layers providing faster convergence</p>
 </li>
 <li>
 <p>Fault Tolerance: Multiple paths exist between any two points, making the structure robust against locally poor connections</p>
@@ -1325,7 +1331,7 @@
 </li>
 </ol>
 <h3 id="mathematical-foundation">Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Permanent link">&para;</a></h3>
-<p><strong>Layer Assignment Probability:</strong></p>
+<p>Layer Assignment Probability:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>P(node reaches layer l) = (1/2)^l
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Expected maximum layer: floor(-ln(uniform(0,1)) × mL)
@@ -1341,7 +1347,7 @@
 <p>Detailed Search Algorithm Mechanics:</p>
 <p><em>Phase 1: Global Navigation (Top Layers)</em></p>
 <ol>
-<li><strong>Entry Point Selection:</strong> Begin at the designated entry point in the highest layer</li>
+<li>Entry Point Selection: Begin at the designated entry point in the highest layer</li>
 <li>Greedy Descent: At each layer, perform greedy search to find the local minimum</li>
 <li>Calculate distances from current position to all connected neighbors</li>
 <li>Move to the neighbor with smallest distance to query vector</li>
@@ -1350,8 +1356,8 @@
 </ol>
 <p><em>Phase 2: Precision Navigation (Bottom Layer)</em></p>
 <ol>
-<li><strong>Beam Search Expansion:</strong> Instead of simple greedy search, maintain a candidate set of size ef_search</li>
-<li><strong>Dynamic Candidate Management:</strong></li>
+<li>Beam Search Expansion: Instead of simple greedy search, maintain a candidate set of size ef_search</li>
+<li>Dynamic Candidate Management:</li>
 <li>Track the ef_search closest points found so far</li>
 <li>Explore neighbors of all candidates in the current beam</li>
 <li>Update beam with newly discovered closer points</li>
@@ -1374,19 +1380,19 @@
 <p><em>HNSW's performance characteristics are highly dependent on proper parameter selection. Understanding the mathematical relationships between parameters enables optimal configuration for specific use cases.</em></p>
 <p>M (Maximum Connections per Node)</p>
 <p>The M parameter fundamentally affects the graph's connectivity and search performance:</p>
-<p><strong>Low M (8-16):</strong></p>
+<p>Low M (8-16):</p>
 <ul>
 <li>Advantages: Lower memory usage, faster construction</li>
 <li>Disadvantages: Potential for disconnected regions, lower recall</li>
 <li>Use case: Memory-constrained environments, simple similarity patterns</li>
 </ul>
-<p><strong>Medium M (16-32):</strong></p>
+<p>Medium M (16-32):</p>
 <ul>
 <li>Advantages: Good balance of performance and memory</li>
 <li>Disadvantages: None significant for most applications</li>
 <li>Use case: General-purpose text search, balanced performance requirements</li>
 </ul>
-<p><strong>High M (32-64):</strong></p>
+<p>High M (32-64):</p>
 <ul>
 <li>Advantages: Excellent recall, robust against difficult data distributions</li>
 <li>Disadvantages: High memory usage, slower construction</li>
@@ -1401,19 +1407,19 @@
 </code></pre></div>
 <p>ef_construction (Construction Beam Width)</p>
 <p>Controls the trade-off between index quality and construction time:</p>
-<p><strong>Low ef_construction (64-128):</strong></p>
+<p>Low ef_construction (64-128):</p>
 <ul>
 <li>Fast construction but potentially lower-quality graph</li>
 <li>Risk of poor connections that hurt search recall</li>
 <li>Suitable for development, rapid prototyping</li>
 </ul>
-<p><strong>Medium ef_construction (128-256):</strong></p>
+<p>Medium ef_construction (128-256):</p>
 <ul>
 <li>Balanced approach for production systems</li>
 <li>Good graph quality without excessive construction time</li>
 <li>Recommended for most applications</li>
 </ul>
-<p><strong>High ef_construction (256-512+):</strong></p>
+<p>High ef_construction (256-512+):</p>
 <ul>
 <li>Highest quality graph structure</li>
 <li>Slow construction but maximum search performance</li>
@@ -1421,7 +1427,7 @@
 </ul>
 <p>ef_search (Query-Time Beam Width)</p>
 <p>The only parameter tunable at query time, allowing dynamic performance adjustment:</p>
-<p><strong>Performance Scaling:</strong></p>
+<p>Performance Scaling:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ef_search=10:  Ultra-fast, ~85% recall
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>ef_search=50:  Fast, ~95% recall
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>ef_search=100: Balanced, ~97% recall
@@ -1431,7 +1437,7 @@
 <p>Advanced Parameter Selection Strategies:</p>
 <p><em>Query-Adaptive ef_search:</em>
 The ef_search parameter can be dynamically adjusted based on query characteristics and system load:</p>
-<p><strong>Application-Specific Tuning:</strong></p>
+<p>Application-Specific Tuning:</p>
 <ul>
 <li>Real-time autocomplete: ef_search = 15-25 (ultra-low latency, 85-90% recall acceptable)</li>
 <li>Main search results: ef_search = 80-120 (balanced latency/accuracy for user-facing results)</li>
@@ -1439,13 +1445,13 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 <li>Research/analytics: ef_search = 300-500 (maximum accuracy, latency less critical)</li>
 <li>Batch processing: ef_search = 200-400 (optimize for throughput over individual query speed)</li>
 </ul>
-<p><strong>System Load Adaptation:</strong></p>
+<p>System Load Adaptation:</p>
 <ul>
 <li>High load periods: Reduce ef_search to maintain response times</li>
 <li>Low load periods: Increase ef_search to improve result quality</li>
 <li>SLA-based scaling: Automatically adjust based on current system latency percentiles</li>
 </ul>
-<p><strong>Query Complexity Estimation:</strong></p>
+<p>Query Complexity Estimation:</p>
 <p>Some queries inherently require more exploration:</p>
 <ul>
 <li>Outlier queries: Vectors far from typical data distribution need higher ef_search</li>
@@ -1458,33 +1464,33 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 - Construction time: O(N × log(N) × M × ef_construction)
 - Search time: O(log(N) × ef_search)
 - Memory usage: Linear with dataset size</p>
-<p><strong>Construction Optimizations:</strong></p>
-<p><strong>Parallel Construction:</strong> Distribute index building across multiple threads</p>
+<p>Construction Optimizations:</p>
+<p>Parallel Construction: Distribute index building across multiple threads</p>
 <ul>
 <li>Partition vectors into chunks for concurrent processing</li>
 <li>Use lock-free data structures for thread-safe updates</li>
 <li>Typical speedup: 4-8x on modern multi-core systems</li>
 </ul>
-<p><strong>Progressive Construction:</strong> Build index incrementally for dynamic datasets</p>
+<p>Progressive Construction: Build index incrementally for dynamic datasets</p>
 <ul>
 <li>Add new vectors without full reconstruction</li>
 <li>Periodically rebalance for optimal performance</li>
 <li>Essential for real-time applications</li>
 </ul>
-<p><strong>Memory-Mapped Storage:</strong> Handle datasets larger than RAM</p>
+<p>Memory-Mapped Storage: Handle datasets larger than RAM</p>
 <ul>
 <li>Store vectors in memory-mapped files</li>
 <li>Let OS manage virtual memory and caching</li>
 <li>Enables searching billion-scale datasets on modest hardware</li>
 </ul>
-<p><strong>Query-Time Optimizations:</strong></p>
-<p><strong><a href="../glossary/#simd-single-instruction-multiple-data">SIMD</a> Vectorization:</strong> Accelerate distance calculations</p>
+<p>Query-Time Optimizations:</p>
+<p><a href="../glossary/#simd-single-instruction-multiple-data">SIMD</a> Vectorization: Accelerate distance calculations</p>
 <ul>
 <li>Use AVX2/AVX-512 instructions for parallel arithmetic</li>
 <li>Achieve 4-16x speedup in distance computations</li>
 <li>Critical for high-dimensional vectors (768, 1536 dimensions)</li>
 </ul>
-<p><strong>Batch Query Processing:</strong> Amortize overhead across multiple queries</p>
+<p>Batch Query Processing: Amortize overhead across multiple queries</p>
 <ul>
 <li>Process 10-100 queries simultaneously</li>
 <li>Better CPU cache utilization</li>
@@ -1496,14 +1502,14 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 <li>Pre-compute entry points for different query types</li>
 <li>Reduce cold-start latency in production systems</li>
 </ul>
-<p><strong>Memory Layout Optimizations:</strong></p>
-<p><strong>Data Structure Packing:</strong> Minimize memory overhead</p>
+<p>Memory Layout Optimizations:</p>
+<p>Data Structure Packing: Minimize memory overhead</p>
 <ul>
 <li>Pack connection lists efficiently</li>
 <li>Use compact representations for small M values</li>
 <li>Typical overhead reduction: 20-40%</li>
 </ul>
-<p><strong>Cache-Friendly Traversal:</strong> Optimize memory access patterns</p>
+<p>Cache-Friendly Traversal: Optimize memory access patterns</p>
 <ul>
 <li>Layout connected nodes spatially close in memory</li>
 <li>Prefetch neighbor data during graph traversal</li>
@@ -1512,7 +1518,7 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 <h2 id="ivf-inverted-file-index">IVF: Inverted File Index<a class="headerlink" href="#ivf-inverted-file-index" title="Permanent link">&para;</a></h2>
 <p><a href="../glossary/#ivf-inverted-file-index">Inverted File Index (IVF)</a> represents a fundamentally different approach to vector search compared to graph-based methods like HNSW. By partitioning the vector space into distinct regions through clustering, IVF transforms the nearest neighbor problem from "search everywhere" to "search only where it matters." This approach excels particularly well for large-scale deployments where memory constraints and predictable performance characteristics are paramount.</p>
 <h3 id="conceptual-foundation-and-mathematical-intuition">Conceptual Foundation and Mathematical Intuition<a class="headerlink" href="#conceptual-foundation-and-mathematical-intuition" title="Permanent link">&para;</a></h3>
-<p><strong>The Divide-and-Conquer Philosophy</strong></p>
+<p>The Divide-and-Conquer Philosophy</p>
 <p>IVF embodies a classic divide-and-conquer strategy adapted for high-dimensional spaces:</p>
 <p><em>Geographic Analogy:</em> Consider finding the nearest coffee shop in a large city:</p>
 <ul>
@@ -1525,14 +1531,14 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 <li>Dewey Decimal System (IVF): Books organized by topic - go directly to relevant sections</li>
 </ul>
 <p>Mathematical Foundation: The Locality Hypothesis</p>
-<p>IVF relies on the <strong>locality principle</strong> in high-dimensional spaces:</p>
+<p>IVF relies on the locality principle in high-dimensional spaces:</p>
 <p><em>Formal Statement:</em> If vectors v1 and v2 are close in the original space, and if vector q is close to v1, then q is likely closer to vectors in the same cluster as v1 than to vectors in distant clusters.</p>
 <p><em>Mathematical Expression:</em>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>For vectors v1, v2 in cluster Ci and query q:
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>P(NN(q) ∈ Ci | d(q, centroid_i) &lt; d(q, centroid_j) ∀j≠i) &gt; threshold
 </code></pre></div></p>
 <p>This principle holds particularly well in high-dimensional spaces due to the concentration of measure phenomenon - in high dimensions, most vectors concentrate in a thin shell around the centroid, making cluster boundaries more meaningful.</p>
-<p><strong>Three-Phase IVF Architecture:</strong></p>
+<p>Three-Phase IVF Architecture:</p>
 <p><em>Phase 1: Offline Clustering (Training)</em></p>
 <ul>
 <li>Analyze the entire vector dataset to identify natural groupings</li>
@@ -1579,7 +1585,7 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 <h3 id="conceptual-understanding-and-mathematical-foundation">Conceptual Understanding and Mathematical Foundation<a class="headerlink" href="#conceptual-understanding-and-mathematical-foundation" title="Permanent link">&para;</a></h3>
 <p>The Dimensional Independence Hypothesis</p>
 <p>Product Quantization is based on a key insight about high-dimensional vector spaces: different dimensions often capture orthogonal or semi-orthogonal aspects of the underlying semantic space. This allows us to compress each subspace independently without catastrophic information loss.</p>
-<p><strong>Information-Theoretic Perspective:</strong></p>
+<p>Information-Theoretic Perspective:</p>
 <p>Consider a D-dimensional vector space where each dimension requires 32 bits (float32). The total information content is 32D bits per vector. PQ recognizes that much of this precision is unnecessary for similarity preservation and that dimensions can be grouped and compressed independently.</p>
 <p>The Product Space Decomposition:</p>
 <p><em>Mathematical Formulation:</em>
@@ -1605,8 +1611,8 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 <p>Why Dimensional Independence Works in High Dimensions:</p>
 <ol>
 <li>Curse of Dimensionality Benefits: In high-dimensional spaces, vectors become increasingly orthogonal, making dimensional correlations weaker</li>
-<li><strong>Embedding Structure:</strong> Modern embedding models often encode different semantic aspects in distinct dimensional ranges</li>
-<li><strong>Local Similarity Preservation:</strong> PQ preserves local neighborhood structure even with quantization errors</li>
+<li>Embedding Structure: Modern embedding models often encode different semantic aspects in distinct dimensional ranges</li>
+<li>Local Similarity Preservation: PQ preserves local neighborhood structure even with quantization errors</li>
 </ol>
 <h2 id="algorithm-selection-guide">Algorithm Selection Guide<a class="headerlink" href="#algorithm-selection-guide" title="Permanent link">&para;</a></h2>
 <p>Choosing the optimal vector search algorithm requires understanding your specific requirements for accuracy, speed, memory usage, and dataset characteristics.</p>
@@ -1765,7 +1771,7 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 <li>1536 dims, 8% memory, 85% accuracy → m=192, k=128 (85:1 compression)</li>
 </ul>
 <h3 id="hybrid-algorithm-strategies">Hybrid Algorithm Strategies<a class="headerlink" href="#hybrid-algorithm-strategies" title="Permanent link">&para;</a></h3>
-<p><strong>Cascading Search Strategy:</strong></p>
+<p>Cascading Search Strategy:</p>
 <p>Use fast approximate algorithms to filter candidates, then refine with more accurate methods:</p>
 <p><em>Two-Stage Process:</em></p>
 <ol>
@@ -1778,7 +1784,7 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 <li>Reduces computational cost while maintaining high precision</li>
 <li>Particularly effective for large-scale deployments</li>
 </ul>
-<p><strong>Dynamic Algorithm Selection:</strong></p>
+<p>Dynamic Algorithm Selection:</p>
 <p>Choose algorithms based on query and dataset characteristics:</p>
 <p><em>Selection Criteria:</em></p>
 <ul>
@@ -1795,10 +1801,10 @@ The ef_search parameter can be dynamically adjusted based on query characteristi
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <p>Vector search algorithms represent a sophisticated balance of mathematical theory and practical engineering. The key takeaways:</p>
 <ol>
-<li><strong>HNSW</strong> excels for high-accuracy requirements with sufficient memory, offering excellent recall and predictable performance</li>
-<li><strong>IVF</strong> provides scalable solutions for massive datasets with memory constraints and parallelization needs</li>
-<li><strong>Product Quantization</strong> enables extreme compression when memory is the primary constraint</li>
-<li><strong>Hybrid approaches</strong> combine strengths of multiple algorithms for optimal performance</li>
+<li>HNSW excels for high-accuracy requirements with sufficient memory, offering excellent recall and predictable performance</li>
+<li>IVF provides scalable solutions for massive datasets with memory constraints and parallelization needs</li>
+<li>Product Quantization enables extreme compression when memory is the primary constraint</li>
+<li>Hybrid approaches combine strengths of multiple algorithms for optimal performance</li>
 </ol>
 <p>Understanding these algorithms' mathematical foundations, performance characteristics, and parameter tuning strategies enables you to build vector search systems that meet your specific requirements.</p>
 <p>For implementation details, see:

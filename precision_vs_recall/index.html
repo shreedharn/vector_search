@@ -263,7 +263,7 @@
   
   
   <span class="md-ellipsis">
-    Search Fundamentals
+    Fundamentals
     
   </span>
   
@@ -274,7 +274,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Search Fundamentals
+            Fundamentals
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -637,7 +637,7 @@
   
   
   <span class="md-ellipsis">
-    OpenSearch Implementation
+    OpenSearch
     
   </span>
   
@@ -648,7 +648,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            OpenSearch Implementation
+            OpenSearch
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -664,7 +664,7 @@
   
   
   <span class="md-ellipsis">
-    OpenSearch Guide
+    Introduction to OpenSearch
     
   </span>
   
@@ -779,7 +779,7 @@
   
   
   <span class="md-ellipsis">
-    Technology Comparisons
+    Service Comparisons
     
   </span>
   
@@ -790,7 +790,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            Technology Comparisons
+            Service Comparisons
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -801,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kendra_vs_opensearch/" class="md-nav__link">
+      <a href="../opensearch_vs_kendra/" class="md-nav__link">
         
   
   
@@ -1209,7 +1209,7 @@
 <p>This fundamental relationship reveals the classic tradeoff: precision measures the purity of your results, while recall measures their completeness.</p>
 <h2 id="why-not-accuracy-specificity-or-sensitivity">Why Not Accuracy, Specificity, or Sensitivity?<a class="headerlink" href="#why-not-accuracy-specificity-or-sensitivity" title="Permanent link">&para;</a></h2>
 <p>You might wonder why we focus on precision and recall rather than other classification metrics like accuracy, specificity, or sensitivity. The answer lies in the unique characteristics of information retrieval tasks.</p>
-<p><strong>Accuracy</strong> measures the proportion of all predictions (both positive and negative) that are correct. In typical classification problems with balanced classes, this works well. However, in vector search, the number of documents you <em>don't</em> retrieve (true negatives) completely dominates the calculation. Imagine a corpus with 1 million documents where only 60 are relevant to a query. If you retrieve 120 documents with 36 relevant ones, your accuracy would be:</p>
+<p>Accuracy measures the proportion of all predictions (both positive and negative) that are correct. In typical classification problems with balanced classes, this works well. However, in vector search, the number of documents you <em>don't</em> retrieve (true negatives) completely dominates the calculation. Imagine a corpus with 1 million documents where only 60 are relevant to a query. If you retrieve 120 documents with 36 relevant ones, your accuracy would be:</p>
 <ul>
 <li>True Positives (TP) = 36 (relevant docs retrieved)</li>
 <li>False Positives (FP) = 84 (irrelevant docs retrieved)</li>
@@ -1218,8 +1218,8 @@
 <li>Accuracy = (36 + 999,916) / 1,000,000 = 0.999952</li>
 </ul>
 <p>This 99.99% accuracy sounds impressive but tells us almost nothing useful. Even a terrible search system that returns random results would have extremely high accuracy simply because most documents are irrelevant. The metric is essentially measuring our ability to <em>not</em> retrieve irrelevant documents from a vast pool, which isn't particularly informative.</p>
-<p><strong>Specificity</strong> (also called true negative rate) measures what proportion of truly irrelevant documents we correctly avoided retrieving. Like accuracy, this metric suffers from the class imbalance problem. In our example above, specificity = 999,916 / (999,916 + 84) = 0.999916. Again, this looks great but provides little actionable insight because we're dealing with such a massive pool of irrelevant documents.</p>
-<p><strong>Sensitivity</strong> is actually identical to recall—it's the same metric with a different name commonly used in medical diagnostics and other fields. Sensitivity measures the proportion of relevant items successfully retrieved, which is exactly what recall does. In the medical context, you might talk about a test's sensitivity to detecting a disease, while in information retrieval, we talk about a system's recall of relevant documents. The mathematics are identical: TP / (TP + FN).</p>
+<p>Specificity (also called true negative rate) measures what proportion of truly irrelevant documents we correctly avoided retrieving. Like accuracy, this metric suffers from the class imbalance problem. In our example above, specificity = 999,916 / (999,916 + 84) = 0.999916. Again, this looks great but provides little actionable insight because we're dealing with such a massive pool of irrelevant documents.</p>
+<p>Sensitivity is actually identical to recall—it's the same metric with a different name commonly used in medical diagnostics and other fields. Sensitivity measures the proportion of relevant items successfully retrieved, which is exactly what recall does. In the medical context, you might talk about a test's sensitivity to detecting a disease, while in information retrieval, we talk about a system's recall of relevant documents. The mathematics are identical: TP / (TP + FN).</p>
 <p>The practical reality of vector search is that we care deeply about two things:</p>
 <ol>
 <li>Of the documents we retrieve, how many are actually relevant? (Precision)</li>

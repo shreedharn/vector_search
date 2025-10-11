@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../kendra_vs_opensearch/">
+        <link rel="prev" href="../opensearch_vs_kendra/">
       
       
         <link rel="next" href="../glossary/">
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#aws-opensearch-vs-pinecone-the-ultimate-vector-search-guide" class="md-skip">
+        <a href="#aws-opensearch-vs-pinecone-service-comparison-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -261,7 +261,7 @@
   
   
   <span class="md-ellipsis">
-    Search Fundamentals
+    Fundamentals
     
   </span>
   
@@ -272,7 +272,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Search Fundamentals
+            Fundamentals
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -380,7 +380,7 @@
   
   
   <span class="md-ellipsis">
-    OpenSearch Implementation
+    OpenSearch
     
   </span>
   
@@ -391,7 +391,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            OpenSearch Implementation
+            OpenSearch
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -407,7 +407,7 @@
   
   
   <span class="md-ellipsis">
-    OpenSearch Guide
+    Introduction to OpenSearch
     
   </span>
   
@@ -524,7 +524,7 @@
   
   
   <span class="md-ellipsis">
-    Technology Comparisons
+    Service Comparisons
     
   </span>
   
@@ -535,7 +535,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            Technology Comparisons
+            Service Comparisons
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -546,7 +546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kendra_vs_opensearch/" class="md-nav__link">
+      <a href="../opensearch_vs_kendra/" class="md-nav__link">
         
   
   
@@ -1924,10 +1924,10 @@
 
 
 
-<h1 id="aws-opensearch-vs-pinecone-the-ultimate-vector-search-guide">AWS OpenSearch vs Pinecone: The Ultimate Vector Search Guide<a class="headerlink" href="#aws-opensearch-vs-pinecone-the-ultimate-vector-search-guide" title="Permanent link">&para;</a></h1>
+<h1 id="aws-opensearch-vs-pinecone-service-comparison-guide">AWS OpenSearch vs Pinecone: Service Comparison Guide<a class="headerlink" href="#aws-opensearch-vs-pinecone-service-comparison-guide" title="Permanent link">&para;</a></h1>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This guide compares two powerful vector search technologies that help computers understand meaning, not just match exact words. Whether you're a curious student, a developer building AI applications, or a technical architect choosing the right tool, this guide has you covered.</p>
-<p><strong>📖 Reading Guide:</strong></p>
+<p>📖 Reading Guide:</p>
 <ul>
 <li>Basic sections - Perfect for beginners and understanding core concepts</li>
 <li>Intermediate sections - For developers and technical decision-makers  </li>
@@ -1944,8 +1944,8 @@
 </ul>
 <p>Vector search works similarly - it converts text, images, or other data into mathematical representations (vectors) that capture meaning, then finds similar items based on that mathematical similarity.</p>
 <h3 id="the-competitors">The Competitors<a class="headerlink" href="#the-competitors" title="Permanent link">&para;</a></h3>
-<p><strong>AWS OpenSearch</strong> is like a Swiss Army knife - it's a powerful search engine that can do traditional text search, analytics, AND vector search. It's part of Amazon's cloud services. For comprehensive technical details about OpenSearch's vector search capabilities, algorithms, and implementation patterns, see the <a href="../opensearch/">OpenSearch Technical Guide</a>.</p>
-<p><strong>Pinecone</strong> is like a specialized precision instrument - it's built specifically and only for vector search, making it incredibly good at that one thing.</p>
+<p>AWS OpenSearch is like a Swiss Army knife - it's a powerful search engine that can do traditional text search, analytics, AND vector search. It's part of Amazon's cloud services. For comprehensive technical details about OpenSearch's vector search capabilities, algorithms, and implementation patterns, see the <a href="../opensearch/">OpenSearch Technical Guide</a>.</p>
+<p>Pinecone is like a specialized precision instrument - it's built specifically and only for vector search, making it incredibly good at that one thing.</p>
 <h3 id="the-key-difference">The Key Difference<a class="headerlink" href="#the-key-difference" title="Permanent link">&para;</a></h3>
 <ul>
 <li>OpenSearch: "I can do vector search plus many other search tasks"</li>
@@ -2308,7 +2308,7 @@
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">environment</span><span class="o">=</span><span class="s2">&quot;us-west1-gcp&quot;</span>        <span class="c1"># Where your data will be stored (Google Cloud, West Coast)</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">)</span>
 </code></pre></div>
-<p><strong>🤓 What's Happening:</strong></p>
+<p>🤓 What's Happening:</p>
 <ul>
 <li>api_key: Your unique identifier and password combined</li>
 <li>environment: Physical location of servers (affects speed for users in different regions)</li>
@@ -2422,7 +2422,7 @@
 <a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">matches</span><span class="p">:</span>
 <a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">match</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;No Title&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> (Score: </span><span class="si">{</span><span class="n">match</span><span class="o">.</span><span class="n">score</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>🤓 Advanced Concepts:</strong></p>
+<p>🤓 Advanced Concepts:</p>
 <ul>
 <li>namespace: Like having separate folders - "production" vs "test" vs "development"</li>
 <li>include_values=False: Saves network bandwidth by not returning the actual vectors</li>
@@ -2813,7 +2813,7 @@
 - Multi-modal capabilities: Handle text, images, and multimedia content in unified RAG systems
 - Production features: Built-in security, monitoring, scaling, and operational tools
 - Custom workflows: Full control over retrieval strategies, filtering, and generation pipelines</p>
-<p><strong>Implementation Examples:</strong>
+<p>Implementation Examples:
 For comprehensive RAG implementation patterns, architectures, and production examples, see the <a href="../opensearch_rag/">OpenSearch RAG Guide</a>.</p>
 <p>Best for RAG when:
 - Building enterprise RAG systems requiring security and compliance
@@ -2835,11 +2835,11 @@ For comprehensive RAG implementation patterns, architectures, and production exa
 - Working with pure embedding-based retrieval
 - Team focuses on application logic rather than search infrastructure</p>
 <h3 id="rag-architecture-patterns">RAG Architecture Patterns<a class="headerlink" href="#rag-architecture-patterns" title="Permanent link">&para;</a></h3>
-<p><strong>OpenSearch RAG Architecture:</strong>
+<p>OpenSearch RAG Architecture:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>User Query → Query Processing → Hybrid Search (Text + Vector) →
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Reranking → Context Assembly → LLM Generation → Response + Sources
 </code></pre></div></p>
-<p><strong>Pinecone RAG Architecture:</strong>
+<p>Pinecone RAG Architecture:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>User Query → Embedding → Vector Search → External Reranking →
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>Context Assembly → LLM Generation → Response + Sources
 </code></pre></div></p>
@@ -2913,14 +2913,14 @@ For comprehensive RAG implementation patterns, architectures, and production exa
 <h2 id="performance-optimization-best-practices">Performance Optimization Best Practices<a class="headerlink" href="#performance-optimization-best-practices" title="Permanent link">&para;</a></h2>
 <h3 id="opensearch-optimization">OpenSearch Optimization<a class="headerlink" href="#opensearch-optimization" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Hardware Configuration</strong></li>
+<li>Hardware Configuration</li>
 <li>Use memory-optimized instances (r5, r6i)</li>
 <li>SSD storage for vector indices</li>
 <li>
 <p>Sufficient RAM for vector operations</p>
 </li>
 <li>
-<p><strong>Index Configuration</strong>
+<p>Index Configuration
    <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">&quot;settings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nt">&quot;index.refresh_interval&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30s&quot;</span><span class="p">,</span>
@@ -2931,7 +2931,7 @@ For comprehensive RAG implementation patterns, architectures, and production exa
 </code></pre></div></p>
 </li>
 <li>
-<p><strong>Query Optimization</strong></p>
+<p>Query Optimization</p>
 </li>
 <li>Use appropriate <code>k</code> values</li>
 <li>Implement result caching</li>
@@ -2940,7 +2940,7 @@ For comprehensive RAG implementation patterns, architectures, and production exa
 <h3 id="pinecone-optimization">Pinecone Optimization<a class="headerlink" href="#pinecone-optimization" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p><strong>Index Configuration</strong>
+<p>Index Configuration
    <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Optimize for latency</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">index</span> <span class="o">=</span> <span class="n">pinecone</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;optimized-index&quot;</span><span class="p">,</span>
@@ -2952,7 +2952,7 @@ For comprehensive RAG implementation patterns, architectures, and production exa
 </code></pre></div></p>
 </li>
 <li>
-<p><strong>Query Optimization</strong></p>
+<p>Query Optimization</p>
 </li>
 <li>Use appropriate metadata indexing</li>
 <li>Batch queries when possible</li>
