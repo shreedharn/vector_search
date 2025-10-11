@@ -4,7 +4,7 @@
 
 This guide compares two powerful vector search technologies that help computers understand meaning, not just match exact words. Whether you're a curious student, a developer building AI applications, or a technical architect choosing the right tool, this guide has you covered.
 
-**📖 Reading Guide:**
+📖 Reading Guide:
 
 - Basic sections - Perfect for beginners and understanding core concepts
 - Intermediate sections - For developers and technical decision-makers  
@@ -25,9 +25,9 @@ Vector search works similarly - it converts text, images, or other data into mat
 
 ### The Competitors
 
-**AWS OpenSearch** is like a Swiss Army knife - it's a powerful search engine that can do traditional text search, analytics, AND vector search. It's part of Amazon's cloud services. For comprehensive technical details about OpenSearch's vector search capabilities, algorithms, and implementation patterns, see the [OpenSearch Technical Guide](opensearch.md).
+AWS OpenSearch is like a Swiss Army knife - it's a powerful search engine that can do traditional text search, analytics, AND vector search. It's part of Amazon's cloud services. For comprehensive technical details about OpenSearch's vector search capabilities, algorithms, and implementation patterns, see the [OpenSearch Technical Guide](opensearch.md).
 
-**Pinecone** is like a specialized precision instrument - it's built specifically and only for vector search, making it incredibly good at that one thing.
+Pinecone is like a specialized precision instrument - it's built specifically and only for vector search, making it incredibly good at that one thing.
 
 ### The Key Difference
 
@@ -170,7 +170,7 @@ pinecone.init(
 )
 ```
 
-**🤓 What's Happening:**
+🤓 What's Happening:
 
 - api_key: Your unique identifier and password combined
 - environment: Physical location of servers (affects speed for users in different regions)
@@ -298,7 +298,7 @@ for i, query_vector in enumerate(query_vectors):
         print(f"  - {match.metadata.get('title', 'No Title')} (Score: {match.score:.3f})")
 ```
 
-**🤓 Advanced Concepts:**
+🤓 Advanced Concepts:
 
 - namespace: Like having separate folders - "production" vs "test" vs "development"
 - include_values=False: Saves network bandwidth by not returning the actual vectors
@@ -652,7 +652,7 @@ Advantages:
 - Production features: Built-in security, monitoring, scaling, and operational tools
 - Custom workflows: Full control over retrieval strategies, filtering, and generation pipelines
 
-**Implementation Examples:**
+Implementation Examples:
 For comprehensive RAG implementation patterns, architectures, and production examples, see the [OpenSearch RAG Guide](opensearch_rag.md).
 
 Best for RAG when:
@@ -680,13 +680,13 @@ Best for RAG when:
 
 ### RAG Architecture Patterns
 
-**OpenSearch RAG Architecture:**
+OpenSearch RAG Architecture:
 ```
 User Query → Query Processing → Hybrid Search (Text + Vector) →
 Reranking → Context Assembly → LLM Generation → Response + Sources
 ```
 
-**Pinecone RAG Architecture:**
+Pinecone RAG Architecture:
 ```
 User Query → Embedding → Vector Search → External Reranking →
 Context Assembly → LLM Generation → Response + Sources
@@ -733,12 +733,12 @@ Context Assembly → LLM Generation → Response + Sources
 
 ### OpenSearch Optimization
 
-1. **Hardware Configuration**
+1. Hardware Configuration
    - Use memory-optimized instances (r5, r6i)
    - SSD storage for vector indices
    - Sufficient RAM for vector operations
 
-2. **Index Configuration**
+2. Index Configuration
    ```json
    {
      "settings": {
@@ -749,13 +749,13 @@ Context Assembly → LLM Generation → Response + Sources
    }
    ```
 
-3. **Query Optimization**
+3. Query Optimization
    - Use appropriate `k` values
    - Implement result caching
    - Optimize filter queries
 
 ### Pinecone Optimization
-1. **Index Configuration**
+1. Index Configuration
    ```python
    # Optimize for latency
    index = pinecone.create_index(
@@ -767,7 +767,7 @@ Context Assembly → LLM Generation → Response + Sources
    )
    ```
 
-2. **Query Optimization**
+2. Query Optimization
    - Use appropriate metadata indexing
    - Batch queries when possible
    - Implement client-side caching

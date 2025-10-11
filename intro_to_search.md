@@ -14,7 +14,7 @@ Early Days: Simple Keyword Matching
 
 The earliest search systems operated on exact keyword matching - a document was relevant if it contained the search terms. This binary approach worked for small collections but failed to capture semantic meaning or handle variations in language.
 
-**Statistical Revolution: TF-IDF**
+Statistical Revolution: TF-IDF
 
 Term Frequency-Inverse Document Frequency ([TF-IDF](glossary.md#tf-idf-term-frequency-inverse-document-frequency)) introduced statistical sophistication to search by considering two key factors:
 
@@ -63,9 +63,9 @@ Where:
 
 Key Improvements Over TF-IDF:
 
-1. **Term Frequency Saturation:** As term frequency increases, the contribution grows logarithmically rather than linearly, preventing keyword stuffing from dominating scores.
+1. Term Frequency Saturation: As term frequency increases, the contribution grows logarithmically rather than linearly, preventing keyword stuffing from dominating scores.
 
-2. **Document Length Normalization:** Longer documents don't automatically score higher simply due to containing more words. The parameter `b` controls how much document length affects scoring.
+2. Document Length Normalization: Longer documents don't automatically score higher simply due to containing more words. The parameter `b` controls how much document length affects scoring.
 
 3. Tunable Parameters: `k1` and `b` can be adjusted based on collection characteristics and user preferences.
 
@@ -80,17 +80,17 @@ Traditional TF would favor Document B due to higher absolute term frequencies. B
 
 ### Where Text Search Excels
 
-**Precision-Critical Scenarios:**
+Precision-Critical Scenarios:
 
 - Legal Document Retrieval: Finding contracts containing specific clauses like "force majeure" or "intellectual property"
 - Technical Documentation: Locating API references with exact method names like "getUserById()"
 - Product Catalogs: Matching precise specifications like "iPhone 15 Pro Max 256GB Blue"
 
-**Transparent Relevance:**
+Transparent Relevance:
 
 Users can easily understand why results matched their query. When searching for "Python pandas DataFrame," it's clear that documents containing these exact terms are relevant. This transparency builds user trust and enables query refinement.
 
-**Computational Efficiency:**
+Computational Efficiency:
 
 Text search operations are computationally lightweight:
 - Index creation: O(N × M) where N = documents, M = average document length
@@ -115,7 +115,7 @@ Text search fails when users and documents employ different terminology for the 
 
 This fundamental limitation occurs because text search operates on exact string matching without understanding that "car," "automobile," and "vehicle" refer to the same concept.
 
-**Context Insensitivity:**
+Context Insensitivity:
 
 The word "bank" could refer to:
 
@@ -135,7 +135,7 @@ Text search struggles with:
 - Acronyms and Abbreviations: "AI" vs "Artificial Intelligence"
 - Misspellings: "recieve" vs "receive"
 
-**Query Formulation Challenges:**
+Query Formulation Challenges:
 
 Users often struggle to formulate effective keyword queries:
 
@@ -153,14 +153,14 @@ From Keywords to Meaning:
 
 Vector search transforms the paradigm from "what words are present?" to "what does this mean?" By converting text into dense numerical vectors, semantically similar content produces geometrically similar vectors, regardless of exact wording.
 
-**The Embedding Revolution:**
+The Embedding Revolution:
 
 Modern [embedding](glossary.md#embedding) models, trained on vast text corpora, learn to represent concepts in continuous vector spaces where:
 - Similar meanings cluster together
 - Relationships become mathematical operations
 - Context determines representation
 
-**Example Transformation:**
+Example Transformation:
 
 ```
 Traditional Keyword Index:
@@ -176,7 +176,7 @@ Vector Representation:
 
 ### How Vector Search Addresses Text Search Limitations
 
-**Solving Vocabulary Mismatch:**
+Solving Vocabulary Mismatch:
 
 Vector search naturally handles synonyms and related concepts because embedding models learn that different words with similar meanings should have similar representations.
 
@@ -185,7 +185,7 @@ Vector search naturally handles synonyms and related concepts because embedding 
 
 The system finds these matches not through keyword overlap but through semantic similarity in vector space.
 
-**Context-Aware Understanding:**
+Context-Aware Understanding:
 
 Advanced embedding models like [BERT](glossary.md#bert-bidirectional-encoder-representations-from-transformers) and [transformer](glossary.md#transformer)-based architectures consider context when generating vectors:
 
@@ -194,7 +194,7 @@ Advanced embedding models like [BERT](glossary.md#bert-bidirectional-encoder-rep
 
 These contextual embeddings enable more precise semantic matching.
 
-**Cross-Language Capabilities:**
+Cross-Language Capabilities:
 
 Multilingual embedding models create shared semantic spaces across languages:
 
@@ -214,7 +214,7 @@ Vector search excels with conversational, intent-driven queries:
 
 ### The Mathematics of Semantic Similarity
 
-**High-Dimensional Semantic Space:**
+High-Dimensional Semantic Space:
 
 Embedding models typically generate vectors with 384 to 1,536 dimensions. Each dimension captures different aspects of meaning:
 
@@ -255,7 +255,7 @@ Understanding how precision (purity of results) and recall (completeness of resu
 | Technical specifications | "RAM >= 16GB AND SSD" → Precise filtering | Cannot handle logical constraints | Text Search |
 | Intent-based queries | "best laptop for programming" → Keyword luck | Understands programming needs | Vector Search |
 
-**Performance Characteristics:**
+Performance Characteristics:
 
 | Metric | Text Search | Vector Search |
 |--------|-------------|---------------|
@@ -303,7 +303,7 @@ Semantic Understanding is Essential
    - Research: "climate change impacts" → find global warming, environmental effects
    - Content discovery: "similar to The Matrix" → find sci-fi, cyberpunk themes
 
-**Cross-Language Search Needed**
+Cross-Language Search Needed
 
    - Global content platforms with multilingual documents
    - International e-commerce with product descriptions in multiple languages
@@ -327,23 +327,23 @@ Modern search systems increasingly adopt hybrid approaches that combine the prec
 
 ### Hybrid Search Architecture
 
-**Score Combination Strategies:**
+Score Combination Strategies:
 
-1. **Linear Combination**
+1. Linear Combination
    ```
    final_score = α × text_score + β × vector_score
 
    Where α + β = 1, and weights can be tuned based on query type
    ```
 
-2. **Rank Fusion**
+2. Rank Fusion
    ```
    RRF_score = Σ(1 / (k + rank_in_list))
 
    Combines rankings from different search methods
    ```
 
-3. **Learning-to-Rank**
+3. Learning-to-Rank
    Machine learning models that learn optimal score combination from user behavior data.
 
 ### Real-World Hybrid Examples
@@ -374,7 +374,7 @@ Academic Research:
 
 ### Implementation Strategy
 
-**Query Classification:**
+Query Classification:
 
 Intelligent systems can dynamically adjust the balance between text and vector search based on query characteristics:
 
@@ -383,7 +383,7 @@ Intelligent systems can dynamically adjust the balance between text and vector s
 - Factual queries ("how to," "what is"): 60% text, 40% vector weight
 - Default queries: 50% text, 50% vector weight (balanced approach)
 
-**User Interface Adaptation:**
+User Interface Adaptation:
 
 Search interfaces can provide different experiences based on the search approach:
 
@@ -393,7 +393,7 @@ Search interfaces can provide different experiences based on the search approach
 
 ## Reranking: Refining Search Results
 
-While initial retrieval systems (text search, vector search, or hybrid approaches) excel at quickly identifying potentially relevant candidates from large datasets, they often lack the computational resources to perform deep analysis of each result. **Reranking** addresses this limitation by applying sophisticated scoring models to a smaller set of initial results, dramatically improving relevance and user satisfaction.
+While initial retrieval systems (text search, vector search, or hybrid approaches) excel at quickly identifying potentially relevant candidates from large datasets, they often lack the computational resources to perform deep analysis of each result. Reranking addresses this limitation by applying sophisticated scoring models to a smaller set of initial results, dramatically improving relevance and user satisfaction.
 
 ### The Two-Stage Search Architecture
 
@@ -424,7 +424,7 @@ Initial retrieval systems face a fundamental constraint: they must balance speed
 - Without Reranking: Fast keyword/vector search returns "wireless headphones" but may rank by basic relevance signals
 - With Reranking: Additional factors like user preferences, product ratings, price sensitivity, and seasonal trends refine the ranking
 
-**Quality Improvements:**
+Quality Improvements:
 
 Reranking typically improves key search metrics:
 - NDCG@10: 15-30% improvement in ranking quality
@@ -433,7 +433,7 @@ Reranking typically improves key search metrics:
 
 ### Types of Reranking Approaches
 
-**Cross-Encoder Reranking:**
+Cross-Encoder Reranking:
 
 Cross-encoders jointly encode the query and each candidate document, enabling rich interaction modeling that captures nuanced relevance signals impossible in the initial retrieval stage.
 
@@ -445,7 +445,7 @@ Candidate: "Sony WH-1000XM5 Noise Canceling Headphones"
 Cross-Encoder Input: [CLS] best wireless headphones for running [SEP] Sony WH-1000XM5 Noise Canceling Headphones - Premium noise canceling... [SEP]
 ```
 
-**Learning-to-Rank (LTR):**
+Learning-to-Rank (LTR):
 
 Machine learning models trained on historical user interactions, combining multiple relevance features to optimize ranking metrics directly.
 
@@ -456,7 +456,7 @@ Machine learning models trained on historical user interactions, combining multi
 - Document quality indicators (freshness, authority)
 - Contextual factors (time, location, device)
 
-**Neural Reranking Models:**
+Neural Reranking Models:
 
 Advanced transformer-based models that can capture complex semantic relationships and user intent patterns beyond traditional relevance matching.
 
@@ -474,7 +474,7 @@ Resource Usage:
 - GPU acceleration recommended for neural rerankers
 - Memory usage scales with reranking window size
 
-**Scalability Strategies:**
+Scalability Strategies:
 
 - Async Reranking: Return initial results immediately, update with reranked results
 - Cached Reranking: Cache reranked results for popular queries
@@ -484,10 +484,10 @@ Resource Usage:
 
 Modern search systems represent a sophisticated evolution from simple keyword matching to semantic understanding. The most effective implementations combine:
 
-1. **Text Search** for precision and exact matching
-2. **Vector Search** for semantic understanding and discovery
-3. **Hybrid Approaches** that leverage strengths of both methods
-4. **Reranking** to refine results with sophisticated relevance modeling
+1. Text Search for precision and exact matching
+2. Vector Search for semantic understanding and discovery
+3. Hybrid Approaches that leverage strengths of both methods
+4. Reranking to refine results with sophisticated relevance modeling
 
 Understanding these components and their trade-offs enables you to build search systems that truly understand user intent and deliver relevant results efficiently.
 

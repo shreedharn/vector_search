@@ -15,7 +15,7 @@ This fundamental relationship reveals the classic tradeoff: precision measures t
 
 You might wonder why we focus on precision and recall rather than other classification metrics like accuracy, specificity, or sensitivity. The answer lies in the unique characteristics of information retrieval tasks.
 
-**Accuracy** measures the proportion of all predictions (both positive and negative) that are correct. In typical classification problems with balanced classes, this works well. However, in vector search, the number of documents you *don't* retrieve (true negatives) completely dominates the calculation. Imagine a corpus with 1 million documents where only 60 are relevant to a query. If you retrieve 120 documents with 36 relevant ones, your accuracy would be:
+Accuracy measures the proportion of all predictions (both positive and negative) that are correct. In typical classification problems with balanced classes, this works well. However, in vector search, the number of documents you *don't* retrieve (true negatives) completely dominates the calculation. Imagine a corpus with 1 million documents where only 60 are relevant to a query. If you retrieve 120 documents with 36 relevant ones, your accuracy would be:
 
 - True Positives (TP) = 36 (relevant docs retrieved)
 - False Positives (FP) = 84 (irrelevant docs retrieved)
@@ -25,9 +25,9 @@ You might wonder why we focus on precision and recall rather than other classifi
 
 This 99.99% accuracy sounds impressive but tells us almost nothing useful. Even a terrible search system that returns random results would have extremely high accuracy simply because most documents are irrelevant. The metric is essentially measuring our ability to *not* retrieve irrelevant documents from a vast pool, which isn't particularly informative.
 
-**Specificity** (also called true negative rate) measures what proportion of truly irrelevant documents we correctly avoided retrieving. Like accuracy, this metric suffers from the class imbalance problem. In our example above, specificity = 999,916 / (999,916 + 84) = 0.999916. Again, this looks great but provides little actionable insight because we're dealing with such a massive pool of irrelevant documents.
+Specificity (also called true negative rate) measures what proportion of truly irrelevant documents we correctly avoided retrieving. Like accuracy, this metric suffers from the class imbalance problem. In our example above, specificity = 999,916 / (999,916 + 84) = 0.999916. Again, this looks great but provides little actionable insight because we're dealing with such a massive pool of irrelevant documents.
 
-**Sensitivity** is actually identical to recall—it's the same metric with a different name commonly used in medical diagnostics and other fields. Sensitivity measures the proportion of relevant items successfully retrieved, which is exactly what recall does. In the medical context, you might talk about a test's sensitivity to detecting a disease, while in information retrieval, we talk about a system's recall of relevant documents. The mathematics are identical: TP / (TP + FN).
+Sensitivity is actually identical to recall—it's the same metric with a different name commonly used in medical diagnostics and other fields. Sensitivity measures the proportion of relevant items successfully retrieved, which is exactly what recall does. In the medical context, you might talk about a test's sensitivity to detecting a disease, while in information retrieval, we talk about a system's recall of relevant documents. The mathematics are identical: TP / (TP + FN).
 
 The practical reality of vector search is that we care deeply about two things:
 

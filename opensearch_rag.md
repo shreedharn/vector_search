@@ -24,7 +24,7 @@ Source Attribution: Traditional language models cannot cite specific sources for
 
 RAG addresses these limitations by introducing a two-step process that separates knowledge retrieval from response generation:
 
-**Step 1: Retrieval** - Given a user question, search through a knowledge base to find relevant documents or passages that contain pertinent information.
+Step 1: Retrieval - Given a user question, search through a knowledge base to find relevant documents or passages that contain pertinent information.
 
 Step 2: Augmented Generation - Provide both the user question and retrieved context to the language model, instructing it to generate a response based on the specific retrieved information.
 
@@ -72,7 +72,7 @@ Architecture Flow:
 5. Combine question and retrieved documents in a prompt
 6. Generate response using language model
 
-**Example Implementation:**
+Example Implementation:
 ```json
 {
   "user_query": "How do I configure SSL certificates?",
@@ -106,7 +106,7 @@ Iterative Retrieval: Performs multiple rounds of retrieval based on partial answ
 
 Context Filtering: Applies relevance scoring and filtering to ensure only the most pertinent information reaches the language model, preventing confusion from marginally relevant content.
 
-**Example Multi-Step Query:**
+Example Multi-Step Query:
 ```
 User Question: "What are the performance implications of different caching strategies for our e-commerce platform?"
 
@@ -127,7 +127,7 @@ Query Contextualization: Combines current question with conversation history to 
 
 Response Continuity: Ensures responses build logically on previous answers while incorporating new retrieved information.
 
-**Example Conversation Flow:**
+Example Conversation Flow:
 ```
 Turn 1:
 User: "How do I set up monitoring for our database?"
@@ -232,7 +232,7 @@ Index Configuration for RAG:
 }
 ```
 
-**RAG Query Implementation:**
+RAG Query Implementation:
 
 ```json
 {
@@ -273,7 +273,7 @@ Index Configuration for RAG:
 
 ### Advanced RAG Patterns
 
-**Multi-Step Retrieval Pipeline:**
+Multi-Step Retrieval Pipeline:
 
 Advanced RAG systems often require multiple retrieval steps to gather comprehensive information for complex queries. OpenSearch's flexibility enables sophisticated retrieval workflows.
 
@@ -379,7 +379,7 @@ Contextual Retrieval with User Personalization:
 
 Reranking plays a crucial role in RAG systems by refining initial retrieval results to maximize the quality of information provided to the generation model. OpenSearch's built-in rescoring capabilities enable sophisticated reranking strategies.
 
-**Cross-Encoder Reranking Integration:**
+Cross-Encoder Reranking Integration:
 
 ```json
 {
@@ -472,7 +472,7 @@ Multi-Signal Reranking for RAG:
 
 Modern RAG systems increasingly need to work with diverse content types beyond text, including images, documents, and multimedia content. OpenSearch's multi-modal capabilities enable sophisticated cross-content retrieval.
 
-**Unified Multi-Modal Index:**
+Unified Multi-Modal Index:
 
 ```json
 {
@@ -514,7 +514,7 @@ Modern RAG systems increasingly need to work with diverse content types beyond t
 }
 ```
 
-**Cross-Modal Retrieval Query:**
+Cross-Modal Retrieval Query:
 
 ```json
 {
@@ -547,7 +547,7 @@ Modern RAG systems increasingly need to work with diverse content types beyond t
 
 For large knowledge bases with natural hierarchical structures, hierarchical RAG enables more efficient and accurate retrieval by first identifying relevant sections before performing detailed search.
 
-**Two-Stage Retrieval Architecture:**
+Two-Stage Retrieval Architecture:
 
 Stage 1: Section-Level Retrieval
 ```json
@@ -657,7 +657,7 @@ def build_targeted_query(sub_query, domain):
 
 Measuring and optimizing RAG system performance requires comprehensive evaluation of both retrieval and generation components. OpenSearch provides tools and patterns to support effective RAG evaluation.
 
-**Retrieval Evaluation Metrics:**
+Retrieval Evaluation Metrics:
 
 Recall@K: Measures what percentage of relevant documents appear in the top-k retrieved results. Critical for ensuring the RAG system has access to necessary information.
 
@@ -667,7 +667,7 @@ Mean Reciprocal Rank (MRR): Assesses how quickly users find relevant information
 
 NDCG (Normalized Discounted Cumulative Gain): Provides a more nuanced evaluation that considers both relevance and ranking quality.
 
-**Implementation Example:**
+Implementation Example:
 
 ```python
 def evaluate_retrieval_quality(test_queries, opensearch_client):
@@ -704,7 +704,7 @@ def evaluate_retrieval_quality(test_queries, opensearch_client):
 
 ### End-to-End RAG Evaluation
 
-**Answer Quality Assessment:**
+Answer Quality Assessment:
 
 Beyond retrieval metrics, RAG systems require evaluation of the final generated responses for accuracy, relevance, completeness, and factual consistency.
 
@@ -767,7 +767,7 @@ Index Optimization for RAG:
 }
 ```
 
-**Query Optimization Patterns:**
+Query Optimization Patterns:
 
 ```python
 def optimized_rag_retrieval(query, opensearch_client, optimization_config):
@@ -828,7 +828,7 @@ def build_optimized_query(query, config):
 
 Production RAG systems must handle varying loads while maintaining response quality and speed. OpenSearch's distributed architecture provides the foundation for scalable RAG deployments.
 
-**Horizontal Scaling Strategy:**
+Horizontal Scaling Strategy:
 
 ```json
 {
@@ -900,7 +900,7 @@ Access Control in RAG:
 }
 ```
 
-**Privacy-Preserving RAG Patterns:**
+Privacy-Preserving RAG Patterns:
 
 ```python
 def privacy_aware_rag_retrieval(query, user_context, opensearch_client):
@@ -947,7 +947,7 @@ def sanitize_user_query(query):
 
 Production RAG systems require comprehensive monitoring to ensure performance, quality, and reliability. OpenSearch provides extensive monitoring capabilities that integrate well with RAG-specific metrics.
 
-**RAG-Specific Monitoring Dashboard:**
+RAG-Specific Monitoring Dashboard:
 
 ```python
 def create_rag_monitoring_dashboard(opensearch_client):

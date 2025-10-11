@@ -60,7 +60,7 @@ Content in this repository is created for educational and informational purposes
 ## 🤝 Contributing
 
 If you find errors or have suggestions for improvements, please open an issue at:
-**[https://github.com/shreedharn/vector_search](https://github.com/shreedharn/vector_search)**
+[https://github.com/shreedharn/vector_search](https://github.com/shreedharn/vector_search)
 
 ---
 

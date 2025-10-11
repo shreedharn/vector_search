@@ -15,7 +15,7 @@ A comprehensive reference guide to key concepts, metrics, and terminology used i
 Definition: Ranking function used by search engines to estimate relevance of documents.
 
 
-**Improvement over TF-IDF:** Term frequency saturation, document length normalization
+Improvement over TF-IDF: Term frequency saturation, document length normalization
 
 
 Parameters: k1 (term frequency saturation), b (length normalization)

@@ -13,7 +13,7 @@ This guide provides a comprehensive comparison between AWS Kendra and AWS OpenSe
 AWS Kendra is a fully managed enterprise search service that uses machine learning to deliver intelligent search capabilities. It's designed for organizations that want to provide natural language search across their enterprise content without extensive technical configuration.
 
 
-**Key characteristics:**
+Key characteristics:
 
 - Managed AI/ML: Pre-trained models handle query understanding and relevance
 - Natural language interface: Users can ask questions as they would to a person
@@ -23,7 +23,7 @@ AWS Kendra is a fully managed enterprise search service that uses machine learni
 ### AWS OpenSearch - Flexible Search and Analytics Platform
 AWS OpenSearch is a distributed search and analytics suite based on Elasticsearch and Kibana. It provides full control over search implementation and supports both traditional text search and modern vector search capabilities.
 
-**Key characteristics:**
+Key characteristics:
 
 - Full control: Configure every aspect of search behavior and relevance
 - Multi-purpose: Supports search, analytics, logging, and monitoring use cases
@@ -103,7 +103,7 @@ For detailed technical information about OpenSearch's search approaches, algorit
 
 ## Cost Comparison
 
-> **⚠️ Pricing Disclaimer:** AWS pricing changes frequently. Please refer to official AWS pricing pages for current rates and detailed cost calculations.
+> ⚠️ Pricing Disclaimer: AWS pricing changes frequently. Please refer to official AWS pricing pages for current rates and detailed cost calculations.
 
 ### AWS Kendra Pricing Structure
 *Current pricing information: [AWS Kendra Pricing](https://aws.amazon.com/kendra/pricing/)*
@@ -114,7 +114,7 @@ For detailed technical information about OpenSearch's search approaches, algorit
 - Developer Edition: Lower-cost tier with reduced capacity
 - Enterprise Edition: Full features and higher capacity
 
-**Typical cost factors:**
+Typical cost factors:
 
 - Base index fee (varies by edition)
 - Per-query charges
@@ -132,7 +132,7 @@ For detailed technical information about OpenSearch's search approaches, algorit
 - Data transfer: Standard AWS data transfer rates
 - Reserved instances: Available for cost optimization
 
-**Typical cost factors:**
+Typical cost factors:
 
 - Instance hours (master, data, and UltraWarm nodes)
 - Storage volume and type
@@ -141,14 +141,14 @@ For detailed technical information about OpenSearch's search approaches, algorit
 
 ### Cost Optimization Considerations
 
-**Kendra cost optimization:**
+Kendra cost optimization:
 
 - Choose appropriate edition for your needs
 - Optimize query patterns to reduce query charges
 - Use incremental updates efficiently
 - Monitor usage with AWS Cost Explorer
 
-**OpenSearch cost optimization:**
+OpenSearch cost optimization:
 
 - Right-size instances for your workload
 - Use Reserved Instances for predictable workloads
@@ -160,13 +160,13 @@ For detailed technical information about OpenSearch's search approaches, algorit
 
 ### When AWS Kendra Excels
 
-**Enterprise Knowledge Base**
+Enterprise Knowledge Base
 
 - Scenario: Company with 50,000 employees needs to search across HR policies, procedures, and documentation
 - Why Kendra: Employees can ask natural questions like "What's the remote work policy?" without training
 - Benefits: Quick deployment, built-in connectors to existing systems, automatic relevance tuning
 
-**Customer Support FAQ**
+Customer Support FAQ
 
 - Scenario: Customer service needs intelligent search across support documents
 - Why Kendra: Natural language understanding improves answer accuracy
@@ -180,14 +180,14 @@ Legal and Compliance Search
 
 ### When AWS OpenSearch Excels
 
-**RAG-Powered AI Applications**
+RAG-Powered AI Applications
 
 - Scenario: Company building an AI assistant that needs to answer questions using company knowledge base
 - Why OpenSearch: Full RAG implementation with vector search, hybrid retrieval, and custom reranking
 - Benefits: Accurate AI responses with source attribution, scalable knowledge integration
 - Implementation: See [OpenSearch RAG Guide](opensearch_rag.md) for detailed patterns
 
-**E-commerce Product Search**
+E-commerce Product Search
 
 - Scenario: Online retailer with millions of products needs advanced search with filters, facets, and recommendations
 - Why OpenSearch: Full control over ranking, faceting, and custom scoring
@@ -199,13 +199,13 @@ Application Monitoring and Logging
 - Why OpenSearch: Real-time ingestion, powerful analytics, custom dashboards
 - Benefits: Faster incident resolution, proactive monitoring
 
-**Content Discovery Platform**
+Content Discovery Platform
 
 - Scenario: Media company needs semantic search across articles, videos, and podcasts
 - Why OpenSearch: Vector search enables content similarity and recommendation
 - Benefits: Improved content discovery, user engagement
 
-**Multi-tenant SaaS Application**
+Multi-tenant SaaS Application
 
 - Scenario: Software platform needs to provide search functionality to multiple clients
 - Why OpenSearch: Flexible architecture supports multi-tenancy and customization
@@ -262,25 +262,25 @@ This approach maximizes the strengths of each service while serving different or
 
 ### Key Planning Factors
 
-**Data Architecture**
+Data Architecture
 
 - Evaluate current data formats and sources
 - Plan for data transformation requirements
 - Consider ongoing data synchronization needs
 
-**User Experience**
+User Experience
 
 - Assess user expectations and training requirements
 - Plan for query interface changes
 - Design for gradual migration if needed
 
-**Technical Implementation**
+Technical Implementation
 
 - Evaluate existing integrations and APIs
 - Plan for infrastructure changes
 - Consider development resource requirements
 
-**Cost Impact**
+Cost Impact
 
 - Model costs under different usage scenarios
 - Factor in migration and development costs
