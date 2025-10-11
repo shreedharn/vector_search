@@ -54,17 +54,17 @@ extra_css:
 docs_dir: docs
 nav:
   - Home: README.md
-  - Search Fundamentals:
+  - Fundamentals:
       - Introduction to Search: intro_to_search.md
       - Vector Search Algorithms: index_deep_dive.md
       - Precision & Recall: precision_vs_recall.md
-  - OpenSearch Implementation:
-      - OpenSearch Guide: opensearch.md
+  - OpenSearch:
+      - Introduction to OpenSearch: opensearch.md
       - RAG with OpenSearch: opensearch_rag.md
       - Production Deployment: opensearch_productionize.md
       - Code Examples: search_examples.md
-  - Technology Comparisons:
-      - OpenSearch vs Kendra: kendra_vs_opensearch.md
+  - Service Comparisons:
+      - OpenSearch vs Kendra: opensearch_vs_kendra.md
       - OpenSearch vs Pinecone: opensearch_vs_pinecone.md
   - Reference:
       - Glossary: glossary.md

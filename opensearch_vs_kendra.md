@@ -5,7 +5,7 @@
 
 This guide provides a comprehensive comparison between AWS Kendra and AWS OpenSearch to help you choose the right search solution for your needs. Both services offer powerful search capabilities but serve different use cases and technical requirements.
 
-📘 For details on OpenSearch: See the dedicated [OpenSearch Introduction](opensearch.md)
+For details on OpenSearch: See the dedicated [OpenSearch Introduction](opensearch.md)
 
 ## Service Philosophy and Approach
 
@@ -58,7 +58,7 @@ For detailed technical information about OpenSearch's search approaches, algorit
 | Vector Search | Not supported | Full vector search capabilities |
 | RAG Support | Limited to Q&A format | Full RAG implementation capabilities |
 
-*For detailed AWS Kendra features, see: [AWS Kendra Features](https://aws.amazon.com/kendra/features/) (please verify current capabilities)*
+*For detailed AWS Kendra features, see: [AWS Kendra Features](https://aws.amazon.com/kendra/features/)*
 
 *For comprehensive OpenSearch vector search capabilities, algorithms, and implementation details, see: [OpenSearch Technical Guide](opensearch.md)*
 
@@ -107,7 +107,6 @@ For detailed technical information about OpenSearch's search approaches, algorit
 
 ### AWS Kendra Pricing Structure
 *Current pricing information: [AWS Kendra Pricing](https://aws.amazon.com/kendra/pricing/)*
-
 
 - Index-based pricing: Monthly fee per search index
 - Query-based charges: Per query pricing model

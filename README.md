@@ -2,8 +2,6 @@
 
 A complete educational resource covering vector search technologies from foundational concepts to production deployment, designed for developers, architects, and practitioners building modern search systems.
 
-Th content of the repository is hosted as a website in GitHub at this [link](https://shreedharn.github.io/vector_search/)
-
 ---
 
 ## Technical Specifications  
@@ -31,7 +29,7 @@ Th content of the repository is hosted as a website in GitHub at this [link](htt
 
 ---
 
-## 📚 Further Reading  
+## Further Reading  
 
 ### Foundation Papers
 
@@ -56,6 +54,8 @@ Th content of the repository is hosted as a website in GitHub at this [link](htt
 ## ℹ️ About
 
 Content in this repository is created for educational and informational purposes. Articles are researched and curated with the assistance of LLMs.
+
+Hosted at: [https://shreedharn.github.io/vector_search/](https://shreedharn.github.io/vector_search/)
 
 ## 🤝 Contributing
 
