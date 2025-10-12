@@ -16,10 +16,10 @@
 {% block content %}
   {{ super() }}
 
-  <!-- Disclaimer Footer (auto link works in both URL modes) -->
-  <div style="margin-top: 2rem; text-align: center; font-size: 0.9rem; color: #666;">
-    See important <a href="{{ 'disclaimers.md' | url }}" style="color: inherit; text-decoration: underline;">disclaimers</a>.
-  </div>
+<div class="disclaimer-note">
+  See important 
+  <a href="{{ base_url }}/disclaimers.html">disclaimers</a>.
+</div>
 
 
   <!-- ✅ Bottom AdSense Ad -->

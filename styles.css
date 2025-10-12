@@ -42,3 +42,15 @@
 /* Keep code/math a touch smaller to match */
 .md-typeset pre, .md-typeset code{ font-size: .85em; }
 .md-typeset mjx-container[display="true"]{ font-size: 85%; }
+
+/* ===== Disclaimer styling ===== */
+.disclaimer-note {
+  font-size: 0.78rem;           /* smaller than your base 0.86rem */
+  color: var(--md-default-fg-color--lighter);
+  margin-top: 1.8rem;
+  text-align: left;
+}
+.disclaimer-note a {
+  color: inherit;
+  text-decoration: underline;
+}

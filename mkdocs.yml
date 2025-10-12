@@ -69,7 +69,7 @@ nav:
   - Reference:
       - Glossary: glossary.md
       - Further Reading: further_reads.md
-  - About:
+  - Key Info:
       - License: LICENSE.md
       - Disclaimers: disclaimers.md
 use_directory_urls: false

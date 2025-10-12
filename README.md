@@ -28,10 +28,10 @@ A complete educational resource covering vector search technologies from foundat
 
 
 
-### 🚀 Start here at [Introduction to Search](./intro_to_search.md)
+#### 🚀 Start at [Introduction to Search](./intro_to_search.md)
 
 
-## ℹ️ About
+### About
 Content in this repository is created for educational and informational purposes. Articles are researched and curated with the assistance of LLMs.
 
 ### Contributing
