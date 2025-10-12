@@ -1,5 +1,3 @@
-## Further Reading  
-
 ### Foundation Papers
 
 - [Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs](https://arxiv.org/abs/1603.09320) (Malkov & Yashunin, 2016): HNSW algorithm

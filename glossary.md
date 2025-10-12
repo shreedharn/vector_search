@@ -2,8 +2,6 @@
 
 A comprehensive reference guide to key concepts, metrics, and terminology used in vector search, information retrieval, and related machine learning fields.
 
-## Table of Contents
-
 - [B](#b) | [C](#c) | [D](#d) | [E](#e) | [F](#f) | [G](#g) | [H](#h) | [I](#i) | [J](#j) | [L](#l) | [M](#m) | [N](#n) | [P](#p) | [Q](#q) | [R](#r) | [S](#s) | [T](#t) | [V](#v)
 
 ---
