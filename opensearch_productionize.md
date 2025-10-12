@@ -332,7 +332,7 @@ Cost Estimation Factors:
 Serverless Costs (variable based on usage):
 
 
-> ⚠️ Pricing Disclaimer: OpenSearch Serverless pricing is based on OpenSearch Compute Units (OCUs) and changes frequently. Always refer to the [AWS OpenSearch Serverless Pricing](https://aws.amazon.com/opensearch-service/pricing/) page for current rates and detailed cost calculations.
+> ⚠️ Pricing Disclaimer: Always refer to the [AWS OpenSearch Pricing](https://aws.amazon.com/opensearch-service/pricing/) page for current rates and cost calculation examples.
 
 OpenSearch Compute Units (OCUs)
 
@@ -367,9 +367,6 @@ Batch Processing Pattern:
 #### Cost Optimization Strategies
 
 Reserved Instance Optimization (Managed):
-
-
-> ⚠️ Pricing Disclaimer: Reserved Instance pricing and savings percentages vary by instance type and AWS region. Consult the [AWS OpenSearch Reserved Instance Pricing](https://aws.amazon.com/opensearch-service/pricing/) page for current rates and specific savings calculations.
 
 Reserved Instance Options:
 
@@ -444,9 +441,6 @@ Data Lifecycle Management:
 #### Multi-Tier Architecture Design
 
 Hot-Warm-Cold Architecture:
-
-
-> ⚠️ Pricing Disclaimer: Instance and storage costs vary by AWS region and change frequently. Refer to [AWS OpenSearch Pricing](https://aws.amazon.com/opensearch-service/pricing/) for current rates.
 
 Data Tier Design Strategy:
 
@@ -1106,6 +1100,7 @@ High QPS Environments (>1000 QPS):
 ### Monitoring and Observability
 
 Comprehensive monitoring is essential for maintaining high-performance vector search systems. Effective observability covers cluster health, performance metrics, resource utilization, and custom application-specific metrics to ensure optimal operation and rapid issue detection.
+
 #### Comprehensive Monitoring Setup
 
 A well-designed monitoring strategy provides visibility into all aspects of your OpenSearch vector deployment, from infrastructure health to application performance. This multi-layered approach enables proactive issue detection and resolution.

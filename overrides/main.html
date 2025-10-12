@@ -2,7 +2,7 @@
 
 {% block extrahead %}
   {{ super() }}
-    {% set excluded_pages = ["license.html"] %}
+    {% set excluded_pages = ["license.html","disclaimers.html"] %}
 
   {% if page.url|lower not in excluded_pages %}
     <!-- Google AdSense -->
@@ -12,4 +12,27 @@
   {% endif %}
 
 
+{% endblock %}
+{% block content %}
+  {{ super() }}
+
+  <!-- Disclaimer Footer (auto link works in both URL modes) -->
+  <div style="margin-top: 2rem; text-align: center; font-size: 0.9rem; color: #666;">
+    See important <a href="{{ 'disclaimers.md' | url }}" style="color: inherit; text-decoration: underline;">disclaimers</a>.
+  </div>
+
+
+  <!-- ✅ Bottom AdSense Ad -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7422173894969399"
+     crossorigin="anonymous"></script>
+<!-- horizontal_ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7422173894969399"
+     data-ad-slot="8510630235"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 {% endblock %}

@@ -1310,6 +1310,7 @@ async def get_metrics():
     return monitor.get_performance_stats()
 ```
 
----
 
 This collection provides comprehensive Python implementation examples for building production-ready vector search systems with OpenSearch.
+
+---

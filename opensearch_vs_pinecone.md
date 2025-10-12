@@ -776,4 +776,4 @@ Context Assembly → LLM Generation → Response + Sources
 
 The choice between OpenSearch and Pinecone depends largely on your specific requirements and constraints. OpenSearch offers more flexibility and control, making it suitable for complex search scenarios that go beyond pure vector similarity. Pinecone excels in pure vector search use cases where simplicity, performance, and managed service benefits outweigh the need for customization.
 
-Consider OpenSearch for hybrid search needs, cost-sensitive deployments, and when you need full control over your search infrastructure. Choose Pinecone for ML-first applications, when you want to minimize operational overhead, and when vector search performance is the primary concern.
+---

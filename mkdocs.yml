@@ -68,5 +68,8 @@ nav:
       - OpenSearch vs Pinecone: opensearch_vs_pinecone.md
   - Reference:
       - Glossary: glossary.md
+      - Further Reading: further_reads.md
+  - About:
       - License: LICENSE.md
+      - Disclaimers: disclaimers.md
 use_directory_urls: false

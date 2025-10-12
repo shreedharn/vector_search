@@ -646,6 +646,9 @@ Vector search algorithms represent a sophisticated balance of mathematical theor
 Understanding these algorithms' mathematical foundations, performance characteristics, and parameter tuning strategies enables you to build vector search systems that meet your specific requirements.
 
 For implementation details, see:
+
 - [OpenSearch Implementation Guide](opensearch.md)
 - [Introduction to Search Systems](intro_to_search.md)
 - [Precision and Recall in Vector Search](precision_vs_recall.md)
+
+---

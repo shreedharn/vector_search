@@ -571,4 +571,3 @@ Limitation: Performance degrades in high dimensions (curse of dimensionality)
 
 ---
 
-This glossary provides essential vocabulary for understanding and implementing vector search systems, from basic concepts to advanced optimization techniques.

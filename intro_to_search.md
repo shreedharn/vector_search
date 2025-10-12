@@ -492,5 +492,8 @@ Modern search systems represent a sophisticated evolution from simple keyword ma
 Understanding these components and their trade-offs enables you to build search systems that truly understand user intent and deliver relevant results efficiently.
 
 For implementation details using specific technologies, see:
+
 - [OpenSearch Implementation Guide](opensearch.md)
 - [Vector Search Algorithms Deep Dive](index_deep_dive.md)
+
+---

@@ -1028,3 +1028,5 @@ Alerting for RAG Systems:
 ```
 
 This comprehensive guide demonstrates how OpenSearch serves as a powerful foundation for building sophisticated RAG systems, from basic document retrieval to advanced multi-modal and agentic architectures. The combination of OpenSearch's robust search capabilities with thoughtful RAG design patterns enables the creation of knowledge systems that provide accurate, relevant, and trustworthy responses while maintaining the scalability and security requirements of production environments.
+
+---

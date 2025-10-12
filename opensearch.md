@@ -6,10 +6,6 @@ A comprehensive guide to implementing vector search in OpenSearch, from understa
 
 OpenSearch extends Apache Lucene's robust document storage and search capabilities with specialized vector search functionality, creating a unified platform for both traditional text search and modern vector-based semantic search. This guide covers the architectural foundations, implementation patterns, and advanced applications for building production vector search systems.
 
-Prerequisites: This guide assumes familiarity with search concepts and vector algorithms. For background, see:
-- [Introduction to Search Systems](intro_to_search.md) - Text search, vector search, and hybrid approaches
-- [Vector Search Algorithms Deep Dive](index_deep_dive.md) - HNSW, IVF, and optimization strategies
-
 ## Understanding Apache Lucene
 
 Before diving into OpenSearch implementation, it's essential to understand Apache Lucene—the powerful search library that forms OpenSearch's foundation. Lucene provides the core indexing and search capabilities that OpenSearch builds upon.
@@ -1016,36 +1012,10 @@ OpenSearch provides a powerful, production-ready platform for vector search buil
 5. Production Ready: Built-in monitoring, scaling, and optimization features for enterprise deployments
 
 For related topics, see:
+
 - [Introduction to Search Systems](intro_to_search.md) - Fundamentals of text and vector search
 - [Vector Search Algorithms Deep Dive](index_deep_dive.md) - HNSW, IVF, and optimization strategies
 - [Precision and Recall in Vector Search](precision_vs_recall.md) - Understanding and optimizing search quality
-
----
-
-## ⚠️ Performance Metrics Disclaimer
-
-Important Notice about Performance Data:
-
-All performance metrics, benchmarks, latency figures, memory usage statistics, and cost examples presented in this document are illustrative examples designed to help with understanding and planning. These numbers are based on theoretical models, synthetic tests, or specific hardware configurations and should not be considered as guaranteed performance metrics for your specific use case.
-
-Actual performance will vary significantly based on:
-
-- Hardware specifications and configurations
-- Data characteristics (vector dimensions, dataset size, distribution)
-- Query patterns and concurrency levels
-- Network latency and infrastructure setup
-- OpenSearch version and configuration settings
-- Operating system and environment factors
-
-Before making production decisions:
-
-- Conduct benchmarks with your actual data and infrastructure
-- Test with realistic query patterns and load
-- Consult official OpenSearch and AWS documentation for current capabilities
-- Consider engaging with AWS support for production sizing guidance
-
-For current official benchmarks and performance guidance, refer to:
-- [OpenSearch Performance Guidelines](https://opensearch.org/docs/latest/tuning/)
-- [AWS OpenSearch Service Best Practices](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/bp.html)
+- [Vector Search Algorithms Deep Dive](index_deep_dive.md) - HNSW, IVF, and optimization strategies
 
 ---
