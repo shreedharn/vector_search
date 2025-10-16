@@ -71,6 +71,5 @@ nav:
       - Further Reading: further_reads.md
   - Key Info:
       - License: LICENSE.md
-      - README: README.md
       - Disclaimers: disclaimers.md
 use_directory_urls: false

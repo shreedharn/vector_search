@@ -140,7 +140,7 @@ With Pinecone:
 | Factor | AWS OpenSearch | Pinecone |
 |---------|----------------|----------|
 | Pricing Model | Instance hours + storage | Vector storage + operations |
-| Base Cost | $15-100+/month (varies by instance) | Free (starter tier) |
+| Base Cost | $25-100+/month (varies by instance) | Free (Starter tier) |
 | Storage Cost | EBS storage rates | Included in tier pricing |
 | Query Cost | No per-query charges | Included in tier pricing |
 | Data Transfer | AWS standard rates | Included within limits |
