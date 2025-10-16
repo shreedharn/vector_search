@@ -14,7 +14,7 @@ Vector search algorithms operate in high-dimensional spaces where traditional in
 
 ### High-Dimensional Geometry Challenges
 
-The [Curse of Dimensionality](glossary.md#curse-of-dimensionality):
+[The Curse of Dimensionality](glossary.md#curse-of-dimensionality):
 
 As vector dimensions increase beyond ~100, several mathematical phenomena fundamentally change how search algorithms must operate:
 
